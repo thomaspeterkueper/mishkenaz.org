@@ -1,0 +1,117 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description = 'Mishkenaz — Sprachforschungsprojekt' } = Astro.props;
+
+const nav = [
+  { href: '/', label: 'Start' },
+  { href: '/grammatik', label: 'Grammatik' },
+  { href: '/proto-mishkenaz', label: 'Proto-Mishkenaz' },
+  { href: '/rueckuebersetzung', label: 'Rückübersetzung' },
+  { href: '/vektoren', label: 'Vektoren' },
+  { href: '/woerterbuch', label: 'Wörterbuch' },
+];
+---
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} · Mishkenaz</title>
+  <meta name="description" content={description} />
+  <style>
+    :root {
+      --bg: #14110f;
+      --fg: #ece5da;
+      --accent: #c9a86a;
+      --muted: #8a8175;
+      --border: #2c2822;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+      line-height: 1.6;
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    header .brand {
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    nav {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+    nav a:hover, nav a.active {
+      color: var(--accent);
+    }
+    main {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+    h1 {
+      color: var(--accent);
+      font-weight: 400;
+      font-size: 2.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .lede {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    .placeholder {
+      border: 1px dashed var(--border);
+      padding: 1.5rem;
+      border-radius: 4px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="brand" href="/">Mishkenaz</a>
+    <nav>
+      {nav.map((item) => (
+        <a href={item.href} class={Astro.url.pathname === item.href ? 'active' : ''}>{item.label}</a>
+      ))}
+    </nav>
+  </header>
+  <main>
+    <slot />
+  </main>
+  <footer>
+    Mishkenaz — Teil des KUEPER-Ökosystems (MISH) · © Thomas Peter Küper
+  </footer>
+</body>
+</html>
