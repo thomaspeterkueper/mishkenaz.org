@@ -1,0 +1,147 @@
+---
+// src/pages/mishkenaz/index.astro
+// Ersetzt die bisherige "Die wiederentdeckte Ur-Sprache"-Version
+// Stand: Juni 2026
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = "Mishkenaz — Anatomie einer erfundenen Sprache";
+const description = "Mishkenaz ist die konstruierte Sprache des Baumeister-Universums. Aus Urlauten, Vektoren und Galut-Schichten entstand ein Sprachsystem zwischen Linguistik, Philosophie und fiktiver Kulturgeschichte.";
+---
+
+<BaseLayout title={title} description={description}>
+
+<style>
+  .mish-page { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem 4rem; }
+  .mish-hero { padding: 4rem 0 3rem; border-bottom: 1px solid var(--gold-light); }
+  .mish-hero .supertitel { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--color-petrol); margin-bottom: 0.75rem; }
+  .mish-hero h1 { font-family: 'Crimson Text', serif; font-size: clamp(3rem, 6vw, 5rem); font-weight: 400; color: var(--dark); line-height: 1.0; margin: 0 0 1rem; letter-spacing: 0.02em; }
+  .mish-hero .untertitel { font-family: 'Lora', serif; font-size: 1.15rem; color: var(--text-muted); font-style: italic; }
+  .einordnung { background: var(--bg-soft); border-left: 3px solid var(--gold); padding: 1.25rem 1.75rem; margin: 2.5rem 0; font-family: 'Lora', serif; font-size: 0.97rem; line-height: 1.75; color: var(--text); }
+  .mish-nav { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 1rem; }
+  .mish-nav a { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-petrol); text-decoration: none; border: 1px solid var(--color-petrol); padding: 0.4rem 1rem; transition: all 0.2s; }
+  .mish-nav a:hover { background: var(--color-petrol); color: white; }
+  .sektion { padding: 2.5rem 0; border-bottom: 1px solid var(--border); }
+  .sektion h2 { font-family: 'Crimson Text', serif; font-size: 1.9rem; color: var(--dark); margin-bottom: 1rem; font-weight: 400; }
+  .sektion p { font-family: 'Lora', serif; font-size: 0.97rem; line-height: 1.8; margin-bottom: 1rem; color: var(--text); }
+  .sektion h3 { font-family: 'Lato', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-petrol); margin: 1.75rem 0 0.5rem; }
+  .aspekt-tabelle, .galut-tabelle { width: 100%; border-collapse: collapse; margin: 1rem 0 1.5rem; font-family: 'Lora', serif; font-size: 0.93rem; }
+  .aspekt-tabelle th { background: var(--dark); color: #FAF8F3; padding: 0.6rem 1rem; text-align: left; font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+  .galut-tabelle th { background: var(--color-petrol); color: white; padding: 0.55rem 0.9rem; text-align: left; font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; }
+  .aspekt-tabelle td, .galut-tabelle td { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .aspekt-tabelle tr:hover td, .galut-tabelle tr:hover td { background: var(--bg-soft); }
+  .aspekt-code { font-family: monospace; color: var(--gold); font-size: 1.05rem; }
+  .galut-tabelle .g6 td { font-style: italic; color: var(--text-muted); }
+  .sachbuch-box { border: 1px solid var(--gold); padding: 1.5rem 2rem; margin: 1.5rem 0; }
+  .sachbuch-box .status { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 0.5rem; }
+  .sachbuch-box p { font-family: 'Lora', serif; font-size: 0.97rem; line-height: 1.75; margin-bottom: 0.75rem; }
+  .sachbuch-box blockquote { font-family: 'Crimson Text', serif; font-size: 1.25rem; font-style: italic; color: var(--dark); border-left: 2px solid var(--gold); padding-left: 1rem; margin: 1rem 0 0; }
+  .lied-block { background: #1a1410; color: #FAF8F3; padding: 2rem 2.5rem; margin: 1.5rem 0; font-family: 'Crimson Text', serif; font-size: 1.15rem; line-height: 1.9; border-left: 3px solid var(--gold); }
+  .lied-block .mishkenaz { color: var(--gold); letter-spacing: 0.02em; }
+  .lied-block .uebersetzung { color: #94a3b8; font-size: 0.95rem; font-style: italic; margin-top: 0.75rem; border-top: 1px solid #2a2a2a; padding-top: 0.75rem; }
+  .lied-link { display: inline-block; margin-top: 1.25rem; font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: opacity 0.2s; }
+  .lied-link:hover { opacity: 0.7; }
+  .nicht-box { background: var(--bg-soft); padding: 1.5rem 2rem; margin: 1.5rem 0; font-family: 'Lora', serif; font-size: 0.95rem; line-height: 1.75; }
+  .nicht-box ul { margin: 0.75rem 0; padding-left: 1.5rem; }
+  .nicht-box li { margin: 0.4rem 0; }
+  .nicht-box p { margin-top: 1rem; }
+  .kernformel { text-align: center; padding: 3.5rem 0 2rem; }
+  .kernformel .formel { font-family: 'Crimson Text', serif; font-size: 1.4rem; color: var(--gold); letter-spacing: 0.15em; margin-bottom: 0.75rem; }
+  .kernformel .erklaerung { font-family: 'Lora', serif; font-size: 0.97rem; color: var(--text-muted); font-style: italic; line-height: 1.7; }
+  @media (max-width: 640px) { .galut-tabelle, .aspekt-tabelle { font-size: 0.82rem; } .lied-block { padding: 1.5rem; font-size: 1rem; } .mish-hero h1 { font-size: 2.6rem; } .sachbuch-box { padding: 1.25rem; } }
+</style>
+
+<div class="mish-page">
+  <section class="mish-hero">
+    <p class="supertitel">Eine konstruierte Sprache</p>
+    <h1>Mishkenaz</h1>
+    <p class="untertitel">Aus dem Körper. Durch die Diaspora. Zurück zum Klang.</p>
+  </section>
+
+  <div class="einordnung">
+    <strong>Was ist Mishkenaz?</strong> Eine konstruierte Sprache, die ich seit über vier Jahrzehnten entwickle — als linguistisches System mit 42 Vektoren, drei Resonanz-Aspekten und einer Grammatik der Haltung statt der Zeit; und als fiktive Kulturgeschichte des Baumeister-Universums. Mishkenaz ist nicht die wiederentdeckte Ursprache der Menschheit. Sie ist eine bewusste Schöpfung — und das ist genug.
+  </div>
+
+  <nav class="mish-nav">
+    <a href="/mishkenaz/vektoren">Die 42 Vektoren →</a>
+    <a href="/mishkenaz/grammatik">Grammatik →</a>
+    <a href="/mishkenaz/proto-mishkenaz">Urgesten →</a>
+    <a href="/mishkenaz/woerterbuch">Wörterbuch →</a>
+    <a href="/mishkenaz/rueckuebersetzung">Rückübersetzungen →</a>
+  </nav>
+
+  <section class="sektion">
+    <h2>Das System</h2>
+    <p>Mishkenaz beschreibt nicht Dinge. Sie beschreibt <strong>Bewegungen zwischen Dingen</strong>. Ein Fluss heißt nicht „Fluss" — er heißt <em>das was nicht stehenbleiben kann</em>. Ein Stein heißt <em>das was in dieser Form zur Ruhe kam</em>. Wer Mishkenaz spricht, kann nicht einfach „Stein" sagen, ohne zu fragen: in welcher Beziehung zur Welt?</p>
+    <h3>Drei Aspekte statt Zeitformen</h3>
+    <p>Mishkenaz kodiert nicht <em>wann</em> etwas geschieht, sondern <em>wie stimmig</em> es ist:</p>
+    <table class="aspekt-tabelle">
+      <thead><tr><th>Aspekt</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+      <tbody>
+        <tr><td><span class="aspekt-code">-om</span></td><td>stimmig, angekommen</td><td><em>Saha-om bi'sa-i la'ta-i</em> — Ich sehe dich. Es stimmt.</td></tr>
+        <tr><td><span class="aspekt-code">-ath</span></td><td>dissonant, nicht stimmig</td><td><em>Saha-ath bi'sa-i la'ta-i</em> — Ich sehe dich. Etwas stimmt nicht.</td></tr>
+        <tr><td><span class="aspekt-code">-il</span></td><td>suchend, noch unterwegs</td><td><em>Saha-il bi'sa-i la'ta-i</em> — Ich versuche dich zu sehen.</td></tr>
+      </tbody>
+    </table>
+    <h3>Die Ta-Konstante</h3>
+    <p>In Mishkenaz ist Grenze keine Bedrohung von Verbindung — sie ist ihre Bedingung. <em>Ma-U</em> (Bindung ohne Grenze) bedeutet Verschmelzung. <em>Ma'Ta'U</em> (Bindung mit Grenze) bedeutet Verbindung, die das Andere als Anderes lässt. Die Ethik ist in der Grammatik.</p>
+    <nav class="mish-nav" style="margin-top: 1.5rem;"><a href="/mishkenaz/grammatik">Grammatik im Detail →</a><a href="/mishkenaz/vektoren">Die 42 Vektoren →</a></nav>
+  </section>
+
+  <section class="sektion">
+    <h2>Die Galut-Schichten</h2>
+    <p>Mishkenaz ist nicht eine einzige Sprache. Es ist ein <strong>Sprachsystem mit Geschichte</strong> — und Geschichte bedeutet Verlust, Drift, Rekombination.</p>
+    <p><em>Logos universal, Phonos lokal.</em> Die Vektorbedeutungen bleiben überall erkennbar. Der Klang passt sich an.</p>
+    <table class="galut-tabelle">
+      <thead><tr><th>Schicht</th><th>Kontaktzone</th><th>Bewahrt</th></tr></thead>
+      <tbody>
+        <tr><td><strong>G1 Galut-Bri'ith</strong></td><td>Levante / Hebräisch</td><td>Liturgie, Schutzformeln, Text</td></tr>
+        <tr><td><strong>G2 Galut-Sahara</strong></td><td>Arabische Wüste</td><td>Körperwissen, Kürze, Dringlichkeit</td></tr>
+        <tr><td><strong>G3 Galut-Eil</strong></td><td>Keltische Inseln</td><td>Gesang, Melodie ohne Text</td></tr>
+        <tr><td><strong>G4 Galut-Saraswath</strong></td><td>Sanskrit / Kaschmir</td><td>Systematisierung, Philosophie</td></tr>
+        <tr><td><strong>G5 Galut-Yin</strong></td><td>Ostasiatischer Raum</td><td>Tonalität, Klang als Bedeutung</td></tr>
+        <tr class="g6"><td><strong>G6 Galut-Endia</strong></td><td>Digitale Welt</td><td>Totaler Zugang — und der Verlust der Auswahl durch Begrenzung</td></tr>
+      </tbody>
+    </table>
+    <p>Keine Schicht bewahrt das ganze System. Jede bewahrt etwas, das die anderen nicht haben. <strong>Zereya</strong> trägt G1 (die Schutzformeln ihrer Großmutter) und G2 (das arabische Substrat des Überlebens) gleichzeitig — ohne es benennen zu können. Sie ist eine lebende Rekombination.</p>
+  </section>
+
+  <section class="sektion">
+    <h2>Das Sachbuch</h2>
+    <div class="sachbuch-box">
+      <p class="status">In Vorbereitung — 2026</p>
+      <p><strong>Mishkenaz — Anatomie einer erfundenen Sprache</strong></p>
+      <p>Kein Grammatik-Lehrbuch. Eine Erkundung der Frage: Was geschieht, wenn eine Sprache konsequent aus dem Körper denkt? Das Buch beschreibt die zwölf Urgesten, die 42 Vektoren, die drei Aspekte als Grammatik der Haltung — und was Mishkenaz nicht kann. Denn eine Sprache, die alles beschreibt, beschreibt nichts.</p>
+      <blockquote>„Man trägt keine vollständige Sprache mit sich, wenn man flieht. Man trägt Lieder."</blockquote>
+    </div>
+  </section>
+
+  <section class="sektion">
+    <h2>Ein Hören</h2>
+    <p>Das Abschiedslied <em>Auv-Pa-il</em> in der G3-Fassung (Auv-Breth, keltische Inseln). Vier Strophen, eine Brücke, ein Atemvers:</p>
+    <div class="lied-block">
+      <p class="mishkenaz">Kin-il bi'ta-i, la'avi-Avi.<br>Wi-Sa-om — Tor-Pa-il.<br>Bi'sa-mira essem-om hoveh,<br>Ori-il bi'sa-ona, go-Ori-Ori.</p>
+      <p class="uebersetzung">Pilgerschaft-suchend, von-dir, zur Leere.<br>Kein Bruch — stimmig — Echo-suchend.<br>Von uns als Wellen: sein — stimmig — jetzt.<br>Spirale-suchend, von uns als Einheit. Bis zur Wiederkehr.</p>
+    </div>
+    <a href="https://thomas-kueper.de/texte/auv-pa-il" class="lied-link">Das vollständige Lied →</a>
+  </section>
+
+  <section class="sektion">
+    <h2>Was Mishkenaz nicht ist</h2>
+    <div class="nicht-box">
+      <ul>
+        <li>Mishkenaz ist <strong>nicht</strong> die wiederentdeckte Ursprache der Menschheit.</li>
+        <li>Mishkenaz wurde <strong>nicht</strong> durch KI-gestützte Mustererkennung entdeckt — sie wurde über vier Jahrzehnte konstruiert.</li>
+        <li>Nicht alle modernen Sprachen sind Fragmente von Mishkenaz.</li>
+      </ul>
+      <p>Konstruierte Sprachen verdienen es, als das gewürdigt zu werden, was sie sind: bewusste Schöpfungen menschlicher Vorstellungskraft. Sie brauchen keine Pseudohistorie, um wertvoll zu sein.</p>
+    </div>
+    <nav class="mish-nav"><a href="https://thomas-kueper.de/overtime-archive">Hintergrund und Werk-Ethik →</a></nav>
+  </section>
+
+  <div class="kernformel">
+    <p class="formel">Avi — Sol — Ma — Sa — Ori</p>
+    <p class="erklaerung">Leere. Impuls. Bindung. Bruch. Rückkehr.<br>Die Sprache kodiert nicht was etwas bedeutet — sondern wie es schwingt.</p>
+  </div>
+</div>
+</BaseLayout>
