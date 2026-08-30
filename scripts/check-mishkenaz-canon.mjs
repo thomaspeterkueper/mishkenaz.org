@@ -36,6 +36,7 @@ const mappings = [
   ["id: 'V19', name: 'Flu'", 'V19 must be Flu.'],
   ["id: 'V35', name: 'Ona-nO'", 'V35 must be Ona-nO.'],
   ["id: 'V36', name: 'Ori / -ori'", 'V36 must be Ori / -ori.'],
+  ["id: 'V37', name: \"-h / '\"", "V37 must be -h / '."],
   ["id: 'V38', name: '-val'", 'V38 must be -val.'],
   ["id: 'V39', name: '-reso'", 'V39 must be -reso.'],
   ["id: 'V40', name: '-ira'", 'V40 must be -ira.'],
@@ -51,6 +52,7 @@ expect(core.includes("deprivationSlot: 'DEPR'"), 'Deprivation slot invariant mus
 
 const forbidden = [
   ['Ona-nO (V42)', 'Legacy Ona-nO (V42) mapping found in pages.'],
+  ['V42 Ona-nO', 'Legacy V42 Ona-nO mapping found in pages.'],
   ['V40 Kora', 'Legacy V40 Kora mapping found in pages.'],
   ['(EVID)', 'Legacy EVID slot found in pages.'],
 ];
