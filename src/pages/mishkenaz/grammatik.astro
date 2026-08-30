@@ -3,11 +3,12 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import {
   MISHKENAZ_CANON_VERSION,
   aspects,
+  aspectSemantics,
   grammar,
 } from '../../data/mishkenaz/core';
 
 const title = 'Grammatik — Mishkenaz';
-const description = 'Mishkenaz v0.9: Slot-Morphologie, drei Resonanzaspekte, Rollenpartikel, Pronomen, Zeitpartikel, Deprivation und Kombinationsregeln.';
+const description = 'Mishkenaz v0.9: Slot-Morphologie, drei relational-epistemische Resonanzaspekte, Rollenpartikel, Pronomen, Zeitpartikel, Deprivation und Kombinationsregeln.';
 ---
 
 <BaseLayout title={title} description={description}>
@@ -62,7 +63,7 @@ const description = 'Mishkenaz v0.9: Slot-Morphologie, drei Resonanzaspekte, Rol
 
   <section class="sektion">
     <h2>Grundprinzip</h2>
-    <p>Mishkenaz ist eine <strong>vektoriell-aspektuelle, slot-basierte Sprache</strong>. Sie besitzt kein Tempussystem wie Deutsch oder Latein. Zeit kann optional markiert werden; zentral ist der Resonanzzustand einer Aussage.</p>
+    <p>Mishkenaz ist eine <strong>vektoriell-aspektuelle, slot-basierte Sprache</strong>. Sie besitzt kein Tempussystem wie Deutsch oder Latein. Zeit kann optional markiert werden; zentral ist die relationale Passung einer Aussage zur Situation, wie sie im Sprechen markiert wird.</p>
     <p>Jeder Vektor kann unmittelbar als Verbstamm verwendet werden. Es gibt keine eigene Verbklasse und keine Infinitivform: <em>Saha</em> ist Stamm, <em>Saha-om</em> bereits eine vollzogene Aussage.</p>
 
     <div class="slot-box"><code>{grammar.slotFormula}</code></div>
@@ -94,12 +95,12 @@ const description = 'Mishkenaz v0.9: Slot-Morphologie, drei Resonanzaspekte, Rol
     <div class="beispiel"><span class="mish">Saha-ath bi'sa-i la'ta-i</span><span class="de">Sehen-dissonant · von mir · zu dir.</span></div>
     <div class="beispiel"><span class="mish">Saha-il bi'sa-i la'ta-i</span><span class="de">Sehen-suchend · von mir · zu dir.</span></div>
 
-    <h3>Operative Auslassung</h3>
-    <p>Die bewusste Auslassung eines Aspekts ist ein <strong>markierter Schweigeplatz</strong>, kein vierter Aspekt. Sie bezeichnet ein gehütetes Nicht-Benennen. Nominale Zustandsformen und Ausrufe können ebenfalls aspektlos stehen.</p>
-
     <div class="hinweis">
-      <strong>Offene Kanonfrage:</strong> Ob <code>-om/-ath/-il</code> primär einen vom Sprecher gesetzten bzw. wahrgenommenen relationalen Zustand markieren oder eine ontische Aussage über die Wirklichkeit selbst treffen, ist noch nicht endgültig entschieden. Diese Referenzseite hält deshalb die etablierte Kernsemantik fest, ohne die metaphysische Lesart zu schließen.
+      <strong>Kanonische Lesart:</strong> {aspectSemantics.summary} {aspectSemantics.nonOntic} {aspectSemantics.plurality} {aspectSemantics.honesty}
     </div>
+
+    <h3>Operative Auslassung</h3>
+    <p>Die bewusste Auslassung eines Aspekts ist ein <strong>markierter Schweigeplatz</strong>, kein vierter Aspekt. Sie bezeichnet ein gehütetes Nicht-Benennen der relationalen Passung. Nominale Zustandsformen und Ausrufe können ebenfalls aspektlos stehen.</p>
   </section>
 
   <section class="sektion">
@@ -162,7 +163,7 @@ const description = 'Mishkenaz v0.9: Slot-Morphologie, drei Resonanzaspekte, Rol
 
   <section class="sektion">
     <h2>Die Ta-Konstante</h2>
-    <p>Die kanonischen Prägungen unterscheiden Bindung ohne und mit Grenze:</p>
+    <p>Die kanonischen Prägungen unterscheiden Bindung ohne und mit Grenze. Die Aspektwahl bleibt relational: Auch <em>Ma'U-om</em> ist grammatisch möglich, aber innerhalb der Ta-Lehre eine spannungsreiche ethische Setzung.</p>
     <div class="beispiel"><span class="mish">Ma'U</span><span class="de">Bindung ohne Grenze — Verschmelzung / Übergriff.</span></div>
     <div class="beispiel"><span class="mish">Ma'Ta'U</span><span class="de">Bindung mit Grenze — Verbindung, die Differenz erhält.</span></div>
     <div class="beispiel"><span class="mish">Ma'Ta'U-om</span><span class="de">Bindung mit Grenze, konvergent/stimmig.</span></div>
