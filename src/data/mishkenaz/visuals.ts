@@ -57,9 +57,9 @@ export const mishkenazVisuals: MishkenazVisual[] = [
       'Runder warmer Meditationsraum mit zentralem Oberlicht, konzentrischen Bodenringen und hängenden Klangobjekten; mehrere Menschen sitzen mit Abstand am Rand des Raums.',
     asset: {
       src: '/images/mishkenaz/meditationskammer-01.webp',
-      ready: false,
-      width: 1448,
-      height: 1086,
+      ready: true,
+      width: 800,
+      height: 600,
       format: 'webp',
     },
     relatedTopics: ['Resonanz', 'Ta', 'Stille', 'Körper', 'Raum'],
