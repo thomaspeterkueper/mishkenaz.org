@@ -49,12 +49,17 @@ for (const [needle, message] of mappings) expect(core.includes(needle), message)
 expect(core.includes('(DEPR)'), 'Grammar slot formula must contain DEPR.');
 expect(core.includes("aspects: ['-om', '-ath', '-il']"), 'Aspects must be exactly -om, -ath, -il.');
 expect(core.includes("deprivationSlot: 'DEPR'"), 'Deprivation slot invariant must remain DEPR.');
+expect(core.includes("aspectReading: 'relational-epistemic'"), 'Aspect semantics must remain relational-epistemic.');
+expect(core.includes("onaNoReading: 'structural-threshold'"), 'Ona-nO must remain a structural threshold, not an obligatory ontic return.');
+expect(core.includes("core: 'Ur-Einheit, mögliche Rückkehr'"), 'Ona-nO core meaning must remain possible rather than completed return.');
 
 const forbidden = [
   ['Ona-nO (V42)', 'Legacy Ona-nO (V42) mapping found in pages.'],
   ['V42 Ona-nO', 'Legacy V42 Ona-nO mapping found in pages.'],
   ['V40 Kora', 'Legacy V40 Kora mapping found in pages.'],
   ['(EVID)', 'Legacy EVID slot found in pages.'],
+  ['Offene Kanonfrage:', 'Resolved semantic questions must not remain presented as open on public reference pages.'],
+  ['vollständige Auflösung', 'Ona-nO must not be presented as completed dissolution on public reference pages.'],
 ];
 
 for (const [needle, message] of forbidden) expect(!pages.includes(needle), message);
