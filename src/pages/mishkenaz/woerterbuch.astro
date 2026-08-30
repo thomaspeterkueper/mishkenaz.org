@@ -1,133 +1,127 @@
 ---
-// src/pages/mishkenaz/woerterbuch.astro
-// Stand: Juni 2026 — aktualisierte Sprachformen (sa-i/ta-i/ku-i), Versionshinweis
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MISHKENAZ_CANON_VERSION, nullpoint, vectors } from '../../data/mishkenaz/core';
+import { canonicalLexicon, grammarLexicon } from '../../data/mishkenaz/lexicon';
 
-const title = "Wörterbuch — Mishkenaz";
-const description = "Mishkenaz ↔ Deutsch mit Live-Suche. Kern-Vektoren, zusammengesetzte Wörter, grammatische Suffixe und Meta-Operatoren.";
+const title = 'Wörterbuch — Mishkenaz';
+const description = 'Klassifizierte Mishkenaz-v0.9-Referenz: Vektoren, Grammatikformen und kanonische Ausdrücke.';
+const vectorEntries = [nullpoint, ...vectors];
 ---
 
 <BaseLayout title={title} description={description}>
 <style>
-  .woert-page { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem 4rem; }
-  .page-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--gold-light); }
-  .breadcrumb { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
-  .breadcrumb a { color: var(--color-petrol); text-decoration: none; }
-  .breadcrumb span { color: var(--text-muted); margin: 0 0.4rem; }
-  .page-header h1 { font-family: 'Crimson Text', serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 400; color: var(--dark); margin: 0 0 0.5rem; }
-  .page-header .sub { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--text-muted); font-style: italic; }
-  .versions-hinweis { background: var(--bg-soft); border-left: 3px solid var(--gold); padding: 1rem 1.5rem; margin: 2rem 0 1.5rem; font-family: 'Lora', serif; font-size: 0.88rem; line-height: 1.7; color: var(--text-muted); }
-  .versions-hinweis a { color: var(--color-petrol); }
-  .such-box { margin: 1.5rem 0 2rem; }
-  #woert-suche { width: 100%; max-width: 560px; padding: 0.85rem 1.25rem; font-family: 'Lora', serif; font-size: 1rem; border: 1px solid var(--border); border-bottom: 2px solid var(--gold); outline: none; background: white; transition: border-color 0.2s; }
-  #woert-suche:focus { border-bottom-color: var(--color-petrol); }
-  #woert-suche::placeholder { color: var(--text-muted); }
-  .dict-sektion { margin-bottom: 3rem; }
-  .dict-sektion h2 { font-family: 'Crimson Text', serif; font-size: 1.6rem; font-weight: 400; color: var(--dark); margin-bottom: 1.25rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--gold-light); }
-  .wort-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 1rem; }
-  .wort-eintrag { background: white; border: 1px solid var(--border); padding: 1.25rem; transition: all 0.2s; }
-  .wort-eintrag:hover { border-color: var(--color-petrol); box-shadow: 0 2px 8px rgba(74,155,155,0.1); }
-  .wort-eintrag.versteckt { display: none; }
-  .mishkenaz-wort { font-family: 'Crimson Text', serif; font-size: 1.6rem; font-style: italic; color: var(--color-petrol); margin-bottom: 0.4rem; }
-  .deutsch { font-family: 'Lora', serif; font-size: 0.95rem; color: var(--text); margin-bottom: 0.25rem; font-weight: 500; }
-  .englisch { font-family: 'Lora', serif; font-size: 0.88rem; color: var(--text-muted); font-style: italic; }
-  .vektor-note { font-family: 'Lato', sans-serif; font-size: 0.65rem; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.5rem; display: block; border-top: 1px solid var(--border); padding-top: 0.4rem; }
-  .keine-ergebnisse { text-align: center; padding: 3rem; font-family: 'Lora', serif; font-size: 1rem; color: var(--text-muted); font-style: italic; display: none; }
-  .keine-ergebnisse.sichtbar { display: block; }
-  .mish-nav { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 0; }
-  .mish-nav a { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-petrol); text-decoration: none; border: 1px solid var(--color-petrol); padding: 0.4rem 1rem; transition: all 0.2s; }
-  .mish-nav a:hover { background: var(--color-petrol); color: white; }
-  @media (max-width: 640px) { .wort-grid { grid-template-columns: 1fr 1fr; } }
+  .dict-page { max-width:var(--max-width); margin:0 auto; padding:0 2rem 4rem; }
+  .page-header { padding:3rem 0 2rem; border-bottom:1px solid var(--gold-light); }
+  .breadcrumb { font-family:'Lato',sans-serif; font-size:.65rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; margin-bottom:.75rem; }
+  .breadcrumb a { color:var(--color-petrol); text-decoration:none; }
+  .breadcrumb span { color:var(--text-muted); margin:0 .4rem; }
+  h1 { font-family:'Crimson Text',serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:400; margin:0 0 .5rem; color:var(--dark); }
+  .sub { font-family:'Lora',serif; font-size:1.08rem; color:var(--text-muted); font-style:italic; }
+  .notice { background:var(--bg-soft); border-left:3px solid var(--gold); padding:1.1rem 1.5rem; margin:1.5rem 0; font-family:'Lora',serif; line-height:1.7; }
+  .search { margin:1.5rem 0 2rem; }
+  #dict-search { width:100%; max-width:640px; padding:.85rem 1rem; border:1px solid var(--border); border-bottom:2px solid var(--gold); font-family:'Lora',serif; font-size:1rem; }
+  .section { margin:2.5rem 0; }
+  .section h2 { font-family:'Crimson Text',serif; font-size:1.75rem; font-weight:400; border-bottom:1px solid var(--gold-light); padding-bottom:.4rem; }
+  .section-intro { font-family:'Lora',serif; color:var(--text-muted); font-size:.9rem; line-height:1.65; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:.9rem; margin-top:1rem; }
+  .entry { border:1px solid var(--border); padding:1rem 1.1rem; background:white; }
+  .entry.hidden { display:none; }
+  .form { font-family:'Crimson Text',serif; font-size:1.35rem; font-style:italic; color:var(--color-petrol); margin:0 0 .35rem; }
+  .meaning { font-family:'Lora',serif; font-size:.9rem; line-height:1.55; margin:.2rem 0; }
+  .meta { font-family:'Lato',sans-serif; font-size:.61rem; letter-spacing:.09em; text-transform:uppercase; color:var(--gold); margin-top:.55rem; border-top:1px solid var(--border); padding-top:.45rem; }
+  .note { font-family:'Lora',serif; font-size:.8rem; color:var(--text-muted); font-style:italic; margin-top:.35rem; }
+  .none { display:none; font-family:'Lora',serif; color:var(--text-muted); font-style:italic; padding:2rem 0; }
+  .none.visible { display:block; }
+  .nav { display:flex; flex-wrap:wrap; gap:.75rem; margin:2rem 0 0; }
+  .nav a { font-family:'Lato',sans-serif; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.18em; color:var(--color-petrol); text-decoration:none; border:1px solid var(--color-petrol); padding:.4rem .9rem; }
+  .nav a:hover { background:var(--color-petrol); color:white; }
 </style>
 
-<div class="woert-page">
-  <header class="page-header"><p class="breadcrumb"><a href="/mishkenaz">Mishkenaz</a><span>›</span>Wörterbuch</p><h1>Wörterbuch</h1><p class="sub">Mishkenaz ↔ Deutsch mit Live-Suche</p></header>
-  <div class="versions-hinweis">Dieses Wörterbuch befindet sich in Überarbeitung. Einige Einträge entsprechen noch älteren Sprachformen. Die aktuellen grammatischen Formen (Pronomen, Beispielsätze) finden sich in der <a href="/mishkenaz/grammatik">Grammatik →</a></div>
-  <div class="such-box"><input type="text" id="woert-suche" placeholder="Mishkenaz oder Deutsch suchen…" autocomplete="off" /></div>
+<div class="dict-page">
+  <header class="page-header">
+    <p class="breadcrumb"><a href="/mishkenaz">Mishkenaz</a><span>›</span>Wörterbuch</p>
+    <h1>Wörterbuch</h1>
+    <p class="sub">Kernreferenz statt Legacy-Sammelliste</p>
+  </header>
 
-  <div id="woerterbuch-inhalt">
-    <div class="dict-sektion"><h2>Kern-Vektoren</h2><div class="wort-grid">
-      <div class="wort-eintrag" data-s="avi leere ursprung vakuum nullpunkt"><p class="mishkenaz-wort">Avi</p><p class="deutsch">Leere, Nullpunkt, Potenzial</p><p class="englisch">Void, Origin, Potential</p><span class="vektor-note">V00 · Urgeste 8</span></div>
-      <div class="wort-eintrag" data-s="sol impuls stoß beginn"><p class="mishkenaz-wort">Sol</p><p class="deutsch">Impuls, Beginn, erster Stoß</p><p class="englisch">Impulse, Beginning</p><span class="vektor-note">V01 · Urgeste Pa-Ableitung</span></div>
-      <div class="wort-eintrag" data-s="mira welle schwingung resonanz"><p class="mishkenaz-wort">Mira</p><p class="deutsch">Welle, Schwingung, Resonanz</p><p class="englisch">Wave, Oscillation</p><span class="vektor-note">V02</span></div>
-      <div class="wort-eintrag" data-s="sa bruch dissonanz schmerz schwelle"><p class="mishkenaz-wort">Sa</p><p class="deutsch">Bruch, Dissonanz, Schwelle</p><p class="englisch">Break, Dissonance, Threshold</p><span class="vektor-note">V03 · Urgeste 6</span></div>
-      <div class="wort-eintrag" data-s="ona ganzheit vollständigkeit einheit"><p class="mishkenaz-wort">Ona</p><p class="deutsch">Ganzheit, Vollständigkeit</p><p class="englisch">Wholeness, Completeness</p><span class="vektor-note">V04</span></div>
-      <div class="wort-eintrag" data-s="bi feuer wärme ort präsenz"><p class="mishkenaz-wort">Bi</p><p class="deutsch">Feuer, Wärme, Ort, Präsenz</p><p class="englisch">Fire, Warmth, Place</p><span class="vektor-note">V12 · Urgeste 11</span></div>
-      <div class="wort-eintrag" data-s="wi kälte negation nicht nein"><p class="mishkenaz-wort">Wi</p><p class="deutsch">Kälte, Negation, Nicht</p><p class="englisch">Cold, Negation, Not</p><span class="vektor-note">V13</span></div>
-      <div class="wort-eintrag" data-s="ku vakuum hunger mangel suche frage"><p class="mishkenaz-wort">Ku</p><p class="deutsch">Vakuum, Hunger, Suche, Frage</p><p class="englisch">Vacuum, Hunger, Search</p><span class="vektor-note">V14 · Urgeste 10</span></div>
-      <div class="wort-eintrag" data-s="ma bindung nahrung sicherheit mutter"><p class="mishkenaz-wort">Ma</p><p class="deutsch">Bindung, Nahrung, Sicherheit</p><p class="englisch">Bond, Nourishment, Security</p><span class="vektor-note">V16 · Urgeste 4</span></div>
-      <div class="wort-eintrag" data-s="ta grenze gegenüber anderes widerstand du"><p class="mishkenaz-wort">Ta</p><p class="deutsch">Grenze, Du, das Andere</p><p class="englisch">Boundary, You, the Other</p><span class="vektor-note">V17 · Urgeste 12</span></div>
-      <div class="wort-eintrag" data-s="saha sicht sehen wahrnehmung durst"><p class="mishkenaz-wort">Saha</p><p class="deutsch">Sicht, Sehen, Wahrnehmung</p><p class="englisch">Sight, Seeing, Perception</p><span class="vektor-note">V06</span></div>
-      <div class="wort-eintrag" data-s="val werden emergenz entfaltung wachstum"><p class="mishkenaz-wort">Val</p><p class="deutsch">Werden, Emergenz, Entfaltung</p><p class="englisch">Becoming, Emergence</p><span class="vektor-note">V38 (Meta-Operator)</span></div>
-      <div class="wort-eintrag" data-s="la tor öffnung erlaubnis"><p class="mishkenaz-wort">La</p><p class="deutsch">Tor, Öffnung, Erlaubnis</p><p class="englisch">Gate, Opening, Permission</p><span class="vektor-note">V09 · Urgeste Il-Ableitung</span></div>
-      <div class="wort-eintrag" data-s="ra fluss wachstum zeit bewegung"><p class="mishkenaz-wort">Ra</p><p class="deutsch">Fluss, Zeit, Wachstum</p><p class="englisch">Flow, Time, Growth</p><span class="vektor-note">V10</span></div>
-      <div class="wort-eintrag" data-s="pa echo identität name"><p class="mishkenaz-wort">Pa</p><p class="deutsch">Echo, Identität, Name</p><p class="englisch">Echo, Identity</p><span class="vektor-note">V08 · Urgeste 5</span></div>
-    </div></div>
-
-    <div class="dict-sektion"><h2>Pronomen</h2><div class="wort-grid">
-      <div class="wort-eintrag" data-s="sa-i ich selbst 1 person singular"><p class="mishkenaz-wort">sa-i</p><p class="deutsch">Ich (1. Pers. Singular)</p><p class="englisch">I</p><span class="vektor-note">von Vektor Sa (Selbst/Quelle)</span></div>
-      <div class="wort-eintrag" data-s="ta-i du 2 person singular"><p class="mishkenaz-wort">ta-i</p><p class="deutsch">Du (2. Pers. Singular)</p><p class="englisch">You</p><span class="vektor-note">von Vektor Ta (Gegenüber)</span></div>
-      <div class="wort-eintrag" data-s="ku-i er sie es 3 person singular"><p class="mishkenaz-wort">ku-i</p><p class="deutsch">Er / Sie / Es (3. Pers. Sing.)</p><p class="englisch">He / She / It</p><span class="vektor-note">von Vektor Ku (das Dritte)</span></div>
-      <div class="wort-eintrag" data-s="sa-mira wir plural distributiv"><p class="mishkenaz-wort">sa-mira</p><p class="deutsch">Wir (distributiv — jede/r einzeln)</p><p class="englisch">We (distributive)</p><span class="vektor-note">sa + -mira (Welle/Viele)</span></div>
-      <div class="wort-eintrag" data-s="sa-ona wir plural kollektiv einheit"><p class="mishkenaz-wort">sa-ona</p><p class="deutsch">Wir (als Einheit)</p><p class="englisch">We (collective)</p><span class="vektor-note">sa + -ona (Ganzheit)</span></div>
-    </div></div>
-
-    <div class="dict-sektion"><h2>Zusammengesetzte Wörter</h2><div class="wort-grid">
-      <div class="wort-eintrag" data-s="ma'ta'u liebe verbindung bindung grenze"><p class="mishkenaz-wort">Ma'Ta'U</p><p class="deutsch">Liebe (Bindung-Grenze-Schutz)</p><p class="englisch">Love</p><span class="vektor-note">Ma + Ta + U · Ta-Konstante</span></div>
-      <div class="wort-eintrag" data-s="om-bi-la heimat zuhause ort erlaubnis"><p class="mishkenaz-wort">Om-Bi-La</p><p class="deutsch">Heimat (Person-Ort-Erlaubnis)</p><p class="englisch">Home</p><span class="vektor-note">Om + Bi + La</span></div>
-      <div class="wort-eintrag" data-s="avi-saha andacht meditation leere durst"><p class="mishkenaz-wort">Avi-Saha</p><p class="deutsch">Andacht (Leere-Durst)</p><p class="englisch">Devotion, Meditation</p><span class="vektor-note">Avi + Saha</span></div>
-      <div class="wort-eintrag" data-s="ku-saha sehnsucht hunger sehen durst"><p class="mishkenaz-wort">Ku-Saha</p><p class="deutsch">Sehnsucht (Hunger-Sehen)</p><p class="englisch">Longing</p><span class="vektor-note">Ku + Saha</span></div>
-      <div class="wort-eintrag" data-s="qadesh-la-om heilig öffnung stimmig schutzformel"><p class="mishkenaz-wort">Qadesh-La-om</p><p class="deutsch">Heilige Öffnung — stimmig (Schutzformel G1)</p><p class="englisch">Sacred opening — convergent</p><span class="vektor-note">G1 Galut-Bri'ith</span></div>
-      <div class="wort-eintrag" data-s="ori-kol spirale rückkehr klang"><p class="mishkenaz-wort">Ori-Kol</p><p class="deutsch">Spiralförmige Rückkehr des Klangs</p><p class="englisch">Spiral return of sound</p><span class="vektor-note">Ori + Kol · Meta-Kompositum</span></div>
-      <div class="wort-eintrag" data-s="saha-om bi sa-i la ta-i ich sehe dich"><p class="mishkenaz-wort">Saha-om bi'sa-i la'ta-i</p><p class="deutsch">Ich sehe dich. Es stimmt.</p><p class="englisch">I see you. It is right.</p><span class="vektor-note">Vollsatz · Aspekt -om</span></div>
-      <div class="wort-eintrag" data-s="sôveth gefälle entropie richtung universum"><p class="mishkenaz-wort">Sôveth</p><p class="deutsch">Das Gefälle (bevorzugte Richtung des Universums)</p><p class="englisch">The gradient, entropic direction</p><span class="vektor-note">Sa-h-Vya · Grundbegriff</span></div>
-    </div></div>
-
-    <div class="dict-sektion"><h2>Grammatische Suffixe</h2><div class="wort-grid">
-      <div class="wort-eintrag" data-s="-om stimmig konvergent aspekt richtig"><p class="mishkenaz-wort">-om</p><p class="deutsch">Aspekt: stimmig, angekommen</p><p class="englisch">Convergent aspect</p></div>
-      <div class="wort-eintrag" data-s="-ath dissonant divergent aspekt falsch"><p class="mishkenaz-wort">-ath</p><p class="deutsch">Aspekt: dissonant, nicht stimmig</p><p class="englisch">Divergent aspect</p></div>
-      <div class="wort-eintrag" data-s="-il suchend werdend aspekt offen"><p class="mishkenaz-wort">-il</p><p class="deutsch">Aspekt: suchend, unterwegs</p><p class="englisch">Seeking aspect</p></div>
-      <div class="wort-eintrag" data-s="bi' von quelle rollenpartikel"><p class="mishkenaz-wort">bi'</p><p class="deutsch">Rollenpartikel: von (Quelle)</p><p class="englisch">From (source marker)</p></div>
-      <div class="wort-eintrag" data-s="la' zu ziel rollenpartikel"><p class="mishkenaz-wort">la'</p><p class="deutsch">Rollenpartikel: zu (Ziel)</p><p class="englisch">To (goal marker)</p></div>
-      <div class="wort-eintrag" data-s="-h entropie genitiv zerfall"><p class="mishkenaz-wort">-h / '</p><p class="deutsch">Entropie, Zerfall, Genitiv</p><p class="englisch">Entropy, genitive</p></div>
-    </div></div>
-
-    <div class="dict-sektion"><h2>Meta-Operatoren</h2><div class="wort-grid">
-      <div class="wort-eintrag" data-s="-ori möbius zyklus wiederkehr spirale"><p class="mishkenaz-wort">-ori</p><p class="deutsch">Möbius, Zyklus, Spiralwiederkehr</p><p class="englisch">Möbius, Cycle</p><span class="vektor-note">V36</span></div>
-      <div class="wort-eintrag" data-s="-val emergenz neues entfaltung"><p class="mishkenaz-wort">-val</p><p class="deutsch">Emergenz, Entfaltung, Neues</p><p class="englisch">Emergence</p><span class="vektor-note">V38</span></div>
-      <div class="wort-eintrag" data-s="-reso resonanz spiegelung gegenseitig"><p class="mishkenaz-wort">-reso</p><p class="deutsch">Resonanz, Spiegelung, Gegenseitigkeit</p><p class="englisch">Resonance</p><span class="vektor-note">V39</span></div>
-      <div class="wort-eintrag" data-s="-kora integration fusion verschmelzung"><p class="mishkenaz-wort">-kora</p><p class="deutsch">Integration, Fusion</p><p class="englisch">Integration</p><span class="vektor-note">V40 · Warnung: Ta-Verlust</span></div>
-      <div class="wort-eintrag" data-s="-kran differentiation analyse klarheit abstand"><p class="mishkenaz-wort">-kran</p><p class="deutsch">Differentiation, Klarheit, Abstand</p><p class="englisch">Differentiation</p><span class="vektor-note">V41</span></div>
-      <div class="wort-eintrag" data-s="-ira attraktor anziehung fokus obsession"><p class="mishkenaz-wort">-ira</p><p class="deutsch">Attraktor, Anziehung, Obsession</p><p class="englisch">Attractor</p><span class="vektor-note">V34</span></div>
-    </div></div>
+  <div class="notice">
+    Diese Seite trennt ab v{MISHKENAZ_CANON_VERSION} bewusst zwischen <strong>Vektoren</strong>, <strong>Grammatikformen</strong> und <strong>kanonischen Ausdrücken</strong>. Freie Interpretationen und experimentelle Rückübersetzungen stehen nicht mehr unmarkiert im Wörterbuch.
   </div>
 
-  <div class="keine-ergebnisse" id="keine-ergebnisse">Keine Einträge gefunden.</div>
-  <nav class="mish-nav"><a href="/mishkenaz/vektoren">Die 42 Vektoren →</a><a href="/mishkenaz/grammatik">Grammatik →</a><a href="/mishkenaz">← Mishkenaz Übersicht</a></nav>
+  <div class="search"><input id="dict-search" type="search" placeholder="Form oder Bedeutung suchen …" autocomplete="off" /></div>
+
+  <div id="dict-content">
+    <section class="section">
+      <h2>Vektoren und Nullpunkt</h2>
+      <p class="section-intro">V00 Avi ist Nullpunkt außerhalb der 42. V01–V42 bilden sieben Oktaven zu je sechs Vektoren.</p>
+      <div class="grid">
+        {vectorEntries.map((entry) => (
+          <article class="entry" data-search={`${entry.id} ${entry.name} ${entry.core} ${entry.usage}`.toLowerCase()}>
+            <p class="form">{entry.name}</p>
+            <p class="meaning">{entry.core}</p>
+            <p class="note">{entry.usage}</p>
+            <p class="meta">{entry.id}{entry.kind === 'operator' ? ' · Meta-Operator' : entry.kind === 'nullpoint' ? ' · Nullpunkt' : entry.kind === 'bridge' ? ' · Brückenvektor' : ''}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Grammatikformen</h2>
+      <p class="section-intro">Diese Formen sind grammatische Marker oder Partikel und nicht mit semantischen Kernvektoren gleichzusetzen.</p>
+      <div class="grid">
+        {grammarLexicon.map((entry) => (
+          <article class="entry" data-search={`${entry.form} ${entry.german} ${entry.scope} ${entry.note ?? ''}`.toLowerCase()}>
+            <p class="form">{entry.form}</p>
+            <p class="meaning">{entry.german}</p>
+            {entry.note && <p class="note">{entry.note}</p>}
+            <p class="meta">{entry.scope}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Kanonische Ausdrücke</h2>
+      <p class="section-intro">Apostroph-Prägungen sind nicht frei spontan produktiv. Wo ein Ausdruck eine historische oder liturgische Schicht trägt, ist sie angegeben.</p>
+      <div class="grid">
+        {canonicalLexicon.map((entry) => (
+          <article class="entry" data-search={`${entry.form} ${entry.german} ${entry.scope} ${entry.note ?? ''}`.toLowerCase()}>
+            <p class="form">{entry.form}</p>
+            <p class="meaning">{entry.german}</p>
+            {entry.note && <p class="note">{entry.note}</p>}
+            <p class="meta">{entry.scope}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <p id="dict-none" class="none">Keine passenden Einträge.</p>
+
+  <nav class="nav">
+    <a href="/mishkenaz/grammatik">Grammatik →</a>
+    <a href="/mishkenaz/vektoren">42 Vektoren →</a>
+    <a href="/mishkenaz/rueckuebersetzung">Interpretative Rückübersetzungen →</a>
+    <a href="/mishkenaz">← Übersicht</a>
+  </nav>
 </div>
 
 <script>
-  const suche = document.getElementById('woert-suche');
-  const eintraege = document.querySelectorAll('.wort-eintrag');
-  const keineErgebnisse = document.getElementById('keine-ergebnisse');
+  const input = document.getElementById('dict-search');
+  const entries = Array.from(document.querySelectorAll('.entry'));
+  const none = document.getElementById('dict-none');
 
-  suche?.addEventListener('input', (e) => {
-    const target = e.target as HTMLInputElement;
-    const term = target.value.toLowerCase().trim();
-    let sichtbar = 0;
-
-    eintraege.forEach(entry => {
-      const element = entry as HTMLElement;
-      const mish = entry.querySelector('.mishkenaz-wort')?.textContent?.toLowerCase() || '';
-      const deutsch = entry.querySelector('.deutsch')?.textContent?.toLowerCase() || '';
-      const s = (element.dataset.s || '') + ' ' + mish + ' ' + deutsch;
-      const treffer = term === '' || s.includes(term);
-      entry.classList.toggle('versteckt', !treffer);
-      if (treffer) sichtbar++;
+  input?.addEventListener('input', (event) => {
+    const value = (event.target instanceof HTMLInputElement ? event.target.value : '').trim().toLowerCase();
+    let visible = 0;
+    entries.forEach((entry) => {
+      const haystack = entry.getAttribute('data-search') ?? '';
+      const match = !value || haystack.includes(value);
+      entry.classList.toggle('hidden', !match);
+      if (match) visible += 1;
     });
-
-    keineErgebnisse?.classList.toggle('sichtbar', sichtbar === 0 && term !== '');
+    none?.classList.toggle('visible', visible === 0);
   });
 </script>
 </BaseLayout>
