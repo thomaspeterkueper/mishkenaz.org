@@ -2,7 +2,8 @@
 
 **Status:** Prüfnotiz vor Merge von PR #2  
 **Referenz:** Theologische Reihe auf `thomas-kueper.de`, Essays 1–6  
-**Scope:** Ontologie, Beziehung, Individualität/Grenze, Verantwortung, Offenheit, Resonanz/Feld, Ursprung/Rückkehr  
+**Mishkenaz-Referenzstand:** v0.9, 2026-08-30  
+**Scope:** Ontologie, Beziehung, Individualität/Grenze, Verantwortung, Offenheit, Resonanz/Feld, Ursprung/Rückkehr
 
 ## Ergebnis in Kürze
 
@@ -21,7 +22,7 @@ Die Ta-Konstante gehört zu den stärksten Verbindungspunkten.
 
 Mishkenaz:
 
-- `Ma-U`: Bindung ohne Grenze → Verschmelzung / Co-Abhängigkeit / Übergriff
+- `Ma'U`: Bindung ohne Grenze → Verschmelzung / Co-Abhängigkeit / Übergriff
 - `Ma'Ta'U`: Bindung mit Grenze → Verbindung, die das Andere als Anderes lässt
 
 Theologische Reihe:
@@ -66,17 +67,17 @@ Bis dahin keine Änderung der Kernsemantik.
 
 ## 5. Vektoren als Sprache vs. Ersatzphysik — redaktionell klärbar
 
-Bezeichnungen wie „Hardware der Realität“, „Feldübertragung“, „Entropie“, „Attraktor“ oder „vollständige Auflösung“ können außerhalb des Werkzusammenhangs wie physikalische Behauptungen wirken.
+Bezeichnungen wie „Entropie“, „Attraktor“, „Integration“ oder „Resonanz“ können außerhalb des Werkzusammenhangs wie physikalische Behauptungen wirken.
 
 Die theologische Reihe setzt hier eine klare epistemische Grenze: Der Feldgedanke ist kein unbekannter Übertragungsmechanismus und keine Ersatzphysik. Mishkenaz selbst wird zugleich ausdrücklich als konstruierte Sprache und als semantisches Koordinatensystem beschrieben.
 
 **Bewertung:** kein Kanonwiderspruch, aber ein Darstellungsrisiko.
 
-**Redaktionelle Konsequenz:** Die Vektorseite sollte ausdrücklich sagen, dass physikalische und akustische Begriffe sprachinterne Metaphern/Modellbilder sind und keine naturwissenschaftliche Wirkungsbehauptung darstellen.
+**Redaktionelle Konsequenz:** Die Vektorseite soll ausdrücklich sagen, dass physikalische und akustische Begriffe sprachinterne Metaphern/Modellbilder sind und keine naturwissenschaftliche Wirkungsbehauptung darstellen.
 
 ## 6. Emergenz, Freiheit und Möglichkeitsraum — kohärent
 
-`Val` (Emergenz / Neues Erscheinen), Differenz, Rekombination und Galut-Drift lassen echte Neuheit zu. Das passt zu den Essays über Freiheit und Kindschaft, in denen Zukunft nicht als vollständig vorgezeichnete Route, sondern als Möglichkeitsraum aus Bedingungen, Entscheidungen, Begegnungen und Folgen verstanden wird.
+V38 `-val` (Emergenz / neues Erscheinen), Differenz, Rekombination und Galut-Drift lassen echte Neuheit zu. Das passt zu den Essays über Freiheit und Kindschaft, in denen Zukunft nicht als vollständig vorgezeichnete Route, sondern als Möglichkeitsraum aus Bedingungen, Entscheidungen, Begegnungen und Folgen verstanden wird.
 
 **Bewertung:** kohärent.
 
@@ -84,48 +85,62 @@ Die theologische Reihe setzt hier eine klare epistemische Grenze: Der Feldgedank
 
 Mishkenaz besitzt Bruch, Dissonanz, Entropie und Tragik als zentrale semantische Felder. Die theologische Reihe akzeptiert Differenz und Reibung als Bedingungen, unter denen Neues entstehen *kann*, lehnt aber ausdrücklich die Aussage ab, Leiden sei deshalb notwendig oder gut.
 
-Mishkenaz behauptet derzeit nicht zwingend, dass Bruch moralisch gut oder notwendiges Entwicklungsinstrument sei. Diese Unterscheidung sollte erhalten bleiben.
+Mishkenaz behauptet derzeit nicht zwingend, dass Bruch moralisch gut oder notwendiges Entwicklungsinstrument sei. Diese Unterscheidung soll erhalten bleiben.
 
 **Bewertung:** produktive Differenz; keine Teleologie des Leidens ergänzen.
 
-## 8. Integration, Kora und die Perspektive des Einzelnen — kohärent, solange die Warnung ernst bleibt
+## 8. Integration, `-kora` und die Perspektive des Einzelnen — kohärent, solange die Grenze sichtbar bleibt
 
-V40 `Kora` bezeichnet Integration/Fusion; die eingebaute Tragik lautet „Verlust der Grenze“. Das entspricht der theologischen Warnung, dass eine Perspektive des Ganzen das konkrete Verlorene und das Opfer nicht überschreiben darf.
+V42 `-kora` bezeichnet im v0.9-Kern Integration / Zusammenführung. Im Zusammenspiel mit der Ta-Konstante ist entscheidend, dass Integration nicht automatisch Verschmelzung bedeutet.
 
-**Bewertung:** kohärent gerade *durch* die negative Grenzmarkierung.
+Die theologische Reihe warnt davor, dass eine Perspektive des Ganzen das konkrete Einzelne und dessen Geschichte überschreibt.
 
-## 9. V42 `Ona-nO` / Rückkehr zur Omnizedenz — Kanonentscheidung erforderlich
+**Bewertung:** grundsätzlich kohärent, sofern `-kora` nicht als automatische Auflösung von Ta/Individualität dargestellt wird.
 
-Hier liegt die stärkste echte Spannung.
+## 9. V35 `Ona-nO` / Ur-Einheit und Rückkehr — Kanonentscheidung erforderlich
 
-Aktuelle V42-Semantik:
+Die v0.9-Kurzreferenz setzt:
 
-- „Ur-Einheit · Rückkehr zur Omnizedenz“
-- Klangbild: „Vollständige Auflösung“
-- Tragik: „Die Auflösung des Selbst“
-- Schlusszyklus: `Avi → … → Ona-nO → Avi`, „Die Sprache kehrt zur Leere zurück“
+- V35 `Ona-nO`
+- Kernbedeutung: Ur-Einheit / Rückkehr
+- typische Verwendung: „das letzte Heimkommen“
+
+Ältere Mishkenaz-Fassungen beschrieben `Ona-nO` stärker als vollständige Auflösung bzw. Rückkehr zur Omnizedenz. Diese ältere Lesart darf nicht mehr unbemerkt als aktueller Vektorstand ausgegeben werden, ist philosophisch aber weiterhin relevant, weil die Frage hinter dem Begriff bestehen bleibt.
 
 Die theologische Reihe entwickelt dagegen ausdrücklich:
 
-- Herkunft verpflichtet nicht zur Rückkehr.
+- Herkunft verpflichtet nicht automatisch zur Rückkehr.
 - Eigenständigkeit und entstandene Geschichte sind real und nicht einfach rückrollbar.
 - Integration des Ganzen darf das Einzelne nicht überschreiben.
 - Die Frage, ob und wie „Rückkehr“ geschieht, bleibt offen.
 
-Die vorhandene Kennzeichnung als **Tragik** zeigt bereits, dass Selbstauflösung nicht einfach als positives Ziel gelesen werden muss. Der abschließende Gesamtzyklus macht die Rückkehr jedoch zugleich zu einer strukturellen Endbewegung des Systems.
-
-**Bewertung:** echte philosophische Spannung. Nicht redaktionell verändern.
+**Bewertung:** echte philosophische Spannung. Nicht redaktionell auflösen.
 
 **Kanonentscheidung:** Es muss bewusst entschieden werden, ob `Ona-nO`
 
 A. tatsächliche ontologische Rückkehr/Auflösung bezeichnet,
-B. einen Grenzvektor bzw. die Vorstellung totaler Integration bezeichnet, deren Preis gerade der Verlust von Ta/Individualität ist,
-C. eine historische Mishkenaz-Lehre darstellt, die von der späteren Philosophie bewusst überholt bzw. widersprochen wird,
+B. einen Grenzvektor bzw. die Vorstellung totaler Integration bezeichnet, deren Preis gerade der Verlust von Ta/Individualität wäre,
+C. eine historische Mishkenaz-Lehre darstellt, die von späteren philosophischen Schichten relativiert oder widersprochen wird,
 D. anders neu bestimmt werden soll.
 
-Bis zu dieser Entscheidung bleibt V42 unverändert.
+Bis zu dieser Entscheidung bleibt die v0.9-Kurzsemantik bestehen; ältere stärkere Aussagen werden nicht als gegenwärtiger Kanon dargestellt.
 
-## 10. Gesamturteil
+## 10. Nummerierungsnotiz v0.9
+
+Für alle weiteren Kohärenzprüfungen gilt:
+
+- V35 = `Ona-nO`
+- V36 = `Ori / -ori`
+- V37 = `-h / '`
+- V38 = `-val`
+- V39 = `-reso`
+- V40 = `-ira`
+- V41 = `-vya`
+- V42 = `-kora`
+
+V00 `Avi` ist Nullpunkt außerhalb der 42; V01–V42 bilden sieben Oktaven zu je sechs Vektoren.
+
+## 11. Gesamturteil
 
 Mishkenaz und die theologische Reihe widersprechen sich **nicht grundsätzlich**. Im Gegenteil: Beziehung vor Isolation, Differenz als Bedingung verantwortlicher Verbindung, Offenheit, Emergenz und die Ablehnung von Verschmelzung bilden einen gemeinsamen Kern.
 
