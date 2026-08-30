@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import VisualFigure from '../../components/mishkenaz/VisualFigure.astro';
 import { MISHKENAZ_CANON_VERSION, aspects } from '../../data/mishkenaz/core';
+import { featuredVisuals } from '../../data/mishkenaz/visuals';
 
 const title = 'Mishkenaz — Anatomie einer erfundenen Sprache';
 const description = 'Mishkenaz ist eine konstruierte Sprache des Baumeister-Universums: Körper, Urgesten, 42 Vektoren, Resonanzaspekte, Register und Galut-Kontaktlinien.';
@@ -50,6 +52,12 @@ const registers = [
   .book .status { font-family:'Lato',sans-serif; font-size:.64rem; font-weight:700; text-transform:uppercase; letter-spacing:.16em; color:var(--gold); }
   .book blockquote { font-family:'Crimson Text',serif; font-size:1.25rem; font-style:italic; border-left:2px solid var(--gold); padding-left:1rem; margin:1rem 0 .2rem; }
   .canon { font-family:'Lato',sans-serif; font-size:.63rem; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); }
+  .visual-grid { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(240px,.65fr); gap:1.6rem; align-items:start; }
+  .visual-copy { padding-top:.4rem; }
+  .visual-copy .eyebrow { font-family:'Lato',sans-serif; font-size:.61rem; font-weight:700; text-transform:uppercase; letter-spacing:.17em; color:var(--gold); }
+  .visual-copy a { font-family:'Lato',sans-serif; font-size:.63rem; font-weight:700; text-transform:uppercase; letter-spacing:.13em; color:var(--color-petrol); text-decoration:none; }
+  .visual-copy a:hover { text-decoration:underline; }
+  @media (max-width:800px) { .visual-grid { grid-template-columns:1fr; } }
   @media (max-width:700px) { .cards { grid-template-columns:1fr; } table { font-size:.8rem; } }
 </style>
 
@@ -71,6 +79,7 @@ const registers = [
     <a href="/mishkenaz/proto-mishkenaz">Urgesten →</a>
     <a href="/mishkenaz/woerterbuch">Wörterbuch →</a>
     <a href="/mishkenaz/rueckuebersetzung">Rückübersetzungen →</a>
+    <a href="/mishkenaz/welt">Räume & Visualisierungen →</a>
   </nav>
 
   <section class="section">
@@ -88,13 +97,14 @@ const registers = [
         </article>
       ))}
     </div>
-    <p>Die bewusste Auslassung eines Aspekts ist ein markierter Schweigeplatz, kein vierter Aspekt. <code>-tum</code> gehört ebenfalls nicht zu den Aspekten, sondern markiert Deprivation: schmerzhaftes Fehlen.</p>
+    <p>Die Aspekte sind <strong>relational-epistemisch</strong>: Sie markieren die wahrgenommene und mitgeteilte Passung zwischen Aussage oder Handlung und Situation, nicht einen objektiven Wahrheitszustand der Welt. Zwei Sprecher können denselben Vorgang deshalb ehrlich verschieden aspektieren. Die bewusste Auslassung eines Aspekts ist ein markierter Schweigeplatz, kein vierter Aspekt. <code>-tum</code> markiert Deprivation: schmerzhaftes Fehlen.</p>
   </section>
 
   <section class="section">
     <h2>Bindung braucht Grenze</h2>
     <p>Eine zentrale Prägung der Sprache ist die Ta-Konstante. Der Apostroph ist dabei wichtig: Er markiert eine historisch geprägte Einheit, nicht eine frei gebildete transparente Sequenz.</p>
     <div class="note"><strong>Ma'U</strong> — Bindung ohne Grenze: Verschmelzung / Übergriff.<br /><strong>Ma'Ta'U</strong> — Bindung mit Grenze: Verbindung, die Differenz erhält.</div>
+    <p><code>Ma'U-om</code> bleibt grammatisch möglich. Innerhalb der Ta-Lehre ist die Form jedoch ethisch spannungsreich: Der Aspekt beschreibt die vom Sprecher wahrgenommene Passung und macht die zugrunde liegende grenzenlose Bindung nicht objektiv „gesund“.</p>
   </section>
 
   <section class="section">
@@ -116,6 +126,20 @@ const registers = [
     <p><em>Logos universal, Phonos lokal.</em> Die Tiefenrelationen können erkennbar bleiben, während Lautform, Register, Substrat und kulturelle Deutung driften.</p>
   </section>
 
+  {featuredVisuals.map((visual) => (
+    <section class="section">
+      <div class="visual-grid">
+        <VisualFigure visual={visual} compact={true} />
+        <div class="visual-copy">
+          <p class="eyebrow">{visual.eyebrow}</p>
+          <h2>{visual.title}</h2>
+          <p>{visual.summary}</p>
+          <p><a href={`/mishkenaz/welt#${visual.slug}`}>Zur Raumstudie →</a></p>
+        </div>
+      </div>
+    </section>
+  ))}
+
   <section class="section">
     <h2>Das Buch</h2>
     <div class="book">
@@ -127,14 +151,15 @@ const registers = [
   </section>
 
   <section class="section">
-    <h2>Was die Referenz bewusst offenlässt</h2>
-    <p>Zwei Fragen sind noch echte Kanonfragen und werden nicht durch Website-Text entschieden: Erstens, ob die Resonanzaspekte perspektivisch-relational oder ontisch zu lesen sind. Zweitens, wie <em>Ona-nO (V35)</em> — Ur-Einheit/Rückkehr — philosophisch genau zu verstehen ist.</p>
+    <h2>Kanonische Lesart</h2>
+    <p>Die zwei früher offenen semantischen Kernfragen sind entschieden: Die Resonanzaspekte sind relational-epistemisch. <em>Ona-nO (V35)</em> bezeichnet <strong>Ur-Einheit / mögliche Rückkehr</strong> und damit eine strukturelle Schwelle, keine vorgeschriebene Selbstauflösung. Ob eine Spirale sich schließt oder eine neue Windung beginnt, liegt außerhalb der Grammatik; <em>Ori / -ori (V36)</em> übernimmt danach Wiederkehr und Revalidierung als Brücke zur Metaebene.</p>
   </section>
 
   <nav class="nav">
     <a href="/mishkenaz/vektoren">Vektoren im Detail →</a>
     <a href="/mishkenaz/grammatik">Grammatik im Detail →</a>
     <a href="/mishkenaz/proto-mishkenaz">Urgesten →</a>
+    <a href="/mishkenaz/welt">Räume & Visualisierungen →</a>
   </nav>
 </div>
 </BaseLayout>
