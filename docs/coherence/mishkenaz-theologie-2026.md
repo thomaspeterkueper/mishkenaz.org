@@ -1,6 +1,6 @@
 # Mishkenaz–Theologie-Kohärenzcheck 2026
 
-**Status:** Prüfnotiz vor Merge von PR #2  
+**Status:** geprüft — semantische Kernfragen am 2026-08-30 entschieden  
 **Referenz:** Theologische Reihe auf `thomas-kueper.de`, Essays 1–6  
 **Mishkenaz-Referenzstand:** v0.9, 2026-08-30  
 **Scope:** Ontologie, Beziehung, Individualität/Grenze, Verantwortung, Offenheit, Resonanz/Feld, Ursprung/Rückkehr
@@ -9,12 +9,10 @@
 
 Der strukturelle Kern von Mishkenaz ist mit der theologischen Reihe weitgehend kohärent. Besonders stark ist die Übereinstimmung dort, wo Beziehung nicht als Verschmelzung, sondern als Verbindung unter Erhalt von Differenz gedacht wird.
 
-Die Prüfung unterscheidet vier Klassen:
+Zwei zuvor offene semantische Kernfragen sind inzwischen kanonisch entschieden:
 
-- **kohärent** — beide Systeme tragen denselben Grundgedanken;
-- **produktive Differenz** — Mishkenaz besitzt eine eigene historische/poetische Perspektive, ohne die philosophische Grundlage zu verletzen;
-- **klärungsbedürftig** — Formulierungen können stärker behaupten, als die theologische Reihe epistemisch zulässt;
-- **Kanonentscheidung erforderlich** — eine Kernbedeutung steht in echter Spannung zur heutigen Philosophie und darf nicht redaktionell umgedeutet werden.
+1. `-om / -ath / -il` werden **relational-epistemisch**, nicht ontisch-absolut gelesen.
+2. V35 `Ona-nO` bezeichnet eine **strukturelle Schwelle möglicher Rückkehr**, nicht vollzogene Selbstauflösung oder verpflichtende ontologische Rückkehr.
 
 ## 1. Beziehung und Differenz — kohärent
 
@@ -50,30 +48,28 @@ Die Essays behandeln Offenheit ausdrücklich als Stärke: Gebet, Feld, Vorsehung
 
 **Bewertung:** stark kohärent.
 
-## 4. `-om` / `-ath` und „Stimmigkeit zur Wirklichkeit“ — klärungsbedürftig
+## 4. `-om / -ath / -il` — entschieden: relational-epistemisch
 
-Die aktuelle Grammatik formuliert, die Aspekte kodierten, „wie stimmig es zur Wirklichkeit ist“.
+Die Aspekte sind keine objektiven metaphysischen Wahrheitsmarker. Sie markieren die **Passung zwischen Aussage/Handlung und Situation, wie sie im Sprechen wahrgenommen und mitgeteilt wird**.
 
-Das kann als objektiver metaphysischer Wahrheitsmarker gelesen werden: Der Sprecher würde grammatisch feststellen, was *wirklich* stimmig oder dissonant ist. Die theologische Reihe ist vorsichtiger. Sie lässt Deutung offen und unterscheidet Erfahrung, Antwort, Verantwortung und metaphysische Erklärung.
+Daraus folgen vier kanonische Konsequenzen:
 
-**Zu klären:** Sind `-om/-ath/-il`
+- Zwei Sprecher können denselben Vorgang ehrlich verschieden aspektieren.
+- Die Aspekte sind dennoch nicht beliebig subjektiv; sie bleiben an Körper, Wahrnehmung, Kontext und Relation gebunden.
+- Lüge entsteht dort, wo ein Sprecher wissentlich einen Aspekt setzt, der seiner eigenen wahrgenommenen relationalen Passung widerspricht.
+- Die operative Auslassung verweigert die Benennung der Passung und ist deshalb ein markierter Schweigeplatz, kein vierter Aspekt.
 
-1. Aussagen über einen vom Sprecher wahrgenommenen/gesetzten Beziehungszustand, oder
-2. ontische Aussagen darüber, wie die Wirklichkeit selbst beschaffen ist?
+Damit passt die Grammatik unmittelbar zur relationalen Ethik der Ta-Konstante und zur epistemischen Vorsicht der theologischen Reihe.
 
-Variante 1 ist mit der theologischen Reihe unmittelbar kompatibel. Variante 2 wäre eine deutlich stärkere metaphysische Setzung und benötigt eine bewusste Kanonentscheidung.
+**Bewertung:** Kanonfrage geschlossen; stark kohärent.
 
-Bis dahin keine Änderung der Kernsemantik.
-
-## 5. Vektoren als Sprache vs. Ersatzphysik — redaktionell klärbar
+## 5. Vektoren als Sprache vs. Ersatzphysik — redaktionell geklärt
 
 Bezeichnungen wie „Entropie“, „Attraktor“, „Integration“ oder „Resonanz“ können außerhalb des Werkzusammenhangs wie physikalische Behauptungen wirken.
 
 Die theologische Reihe setzt hier eine klare epistemische Grenze: Der Feldgedanke ist kein unbekannter Übertragungsmechanismus und keine Ersatzphysik. Mishkenaz selbst wird zugleich ausdrücklich als konstruierte Sprache und als semantisches Koordinatensystem beschrieben.
 
-**Bewertung:** kein Kanonwiderspruch, aber ein Darstellungsrisiko.
-
-**Redaktionelle Konsequenz:** Die Vektorseite soll ausdrücklich sagen, dass physikalische und akustische Begriffe sprachinterne Metaphern/Modellbilder sind und keine naturwissenschaftliche Wirkungsbehauptung darstellen.
+**Bewertung:** kein Kanonwiderspruch. Die öffentliche Vektorreferenz markiert diese Begriffe ausdrücklich als sprachliche Modellbilder.
 
 ## 6. Emergenz, Freiheit und Möglichkeitsraum — kohärent
 
@@ -85,45 +81,35 @@ V38 `-val` (Emergenz / neues Erscheinen), Differenz, Rekombination und Galut-Dri
 
 Mishkenaz besitzt Bruch, Dissonanz, Entropie und Tragik als zentrale semantische Felder. Die theologische Reihe akzeptiert Differenz und Reibung als Bedingungen, unter denen Neues entstehen *kann*, lehnt aber ausdrücklich die Aussage ab, Leiden sei deshalb notwendig oder gut.
 
-Mishkenaz behauptet derzeit nicht zwingend, dass Bruch moralisch gut oder notwendiges Entwicklungsinstrument sei. Diese Unterscheidung soll erhalten bleiben.
+Die relational-epistemische Lesart von `-ath` verstärkt diese Grenze: Dissonanz ist Diagnose einer nicht tragenden Relation, kein kosmisches Urteil und keine Teleologie des Leidens.
 
 **Bewertung:** produktive Differenz; keine Teleologie des Leidens ergänzen.
 
-## 8. Integration, `-kora` und die Perspektive des Einzelnen — kohärent, solange die Grenze sichtbar bleibt
+## 8. Integration, `-kora` und die Perspektive des Einzelnen — kohärent
 
 V42 `-kora` bezeichnet im v0.9-Kern Integration / Zusammenführung. Im Zusammenspiel mit der Ta-Konstante ist entscheidend, dass Integration nicht automatisch Verschmelzung bedeutet.
 
 Die theologische Reihe warnt davor, dass eine Perspektive des Ganzen das konkrete Einzelne und dessen Geschichte überschreibt.
 
-**Bewertung:** grundsätzlich kohärent, sofern `-kora` nicht als automatische Auflösung von Ta/Individualität dargestellt wird.
+**Bewertung:** kohärent, solange `-kora` nicht als automatische Auflösung von Ta/Individualität dargestellt wird.
 
-## 9. V35 `Ona-nO` / Ur-Einheit und Rückkehr — Kanonentscheidung erforderlich
+## 9. V35 `Ona-nO` — entschieden: strukturelle Schwelle möglicher Rückkehr
 
-Die v0.9-Kurzreferenz setzt:
+Die kanonische v0.9-Lesart lautet:
 
 - V35 `Ona-nO`
-- Kernbedeutung: Ur-Einheit / Rückkehr
-- typische Verwendung: „das letzte Heimkommen“
+- Kernbedeutung: **Ur-Einheit / mögliche Rückkehr**
+- Funktion: **strukturelle Schwelle** am Ende der semantischen sechsten Oktave
+- keine vollzogene Selbstauflösung
+- keine verpflichtende ontologische Rückkehr
 
-Ältere Mishkenaz-Fassungen beschrieben `Ona-nO` stärker als vollständige Auflösung bzw. Rückkehr zur Omnizedenz. Diese ältere Lesart darf nicht mehr unbemerkt als aktueller Vektorstand ausgegeben werden, ist philosophisch aber weiterhin relevant, weil die Frage hinter dem Begriff bestehen bleibt.
+`Ona-nO` markiert die Position, an der Integration oder Rückkehr möglich wird. Ob sich die Spirale schließt oder eine neue Windung beginnt, ist ausdrücklich keine grammatische Frage. V36 `Ori / -ori` nimmt diese Offenheit als Wiederkehr/Revalidierung auf und bildet die Brücke zur Metaebene.
 
-Die theologische Reihe entwickelt dagegen ausdrücklich:
+Spätere Galut- oder Kommentarschichten dürfen `Ona-nO` ontologischer deuten. Solche Lesarten sind historische bzw. interpretative Schichten und nicht der R1-Kern.
 
-- Herkunft verpflichtet nicht automatisch zur Rückkehr.
-- Eigenständigkeit und entstandene Geschichte sind real und nicht einfach rückrollbar.
-- Integration des Ganzen darf das Einzelne nicht überschreiben.
-- Die Frage, ob und wie „Rückkehr“ geschieht, bleibt offen.
+Diese Entscheidung beseitigt die frühere Spannung zur theologischen Reihe: Herkunft verpflichtet nicht automatisch zur Rückkehr; Individualität und entstandene Geschichte werden grammatisch nicht zur Auflösung bestimmt.
 
-**Bewertung:** echte philosophische Spannung. Nicht redaktionell auflösen.
-
-**Kanonentscheidung:** Es muss bewusst entschieden werden, ob `Ona-nO`
-
-A. tatsächliche ontologische Rückkehr/Auflösung bezeichnet,
-B. einen Grenzvektor bzw. die Vorstellung totaler Integration bezeichnet, deren Preis gerade der Verlust von Ta/Individualität wäre,
-C. eine historische Mishkenaz-Lehre darstellt, die von späteren philosophischen Schichten relativiert oder widersprochen wird,
-D. anders neu bestimmt werden soll.
-
-Bis zu dieser Entscheidung bleibt die v0.9-Kurzsemantik bestehen; ältere stärkere Aussagen werden nicht als gegenwärtiger Kanon dargestellt.
+**Bewertung:** Kanonfrage geschlossen; kohärent.
 
 ## 10. Nummerierungsnotiz v0.9
 
@@ -142,11 +128,9 @@ V00 `Avi` ist Nullpunkt außerhalb der 42; V01–V42 bilden sieben Oktaven zu je
 
 ## 11. Gesamturteil
 
-Mishkenaz und die theologische Reihe widersprechen sich **nicht grundsätzlich**. Im Gegenteil: Beziehung vor Isolation, Differenz als Bedingung verantwortlicher Verbindung, Offenheit, Emergenz und die Ablehnung von Verschmelzung bilden einen gemeinsamen Kern.
+Mishkenaz und die theologische Reihe sind im aktuellen v0.9-Kern **philosophisch kohärent**. Beziehung vor Isolation, Differenz als Bedingung verantwortlicher Verbindung, epistemische Offenheit, Emergenz und die Ablehnung erzwungener Verschmelzung bilden einen gemeinsamen Kern.
 
-Vor einer endgültigen philosophischen Freigabe bleiben zwei Kernfragen:
+Die beiden zuvor offenen semantischen Fragen sind geschlossen. Künftige Erweiterungen müssen deshalb zwei Invarianten respektieren:
 
-1. Ist „Stimmigkeit“ (`-om/-ath/-il`) perspektivisch-relational oder ontisch-absolut?
-2. Ist `Ona-nO` Ziel, Grenzfall, historische Lehre oder etwas anderes?
-
-Die Darstellungsfrage „Vektoren sind keine Ersatzphysik“ kann dagegen ohne Kanonänderung redaktionell geklärt werden.
+1. Resonanzaspekte bleiben relational-epistemisch und werden nicht zu objektiven Wahrheitsmarkern umgedeutet.
+2. `Ona-nO` bleibt strukturelle Möglichkeit von Rückkehr/Integration und wird im R1-Kern nicht zu einem metaphysisch vorgeschriebenen Endzustand.
