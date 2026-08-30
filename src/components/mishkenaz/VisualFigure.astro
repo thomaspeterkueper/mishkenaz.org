@@ -1,0 +1,123 @@
+---
+import {
+  visualKindLabels,
+  visualStatusLabels,
+  type MishkenazVisual,
+} from '../../data/mishkenaz/visuals';
+
+interface Props {
+  visual: MishkenazVisual;
+  compact?: boolean;
+}
+
+const { visual, compact = false } = Astro.props;
+---
+
+<figure class:list={['visual-figure', { compact }]}>
+  {visual.asset.ready ? (
+    <img
+      src={visual.asset.src}
+      width={visual.asset.width}
+      height={visual.asset.height}
+      alt={visual.alt}
+      loading="lazy"
+      decoding="async"
+    />
+  ) : (
+    <div class="visual-pending" aria-label={`Bildasset für ${visual.title} noch nicht im Repository`}>
+      <span>Visualisierung vorbereitet</span>
+      <strong>{visual.title}</strong>
+      <small>Bildasset wird separat eingehängt.</small>
+    </div>
+  )}
+
+  <figcaption>
+    <div class="visual-meta">
+      <span>{visualKindLabels[visual.kind]}</span>
+      <span>{visualStatusLabels[visual.status]}</span>
+    </div>
+    <strong>{visual.title}</strong>
+    <p>{visual.caption}</p>
+  </figcaption>
+</figure>
+
+<style>
+  .visual-figure {
+    margin: 1.5rem 0;
+    border: 1px solid var(--gold-light);
+    background: #fffdf8;
+  }
+
+  .visual-figure img,
+  .visual-pending {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .visual-pending {
+    min-height: 22rem;
+    display: grid;
+    place-content: center;
+    gap: .35rem;
+    text-align: center;
+    padding: 2rem;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(167, 125, 53, .18), transparent 34%),
+      linear-gradient(145deg, #efe7d9, #d8c7a9);
+    color: var(--dark);
+  }
+
+  .visual-pending span,
+  .visual-pending small,
+  .visual-meta {
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+  }
+
+  .visual-pending span,
+  .visual-pending small {
+    font-size: .62rem;
+  }
+
+  .visual-pending strong {
+    font-family: 'Crimson Text', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 400;
+  }
+
+  figcaption {
+    padding: 1rem 1.2rem 1.2rem;
+  }
+
+  figcaption > strong {
+    display: block;
+    margin: .5rem 0 .2rem;
+    font-family: 'Crimson Text', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--dark);
+  }
+
+  figcaption p {
+    margin: 0;
+    font-family: 'Lora', serif;
+    font-size: .88rem;
+    line-height: 1.65;
+    color: var(--text-muted);
+  }
+
+  .visual-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem 1rem;
+    font-size: .58rem;
+    color: var(--color-petrol);
+  }
+
+  .compact .visual-pending {
+    min-height: 15rem;
+  }
+</style>
