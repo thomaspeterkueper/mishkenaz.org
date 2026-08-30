@@ -1,157 +1,120 @@
 ---
-// src/pages/mishkenaz/vektoren.astro
-// Stand: Juni 2026 — Frequenz → Klangbild, korrigierte Einleitung
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  MISHKENAZ_CANON_VERSION,
+  nullpoint,
+  octaveTitles,
+  vectors,
+} from '../../data/mishkenaz/core';
 
-const title = "Die 42 Vektoren — Mishkenaz";
-const description = "Die 42 Vektoren sind das Koordinatensystem von Mishkenaz: sieben Oktaven zu je sechs Dimensionen. Kein Wörterbuch — ein System von Richtungen.";
+const title = 'Die 42 Vektoren — Mishkenaz';
+const description = 'Die 42 Vektoren von Mishkenaz in sieben Oktaven zu je sechs Vektoren. V00 Avi ist der Nullpunkt außerhalb der 42.';
+const octaves = Object.entries(octaveTitles).map(([nr, label]) => ({
+  nr: Number(nr),
+  label,
+  vectors: vectors.filter((vector) => vector.octave === Number(nr)),
+}));
 ---
 
 <BaseLayout title={title} description={description}>
 <style>
   .vek-page { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem 4rem; }
   .page-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--gold-light); }
-  .breadcrumb { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .breadcrumb { font-family: 'Lato', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem; }
   .breadcrumb a { color: var(--color-petrol); text-decoration: none; }
-  .breadcrumb span { color: var(--text-muted); margin: 0 0.4rem; }
-  .page-header h1 { font-family: 'Crimson Text', serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 400; color: var(--dark); margin: 0 0 0.5rem; }
+  .breadcrumb span { color: var(--text-muted); margin: 0 .4rem; }
+  .page-header h1 { font-family: 'Crimson Text', serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 400; color: var(--dark); margin: 0 0 .5rem; }
   .page-header .sub { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--text-muted); font-style: italic; }
-  .intro-box { background: var(--bg-soft); border-left: 3px solid var(--gold); padding: 1.25rem 1.75rem; margin: 2rem 0; font-family: 'Lora', serif; font-size: 0.97rem; line-height: 1.75; }
-  .intro-box a { color: var(--color-petrol); }
-  .warnung { background: var(--color-petrol-light); border-left: 3px solid var(--color-petrol); padding: 1rem 1.5rem; margin: 1.5rem 0; font-family: 'Lora', serif; font-size: 0.9rem; line-height: 1.7; font-style: italic; }
-  details.oktave { border: 1px solid var(--border); margin-bottom: 1.25rem; transition: border-color 0.2s; }
-  details.oktave:hover { border-color: var(--gold-light); }
+  .intro-box, .note-box { padding: 1.15rem 1.5rem; margin: 1.5rem 0; font-family: 'Lora', serif; line-height: 1.75; }
+  .intro-box { background: var(--bg-soft); border-left: 3px solid var(--gold); }
+  .note-box { background: var(--color-petrol-light); border-left: 3px solid var(--color-petrol); font-size: .92rem; }
+  .canon-stamp { font-family: 'Lato', sans-serif; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text-muted); }
+  .nullpunkt { border: 1px solid var(--gold); padding: 1.3rem 1.5rem; margin: 2rem 0; display: grid; grid-template-columns: auto 1fr; gap: 1rem 1.5rem; align-items: start; }
+  .nullpunkt .id { font-family: 'Lato', sans-serif; font-weight: 700; color: var(--gold); }
+  .nullpunkt h2 { font-family: 'Crimson Text', serif; font-size: 1.8rem; font-weight: 400; margin: 0 0 .25rem; color: var(--dark); }
+  .nullpunkt p { font-family: 'Lora', serif; margin: .2rem 0; line-height: 1.65; }
+  details.oktave { border: 1px solid var(--border); margin-bottom: 1.15rem; }
   details.oktave[open] { border-color: var(--color-petrol); }
-  details.oktave > summary { display: flex; align-items: center; gap: 1.25rem; padding: 1.25rem 1.75rem; cursor: pointer; list-style: none; background: var(--bg-soft); transition: background 0.2s; user-select: none; }
+  details.oktave > summary { display: flex; gap: 1rem; align-items: baseline; padding: 1.1rem 1.4rem; cursor: pointer; list-style: none; background: var(--bg-soft); }
   details.oktave > summary::-webkit-details-marker { display: none; }
-  details.oktave[open] > summary { background: var(--dark); color: #FAF8F3; }
-  .ok-nr { font-family: 'Crimson Text', serif; font-size: 2.5rem; font-weight: 400; color: var(--gold); min-width: 3rem; text-align: center; }
-  details.oktave[open] .ok-nr { color: var(--gold); }
-  .ok-titel { font-family: 'Crimson Text', serif; font-size: 1.5rem; font-weight: 400; flex: 1; }
-  .ok-desc { font-family: 'Lora', serif; font-size: 0.88rem; color: var(--text-muted); font-style: italic; }
-  details.oktave[open] .ok-desc { color: #94a3b8; }
-  .oktave-inhalt { padding: 1.5rem 1.75rem 2rem; background: #fafafa; }
-  .vek-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 1rem; margin-bottom: 1.25rem; }
-  .vek-karte { background: white; border-left: 3px solid var(--color-petrol); padding: 1.25rem 1.25rem 1.25rem 1.5rem; position: relative; transition: all 0.2s; }
-  .vek-karte:hover { border-left-color: var(--gold); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-  .vek-id { position: absolute; top: -0.6rem; right: 0.75rem; background: var(--gold); color: white; padding: 0.15rem 0.6rem; font-family: 'Lato', sans-serif; font-size: 0.7rem; font-weight: 700; }
-  .vek-karte h3 { font-family: 'Crimson Text', serif; font-size: 1.5rem; font-style: italic; color: var(--color-petrol); margin-bottom: 0.2rem; }
-  .vek-name { font-family: 'Lato', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text); display: block; margin-bottom: 0.5rem; }
-  .vek-klang { font-family: 'Lora', serif; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.5rem; }
-  .vek-tragik { font-family: 'Lora', serif; font-size: 0.85rem; font-style: italic; color: var(--color-petrol); border-top: 1px solid var(--border); padding-top: 0.5rem; margin-top: 0.3rem; }
-  .kernformel { background: var(--color-petrol-light); border-left: 3px solid var(--color-petrol); padding: 1rem 1.5rem; font-family: 'Lora', serif; font-size: 0.92rem; line-height: 1.7; margin-top: 0.5rem; }
-  .kernformel strong { color: var(--color-petrol); }
-  .galut-hinweis { background: var(--bg-soft); border-left: 3px solid var(--gold); padding: 0.9rem 1.25rem; margin-top: 0.75rem; font-family: 'Lora', serif; font-size: 0.88rem; line-height: 1.7; font-style: italic; color: var(--text-muted); }
-  .schlussformel { background: var(--dark); color: #FAF8F3; padding: 2.5rem 2rem; margin-top: 3rem; text-align: center; }
-  .schlussformel .formel { font-family: 'Crimson Text', serif; font-size: 1.3rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 0.5rem; }
-  .schlussformel .sub { font-family: 'Lora', serif; font-size: 0.95rem; color: #94a3b8; font-style: italic; }
-  .mish-nav { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 0; }
-  .mish-nav a { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-petrol); text-decoration: none; border: 1px solid var(--color-petrol); padding: 0.4rem 1rem; transition: all 0.2s; }
+  .ok-nr { font-family: 'Crimson Text', serif; font-size: 2rem; color: var(--gold); min-width: 2rem; }
+  .ok-title { font-family: 'Crimson Text', serif; font-size: 1.35rem; color: var(--dark); }
+  .ok-range { margin-left: auto; font-family: 'Lato', sans-serif; font-size: .65rem; color: var(--text-muted); letter-spacing: .08em; }
+  .vek-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 1px; background: var(--border); border-top: 1px solid var(--border); }
+  .vek-card { background: white; padding: 1.15rem 1.25rem; min-height: 150px; }
+  .vek-card.operator { background: var(--bg-soft); }
+  .vek-head { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+  .vek-head h3 { font-family: 'Crimson Text', serif; font-size: 1.45rem; font-style: italic; color: var(--color-petrol); margin: 0; }
+  .vek-id { font-family: 'Lato', sans-serif; font-size: .65rem; font-weight: 700; color: var(--gold); }
+  .vek-core { font-family: 'Lora', serif; font-size: .94rem; line-height: 1.55; margin: .6rem 0 .45rem; }
+  .vek-use { font-family: 'Lora', serif; font-size: .83rem; line-height: 1.5; color: var(--text-muted); font-style: italic; }
+  .bridge-note { font-family: 'Lora', serif; font-size: .9rem; line-height: 1.65; padding: 1rem 1.4rem; border-top: 1px solid var(--border); background: #fafafa; }
+  .mish-nav { display: flex; flex-wrap: wrap; gap: .75rem; margin: 2rem 0 0; }
+  .mish-nav a { font-family: 'Lato', sans-serif; font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; color: var(--color-petrol); text-decoration: none; border: 1px solid var(--color-petrol); padding: .4rem 1rem; }
   .mish-nav a:hover { background: var(--color-petrol); color: white; }
-  @media (max-width: 640px) { .ok-titel { font-size: 1.2rem; } .ok-desc { display: none; } .vek-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) { .ok-range { display:none; } .nullpunkt { grid-template-columns: 1fr; } }
 </style>
 
 <div class="vek-page">
   <header class="page-header">
     <p class="breadcrumb"><a href="/mishkenaz">Mishkenaz</a><span>›</span>Die 42 Vektoren</p>
     <h1>Die 42 Vektoren</h1>
-    <p class="sub">Sieben Oktaven — das Koordinatensystem der Sprache</p>
+    <p class="sub">Sieben Oktaven zu je sechs Vektoren — V00 liegt außerhalb des Systems.</p>
   </header>
+
   <div class="intro-box">
-    <p>Die 42 Vektoren sind die fundamentalen Parameter im Mishkenaz-System. Sie strukturieren, wie die Sprache Wahrnehmung, Beziehung und Bewegung kodiert. Sie sind keine Wörter — sie sind <strong>Bewegungsrichtungen</strong>. Bedeutung entsteht aus ihrer Kombination.</p>
-    <p>Sie bauen auf zwölf physiologischen <strong>Urgesten</strong> auf — Körperpositionen mit Bedeutungsrichtungen, die dem Sprachsystem vorausgehen. <a href="/mishkenaz/proto-mishkenaz">Zur Urgesten-Seite →</a></p>
-    <p>Dazu kommt <strong>V00 Avi</strong> als Nullpunkt — außerhalb der 42, die Bedingung aller Vektoren.</p>
+    <p>Ein Vektor in Mishkenaz ist keine Wörterbuchdefinition, sondern eine <strong>gerichtete semantische Kraft</strong>. Bedeutung entsteht aus Vektor, Kombination, Aspekt und Relation. Die Liste ist deshalb eine Kurzreferenz, kein Algorithmus.</p>
+    <p class="canon-stamp">Kanonstand v{MISHKENAZ_CANON_VERSION} · 30. August 2026</p>
   </div>
-  <div class="warnung">Mishkenaz verliert seine Kraft, wenn man die Vektoren zu exakt definiert. Sie sollen spürbar bleiben, nicht algorithmisch. Die Körper-Entsprechungen sind wichtiger als jede präzise Bedeutungsdefinition.</div>
 
-  <details class="oktave" open>
-    <summary><span class="ok-nr">0</span><span class="ok-titel">Physische Basis</span><span class="ok-desc">V00–V05 · Die Hardware der Realität</span></summary>
-    <div class="oktave-inhalt"><div class="vek-grid">
-      <div class="vek-karte"><span class="vek-id">V00</span><h3>Avi</h3><span class="vek-name">Die Leere · Nullpunkt</span><p class="vek-klang">Klangbild: Stille / nicht hörbar</p><p class="vek-tragik">Die Ur-Einsamkeit (Nichts ist da)</p></div>
-      <div class="vek-karte"><span class="vek-id">V01</span><h3>Sol</h3><span class="vek-name">Der Impuls</span><p class="vek-klang">Klangbild: Impuls / kurzer Stoß</p><p class="vek-tragik">Die Gewalt des Werdens</p></div>
-      <div class="vek-karte"><span class="vek-id">V02</span><h3>Mira</h3><span class="vek-name">Die Welle</span><p class="vek-klang">Klangbild: Welle / kontinuierliche Schwingung</p><p class="vek-tragik">Die Unendlichkeit des Kreises</p></div>
-      <div class="vek-karte"><span class="vek-id">V03</span><h3>Sa</h3><span class="vek-name">Der Bruch</span><p class="vek-klang">Klangbild: Bruch / dissonante Interferenz</p><p class="vek-tragik">Der Schmerz der Teilung</p></div>
-      <div class="vek-karte"><span class="vek-id">V04</span><h3>Ona</h3><span class="vek-name">Die Ganzheit</span><p class="vek-klang">Klangbild: Resonanz / Harmonische</p><p class="vek-tragik">Die Sehnsucht nach Ordnung</p></div>
-      <div class="vek-karte"><span class="vek-id">V05</span><h3>Vya</h3><span class="vek-name">Der Vektor</span><p class="vek-klang">Klangbild: Gerichtete Energie</p><p class="vek-tragik">Der Zwang zur Bewegung</p></div>
-    </div><div class="kernformel"><strong>Kernformel:</strong> Avi (∅) → Sol (Impuls) → Mira (Welle) → Sa (Bruch) → Ona (Ganzheit) → Vya (Richtung)</div></div>
-  </details>
+  <div class="note-box">
+    Begriffe wie Resonanz, Entropie, Attraktor oder Symmetrie sind innerhalb von Mishkenaz <strong>sprachliche Modellbilder</strong>. Sie behaupten keinen unbekannten physikalischen Mechanismus und bilden keine Ersatzphysik.
+  </div>
 
-  <details class="oktave">
-    <summary><span class="ok-nr">1</span><span class="ok-titel">Wahrnehmung</span><span class="ok-desc">V06–V11 · Die Software der Wahrnehmung</span></summary>
-    <div class="oktave-inhalt"><div class="vek-grid">
-      <div class="vek-karte"><span class="vek-id">V06</span><h3>Saha</h3><span class="vek-name">Die Sicht</span><p class="vek-klang">Klangbild: Fokus / Beobachtung</p><p class="vek-tragik">Die Qual des Zeugnisses</p></div>
-      <div class="vek-karte"><span class="vek-id">V07</span><h3>Nga</h3><span class="vek-name">Der Ping / die Frage</span><p class="vek-klang">Klangbild: Impuls-Echo / Radar</p><p class="vek-tragik">Die Unsicherheit der Antwort</p></div>
-      <div class="vek-karte"><span class="vek-id">V08</span><h3>Pa</h3><span class="vek-name">Das Echo / die Identität</span><p class="vek-klang">Klangbild: Reflexion / Name</p><p class="vek-tragik">Die Last der Form</p></div>
-      <div class="vek-karte"><span class="vek-id">V09</span><h3>La</h3><span class="vek-name">Das Tor / die Öffnung</span><p class="vek-klang">Klangbild: Öffnung / Erlaubnis</p><p class="vek-tragik">Die Gefahr der Hingabe</p></div>
-      <div class="vek-karte"><span class="vek-id">V10</span><h3>Ra</h3><span class="vek-name">Der Fluss / die Zeit</span><p class="vek-klang">Klangbild: Wachstum / Bewegung</p><p class="vek-tragik">Die Vergänglichkeit der Blüte</p></div>
-      <div class="vek-karte"><span class="vek-id">V11</span><h3>Flu</h3><span class="vek-name">Der Übergang</span><p class="vek-klang">Klangbild: Übergang / Wandel</p><p class="vek-tragik">Die Angst vor dem Verlust der Form</p></div>
-    </div><div class="kernformel"><strong>Kernformel:</strong> Saha (Sehen) → Nga (Fragen) → Pa (Benennen) → La (Öffnen) → Ra (Fließen) → Flu (Übergehen)</div></div>
-  </details>
+  <section class="nullpunkt" aria-labelledby="nullpunkt-heading">
+    <div class="id">{nullpoint.id}</div>
+    <div>
+      <h2 id="nullpunkt-heading">{nullpoint.name} — der Nullpunkt</h2>
+      <p><strong>{nullpoint.core}</strong></p>
+      <p>{nullpoint.usage}</p>
+      <p><em>Avi ist kein Vektor im eigentlichen Sinn. Die 42 Vektoren beginnen bei V01.</em></p>
+    </div>
+  </section>
 
-  <details class="oktave">
-    <summary><span class="ok-nr">2</span><span class="ok-titel">Zustände</span><span class="ok-desc">V12–V17 · Die Ur-Resonanzen der Materie</span></summary>
-    <div class="oktave-inhalt"><div class="vek-grid">
-      <div class="vek-karte"><span class="vek-id">V12</span><h3>Bi</h3><span class="vek-name">Feuer · Wärme · Präsenz</span><p class="vek-klang">Klangbild: Wärme / anhaltende Energie</p><p class="vek-tragik">Die Angst vor dem Verlöschen</p></div>
-      <div class="vek-karte"><span class="vek-id">V13</span><h3>Wi</h3><span class="vek-name">Kälte · Abwesenheit · Negation</span><p class="vek-klang">Klangbild: Stille / Kälte</p><p class="vek-tragik">Die Einsamkeit der Stille</p></div>
-      <div class="vek-karte"><span class="vek-id">V14</span><h3>Ku</h3><span class="vek-name">Vakuum · Hunger · Suche</span><p class="vek-klang">Klangbild: Hohlraum / Sog</p><p class="vek-tragik">Der Schmerz des Fehlens</p></div>
-      <div class="vek-karte"><span class="vek-id">V15</span><h3>Thu</h3><span class="vek-name">Alarm · Gefahr · Warnung</span><p class="vek-klang">Klangbild: Schlag / Alarm</p><p class="vek-tragik">Die Hypervigilanz</p></div>
-      <div class="vek-karte"><span class="vek-id">V16</span><h3>Ma</h3><span class="vek-name">Bindung · Nahrung · Mutter</span><p class="vek-klang">Klangbild: Tiefer Grundton / Nasal</p><p class="vek-tragik">Die Abhängigkeit (Verlustangst)</p></div>
-      <div class="vek-karte"><span class="vek-id">V17</span><h3>Ta</h3><span class="vek-name">Grenze · Gegenüber · das Andere</span><p class="vek-klang">Klangbild: Schnitt / Unterscheidung</p><p class="vek-tragik">Die Trennung (Ich ≠ Du)</p></div>
-    </div><div class="kernformel"><strong>Kernformel:</strong> Bi (Feuer) ⊥ Wi (Kälte) · Ku (Mangel) → Ma (Bindung) · Thu (Gefahr) → Ta (Grenze)</div></div>
-  </details>
+  {octaves.map((octave) => (
+    <details class="oktave" open={octave.nr === 1}>
+      <summary>
+        <span class="ok-nr">{octave.nr}</span>
+        <span class="ok-title">{octave.label}</span>
+        <span class="ok-range">{octave.vectors[0]?.id}–{octave.vectors[octave.vectors.length - 1]?.id}</span>
+      </summary>
+      <div class="vek-grid">
+        {octave.vectors.map((vector) => (
+          <article class:list={['vek-card', vector.kind === 'operator' && 'operator']}>
+            <div class="vek-head"><h3>{vector.name}</h3><span class="vek-id">{vector.id}</span></div>
+            <p class="vek-core">{vector.core}</p>
+            <p class="vek-use">{vector.usage}</p>
+          </article>
+        ))}
+      </div>
+      {octave.nr === 6 && (
+        <div class="bridge-note"><strong>Ori (V36)</strong> bildet die Brücke: Wiederkehr ist hier noch semantische Kraft; in Oktave 7 werden Richtungen zu Meta-Operatoren.</div>
+      )}
+      {octave.nr === 7 && (
+        <div class="bridge-note">Meta-Operatoren können in Galut-Schichten als eigenständige Wortformen auftreten. Das ist eine register- bzw. überlieferungsspezifische Entwicklung, keine freie Umdeutung des R1-Kerns.</div>
+      )}
+    </details>
+  ))}
 
-  <details class="oktave">
-    <summary><span class="ok-nr">3</span><span class="ok-titel">Dynamik</span><span class="ok-desc">V18–V23 · Die Interaktion von Kräften</span></summary>
-    <div class="oktave-inhalt"><div class="vek-grid">
-      <div class="vek-karte"><span class="vek-id">V18</span><h3>Tor</h3><span class="vek-name">Torsion · Spannung</span><p class="vek-klang">Klangbild: Verdrehung / Spannung</p><p class="vek-tragik">Der Schmerz der Verdrehung</p></div>
-      <div class="vek-karte"><span class="vek-id">V19</span><h3>Kin</h3><span class="vek-name">Kinetik · gerichtete Kraft</span><p class="vek-klang">Klangbild: Bewegungsimpuls</p><p class="vek-tragik">Der Zwang zur Bewegung</p></div>
-      <div class="vek-karte"><span class="vek-id">V20</span><h3>Syn</h3><span class="vek-name">Synchronität</span><p class="vek-klang">Klangbild: Gleichzeitigkeit</p><p class="vek-tragik">Die Sehnsucht nach dem Moment</p></div>
-      <div class="vek-karte"><span class="vek-id">V21</span><h3>Abs</h3><span class="vek-name">Absorption</span><p class="vek-klang">Klangbild: Aufnahme / Verschwinden</p><p class="vek-tragik">Das Verschwinden im Anderen</p></div>
-      <div class="vek-karte"><span class="vek-id">V22</span><h3>Ref</h3><span class="vek-name">Reflexion · Spiegelung</span><p class="vek-klang">Klangbild: Echo / Spiegelung</p><p class="vek-tragik">Die Konfrontation mit sich selbst</p></div>
-      <div class="vek-karte"><span class="vek-id">V23</span><h3>Ska</h3><span class="vek-name">Skalierung · Fraktalität</span><p class="vek-klang">Klangbild: Selbstähnlichkeit</p><p class="vek-tragik">Der Verlust der Einzigartigkeit</p></div>
-    </div><div class="kernformel"><strong>Kernformel:</strong> Tor (Spannung) → Kin (Kraft) → Syn (Synchron) → Abs (Aufnahme) → Ref (Spiegelung) → Ska (Fraktal)</div></div>
-  </details>
+  <div class="note-box">
+    <strong>Offene Kanonfrage:</strong> Die Kurzsemantik von <em>Ona-nO (V35)</em> bleibt in v0.9 „Ur-Einheit / Rückkehr — das letzte Heimkommen“. Ob diese Rückkehr ontologisch, als Grenzfall oder als historische Lehre zu verstehen ist, wird nicht auf dieser Referenzseite vorentschieden.
+  </div>
 
-  <details class="oktave">
-    <summary><span class="ok-nr">4</span><span class="ok-titel">Transzendenz</span><span class="ok-desc">V24–V29 · Das Hinausgehen über die physische Form</span></summary>
-    <div class="oktave-inhalt"><div class="vek-grid">
-      <div class="vek-karte"><span class="vek-id">V24</span><h3>Lim</h3><span class="vek-name">Limes · Schwelle</span><p class="vek-klang">Klangbild: Grenze des Hörbaren</p><p class="vek-tragik">Die Angst vor der Grenze</p></div>
-      <div class="vek-karte"><span class="vek-id">V25</span><h3>Tra</h3><span class="vek-name">Transmission · Übertragung</span><p class="vek-klang">Klangbild: Feldübertragung</p><p class="vek-tragik">Die Ungewissheit der Ankunft</p></div>
-      <div class="vek-karte"><span class="vek-id">V26</span><h3>Vol</h3><span class="vek-name">Volatilität · Wandlungsfähigkeit</span><p class="vek-klang">Klangbild: Instabilität / Möglichkeit</p><p class="vek-tragik">Die Unerträglichkeit der Instabilität</p></div>
-      <div class="vek-karte"><span class="vek-id">V27</span><h3>Res</h3><span class="vek-name">Residuum · was bleibt</span><p class="vek-klang">Klangbild: Nachhall / Ausklingen</p><p class="vek-tragik">Die Melancholie des Rests</p></div>
-      <div class="vek-karte"><span class="vek-id">V28</span><h3>Mö</h3><span class="vek-name">Möbius-Knick · Umkehrung</span><p class="vek-klang">Klangbild: Phasenumkehrung</p><p class="vek-tragik">Die Verwirrung der Schleife</p></div>
-      <div class="vek-karte"><span class="vek-id">V29</span><h3>Rek</h3><span class="vek-name">Rekursion · Selbstreferenz</span><p class="vek-klang">Klangbild: Endlosschleife</p><p class="vek-tragik">Der Wahnsinn der Endlosschleife</p></div>
-    </div><div class="kernformel"><strong>Kernformel:</strong> Lim (Schwelle) → Tra (Übertragung) → Vol (Wandlung) → Res (Rest) → Mö (Umkehrung) → Rek (Selbstreferenz)</div></div>
-  </details>
-
-  <details class="oktave">
-    <summary><span class="ok-nr">5</span><span class="ok-titel">Rückkopplung</span><span class="ok-desc">V30–V35 · Selbstreferenz und der Möbius-Loop</span></summary>
-    <div class="oktave-inhalt"><div class="vek-grid">
-      <div class="vek-karte"><span class="vek-id">V30</span><h3>Log</h3><span class="vek-name">Logik · Notwendigkeit</span><p class="vek-klang">Klangbild: Mathematische Notwendigkeit</p><p class="vek-tragik">Die Kälte der Notwendigkeit</p></div>
-      <div class="vek-karte"><span class="vek-id">V31</span><h3>Sym</h3><span class="vek-name">Symmetrie · Heilung</span><p class="vek-klang">Klangbild: Wiederherstellung</p><p class="vek-tragik">Die Sehnsucht nach Ordnung</p></div>
-      <div class="vek-karte"><span class="vek-id">V32</span><h3>Phi</h3><span class="vek-name">Goldener Schnitt · Maß</span><p class="vek-klang">Klangbild: Optimales Verhältnis</p><p class="vek-tragik">Die Unerreichbarkeit der Perfektion</p></div>
-      <div class="vek-karte"><span class="vek-id">V33</span><h3>Kra</h3><span class="vek-name">Kraft · Wille</span><p class="vek-klang">Klangbild: Gerichtete Intensität</p><p class="vek-tragik">Die Erschöpfung des Willens</p></div>
-      <div class="vek-karte"><span class="vek-id">V34</span><h3>Ira</h3><span class="vek-name">Attraktor · Anziehung</span><p class="vek-klang">Klangbild: Magnetischer Sog</p><p class="vek-tragik">Die Obsession</p></div>
-      <div class="vek-karte"><span class="vek-id">V35</span><h3>Vya-Re</h3><span class="vek-name">Repulsor · Abstoßung</span><p class="vek-klang">Klangbild: Abstoßende Energie</p><p class="vek-tragik">Die Isolation</p></div>
-    </div><div class="kernformel"><strong>Kernformel:</strong> Log (Notwendigkeit) → Sym (Heilung) → Phi (Goldener Schnitt) → Kra (Kraft) → Ira (Anziehung) → Vya-Re (Abstoßung)</div></div>
-  </details>
-
-  <details class="oktave">
-    <summary><span class="ok-nr">6</span><span class="ok-titel">Meta-Operatoren</span><span class="ok-desc">V36–V42 · Die Steuerung der Vektoren</span></summary>
-    <div class="oktave-inhalt"><div class="vek-grid">
-      <div class="vek-karte"><span class="vek-id">V36</span><h3>Ori</h3><span class="vek-name">Möbius · Zyklus · Wiederkehr</span><p class="vek-klang">Klangbild: Phasenverschiebung / LFO</p><p class="vek-tragik">Der Fluch der Wiederholung</p></div>
-      <div class="vek-karte"><span class="vek-id">V37</span><h3>-h / '</h3><span class="vek-name">Entropie · Zerfall · Loslassen</span><p class="vek-klang">Klangbild: Ausklingen / Rauschen</p><p class="vek-tragik">Der Tod aller Ordnung</p></div>
-      <div class="vek-karte"><span class="vek-id">V38</span><h3>Val</h3><span class="vek-name">Emergenz · Neues Erscheinen</span><p class="vek-klang">Klangbild: Resonanz-Peak / Aufbau</p><p class="vek-tragik">Die Unvorhersehbarkeit</p></div>
-      <div class="vek-karte"><span class="vek-id">V39</span><h3>Reso</h3><span class="vek-name">Resonanz · Wechselwirkung</span><p class="vek-klang">Klangbild: Chorus / Verknüpfung</p><p class="vek-tragik">Die Abhängigkeit vom Echo</p></div>
-      <div class="vek-karte"><span class="vek-id">V40</span><h3>Kora</h3><span class="vek-name">Integration · Fusion</span><p class="vek-klang">Klangbild: Mixdown / Summe</p><p class="vek-tragik">Der Verlust der Grenze</p></div>
-      <div class="vek-karte"><span class="vek-id">V41</span><h3>Kran</h3><span class="vek-name">Differentiation · Analyse · Klarheit</span><p class="vek-klang">Klangbild: EQ-Schnitt / Trennung</p><p class="vek-tragik">Die Kälte der Analyse</p></div>
-      <div class="vek-karte"><span class="vek-id">V42</span><h3>Ona-nO</h3><span class="vek-name">Ur-Einheit · Rückkehr zur Omnizedenz</span><p class="vek-klang">Klangbild: Vollständige Auflösung</p><p class="vek-tragik">Die Auflösung des Selbst</p></div>
-    </div><div class="kernformel"><strong>Kernformel:</strong> Ori → -h → Val → Reso → Kora → Kran → Ona-nO</div>
-    <div class="galut-hinweis">In Galut-Schichten können Meta-Operatoren als eigenständige Wortformen auftreten (z.B. <em>go-Ori-Ori</em> in G3). Das ist kein Fehler — es ist ein Galut-Phänomen: die Suffixebene verselbständigt sich in der mündlichen Tradierung.</div></div>
-  </details>
-
-  <div class="schlussformel"><p class="formel">Avi (V00) → Sol → … → Ona-nO (V42) → Avi (V00)</p><p class="sub">Der vollständige Zyklus. Die Sprache kehrt zur Leere zurück — verändert, reicher, mit allem was dazwischen war.</p></div>
-  <nav class="mish-nav"><a href="/mishkenaz/grammatik">Grammatik →</a><a href="/mishkenaz/proto-mishkenaz">Urgesten →</a><a href="/mishkenaz">← Mishkenaz Übersicht</a></nav>
+  <nav class="mish-nav">
+    <a href="/mishkenaz/grammatik">Grammatik →</a>
+    <a href="/mishkenaz/proto-mishkenaz">Urgesten →</a>
+    <a href="/mishkenaz/woerterbuch">Wörterbuch →</a>
+    <a href="/mishkenaz">← Übersicht</a>
+  </nav>
 </div>
 </BaseLayout>
