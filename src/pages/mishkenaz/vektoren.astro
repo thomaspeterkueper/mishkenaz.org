@@ -4,6 +4,7 @@ import {
   MISHKENAZ_CANON_VERSION,
   nullpoint,
   octaveTitles,
+  onaNoSemantics,
   vectors,
 } from '../../data/mishkenaz/core';
 
@@ -98,7 +99,7 @@ const octaves = Object.entries(octaveTitles).map(([nr, label]) => ({
         ))}
       </div>
       {octave.nr === 6 && (
-        <div class="bridge-note"><strong>Ori (V36)</strong> bildet die Brücke: Wiederkehr ist hier noch semantische Kraft; in Oktave 7 werden Richtungen zu Meta-Operatoren.</div>
+        <div class="bridge-note"><strong>Ona-nO (V35)</strong> ist die strukturelle Schwelle vor der Rückkehr: mögliches Schließen oder neue Windung. <strong>Ori (V36)</strong> bildet anschließend die Brücke; Wiederkehr ist dort noch semantische Kraft, bevor in Oktave 7 Richtungen zu Meta-Operatoren werden.</div>
       )}
       {octave.nr === 7 && (
         <div class="bridge-note">Meta-Operatoren können in Galut-Schichten als eigenständige Wortformen auftreten. Das ist eine register- bzw. überlieferungsspezifische Entwicklung, keine freie Umdeutung des R1-Kerns.</div>
@@ -107,7 +108,7 @@ const octaves = Object.entries(octaveTitles).map(([nr, label]) => ({
   ))}
 
   <div class="note-box">
-    <strong>Offene Kanonfrage:</strong> Die Kurzsemantik von <em>Ona-nO (V35)</em> bleibt in v0.9 „Ur-Einheit / Rückkehr — das letzte Heimkommen“. Ob diese Rückkehr ontologisch, als Grenzfall oder als historische Lehre zu verstehen ist, wird nicht auf dieser Referenzseite vorentschieden.
+    <strong>Kanonische Lesart von Ona-nO:</strong> {onaNoSemantics.meaning} {onaNoSemantics.continuation} Spätere Galut- oder Kommentarschichten können diese Schwelle ontologischer deuten; solche Lesarten sind historische Interpretation, nicht R1-Kern.
   </div>
 
   <nav class="mish-nav">
