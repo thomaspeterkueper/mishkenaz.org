@@ -1,102 +1,124 @@
 ---
-// src/pages/mishkenaz/rueckuebersetzung.astro
-// Stand: Juni 2026 — korrigierter Eingangssatz, Zerlegungen als Interpretationen
-
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MISHKENAZ_CANON_VERSION } from '../../data/mishkenaz/core';
 
-const title = "Rückübersetzungen — Mishkenaz";
-const description = "Sehnsucht, Saudade, Heimat, Han — manche Wörter tragen mehr als eine Sprache fassen kann. Mishkenaz-Zerlegungen dieser verdichteten Bedeutungsfelder.";
+const title = 'Rückübersetzungen — Mishkenaz';
+const description = 'Interpretative Mishkenaz-Zerlegungen verdichteter Bedeutungsfelder — ausdrücklich keine Etymologien und keine automatische Kanonisierung.';
+
+const examples = [
+  {
+    word: 'Sehnsucht',
+    language: 'Deutsch',
+    form: 'Ku-Saha + Pa-Sa',
+    literal: 'Suche/Hohlraum–Sehen + Echo–Bruch',
+    explanation: 'Eine mögliche Mishkenaz-Lesart: etwas wird gesucht und gesehen, zugleich ist sein Echo gebrochen oder nicht erreichbar.',
+    status: 'Interpretation — keine kanonische Apostroph-Prägung',
+  },
+  {
+    word: 'Heimat',
+    language: 'Deutsch',
+    form: 'Om-Bi-La',
+    literal: 'Ankommen/Stimmigkeit – Wärme/Quelle – Öffnung/Raum',
+    explanation: 'Eine essayistische Verdichtung des Bedeutungsfeldes von Ankommen, Wärme und Erlaubnis bzw. geöffnetem Raum. Om stammt hier aus der Urgestenebene; die Form ist deshalb keine reguläre R1-Lexemdefinition.',
+    status: 'Arbeitsdeutung — ebenenübergreifend',
+  },
+  {
+    word: 'Liebe',
+    language: 'Deutsch / Englisch',
+    form: "Ma'Ta'U",
+    literal: 'Bindung mit Grenze',
+    explanation: "Hier liegt eine kanonische Prägung zugrunde: Ma'U bezeichnet Bindung ohne Grenze; Ma'Ta'U erhält Differenz durch Ta. Operatoren können anschließend zusätzliche Zustandsrichtungen markieren.",
+    status: 'Kanonische Prägung; konkrete Rückübersetzung bleibt Interpretation',
+  },
+  {
+    word: 'Andacht',
+    language: 'Deutsch',
+    form: 'Avi-Saha',
+    literal: 'Nullpunkt/Leere – Sehen/Wahrnehmen',
+    explanation: 'Eine transparente Sequenz für eine auf Leere bzw. Ursprung gerichtete Wahrnehmung. Sie wird hier als Deutungswerkzeug verwendet, nicht als historisch belegtes Mishkenaz-Lexem.',
+    status: 'Interpretation — transparente Sequenz',
+  },
+];
 ---
 
 <BaseLayout title={title} description={description}>
 <style>
-  .rueck-page { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem 4rem; }
-  .page-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--gold-light); }
-  .breadcrumb { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.75rem; }
-  .breadcrumb a { color: var(--color-petrol); text-decoration: none; }
-  .breadcrumb span { color: var(--text-muted); margin: 0 0.4rem; }
-  .page-header h1 { font-family: 'Crimson Text', serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 400; color: var(--dark); margin: 0 0 0.5rem; }
-  .page-header .sub { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--text-muted); font-style: italic; }
-  .intro-box { background: var(--bg-soft); border-left: 3px solid var(--gold); padding: 1.25rem 1.75rem; margin: 2rem 0; font-family: 'Lora', serif; font-size: 0.97rem; line-height: 1.75; }
-  .intro-box p { margin-bottom: 0.75rem; }
-  .intro-box p:last-child { margin: 0; }
-  .wort-karte { border: 1px solid var(--border); margin-bottom: 2.5rem; transition: border-color 0.2s; }
-  .wort-karte:hover { border-color: var(--gold-light); }
-  .wort-karte.featured { border-color: var(--color-petrol); border-width: 2px; }
-  .wort-kopf { display: flex; justify-content: space-between; align-items: baseline; padding: 1.5rem 2rem 1rem; border-bottom: 1px solid var(--gold-light); }
-  .wort-kopf h2 { font-family: 'Crimson Text', serif; font-size: 2.2rem; font-weight: 400; color: var(--dark); margin: 0; }
-  .wort-kopf .sprache { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-muted); }
-  .formel-block { background: var(--dark); color: #FAF8F3; padding: 1.5rem 2rem; text-align: center; }
-  .formel-block .mishkenaz { font-family: 'Crimson Text', serif; font-size: 2rem; font-style: italic; color: var(--gold); display: block; margin-bottom: 0.3rem; }
-  .formel-block .woertlich { font-family: 'Lora', serif; font-size: 0.95rem; color: #94a3b8; font-style: italic; }
-  .erklaerung { padding: 1.5rem 2rem; }
-  .erklaerung h3 { font-family: 'Lato', sans-serif; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-petrol); margin-bottom: 0.75rem; }
-  .erklaerung p { font-family: 'Lora', serif; font-size: 0.95rem; line-height: 1.8; margin-bottom: 0.75rem; }
-  .erklaerung .einsicht { background: var(--bg-soft); border-left: 3px solid var(--gold); padding: 0.9rem 1.25rem; font-style: italic; margin: 0.75rem 0; }
-  .verwandt { padding: 1.25rem 2rem; border-top: 1px solid var(--border); background: var(--bg-soft); }
-  .verwandt .hinweis { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 0.75rem; display: block; }
-  .verwandt .interpretations-hinweis { font-family: 'Lora', serif; font-size: 0.82rem; color: var(--text-muted); font-style: italic; margin-bottom: 0.75rem; }
-  .verwandt ul { list-style: none; padding: 0; margin: 0; }
-  .verwandt li { font-family: 'Lora', serif; font-size: 0.92rem; line-height: 1.7; margin-bottom: 0.4rem; }
-  .verwandt li strong { font-family: 'Crimson Text', serif; font-style: italic; color: var(--color-petrol); font-size: 1.05rem; }
-  .kompakt-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 1.25rem; margin: 2rem 0; }
-  .kompakt-karte { border: 1px solid var(--border); padding: 1.25rem; transition: border-color 0.2s; }
-  .kompakt-karte:hover { border-color: var(--color-petrol); }
-  .kompakt-karte h3 { font-family: 'Crimson Text', serif; font-size: 1.6rem; color: var(--color-petrol); margin-bottom: 0.2rem; }
-  .kompakt-karte .spr { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); display: block; margin-bottom: 0.5rem; }
-  .kompakt-karte .formel { font-family: 'Crimson Text', serif; font-size: 1.25rem; font-style: italic; color: var(--gold); display: block; margin-bottom: 0.4rem; }
-  .kompakt-karte .bed { font-family: 'Lora', serif; font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
-  .sektion-titel { font-family: 'Crimson Text', serif; font-size: 1.75rem; font-weight: 400; color: var(--dark); margin: 3rem 0 1.5rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--gold-light); }
-  .mish-nav { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 2rem 0 0; }
-  .mish-nav a { font-family: 'Lato', sans-serif; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-petrol); text-decoration: none; border: 1px solid var(--color-petrol); padding: 0.4rem 1rem; transition: all 0.2s; }
-  .mish-nav a:hover { background: var(--color-petrol); color: white; }
-  @media (max-width: 640px) { .wort-kopf { flex-direction: column; gap: 0.3rem; } .formel-block .mishkenaz { font-size: 1.5rem; } .erklaerung, .verwandt { padding: 1.25rem; } }
+  .page { max-width:var(--max-width); margin:0 auto; padding:0 2rem 4rem; }
+  .page-header { padding:3rem 0 2rem; border-bottom:1px solid var(--gold-light); }
+  .breadcrumb { font-family:'Lato',sans-serif; font-size:.65rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; margin-bottom:.75rem; }
+  .breadcrumb a { color:var(--color-petrol); text-decoration:none; }
+  .breadcrumb span { color:var(--text-muted); margin:0 .4rem; }
+  h1 { font-family:'Crimson Text',serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:400; color:var(--dark); margin:0 0 .5rem; }
+  .sub { font-family:'Lora',serif; font-size:1.08rem; color:var(--text-muted); font-style:italic; }
+  .intro, .rule { font-family:'Lora',serif; line-height:1.75; padding:1.1rem 1.5rem; margin:1.5rem 0; }
+  .intro { background:var(--bg-soft); border-left:3px solid var(--gold); }
+  .rule { background:var(--color-petrol-light); border-left:3px solid var(--color-petrol); font-size:.9rem; }
+  .card { border:1px solid var(--border); margin:1.5rem 0; }
+  .card-head { display:flex; justify-content:space-between; gap:1rem; padding:1.2rem 1.5rem .8rem; border-bottom:1px solid var(--gold-light); }
+  .card h2 { font-family:'Crimson Text',serif; font-size:2rem; font-weight:400; margin:0; }
+  .language { font-family:'Lato',sans-serif; font-size:.62rem; text-transform:uppercase; letter-spacing:.15em; color:var(--text-muted); }
+  .formula { background:var(--dark); padding:1.3rem 1.5rem; text-align:center; }
+  .formula strong { display:block; font-family:'Crimson Text',serif; font-size:1.75rem; font-style:italic; color:var(--gold); }
+  .formula span { font-family:'Lora',serif; color:#94a3b8; font-size:.88rem; font-style:italic; }
+  .body { padding:1.2rem 1.5rem; font-family:'Lora',serif; line-height:1.72; }
+  .status { border-top:1px solid var(--border); background:var(--bg-soft); padding:.8rem 1.5rem; font-family:'Lato',sans-serif; font-size:.63rem; text-transform:uppercase; letter-spacing:.1em; color:var(--color-petrol); }
+  .operators { width:100%; border-collapse:collapse; margin:1rem 0; font-family:'Lora',serif; font-size:.9rem; }
+  .operators th { background:var(--dark); color:white; text-align:left; padding:.6rem .8rem; font-family:'Lato',sans-serif; font-size:.62rem; text-transform:uppercase; letter-spacing:.1em; }
+  .operators td { padding:.65rem .8rem; border-bottom:1px solid var(--border); }
+  .nav { display:flex; flex-wrap:wrap; gap:.75rem; margin:2rem 0 0; }
+  .nav a { font-family:'Lato',sans-serif; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.18em; color:var(--color-petrol); text-decoration:none; border:1px solid var(--color-petrol); padding:.4rem .9rem; }
+  .nav a:hover { background:var(--color-petrol); color:white; }
 </style>
 
-<div class="rueck-page">
-  <header class="page-header"><p class="breadcrumb"><a href="/mishkenaz">Mishkenaz</a><span>›</span>Rückübersetzungen</p><h1>Rückübersetzungen</h1><p class="sub">Verdichtete Bedeutungsfelder — in Vektoren aufgeschlüsselt</p></header>
-  <div class="intro-box"><p>Manche Wörter unserer modernen Sprachen tragen Bedeutungsfelder, die mehr enthalten, als ein einzelnes Wort fassen kann — Sehnsucht, Saudade, Heimat, Han. Mishkenaz versucht, diese verdichteten Bedeutungen in ihre Vektor-Komponenten aufzuschlüsseln.</p><p>Das ist <strong>keine Behauptung über sprachliche Abstammung</strong> — es ist ein Werkzeug, um die innere Architektur dieser Wörter sichtbar zu machen. Alle folgenden Zerlegungen sind Mishkenaz-Interpretationen der Bedeutungsfelder, keine etymologischen Aussagen.</p></div>
+<div class="page">
+  <header class="page-header">
+    <p class="breadcrumb"><a href="/mishkenaz">Mishkenaz</a><span>›</span>Rückübersetzungen</p>
+    <h1>Rückübersetzungen</h1>
+    <p class="sub">Bedeutungsfelder als Experiment, nicht als Etymologie</p>
+  </header>
 
-  <div class="wort-karte featured">
-    <div class="wort-kopf"><h2>Sehnsucht</h2><span class="sprache">Deutsch</span></div>
-    <div class="formel-block"><span class="mishkenaz">Ku-Saha + Pa-Sa</span><span class="woertlich">Wörtlich: „Hunger-Sehen + Echo-Bruch"</span></div>
-    <div class="erklaerung"><h3>Warum diese Kombination?</h3><p><strong>Ku-Saha</strong> — man hungert nach dem Sehen, man dürstet nach dem Blick auf etwas.<br><strong>Pa-Sa</strong> — das Echo (die Form, die man sucht) ist gebrochen, nicht erreichbar.</p><div class="einsicht">Sehnsucht ist das Leiden an der Sichtbarkeit des Unerreichbaren. Man würde nicht leiden, wenn man es nicht sähe — aber man sieht es, und genau das schmerzt.</div></div>
-    <div class="verwandt"><span class="hinweis">Verwandte Konzepte</span><p class="interpretations-hinweis">Mishkenaz-Interpretationen — keine sprachhistorische Etymologie.</p><ul><li><strong>Saudade</strong> (Portugiesisch) = Ku-Saha-h — Hunger-Sehen-Entropie: der Hunger nach dem Verlorenen, das zerfällt</li><li><strong>한 Han</strong> (Koreanisch) = Sa-h-Ori — Bruch-Entropie-Möbius: kollektiver Schmerz der sich in der Spirale wiederholt</li><li><strong>Hiraeth</strong> (Walisisch) = Ku-Ona-h — Hunger nach der verlorenen Ganzheit</li></ul></div>
+  <div class="intro">
+    Rückübersetzungen fragen: <em>Wie könnte Mishkenaz ein bereits vorhandenes Bedeutungsfeld zerlegen?</em> Sie behaupten weder sprachliche Abstammung noch, dass die gezeigte Form historisch zum R1-Wortschatz gehört. Nur ausdrücklich als kanonisch markierte Prägungen besitzen diesen Status.
   </div>
 
-  <div class="wort-karte">
-    <div class="wort-kopf"><h2>Heimat</h2><span class="sprache">Deutsch</span></div>
-    <div class="formel-block"><span class="mishkenaz">Om-Bi-La</span><span class="woertlich">Wörtlich: „Person-Ort-Erlaubnis"</span></div>
-    <div class="erklaerung"><h3>Warum diese Kombination?</h3><p><strong>Om</strong> — ich als verkörpertes Wesen, als Person.<br><strong>Bi</strong> — ein physischer Raum, ein Ort mit Wärme.<br><strong>La</strong> — Erlaubnis: ich darf hier sein, muss es nicht rechtfertigen.</p><div class="einsicht">Heimat ist nicht nur ein Ort. Es ist der Ort, wo mein Sein erlaubt ist — wo ich nicht erkläre, rechtfertige oder beweise. Wo ich einfach bin.</div></div>
-    <div class="verwandt"><span class="hinweis">Warum Heimat unübersetzbar ist</span><p class="interpretations-hinweis">Mishkenaz-Interpretation.</p><ul><li>Englisch „home" = Bi-La (Ort-Erlaubnis) — fehlt die Person (Om)</li><li>Französisch „chez moi" = „bei mir" — Ort ohne Erlaubnis-Dimension</li><li>Mishkenaz <strong>Om-Bi-La</strong> = alle drei Dimensionen als Einheit</li></ul></div>
+  <div class="rule">
+    <strong>Notation v{MISHKENAZ_CANON_VERSION}:</strong> Apostroph = historisch geprägte Einheit; Bindestrich = transparente Sequenz; Leerzeichen = Syntax. Neue Apostroph-Prägungen werden hier nicht aus dem Stegreif erfunden.
   </div>
 
-  <div class="wort-karte featured">
-    <div class="wort-kopf"><h2>Liebe</h2><span class="sprache">Deutsch / Englisch</span></div>
-    <div class="formel-block"><span class="mishkenaz">Ma'Ta'U</span><span class="woertlich">Wörtlich: „Bindung-Grenze-Schutz"</span></div>
-    <div class="erklaerung"><h3>Warum diese Kombination?</h3><p><strong>Ma</strong> — Bindung, Nahrung, das Nährende.<br><strong>Ta</strong> — Grenze, das Andere, Du als Du.<br><strong>U</strong> — Schutz, Geborgenheit, die Hülle.</p><div class="einsicht">Liebe ohne Ta (Grenze) ist Ma-U — Besessenheit, Verschmelzung, Co-Abhängigkeit. Erst die Anerkennung der Grenze macht aus Bindung echte Resonanz.</div><h3 style="margin-top:1.25rem;">Die 8 Zustände der Liebe</h3><p>Durch Meta-Operatoren entstehen acht verschiedene Qualitäten:</p></div>
-    <div class="verwandt"><span class="hinweis">Mit Meta-Operatoren</span><p class="interpretations-hinweis">Mishkenaz-Interpretation des Bedeutungsfeldes.</p><ul><li><strong>Ma'Ta'U-reso</strong> = Resonanz-Liebe (gegenseitig gespiegelt)</li><li><strong>Ma'Ta'U-ori</strong> = Möbius-Liebe (On-Off-Schleife, Sehnsucht)</li><li><strong>Ma'Ta'U-h</strong> = Zerfallende Liebe (im Abschied)</li><li><strong>Ma'Ta'U-val</strong> = Emergente Liebe (etwas Neues entsteht)</li><li><strong>Ma'Ta'U-kora</strong> = Verschmelzungs-Liebe (Warnung: Ta fehlt)</li><li><strong>Ma-U</strong> (ohne Ta) = Besessenheit, Übergriff</li></ul></div>
+  {examples.map((example) => (
+    <article class="card">
+      <div class="card-head"><h2>{example.word}</h2><span class="language">{example.language}</span></div>
+      <div class="formula"><strong>{example.form}</strong><span>{example.literal}</span></div>
+      <div class="body">{example.explanation}</div>
+      <div class="status">{example.status}</div>
+    </article>
+  ))}
+
+  <section>
+    <h2>Operatoren an <em>Ma'Ta'U</em></h2>
+    <p class="body">Die folgenden Formen illustrieren den aktuellen Operatorstand. Sie sind keine acht festen „Arten der Liebe“, sondern mögliche Richtungen, die auf die kanonische Prägung angewandt werden.</p>
+    <table class="operators">
+      <thead><tr><th>Form</th><th>v0.9-Lesart</th></tr></thead>
+      <tbody>
+        <tr><td><em>Ma'Ta'U-reso</em></td><td>Bindung mit Grenze unter Resonanz / Wechselwirkung (V39)</td></tr>
+        <tr><td><em>Ma'Ta'U-ori</em></td><td>zyklische Wiederkehr / Revalidierung (Ori V36) — nicht „Möbius“</td></tr>
+        <tr><td><em>Ma'Ta'U-h</em></td><td>Entropie, Zerfall, Loslassen (V37)</td></tr>
+        <tr><td><em>Ma'Ta'U-val</em></td><td>Emergenz, neues Erscheinen (V38)</td></tr>
+        <tr><td><em>Ma'Ta'U-kora</em></td><td>Integration / Zusammenführung (V42); Ta bleibt in der Prägung ausdrücklich vorhanden</td></tr>
+        <tr><td><em>Ma'U</em></td><td>Bindung ohne Ta/Grenze — eigenständige kanonische Warnform, nicht dasselbe wie <em>-kora</em></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="rule">
+    <strong>Wichtige Trennung:</strong> V30 <em>Mö</em> bezeichnet Möbius-Knick / Umkehrung. V36 <em>Ori / -ori</em> bezeichnet zyklische Wiederkehr / Revalidierung. Die ältere Gleichsetzung von <em>-ori</em> mit „Möbius“ gilt nicht mehr als v0.9-Referenz.
   </div>
 
-  <div class="wort-karte">
-    <div class="wort-kopf"><h2>Andacht</h2><span class="sprache">Deutsch</span></div>
-    <div class="formel-block"><span class="mishkenaz">Avi-Saha</span><span class="woertlich">Wörtlich: „Leere-Durst"</span></div>
-    <div class="erklaerung"><h3>Warum diese Kombination?</h3><p><strong>Avi</strong> — die Leere, der Nullpunkt, das Potenzial vor aller Form.<br><strong>Saha</strong> — Durst, das Verlangen nach Sicht, das Sehen-Wollen.</p><div class="einsicht">Andacht ist der Durst nach der Leere. Nicht nach „etwas", sondern nach dem Ursprung selbst — dem Zustand bevor Form entstand.</div></div>
-    <div class="verwandt"><span class="hinweis">Verwandte Konzepte</span><p class="interpretations-hinweis">Mishkenaz-Interpretation.</p><ul><li><strong>Avi-Saha-om</strong> = Meditation (Andacht stimmig angekommen)</li><li><strong>Avi-Saha-il</strong> = Gebet (Andacht die noch sucht, noch nicht angekommen)</li></ul></div>
-  </div>
-
-  <h2 class="sektion-titel">Weitere Rückübersetzungen</h2>
-  <div class="kompakt-grid">
-    <div class="kompakt-karte"><h3>정 Jeong</h3><span class="spr">Koreanisch</span><span class="formel">Ma-Ta-Reso</span><span class="bed">Tiefe Verbundenheit durch gemeinsame Geschichte — Bindung-Grenze-Resonanz</span></div>
-    <div class="kompakt-karte"><h3>Hygge</h3><span class="spr">Dänisch</span><span class="formel">Ma-Bi-om</span><span class="bed">Gemütliche Geborgenheit — Bindung-Wärme-stimmig</span></div>
-    <div class="kompakt-karte"><h3>Fernweh</h3><span class="spr">Deutsch</span><span class="formel">Ku-Saha-Sa</span><span class="bed">Sehnsucht nach der Ferne — Hunger-Sehen-Bruch (das Ferne ruft, ist aber getrennt)</span></div>
-    <div class="kompakt-karte"><h3>Schadenfreude</h3><span class="spr">Deutsch</span><span class="formel">Sa-Ta-Ira</span><span class="bed">Freude am Schmerz des Anderen — Bruch-Grenze-Attraktor</span></div>
-    <div class="kompakt-karte"><h3>Weltschmerz</h3><span class="spr">Deutsch</span><span class="formel">Ona-Sa-Saha</span><span class="bed">Leiden an der Welt als Ganzer — Ganzheit-Bruch-Sicht</span></div>
-    <div class="kompakt-karte"><h3>Tessân</h3><span class="spr">Mishkenaz R4</span><span class="formel">Val-Ta-om</span><span class="bed">Tägliches Ausrichten gegen das Gefälle — Emergenz-Grenze-stimmig. Kein deutsches Äquivalent.</span></div>
-    <div class="kompakt-karte"><h3>Vûrath</h3><span class="spr">Mishkenaz</span><span class="formel">Ra-Wi-om</span><span class="bed">Institutionelles Weitermachen ohne Handeln — Fluss-Kälte-stimmig (scheinbar)</span></div>
-    <div class="kompakt-karte"><h3>Sôveth</h3><span class="spr">Mishkenaz</span><span class="formel">Sa-h-Vya</span><span class="bed">Das Gefälle, die bevorzugte Richtung des Universums — Bruch-Entropie-Vektor</span></div>
-  </div>
-
-  <nav class="mish-nav"><a href="/mishkenaz/vektoren">Die 42 Vektoren →</a><a href="/mishkenaz/grammatik">Grammatik →</a><a href="/mishkenaz">← Mishkenaz Übersicht</a></nav>
+  <nav class="nav">
+    <a href="/mishkenaz/woerterbuch">Wörterbuch →</a>
+    <a href="/mishkenaz/vektoren">42 Vektoren →</a>
+    <a href="/mishkenaz/grammatik">Grammatik →</a>
+    <a href="/mishkenaz">← Übersicht</a>
+  </nav>
 </div>
 </BaseLayout>
