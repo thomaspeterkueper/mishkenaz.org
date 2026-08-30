@@ -1,4 +1,4 @@
-# Mishkenaz v0.9 ↔ Website — Kanon-Audit
+# Mishkenaz v0.9 — Website-Audit
 
 **Stand:** 2026-08-30  
 **Scope:** PR #2 `automation/migrate-full-mishkenaz-content`  
@@ -7,11 +7,9 @@
 
 ## 1. Ausgangslage
 
-PR #2 begann als Migration des letzten vollständigen Mishkenaz-Webstands aus `thomas-kueper.de`. Diese Quelle stammte im Wesentlichen aus Juni 2026. Der inzwischen entwickelte Buch-/Authoring-Stand v0.9 hatte jedoch zentrale Teile des Sprachsystems verändert bzw. präzisiert.
+Der Juni-2026-Webstand war technisch weitgehend vorhanden, enthielt aber veraltete Vektormappings, Legacy-Grammatik und uneinheitliche Begriffe. Der Audit hat deshalb nicht nur geprüft, ob alle Seiten migriert wurden, sondern ob die öffentlich sichtbare Website mit dem v0.9-Sprachkanon übereinstimmt.
 
-Der Audit hat deshalb nicht nur geprüft, ob alle Seiten migriert wurden, sondern ob die Website den aktuellen v0.9-Kern korrekt wiedergibt.
-
-## 2. Behobene Blocker
+## 2. Behobene Kernprobleme
 
 ### Vektorsystem
 
@@ -19,18 +17,9 @@ Der Audit hat deshalb nicht nur geprüft, ob alle Seiten migriert wurden, sonder
 
 Aktuell gilt:
 
-- V00 Avi = Nullpunkt außerhalb der 42;
-- V01–V42 = sieben Oktaven zu je sechs Vektoren;
-- V11 Sa-h;
-- V19 Flu;
-- V35 Ona-nO;
-- V36 Ori / -ori;
-- V37 -h / ';
-- V38 -val;
-- V39 -reso;
-- V40 -ira;
-- V41 -vya;
-- V42 -kora.
+- V00 Avi liegt außerhalb der 42 Vektoren;
+- V01–V42 bilden exakt sieben Oktaven zu je sechs Vektoren;
+- kritische Zuordnungen wie V11 Sa-h, V19 Flu, V35 Ona-nO, V36 Ori/-ori und V37–V42 sind synchronisiert.
 
 Die Vektorseite rendert aus `src/data/mishkenaz/core.ts`.
 
@@ -59,17 +48,9 @@ Korrigiert wurden unter anderem:
 
 ## 3. Weitere synchronisierte Bereiche
 
-### Urgesten / Phonologie
+### Phonologie / Urgesten
 
-`src/data/mishkenaz/phonology.ts` ist die strukturierte v0.9-Referenz für die zwölf Urgesten und das R1-Phoneminventar.
-
-Unter anderem:
-
-- B stammt von Pa, nicht Ma oder Bi;
-- Avi ist Schwa / eigenständiger Nullpunktvokal;
-- Auv bleibt davon getrennt;
-- der Avi→Auv-Merger ist eine lokale G3-Entwicklung;
-- Om ist als Urgeste eine untrennbare Übergangsgeste.
+Die zwölf Urgesten und die Ableitung der phonologischen Grundschicht sind als eigene Datenquelle ausgelagert. `Avi` und `Auv` bleiben semantisch getrennt; der G3-Merger ist als historische Sonderentwicklung gefasst.
 
 ### Galut und Register
 
@@ -102,7 +83,7 @@ Spätere Galut- oder Kommentarschichten dürfen `Ona-nO` ontologischer deuten; s
 
 ## 5. Architektur gegen erneuten Drift
 
-Neu angelegt:
+Neu bzw. kanonisch genutzt:
 
 - `src/data/mishkenaz/core.ts`
 - `src/data/mishkenaz/phonology.ts`
@@ -111,9 +92,9 @@ Neu angelegt:
 
 Der CI-Kanoncheck prüft unter anderem:
 
-- V00 genau einmal und außerhalb der 42;
-- V01–V42 vollständig und eindeutig;
-- sieben Oktaven mit je sechs Vektoren;
+- V00 außerhalb der 42;
+- exakt V01–V42;
+- sieben Oktaven × sechs Vektoren;
 - die kritischen v0.9-ID-Zuordnungen;
 - exakt drei Aspekte `-om`, `-ath`, `-il`;
 - DEPR statt EVID;
@@ -121,14 +102,28 @@ Der CI-Kanoncheck prüft unter anderem:
 - `onaNoReading = structural-threshold`;
 - Abwesenheit zentraler Legacy- und inzwischen verworfener Semantikmuster auf den öffentlichen Seiten.
 
-## 6. Routenprüfung
+## 6. Visualisierungen als eigener Inhaltstyp
+
+Mit `src/data/mishkenaz/visuals.ts` und `src/components/mishkenaz/VisualFigure.astro` ist ein eigener kuratierter Visualisierungs-Layer eingeführt. Bilder werden nicht automatisch als Kanon behandelt, sondern erhalten Typ und Status.
+
+Statusstufen:
+
+- `canonical` — verbindliche Darstellung;
+- `work-near` — werknahe Visualisierung, ohne exakte Rekonstruktionsbehauptung;
+- `experimental` — explorative Studie.
+
+Die neue Route `/mishkenaz/welt` bündelt Räume und Visualisierungen. Die erste eingetragene Raumstudie ist die Meditationskammer (`VIS-MISH-0001`) mit Status `work-near`. Solange das Binärasset noch nicht im Repository liegt, rendert die Komponente einen kontrollierten Platzhalter statt eines gebrochenen Bildes.
+
+Siehe `docs/coherence/mishkenaz-visualisations.md`.
+
+## 7. Routenprüfung
 
 Die historischen Top-Level-Routen `/vektoren`, `/grammatik`, `/proto-mishkenaz`, `/woerterbuch` und `/rueckuebersetzung` enthalten keine eigenen Sprachkopien. Sie rendern die jeweiligen `/mishkenaz/...`-Seiten und bilden damit keine zweite Source of Truth.
 
-Auch `/` rendert die kanonische Mishkenaz-Übersicht.
+Auch `/` rendert die kanonische Mishkenaz-Übersicht. Die Übersicht verweist zusätzlich auf `/mishkenaz/welt`.
 
-## 7. Ergebnis
+## 8. Ergebnis
 
 Der Juni-2026-Migrationsstand ist nicht mehr die semantische Referenz. PR #2 enthält eine auf v0.9 synchronisierte, strukturierte und gegen zentrale Driftfehler abgesicherte Mishkenaz-Website.
 
-Die zwei früher offenen semantischen Kernfragen sind geschlossen und als CI-Invarianten verankert.
+Die zwei früher offenen semantischen Kernfragen sind geschlossen und als CI-Invarianten verankert. Visualisierungen sind als eigener, statusgeführter Inhaltstyp eingeführt, sodass Bildsprache und Sprachkanon künftig kontrolliert nebeneinander wachsen können.
