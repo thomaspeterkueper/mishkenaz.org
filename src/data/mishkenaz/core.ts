@@ -69,7 +69,7 @@ export const vectors: MishkenazVector[] = [
   { id: 'V32', name: 'Log', octave: 6, core: 'Logik-Struktur, Bauen', usage: 'Architektur, Planung, das bewusste Konstruieren', kind: 'semantic' },
   { id: 'V33', name: 'Sym', octave: 6, core: 'Symmetrie', usage: 'Balance, Gleichgewicht', kind: 'semantic' },
   { id: 'V34', name: 'Phi', octave: 6, core: 'Goldenes Maß, Harmonie', usage: 'Schönheit als strukturelles Prinzip', kind: 'semantic' },
-  { id: 'V35', name: 'Ona-nO', octave: 6, core: 'Ur-Einheit, Rückkehr', usage: 'das letzte Heimkommen', kind: 'semantic' },
+  { id: 'V35', name: 'Ona-nO', octave: 6, core: 'Ur-Einheit, mögliche Rückkehr', usage: 'strukturelle Schwelle: Rückkehr oder neue Windung', kind: 'semantic' },
   { id: 'V36', name: 'Ori / -ori', octave: 6, core: 'zyklische Wiederkehr, Revalidierung', usage: 'rekursive Rückkehr; als grammatischer Operator auch -ori', kind: 'bridge' },
 
   { id: 'V37', name: "-h / '", octave: 7, core: 'Entropie, Zerfall, Loslassen', usage: 'Meta-Operator', kind: 'operator' },
@@ -81,10 +81,25 @@ export const vectors: MishkenazVector[] = [
 ];
 
 export const aspects = [
-  { suffix: '-om', label: 'konvergent', meaning: 'stimmig, angekommen, in Resonanz', body: 'Atem, der vollständig entlassen wird' },
-  { suffix: '-ath', label: 'divergent', meaning: 'dissonant, im Schmerz, nicht stimmig', body: 'Atem, der sich verkürzt' },
-  { suffix: '-il', label: 'suchend', meaning: 'unterwegs, offen, noch nicht entschieden', body: 'Atem, der einatmet und hält' },
+  { suffix: '-om', label: 'konvergent', meaning: 'als stimmig, angekommen, in Resonanz markiert', body: 'Atem, der vollständig entlassen wird' },
+  { suffix: '-ath', label: 'divergent', meaning: 'als dissonant, schmerzhaft, nicht tragend markiert', body: 'Atem, der sich verkürzt' },
+  { suffix: '-il', label: 'suchend', meaning: 'als unterwegs, offen, noch nicht entschieden markiert', body: 'Atem, der einatmet und hält' },
 ] as const;
+
+export const aspectSemantics = {
+  mode: 'relational-epistemic',
+  summary: 'Die Aspekte markieren die Passung zwischen Aussage/Handlung und Situation, wie sie im Sprechen wahrgenommen und mitgeteilt wird.',
+  nonOntic: 'Sie sind keine objektiven Wahrheitsmarker über Zustände der Welt.',
+  plurality: 'Zwei Sprecher können denselben Vorgang ehrlich verschieden aspektieren.',
+  honesty: 'Lüge entsteht, wenn ein Sprecher wissentlich gegen die eigene wahrgenommene relationale Passung aspektiert.',
+} as const;
+
+export const onaNoSemantics = {
+  mode: 'structural-threshold',
+  core: 'Ur-Einheit / mögliche Rückkehr',
+  meaning: 'V35 markiert die strukturelle Schwelle, an der Rückkehr oder Integration möglich wird; es behauptet weder vollzogene Selbstauflösung noch verpflichtende ontologische Rückkehr.',
+  continuation: 'Ob sich die Spirale schließt oder eine neue Windung beginnt, liegt außerhalb der Grammatik.',
+} as const;
 
 export const grammar = {
   slotFormula: '(ZEIT) — (NEG) — (INTENS) — STAMM — (COLL) — (ASP) — (DEPR)',
@@ -109,5 +124,7 @@ export const canonInvariants = {
   ori: 'V36',
   kora: 'V42',
   aspects: ['-om', '-ath', '-il'],
+  aspectReading: 'relational-epistemic',
+  onaNoReading: 'structural-threshold',
   deprivationSlot: 'DEPR',
 } as const;
