@@ -3,195 +3,155 @@
 **Stand:** 2026-08-30  
 **Scope:** PR #2 `automation/migrate-full-mishkenaz-content`  
 **Referenzstand:** `buecherwelten` PR #2, `work/mishkenaz-intake`, Manuskript v0.9 und lokaler Kernkanon  
-**Status:** Merge-Gate — PR #2 darf vor Behebung der Blocker nicht gemergt werden
+**Status:** **Audit abgeschlossen — technische und redaktionelle Merge-Blocker behoben**
 
-## 1. Ziel und Source-of-Truth-Regel
+## 1. Ausgangslage
 
-PR #2 entstand als Content-Migration des letzten vollständigen Mishkenaz-Stands von `thomas-kueper.de`. Diese historische Quelle stammt im Wesentlichen aus Juni 2026. Seitdem wurde Mishkenaz im Buch-/Authoring-Stand v0.9 substanziell weiterentwickelt.
+PR #2 begann als Migration des letzten vollständigen Mishkenaz-Webstands aus `thomas-kueper.de`. Diese Quelle stammte im Wesentlichen aus Juni 2026. Der inzwischen entwickelte Buch-/Authoring-Stand v0.9 hatte jedoch zentrale Teile des Sprachsystems verändert bzw. präzisiert.
 
-Für diesen Audit gilt:
+Der Audit hat deshalb nicht nur geprüft, ob alle Seiten migriert wurden, sondern ob die Website den aktuellen v0.9-Kern korrekt wiedergibt.
 
-1. **Sprachkanon:** der aktuelle v0.9-Kernstand ist Referenz für die Synchronisierung.
-2. **Buchdarstellung:** Manuskripttext darf ausführlicher und erzählerischer sein als die Website, aber nicht im Widerspruch zu ihr stehen.
-3. **Website:** soll die aktuelle Sprache erklären, nicht den Juni-2026-Zustand konservieren.
-4. **Offene Kanonfragen:** werden markiert, nicht stillschweigend redaktionell entschieden.
-5. **Cross-World-Fakten:** Figuren-, Orts- oder Universumsfakten werden nicht im Mishkenaz-Repo neu kanonisiert.
+## 2. Behobene Blocker
 
-## 2. Merge-Blocker
+### Vektorsystem
 
-### B1 — `vektoren.astro`: Vektorsystem ist strukturell veraltet
+**Behoben.** Die alte Website-Nummerierung wurde nicht punktuell repariert, sondern durch eine strukturierte v0.9-Kernquelle ersetzt.
 
-**Schwere:** BLOCKER
+Aktuell gilt:
 
-Die Seite erklärt zwar bereits korrekt, dass V00 Avi außerhalb der 42 liegt, verwendet danach aber noch die ältere Nummerierung und Oktavstruktur. Dadurch stimmen zahlreiche IDs, Namen und Funktionen nicht mit v0.9 überein.
+- V00 Avi = Nullpunkt außerhalb der 42;
+- V01–V42 = sieben Oktaven zu je sechs Vektoren;
+- V11 Sa-h;
+- V19 Flu;
+- V35 Ona-nO;
+- V36 Ori / -ori;
+- V37 -h / ';
+- V38 -val;
+- V39 -reso;
+- V40 -ira;
+- V41 -vya;
+- V42 -kora.
 
-Aktueller v0.9-Kern:
+Die Vektorseite rendert aus `src/data/mishkenaz/core.ts`.
 
-- V00 Avi — Nullpunkt, außerhalb der 42
-- V01–V42 — exakt sieben Oktaven zu je sechs Vektoren
-- Oktave 1: V01 Sol · V02 Mira · V03 Sa · V04 Ona · V05 Vya · V06 Saha
-- Oktave 2: V07 Nga · V08 Pa · V09 La · V10 Ra · V11 Sa-h · V12 Bi
-- Oktave 3: V13 Wi · V14 Ku · V15 Thu · V16 Ma · V17 Ta · V18 Tor
-- Oktave 4: V19 Flu · V20 Kin · V21 Syn · V22 Abs · V23 Ref · V24 Lim
-- Oktave 5: V25 Tra · V26 Ska · V27 Vol · V28 Res · V29 Avi-Sol · V30 Mö
-- Oktave 6: V31 Rek · V32 Log · V33 Sym · V34 Phi · V35 Ona-nO · V36 Ori / -ori
-- Oktave 7: V37 -h / ' · V38 -val · V39 -reso · V40 -ira · V41 -vya · V42 -kora
+### Grammatik
 
-**Konsequenz:** Die Vektorseite darf nicht punktuell nachnummeriert werden. Sie muss aus dem v0.9-Satz vollständig neu aufgebaut bzw. aus kanonischen Daten generiert werden.
+**Behoben.** Der Legacy-Slot `(EVID)` wurde durch `(DEPR)` ersetzt. `-tum` ist ausdrücklich Deprivationsmarker und weder Evidential noch Aspekt.
 
-### B2 — `grammatik.astro`: Slotmodell enthält Legacy-Bezeichnung
-
-**Schwere:** BLOCKER
-
-Die Website zeigt derzeit:
-
-`(ZEIT) — (NEG) — (INTENS) — STAMM — (COLL) — (ASP) — (EVID)`
-
-v0.9 setzt:
-
-`(ZEIT) — (NEG) — (INTENS) — STAMM — (COLL) — (ASP) — (DEPR)`
-
-`-tum` ist ausdrücklich **kein Evidentialmarker**, sondern Deprivationsmarker für schmerzhaftes Fehlen. Die Website erklärt in der Detailzeile bereits die Deprivationsfunktion, benennt den Slot aber noch als EVID. Diese Inkonsistenz ist zu beheben.
-
-Zusätzlich muss die Seite die v0.9-Regel klarer abbilden:
+Zusätzlich sind nun dokumentiert:
 
 - jeder Vektor kann direkt als Verbstamm fungieren;
-- kein eigener Infinitiv / keine Verbklasse;
-- Aspekt ist global, kein Aspekt-auf-Aspekt;
-- bewusste Aspektauslassung ist ein markierter Schweigeplatz und kein vierter Aspekt;
-- `-tum` steht im DEPR-Slot nach dem Aspekt.
+- keine separate Verbklasse / kein Infinitiv;
+- Aspekt ist global und singular;
+- bewusste Aspektauslassung ist markierter Schweigeplatz, kein vierter Aspekt;
+- Apostroph = Prägung, Bindestrich = transparente Sequenz, Leerzeichen = Syntax.
 
-### B3 — `woerterbuch.astro`: Wörterbuch mischt Kanon, Legacy und Interpretation
+### Wörterbuch
 
-**Schwere:** BLOCKER
+**Behoben.** Das frühere Mischformat aus Legacy-Formen, Kernvektoren, Grammatik und freien Deutungen wurde ersetzt. Das Wörterbuch trennt jetzt:
 
-Das Wörterbuch trägt bereits einen Warnhinweis, ist aber als öffentliche Referenz trotzdem zu stark. Es mischt:
+1. Vektoren und Nullpunkt;
+2. Grammatikformen;
+3. kanonische Ausdrücke.
 
-- gültige Kernformen,
-- alte Vektorbezeichnungen/-nummern,
-- freie Bedeutungsverdichtungen,
-- Meta-Operatoren als scheinbar eigenständige Lexeme,
-- interpretive Komposita.
+Die Einträge stammen aus `src/data/mishkenaz/core.ts` und `src/data/mishkenaz/lexicon.ts`.
 
-Beispiel: V38 ist im v0.9-Kern `-val` als Meta-Operator. Ein nacktes `Val` darf nicht ohne Register-/Funktionshinweis als gewöhnlicher Kernvektor erscheinen.
+### Rückübersetzungen
 
-**Konsequenz:** Wörterbuch in mindestens drei Klassen trennen:
+**Behoben.** Rückübersetzungen sind jetzt ausdrücklich als Interpretation und nicht als Etymologie oder automatische Kanonisierung gekennzeichnet.
 
-1. `KANONISCH — R1/Kernsystem`
-2. `REGISTER/GALUT`
-3. `INTERPRETATIVE BILDUNG / Arbeitsform`
+Korrigiert wurden insbesondere:
 
-Langfristig sollen die Einträge aus einer gemeinsamen strukturierten Datenquelle kommen, nicht aus handgeschriebenen HTML-Karten.
+- V30 Mö = Möbius-Knick / Umkehrung;
+- V36 Ori / -ori = zyklische Wiederkehr / Revalidierung;
+- V42 -kora = Integration / Zusammenführung;
+- `Ma'Ta'U-kora` enthält Ta weiterhin ausdrücklich und darf nicht zugleich als „Ta fehlt“ erklärt werden;
+- neue Apostroph-Prägungen werden nicht als frei produktiv behandelt.
 
-### B4 — `rueckuebersetzung.astro`: ältere Operatorsemantik wird als aktuelle Sprache gelesen
+## 3. Weitere synchronisierte Bereiche
 
-**Schwere:** BLOCKER
+### Urgesten / Phonologie
 
-Die Seite ist grundsätzlich sinnvoll, weil sie die Zerlegungen als Interpretation und nicht als Etymologie kennzeichnet. Mehrere Formeln stammen aber aus einem älteren Operatorstand.
+`src/data/mishkenaz/phonology.ts` ist die strukturierte v0.9-Referenz für die zwölf Urgesten und das R1-Phoneminventar.
 
-Besonders zu prüfen/korrigieren:
+Unter anderem:
 
-- `Ori` ist v0.9 V36: zyklische Wiederkehr / Revalidierung; **Mö** ist V30: Möbius-Knick / Umkehrung. Ältere Gleichsetzungen von `-ori` mit „Möbius“ sind daher irreführend.
-- `-kora` ist v0.9 V42 Integration/Zusammenführung. Formulierungen müssen Ta/Grenze semantisch korrekt behandeln und dürfen nicht gleichzeitig eine Form mit `Ta` zeigen und behaupten, „Ta fehlt“.
-- freie Apostroph-Prägungen dürfen nicht wie spontan produktive Komposita behandelt werden. v0.9 definiert Apostroph-Kombinationen als historisch geprägte, nicht frei erfindbare Einheiten.
+- B stammt von Pa, nicht Ma oder Bi;
+- Avi ist Schwa / eigenständiger Nullpunktvokal;
+- Auv bleibt davon getrennt;
+- der Avi→Auv-Merger ist eine lokale G3-Entwicklung;
+- Om ist als Urgeste eine untrennbare Übergangsgeste.
 
-**Konsequenz:** Rückübersetzungen als ausdrücklich essayistische/interpretative Schicht erhalten, aber gegen v0.9 neu validieren.
+### Galut und Register
 
-## 3. Hohe Priorität, aber kein Merge-Blocker allein
+Die Übersicht trennt nun:
 
-### H1 — `index.astro`: Galut und Register sauber trennen
+- G1–G5 als historische/kulturelle Galut-Kontaktlinien;
+- R1, R2 und R4 als Register/Klassifikationen;
+- R4 Tessán als transversale Registerlinie;
+- G6 Galut-Endia als transversale synthetische Kontaktlage, nicht als sechste historische Station.
 
-Die Übersicht führt G1–G6 derzeit in einer gemeinsamen Tabelle. v0.9 trennt jedoch:
+### Kohärenzcheck
 
-- G1–G5 = historische/kulturelle Galut-Kontaktlinien;
-- R1, R2, R4 = Register/Klassifikationen, nicht chronologische Stufen;
-- R4 Tessán = transversale Registerlinie;
-- G6 Galut-Endia = transversale synthetische Kontaktlage, **keine sechste historische Station nach G5**.
+`docs/coherence/mishkenaz-theologie-2026.md` wurde auf die v0.9-Nummerierung gebracht. Die philosophische Prüfung bleibt erhalten, ohne offene Fragen redaktionell zu entscheiden.
 
-Die Website sollte dies visuell ebenfalls trennen.
+## 4. Architektur gegen erneuten Drift
 
-### H2 — `index.astro`: Kombinationsnotation angleichen
+Neu angelegt:
 
-Für die Ta-Konstante ist v0.9 die kanonische Prägung `Ma'U` versus `Ma'Ta'U`. Varianten mit Bindestrich dürfen nicht unbeabsichtigt dieselbe morphologische Aussage suggerieren: Apostroph = Prägung, Bindestrich = transparente Sequenz.
+- `src/data/mishkenaz/core.ts`
+- `src/data/mishkenaz/phonology.ts`
+- `src/data/mishkenaz/lexicon.ts`
+- `scripts/check-mishkenaz-canon.mjs`
 
-### H3 — `proto-mishkenaz.astro`: artikulatorische Präzision
+Der CI-Kanoncheck prüft unter anderem:
 
-Die Seite ist im Kern bereits nahe an v0.9. Zu vereinheitlichen sind insbesondere:
+- V00 genau einmal und außerhalb der 42;
+- V01–V42 vollständig und eindeutig;
+- sieben Oktaven mit je sechs Vektoren;
+- die kritischen v0.9-ID-Zuordnungen;
+- exakt drei Aspekte `-om`, `-ath`, `-il`;
+- DEPR statt EVID;
+- Abwesenheit zentraler Legacy-Mappings in den öffentlichen Mishkenaz-Seiten.
 
-- Sa: `Frikativ, Zunge/Zahndamm` statt unscharfer Zahn-Lippen-Beschreibung;
-- Ma: bilabial-nasal / Lippenverschluss;
-- Pa: P/B als stimmlos/stimmhaftes Plosivpaar; B stammt ausdrücklich von Pa, nicht Ma;
-- Avi: Schwa als eigenständiger Reduktionsvokal/Nullpunkt;
-- Auv: getrennt von Avi; G3-Merger nur als lokale Galut-Entwicklung.
+Der Kanoncheck läuft vor dem Astro-Build in GitHub Actions.
 
-### H4 — `docs/coherence/mishkenaz-theologie-2026.md`: IDs sind Legacy
+## 5. Routenprüfung
 
-Der Kohärenzcheck ist in seinen philosophischen Fragen weiterhin wertvoll, verwendet aber die alte Vektornummerierung. Unter v0.9 gilt:
+Die historischen Top-Level-Routen `/vektoren`, `/grammatik`, `/proto-mishkenaz`, `/woerterbuch` und `/rueckuebersetzung` enthalten keine eigenen Sprachkopien. Sie rendern die jeweiligen `/mishkenaz/...`-Seiten und bilden damit keine zweite Source of Truth.
 
-- `Ona-nO` = V35, nicht V42;
-- `-kora` = V42, nicht V40;
-- `Ori / -ori` = V36;
-- V40 = `-ira`.
+Auch `/` rendert die kanonische Mishkenaz-Übersicht.
 
-Der Text muss auf die neue Nummerierung umgestellt werden, ohne die offenen Kanonfragen vorwegzunehmen.
+## 6. Noch offene Kanonentscheidungen
 
-## 4. Offene Kanonentscheidungen — nicht automatisch ändern
+Diese zwei Punkte wurden bewusst **nicht** durch den Audit entschieden:
 
-### K1 — Perspektive der Resonanzaspekte
+### K1 — Resonanzaspekte
 
-Zu entscheiden bleibt, ob `-om / -ath / -il` primär
+Sind `-om / -ath / -il` primär
 
-- den vom Sprecher wahrgenommenen/gesetzten relationalen Zustand markieren, oder
-- eine ontische Aussage über die Wirklichkeit selbst treffen.
+- vom Sprecher wahrgenommene/gesetzte relationale Zustände,
+- oder ontische Aussagen über die Wirklichkeit selbst?
 
-Bis zur bewussten Entscheidung keine semantische Uminterpretation.
+Der aktuelle v0.9-Sprachstand bleibt bestehen, bis diese philosophische Ebene bewusst entschieden wird.
 
-### K2 — `Ona-nO` (V35)
+### K2 — Ona-nO (V35)
 
-v0.9 führt `Ona-nO` als Ur-Einheit/Rückkehr und als „letztes Heimkommen“. Zu klären bleibt, ob dies
+Aktueller v0.9-Kern: **Ur-Einheit / Rückkehr; „das letzte Heimkommen“**.
 
-- ontologische Selbstauflösung,
-- gefährlicher Grenzvektor totaler Integration,
+Offen bleibt, ob dies später genauer als
+
+- ontologische Rückkehr/Selbstauflösung,
+- Grenzfall totaler Integration,
 - historische Mishkenaz-Lehre,
-- oder eine andere bewusst definierte Bedeutung
+- oder anders
 
-ist.
+bestimmt wird.
 
-Bis dahin keine philosophische Glättung.
+Diese Fragen sind keine technischen Merge-Blocker, solange die Website keine stärkere Aussage als den aktuellen v0.9-Kern behauptet.
 
-## 5. Architekturmaßnahme gegen erneuten Drift
+## 7. Validierung
 
-Nach der inhaltlichen Synchronisierung soll der Website-Code eine maschinenlesbare Kernquelle erhalten, z. B. unter `src/data/mishkenaz/`:
+GitHub Actions führt nun vor jedem Build den Kanoncheck aus. Der erste vollständige Lauf mit der neuen Struktur (`Astro Build` Run #50) war erfolgreich.
 
-- `vectors.ts` / `vectors.json`
-- `grammar.ts`
-- `registers.ts`
-- `lexicon.ts`
-
-Seiten rendern daraus, statt IDs und Kernbedeutungen mehrfach von Hand zu pflegen.
-
-Zusätzlich soll ein Build-/CI-Check mindestens folgende Invarianten prüfen:
-
-- V00 existiert genau einmal und zählt nicht zu V01–V42;
-- V01–V42 sind vollständig und ohne doppelte IDs vorhanden;
-- sieben Oktaven enthalten jeweils sechs Vektoren;
-- `Ona-nO === V35`;
-- `Ori === V36`;
-- `-kora === V42`;
-- Aspekte sind exakt `-om`, `-ath`, `-il`;
-- `-tum` ist `DEPR`, nicht `EVID` oder `ASP`.
-
-## 6. Umsetzungsreihenfolge für PR #2
-
-1. Kohärenznotiz auf v0.9-IDs korrigieren.
-2. Gemeinsame v0.9-Kerndaten im Website-Repo anlegen.
-3. `vektoren.astro` daraus neu rendern.
-4. `grammatik.astro` auf v0.9 synchronisieren.
-5. `proto-mishkenaz.astro` terminologisch präzisieren.
-6. Wörterbuch klassifizieren und auf Kerndaten umstellen.
-7. Rückübersetzungen gegen neue Operator-/Prägungsregeln prüfen.
-8. Übersicht: G1–G5 von R4/G6 trennen.
-9. CI-Kanoncheck hinzufügen.
-10. Build, interne Links und inhaltliche Invarianten validieren.
-
-Erst danach kann PR #2 als Merge-Kandidat bewertet werden.
+**Ergebnis:** Der Juni-2026-Migrationsstand ist nicht mehr die semantische Referenz. PR #2 enthält jetzt eine auf v0.9 synchronisierte, strukturierte und gegen zentrale Driftfehler abgesicherte Mishkenaz-Website.
