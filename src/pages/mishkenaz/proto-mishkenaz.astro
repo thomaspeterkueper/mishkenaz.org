@@ -1,0 +1,98 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { urgesten, r1Inventory, phonologyNotes } from '../../data/mishkenaz/phonology';
+import { MISHKENAZ_CANON_VERSION } from '../../data/mishkenaz/core';
+
+const title = 'Urgesten — Proto-Mishkenaz';
+const description = 'Die zwölf Urgesten und das daraus abgeleitete R1-Phoneminventar von Mishkenaz v0.9.';
+---
+
+<BaseLayout title={title} description={description}>
+<style>
+  .proto-page { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem 4rem; }
+  .page-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--gold-light); }
+  .breadcrumb { font-family: 'Lato', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem; }
+  .breadcrumb a { color: var(--color-petrol); text-decoration: none; }
+  .breadcrumb span { color: var(--text-muted); margin: 0 .45rem; }
+  .page-header h1 { font-family: 'Crimson Text', serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 400; color: var(--dark); margin: 0 0 .5rem; }
+  .page-header .sub { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--text-muted); font-style: italic; }
+  .intro, .hinweis { font-family: 'Lora', serif; line-height: 1.75; padding: 1.1rem 1.5rem; margin: 1.5rem 0; }
+  .intro { background: var(--bg-soft); border-left: 3px solid var(--gold); }
+  .hinweis { background: var(--color-petrol-light); border-left: 3px solid var(--color-petrol); font-size: .9rem; }
+  .sektion { padding: 2.2rem 0; border-bottom: 1px solid var(--border); }
+  .sektion h2 { font-family: 'Crimson Text', serif; font-size: 1.8rem; font-weight: 400; margin: 0 0 1rem; color: var(--dark); }
+  .sektion p, .sektion li { font-family: 'Lora', serif; line-height: 1.7; }
+  table { width: 100%; border-collapse: collapse; font-family: 'Lora', serif; font-size: .88rem; }
+  th { background: var(--dark); color: #FAF8F3; padding: .6rem .75rem; text-align: left; font-family: 'Lato', sans-serif; font-size: .62rem; text-transform: uppercase; letter-spacing: .1em; }
+  td { padding: .65rem .75rem; border-bottom: 1px solid var(--border); vertical-align: top; }
+  .nr { color: var(--gold); font-family: 'Lato', sans-serif; font-weight: 700; }
+  .name { font-family: 'Crimson Text', serif; color: var(--color-petrol); font-size: 1.1rem; font-style: italic; }
+  .inventory { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+  .inventory div { background: var(--bg-soft); padding: 1rem 1.2rem; font-family: 'Lora', serif; line-height: 1.65; }
+  .inventory strong { display:block; color:var(--color-petrol); margin-bottom:.35rem; }
+  .canon { font-family:'Lato',sans-serif; font-size:.65rem; text-transform:uppercase; letter-spacing:.14em; color:var(--text-muted); }
+  .mish-nav { display:flex; flex-wrap:wrap; gap:.75rem; margin:2rem 0 0; }
+  .mish-nav a { font-family:'Lato',sans-serif; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.2em; color:var(--color-petrol); text-decoration:none; border:1px solid var(--color-petrol); padding:.4rem 1rem; }
+  .mish-nav a:hover { background:var(--color-petrol); color:white; }
+  @media (max-width:760px) { table { font-size:.78rem; } .inventory { grid-template-columns:1fr; } }
+</style>
+
+<div class="proto-page">
+  <header class="page-header">
+    <p class="breadcrumb"><a href="/mishkenaz">Mishkenaz</a><span>›</span>Urgesten</p>
+    <h1>Die zwölf Urgesten</h1>
+    <p class="sub">Körperpositionen vor dem Phonem</p>
+  </header>
+
+  <div class="intro">
+    Die Urgesten sind das <strong>theoretische körperliche Fundament</strong> von Mishkenaz. Sie sind keine Behauptung über eine historisch nachgewiesene Ursprache, sondern ein Modell: zwölf Artikulationsereignisse, aus denen Lautklassen und Bedeutungsrichtungen abgeleitet werden.
+  </div>
+
+  <section class="sektion">
+    <h2>Urgesten und Ableitungen</h2>
+    <table>
+      <thead><tr><th>#</th><th>Urgeste</th><th>Körperposition</th><th>Bedeutungsrichtung</th><th>R1-Ableitungen</th></tr></thead>
+      <tbody>
+        {urgesten.map((gesture) => (
+          <tr>
+            <td class="nr">{gesture.nr}</td>
+            <td class="name">{gesture.name}</td>
+            <td>{gesture.body}</td>
+            <td>{gesture.direction}</td>
+            <td><strong>{gesture.phonemes}</strong><br /><small>{gesture.derivation}</small></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </section>
+
+  <section class="sektion">
+    <h2>R1-Phoneminventar</h2>
+    <div class="inventory">
+      <div><strong>Konsonanten · ca. 17</strong>{r1Inventory.consonants.join(' · ')}</div>
+      <div><strong>Vokale / Vokalqualitäten · ca. 8</strong>{r1Inventory.vowels.join(' · ')}</div>
+    </div>
+    <p>Das resultierende Inventar liegt damit bei ungefähr 25 Phonemen und bildet die rekonstruierte R1-Referenz. Galut-Schichten dürfen dieses Oberflächeninventar verändern.</p>
+  </section>
+
+  <section class="sektion">
+    <h2>Drei Präzisierungen</h2>
+    <div class="hinweis"><strong>Om:</strong> {phonologyNotes.om}</div>
+    <div class="hinweis"><strong>Avi / Auv:</strong> {phonologyNotes.aviAuv}</div>
+    <div class="hinweis"><strong>B:</strong> {phonologyNotes.b}</div>
+  </section>
+
+  <section class="sektion">
+    <h2>Empirischer Status</h2>
+    <p>Nicht alle zwölf Urgesten haben denselben Bezug zu realer Phonetik. Artikulatorisch naheliegende Gesten, kulturell geprägte Formen und systeminterne Setzungen werden im Mishkenaz-Modell bewusst zusammengeführt. Reale Phonetik und Lautsymbolik dienen als Vergleichsanker, nicht als Beweis für die historische Existenz des Systems.</p>
+  </section>
+
+  <p class="canon">Kanonstand v{MISHKENAZ_CANON_VERSION} · Urgesten-Daten aus <code>src/data/mishkenaz/phonology.ts</code></p>
+
+  <nav class="mish-nav">
+    <a href="/mishkenaz/grammatik">Grammatik →</a>
+    <a href="/mishkenaz/vektoren">Die 42 Vektoren →</a>
+    <a href="/mishkenaz">← Übersicht</a>
+  </nav>
+</div>
+</BaseLayout>

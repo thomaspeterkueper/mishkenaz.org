@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  MISHKENAZ_CANON_VERSION,
+  aspects,
+  aspectSemantics,
+  grammar,
+} from '../../data/mishkenaz/core';
+
+const title = 'Grammatik — Mishkenaz';
+const description = 'Mishkenaz v0.9: Slot-Morphologie, drei relational-epistemische Resonanzaspekte, Rollenpartikel, Pronomen, Zeitpartikel, Deprivation und Kombinationsregeln.';
+---
+
+<BaseLayout title={title} description={description}>
+<style>
+  .gram-page { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem 4rem; }
+  .page-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--gold-light); }
+  .breadcrumb { font-family: 'Lato', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem; }
+  .breadcrumb a { color: var(--color-petrol); text-decoration: none; }
+  .breadcrumb span { color: var(--text-muted); margin: 0 .4rem; }
+  .page-header h1 { font-family: 'Crimson Text', serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 400; color: var(--dark); margin: 0 0 .5rem; }
+  .page-header .sub { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--text-muted); font-style: italic; }
+  .hinweis { background: var(--color-petrol-light); border-left: 3px solid var(--color-petrol); padding: 1.1rem 1.5rem; margin: 1.5rem 0; font-family: 'Lora', serif; font-size: .92rem; line-height: 1.75; }
+  .canon { font-family: 'Lato', sans-serif; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text-muted); }
+  .sektion { padding: 2.35rem 0; border-bottom: 1px solid var(--border); }
+  .sektion h2 { font-family: 'Crimson Text', serif; font-size: 1.75rem; font-weight: 400; color: var(--dark); margin-bottom: .8rem; }
+  .sektion h3 { font-family: 'Lato', sans-serif; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .18em; color: var(--color-petrol); margin: 1.6rem 0 .55rem; }
+  .sektion p, .sektion li { font-family: 'Lora', serif; font-size: .96rem; line-height: 1.75; }
+  .slot-box { background: var(--dark); color: #FAF8F3; padding: 1.5rem 1.75rem; margin: 1rem 0; overflow-x: auto; }
+  .slot-box code { color: var(--gold); font-size: 1rem; white-space: nowrap; }
+  .slot-grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(210px,1fr)); gap: .75rem; margin-top: 1rem; }
+  .slot-grid div { background: var(--bg-soft); padding: .9rem 1rem; font-family: 'Lora', serif; font-size: .88rem; line-height: 1.55; }
+  .slot-grid strong { color: var(--color-petrol); }
+  .aspekte-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:1rem 0; }
+  .aspekt { border:1px solid var(--gold-light); padding:1.15rem; }
+  .aspekt .suffix { font-family: monospace; font-size:1.35rem; color:var(--gold); }
+  .aspekt .label { display:block; font-family:'Lato',sans-serif; font-size:.66rem; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--color-petrol); margin:.35rem 0; }
+  .aspekt p { font-size:.86rem; margin:.25rem 0; }
+  .beispiel { background:var(--bg-soft); padding:.85rem 1.1rem; margin:.55rem 0; }
+  .beispiel .mish { font-family:'Crimson Text',serif; font-size:1.14rem; font-style:italic; color:var(--color-petrol); }
+  .beispiel .de { display:block; color:var(--text-muted); font-family:'Lora',serif; font-size:.88rem; margin-top:.15rem; }
+  table { width:100%; border-collapse:collapse; margin:1rem 0; font-family:'Lora',serif; font-size:.9rem; }
+  th { background:var(--dark); color:#FAF8F3; padding:.6rem .8rem; text-align:left; font-family:'Lato',sans-serif; font-size:.64rem; text-transform:uppercase; letter-spacing:.1em; }
+  td { padding:.65rem .8rem; border-bottom:1px solid var(--border); vertical-align:top; }
+  .code { font-family:monospace; color:var(--gold); }
+  .rule-list { margin: .75rem 0; padding-left: 1.35rem; }
+  .mish-nav { display:flex; flex-wrap:wrap; gap:.75rem; margin:2rem 0 0; }
+  .mish-nav a { font-family:'Lato',sans-serif; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.2em; color:var(--color-petrol); text-decoration:none; border:1px solid var(--color-petrol); padding:.4rem 1rem; }
+  .mish-nav a:hover { background:var(--color-petrol); color:white; }
+  @media (max-width:640px) { .aspekte-grid { grid-template-columns:1fr; } table { font-size:.82rem; } }
+</style>
+
+<div class="gram-page">
+  <header class="page-header">
+    <p class="breadcrumb"><a href="/mishkenaz">Mishkenaz</a><span>›</span>Grammatik</p>
+    <h1>Grammatik</h1>
+    <p class="sub">R1 — rekonstruierte Dvārakā-Grundform</p>
+  </header>
+
+  <div class="hinweis">
+    Diese Seite beschreibt den Referenzstand <strong>v{MISHKENAZ_CANON_VERSION}</strong> von R1. Galut-Schichten können Phonologie, Oberflächensyntax, Pronomen oder die Realisierung der Aspekte verändern; die R1-Form bleibt die Rekonstruktionsreferenz.
+  </div>
+
+  <section class="sektion">
+    <h2>Grundprinzip</h2>
+    <p>Mishkenaz ist eine <strong>vektoriell-aspektuelle, slot-basierte Sprache</strong>. Sie besitzt kein Tempussystem wie Deutsch oder Latein. Zeit kann optional markiert werden; zentral ist die relationale Passung einer Aussage zur Situation, wie sie im Sprechen markiert wird.</p>
+    <p>Jeder Vektor kann unmittelbar als Verbstamm verwendet werden. Es gibt keine eigene Verbklasse und keine Infinitivform: <em>Saha</em> ist Stamm, <em>Saha-om</em> bereits eine vollzogene Aussage.</p>
+
+    <div class="slot-box"><code>{grammar.slotFormula}</code></div>
+    <div class="slot-grid">
+      <div><strong>ZEIT</strong><br />optionaler Zeitpartikel vor dem Stamm</div>
+      <div><strong>NEG</strong><br /><code>wi-</code> als einfache Verneinung</div>
+      <div><strong>INTENS</strong><br />Stammverdoppelung, z. B. <em>Ma-Ma</em></div>
+      <div><strong>STAMM</strong><br />obligatorischer semantischer Kern</div>
+      <div><strong>COLL</strong><br /><code>-ona</code> für kollektives Ganzes</div>
+      <div><strong>ASP</strong><br />genau einer der drei Resonanzaspekte oder markierte Auslassung</div>
+      <div><strong>DEPR</strong><br /><code>-tum</code>: schmerzhaftes Fehlen</div>
+    </div>
+  </section>
+
+  <section class="sektion">
+    <h2>Die drei Resonanzaspekte</h2>
+    <div class="aspekte-grid">
+      {aspects.map((aspect) => (
+        <article class="aspekt">
+          <span class="suffix">{aspect.suffix}</span>
+          <span class="label">{aspect.label}</span>
+          <p>{aspect.meaning}</p>
+          <p><em>{aspect.body}</em></p>
+        </article>
+      ))}
+    </div>
+
+    <div class="beispiel"><span class="mish">Saha-om bi'sa-i la'ta-i</span><span class="de">Sehen-stimmig · von mir · zu dir.</span></div>
+    <div class="beispiel"><span class="mish">Saha-ath bi'sa-i la'ta-i</span><span class="de">Sehen-dissonant · von mir · zu dir.</span></div>
+    <div class="beispiel"><span class="mish">Saha-il bi'sa-i la'ta-i</span><span class="de">Sehen-suchend · von mir · zu dir.</span></div>
+
+    <div class="hinweis">
+      <strong>Kanonische Lesart:</strong> {aspectSemantics.summary} {aspectSemantics.nonOntic} {aspectSemantics.plurality} {aspectSemantics.honesty}
+    </div>
+
+    <h3>Operative Auslassung</h3>
+    <p>Die bewusste Auslassung eines Aspekts ist ein <strong>markierter Schweigeplatz</strong>, kein vierter Aspekt. Sie bezeichnet ein gehütetes Nicht-Benennen der relationalen Passung. Nominale Zustandsformen und Ausrufe können ebenfalls aspektlos stehen.</p>
+  </section>
+
+  <section class="sektion">
+    <h2>Deprivation: <code>-tum</code></h2>
+    <p><code>-tum</code> ist ausdrücklich <strong>kein Evidentialmarker und kein Aspekt</strong>. Der Marker zeigt an, dass etwas nicht nur abwesend ist, sondern schmerzhaft fehlt oder vermisst wird. Er steht im DEPR-Slot nach dem Aspekt.</p>
+    <div class="beispiel"><span class="mish">Sh'arim-tum</span><span class="de">Tore-fehlend — die Tore, die gebraucht werden, sind nicht da.</span></div>
+    <div class="beispiel"><span class="mish">Sh'arim-om-tum</span><span class="de">Tore-stimmig-fehlend — Aspekt und Deprivation können gemeinsam auftreten.</span></div>
+  </section>
+
+  <section class="sektion">
+    <h2>Wortstellung und Rollen</h2>
+    <p>R1 bevorzugt <strong>Handlung → Quelle → Ziel</strong>. Die Rollenpartikel markieren keine klassischen Subjekt-/Objektrollen:</p>
+    <table>
+      <thead><tr><th>Partikel</th><th>Funktion</th><th>Beispiel</th></tr></thead>
+      <tbody>
+        <tr><td><span class="code">bi'</span></td><td>Quelle</td><td><em>bi'sa-i</em> — von mir</td></tr>
+        <tr><td><span class="code">la'</span></td><td>Ziel / Empfänger</td><td><em>la'ta-i</em> — zu dir</td></tr>
+      </tbody>
+    </table>
+    <p>Der Apostroph in <em>bi'sa-i</em> bzw. <em>la'ta-i</em> markiert die enge Fuge zwischen Rollenpartikel und Pronomen.</p>
+  </section>
+
+  <section class="sektion">
+    <h2>Pronomen in R1</h2>
+    <table>
+      <thead><tr><th>Person</th><th>Singular</th><th>distributiver Plural</th><th>kollektiver Plural</th></tr></thead>
+      <tbody>
+        <tr><td>1.</td><td><span class="code">sa-i</span></td><td>sa-mira</td><td>sa-ona</td></tr>
+        <tr><td>2.</td><td><span class="code">ta-i</span></td><td>ta-mira</td><td>ta-ona</td></tr>
+        <tr><td>3.</td><td><span class="code">ku-i</span></td><td>ku-mira</td><td>ku-ona</td></tr>
+      </tbody>
+    </table>
+    <p><code>-mira</code> behandelt Vielheit als einzelne Wellen; <code>-ona</code> behandelt sie als kollektives Ganzes.</p>
+  </section>
+
+  <section class="sektion">
+    <h2>Negation und Zeitpartikel</h2>
+    <p><code>wi-</code> ist die einfache Negation. <code>avi-</code> kann daneben als Zeitpartikel „vergangen“ auftreten; die Funktionen werden durch den Slot und Kontext unterschieden.</p>
+    <table>
+      <thead><tr><th>Partikel</th><th>Bedeutung</th><th>Herkunft</th></tr></thead>
+      <tbody>
+        {grammar.timeParticles.map((time) => (
+          <tr><td><span class="code">{time.form}</span></td><td>{time.meaning}</td><td>{time.origin}</td></tr>
+        ))}
+      </tbody>
+    </table>
+    <div class="beispiel"><span class="mish">avi-Ma-ath bi'sa-i la'ta-i</span><span class="de">Vergangen · Bindung-dissonant · von mir · zu dir.</span></div>
+  </section>
+
+  <section class="sektion">
+    <h2>Kombinationsnotation</h2>
+    <ul class="rule-list">
+      <li><strong>Apostroph</strong> — historische/kanonische Prägung mit emergenter Gesamtbedeutung, z. B. <em>Ma'Ta'U</em>. Nicht frei spontan produktiv.</li>
+      <li><strong>Bindestrich</strong> — transparente Sequenz, deren Elemente einzeln lesbar bleiben, z. B. <em>Ori-Kol</em>.</li>
+      <li><strong>Leerzeichen</strong> — syntaktisch verbundene eigenständige Satzglieder.</li>
+      <li><strong>Aspekt ist global und singular.</strong> <em>Ma-om-il</em> ist ungrammatisch.</li>
+      <li><strong>Sprechbarkeit begrenzt Tiefe.</strong> Drei Elemente plus Aspekt sind eine natürliche Obergrenze transparenter Bindestrichkombinationen.</li>
+    </ul>
+  </section>
+
+  <section class="sektion">
+    <h2>Die Ta-Konstante</h2>
+    <p>Die kanonischen Prägungen unterscheiden Bindung ohne und mit Grenze. Die Aspektwahl bleibt relational: Auch <em>Ma'U-om</em> ist grammatisch möglich, aber innerhalb der Ta-Lehre eine spannungsreiche ethische Setzung.</p>
+    <div class="beispiel"><span class="mish">Ma'U</span><span class="de">Bindung ohne Grenze — Verschmelzung / Übergriff.</span></div>
+    <div class="beispiel"><span class="mish">Ma'Ta'U</span><span class="de">Bindung mit Grenze — Verbindung, die Differenz erhält.</span></div>
+    <div class="beispiel"><span class="mish">Ma'Ta'U-om</span><span class="de">Bindung mit Grenze, konvergent/stimmig.</span></div>
+  </section>
+
+  <section class="sektion">
+    <h2>Fragen</h2>
+    <p>Mishkenaz besitzt keine separate Fragesyntax. Polare Fragen können durch <code>-il</code> und Intonation entstehen; Ergänzungsfragen verwenden einen Vektor im suchenden Aspekt.</p>
+    <div class="beispiel"><span class="mish">Ku-il</span><span class="de">Hohlraum/Suche — suchend: „Was ist das?“ / „Ich weiß es noch nicht.“</span></div>
+    <div class="beispiel"><span class="mish">Ra-il</span><span class="de">Fluss — suchend: „Wohin?“ / „Woher?“</span></div>
+    <p>R1 bevorzugt außerdem Parataxe. Explizitere Konjunktionen können in Kontakt- und Galut-Schichten hinzukommen.</p>
+  </section>
+
+  <p class="canon">Referenz: Mishkenaz v{MISHKENAZ_CANON_VERSION} · Website-Kerndaten werden aus <code>src/data/mishkenaz/core.ts</code> bezogen.</p>
+
+  <nav class="mish-nav">
+    <a href="/mishkenaz/vektoren">Die 42 Vektoren →</a>
+    <a href="/mishkenaz/proto-mishkenaz">Urgesten →</a>
+    <a href="/mishkenaz">← Übersicht</a>
+  </nav>
+</div>
+</BaseLayout>
