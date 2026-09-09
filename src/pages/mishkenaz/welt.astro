@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VisualFigure from '../../components/mishkenaz/VisualFigure.astro';
+import { worldVisuals } from '../../data/mishkenaz/visuals';
+
+const title = 'Räume & Visualisierungen — Mishkenaz';
+const description = 'Kuratiertes Bildarchiv für Räume, Atmosphären und erklärende Visualisierungen im Mishkenaz-Kontext.';
+---
+
+<BaseLayout title={title} description={description}>
+  <style>
+    .world-page { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem 5rem; }
+    .hero { padding: 4rem 0 2.6rem; border-bottom: 1px solid var(--gold-light); }
+    .hero .supertitle { font-family:'Lato',sans-serif; font-size:.65rem; font-weight:700; letter-spacing:.25em; text-transform:uppercase; color:var(--color-petrol); }
+    .hero h1 { font-family:'Crimson Text',serif; font-size:clamp(2.7rem,5.5vw,4.6rem); font-weight:400; line-height:1.02; margin:.65rem 0 1rem; color:var(--dark); }
+    .hero .sub { max-width: 760px; font-family:'Lora',serif; font-size:1.05rem; line-height:1.7; color:var(--text-muted); }
+    .intro { margin: 1.8rem 0 2.5rem; padding: 1.15rem 1.4rem; border-left: 3px solid var(--gold); background: var(--bg-soft); font-family:'Lora',serif; line-height:1.7; }
+    .visual-entry { padding: 2.7rem 0; border-bottom: 1px solid var(--border); }
+    .visual-entry h2 { font-family:'Crimson Text',serif; font-size:2rem; font-weight:400; color:var(--dark); margin:0 0 .65rem; }
+    .visual-entry .summary { max-width: 800px; font-family:'Lora',serif; line-height:1.75; }
+    .topics { display:flex; flex-wrap:wrap; gap:.45rem; margin:1rem 0; }
+    .topics span { font-family:'Lato',sans-serif; font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; border:1px solid var(--gold-light); padding:.28rem .55rem; color:var(--text-muted); }
+    .links { display:flex; flex-wrap:wrap; gap:.7rem; margin-top:1rem; }
+    .links a, .back { font-family:'Lato',sans-serif; font-size:.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.14em; color:var(--color-petrol); text-decoration:none; }
+    .links a:hover, .back:hover { text-decoration:underline; }
+    .back-row { margin-top:2rem; }
+  </style>
+
+  <div class="world-page">
+    <section class="hero">
+      <p class="supertitle">Mishkenaz als gebaute und gelebte Welt</p>
+      <h1>Räume & Visualisierungen</h1>
+      <p class="sub">Nicht jedes Bild behauptet Kanon. Diese Sammlung trennt bewusst zwischen kanonischer Darstellung, werknaher Visualisierung und experimenteller Studie. So kann die Welt sichtbar werden, ohne eine Bildidee vorschnell zur verbindlichen Rekonstruktion zu erklären.</p>
+    </section>
+
+    <div class="intro">
+      <strong>Bildstatus ist Teil der Aussage.</strong> Sachgrafiken erklären das Sprachsystem; atmosphärische Illustrationen machen Räume, Körperlichkeit und Kultur vorstellbar. Hybridvisualisierungen dürfen beides verbinden. Der Status steht deshalb direkt am Bild und nicht nur in internen Notizen.
+    </div>
+
+    {worldVisuals.map((visual) => (
+      <article class="visual-entry" id={visual.slug}>
+        <h2>{visual.title}</h2>
+        <p class="summary">{visual.summary}</p>
+        <VisualFigure visual={visual} />
+        <div class="topics">
+          {visual.relatedTopics.map((topic) => <span>{topic}</span>)}
+        </div>
+        <nav class="links" aria-label={`Verwandte Seiten zu ${visual.title}`}>
+          {visual.relatedPages.map((page) => <a href={page.href}>{page.label} →</a>)}
+        </nav>
+      </article>
+    ))}
+
+    <p class="back-row"><a class="back" href="/mishkenaz">← Zur Mishkenaz-Übersicht</a></p>
+  </div>
+</BaseLayout>

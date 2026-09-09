@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "check:canon": "node scripts/check-mishkenaz-canon.mjs",
     "build": "astro build",
     "preview": "astro preview"
   },

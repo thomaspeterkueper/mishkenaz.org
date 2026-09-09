@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  MISHKENAZ_CANON_VERSION,
+  nullpoint,
+  octaveTitles,
+  onaNoSemantics,
+  vectors,
+} from '../../data/mishkenaz/core';
+
+const title = 'Die 42 Vektoren — Mishkenaz';
+const description = 'Die 42 Vektoren von Mishkenaz in sieben Oktaven zu je sechs Vektoren. V00 Avi ist der Nullpunkt außerhalb der 42.';
+const octaves = Object.entries(octaveTitles).map(([nr, label]) => ({
+  nr: Number(nr),
+  label,
+  vectors: vectors.filter((vector) => vector.octave === Number(nr)),
+}));
+---
+
+<BaseLayout title={title} description={description}>
+<style>
+  .vek-page { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem 4rem; }
+  .page-header { padding: 3rem 0 2rem; border-bottom: 1px solid var(--gold-light); }
+  .breadcrumb { font-family: 'Lato', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem; }
+  .breadcrumb a { color: var(--color-petrol); text-decoration: none; }
+  .breadcrumb span { color: var(--text-muted); margin: 0 .4rem; }
+  .page-header h1 { font-family: 'Crimson Text', serif; font-size: clamp(2.2rem,5vw,3.5rem); font-weight: 400; color: var(--dark); margin: 0 0 .5rem; }
+  .page-header .sub { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--text-muted); font-style: italic; }
+  .intro-box, .note-box { padding: 1.15rem 1.5rem; margin: 1.5rem 0; font-family: 'Lora', serif; line-height: 1.75; }
+  .intro-box { background: var(--bg-soft); border-left: 3px solid var(--gold); }
+  .note-box { background: var(--color-petrol-light); border-left: 3px solid var(--color-petrol); font-size: .92rem; }
+  .canon-stamp { font-family: 'Lato', sans-serif; font-size: .65rem; letter-spacing: .15em; text-transform: uppercase; color: var(--text-muted); }
+  .nullpunkt { border: 1px solid var(--gold); padding: 1.3rem 1.5rem; margin: 2rem 0; display: grid; grid-template-columns: auto 1fr; gap: 1rem 1.5rem; align-items: start; }
+  .nullpunkt .id { font-family: 'Lato', sans-serif; font-weight: 700; color: var(--gold); }
+  .nullpunkt h2 { font-family: 'Crimson Text', serif; font-size: 1.8rem; font-weight: 400; margin: 0 0 .25rem; color: var(--dark); }
+  .nullpunkt p { font-family: 'Lora', serif; margin: .2rem 0; line-height: 1.65; }
+  details.oktave { border: 1px solid var(--border); margin-bottom: 1.15rem; }
+  details.oktave[open] { border-color: var(--color-petrol); }
+  details.oktave > summary { display: flex; gap: 1rem; align-items: baseline; padding: 1.1rem 1.4rem; cursor: pointer; list-style: none; background: var(--bg-soft); }
+  details.oktave > summary::-webkit-details-marker { display: none; }
+  .ok-nr { font-family: 'Crimson Text', serif; font-size: 2rem; color: var(--gold); min-width: 2rem; }
+  .ok-title { font-family: 'Crimson Text', serif; font-size: 1.35rem; color: var(--dark); }
+  .ok-range { margin-left: auto; font-family: 'Lato', sans-serif; font-size: .65rem; color: var(--text-muted); letter-spacing: .08em; }
+  .vek-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap: 1px; background: var(--border); border-top: 1px solid var(--border); }
+  .vek-card { background: white; padding: 1.15rem 1.25rem; min-height: 150px; }
+  .vek-card.operator { background: var(--bg-soft); }
+  .vek-head { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+  .vek-head h3 { font-family: 'Crimson Text', serif; font-size: 1.45rem; font-style: italic; color: var(--color-petrol); margin: 0; }
+  .vek-id { font-family: 'Lato', sans-serif; font-size: .65rem; font-weight: 700; color: var(--gold); }
+  .vek-core { font-family: 'Lora', serif; font-size: .94rem; line-height: 1.55; margin: .6rem 0 .45rem; }
+  .vek-use { font-family: 'Lora', serif; font-size: .83rem; line-height: 1.5; color: var(--text-muted); font-style: italic; }
+  .bridge-note { font-family: 'Lora', serif; font-size: .9rem; line-height: 1.65; padding: 1rem 1.4rem; border-top: 1px solid var(--border); background: #fafafa; }
+  .mish-nav { display: flex; flex-wrap: wrap; gap: .75rem; margin: 2rem 0 0; }
+  .mish-nav a { font-family: 'Lato', sans-serif; font-size: .65rem; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; color: var(--color-petrol); text-decoration: none; border: 1px solid var(--color-petrol); padding: .4rem 1rem; }
+  .mish-nav a:hover { background: var(--color-petrol); color: white; }
+  @media (max-width: 640px) { .ok-range { display:none; } .nullpunkt { grid-template-columns: 1fr; } }
+</style>
+
+<div class="vek-page">
+  <header class="page-header">
+    <p class="breadcrumb"><a href="/mishkenaz">Mishkenaz</a><span>›</span>Die 42 Vektoren</p>
+    <h1>Die 42 Vektoren</h1>
+    <p class="sub">Sieben Oktaven zu je sechs Vektoren — V00 liegt außerhalb des Systems.</p>
+  </header>
+
+  <div class="intro-box">
+    <p>Ein Vektor in Mishkenaz ist keine Wörterbuchdefinition, sondern eine <strong>gerichtete semantische Kraft</strong>. Bedeutung entsteht aus Vektor, Kombination, Aspekt und Relation. Die Liste ist deshalb eine Kurzreferenz, kein Algorithmus.</p>
+    <p class="canon-stamp">Kanonstand v{MISHKENAZ_CANON_VERSION} · 30. August 2026</p>
+  </div>
+
+  <div class="note-box">
+    Begriffe wie Resonanz, Entropie, Attraktor oder Symmetrie sind innerhalb von Mishkenaz <strong>sprachliche Modellbilder</strong>. Sie behaupten keinen unbekannten physikalischen Mechanismus und bilden keine Ersatzphysik.
+  </div>
+
+  <section class="nullpunkt" aria-labelledby="nullpunkt-heading">
+    <div class="id">{nullpoint.id}</div>
+    <div>
+      <h2 id="nullpunkt-heading">{nullpoint.name} — der Nullpunkt</h2>
+      <p><strong>{nullpoint.core}</strong></p>
+      <p>{nullpoint.usage}</p>
+      <p><em>Avi ist kein Vektor im eigentlichen Sinn. Die 42 Vektoren beginnen bei V01.</em></p>
+    </div>
+  </section>
+
+  {octaves.map((octave) => (
+    <details class="oktave" open={octave.nr === 1}>
+      <summary>
+        <span class="ok-nr">{octave.nr}</span>
+        <span class="ok-title">{octave.label}</span>
+        <span class="ok-range">{octave.vectors[0]?.id}–{octave.vectors[octave.vectors.length - 1]?.id}</span>
+      </summary>
+      <div class="vek-grid">
+        {octave.vectors.map((vector) => (
+          <article class:list={['vek-card', vector.kind === 'operator' && 'operator']}>
+            <div class="vek-head"><h3>{vector.name}</h3><span class="vek-id">{vector.id}</span></div>
+            <p class="vek-core">{vector.core}</p>
+            <p class="vek-use">{vector.usage}</p>
+          </article>
+        ))}
+      </div>
+      {octave.nr === 6 && (
+        <div class="bridge-note"><strong>Ona-nO (V35)</strong> ist die strukturelle Schwelle vor der Rückkehr: mögliches Schließen oder neue Windung. <strong>Ori (V36)</strong> bildet anschließend die Brücke; Wiederkehr ist dort noch semantische Kraft, bevor in Oktave 7 Richtungen zu Meta-Operatoren werden.</div>
+      )}
+      {octave.nr === 7 && (
+        <div class="bridge-note">Meta-Operatoren können in Galut-Schichten als eigenständige Wortformen auftreten. Das ist eine register- bzw. überlieferungsspezifische Entwicklung, keine freie Umdeutung des R1-Kerns.</div>
+      )}
+    </details>
+  ))}
+
+  <div class="note-box">
+    <strong>Kanonische Lesart von Ona-nO:</strong> {onaNoSemantics.meaning} {onaNoSemantics.continuation} Spätere Galut- oder Kommentarschichten können diese Schwelle ontologischer deuten; solche Lesarten sind historische Interpretation, nicht R1-Kern.
+  </div>
+
+  <nav class="mish-nav">
+    <a href="/mishkenaz/grammatik">Grammatik →</a>
+    <a href="/mishkenaz/proto-mishkenaz">Urgesten →</a>
+    <a href="/mishkenaz/woerterbuch">Wörterbuch →</a>
+    <a href="/mishkenaz">← Übersicht</a>
+  </nav>
+</div>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <slot />
+</Layout>
+
+<style is:global>
+  :root {
+    --max-width: 1120px;
+    --gold: #a77d35;
+    --gold-light: #dfcfad;
+    --color-petrol: #2f6f73;
+    --color-petrol-light: #e9f2f1;
+    --dark: #211d19;
+    --text: #312c27;
+    --text-muted: #746d65;
+    --bg-soft: #f4f0e8;
+    --border: #ddd5c9;
+  }
+
+  main {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: #faf8f3;
+    color: var(--text);
+  }
+</style>

@@ -45,7 +45,11 @@ npm run build     # Produktions-Build nach ./dist
 
 ```
 src/
-  layouts/Layout.astro     Gemeinsames Seiten-Layout (Header/Nav/Footer)
+  layouts/
+    Layout.astro            Gemeinsames Seiten-Layout (Header/Nav/Footer)
+    BaseLayout.astro        Basis-Layout für die migrierten Vollseiten
+  components/mishkenaz/     Seiten-Komponenten (z. B. VisualFigure)
+  data/mishkenaz/           Kanon-Datenquellen (core, lexicon, phonology, visuals)
   pages/
     index.astro             Start
     grammatik.astro         Grammatik
@@ -53,19 +57,33 @@ src/
     rueckuebersetzung.astro Rückübersetzung
     vektoren.astro          Vektoren
     woerterbuch.astro       Wörterbuch
+    mishkenaz/              Kanonische Vollseiten (migrierter Content)
+      index.astro             Übersicht: System, Aspekte, Galut-Schichten
+      grammatik.astro         Grammatik
+      proto-mishkenaz.astro   Proto-Mishkenaz (Urgesten)
+      rueckuebersetzung.astro Rückübersetzungen
+      vektoren.astro          Vektoren (aus core.ts)
+      welt.astro              Welt
+      woerterbuch.astro       Wörterbuch mit Live-Suche
 external-tasks/
   open/                     Offene Anforderungen an dieses Repo
   done/                     Erledigte Anforderungen
+  parked/                   Zurückgestellte Anforderungen
   rejected/                 Abgelehnte Anforderungen
+docs/
+  coherence/                Kohärenz-Dokumente (Audits, Kanon-Abgrenzungen)
+scripts/
+  check-mishkenaz-canon.mjs Kanon-Check (CI: npm run check:canon)
 ```
 
 ## Status
 
-**Stand 2026-07-14: Grundgerüst angelegt, alle sechs Seiten sind Platzhalter.**
-Content-Migration/-Aufbau aus den kanonischen OTA-Dokumenten (OTA-FND, OTA-LIT)
-steht noch aus und erfolgt nach der etablierten read-before-write-Methodik.
+**Stand 2026-08-31: Content-Migration aus `thomas-kueper.de` abgeschlossen; die
+Website entspricht dem v0.9-Sprachkanon.**
 
-> Hinweis zu ECO-ARC-0009: Die dort unter „Folgeaufgaben" als *erledigt*
-> markierte Content-Migration aus `thomas-kueper.de` hat zum Zeitpunkt dieses
-> Commits **nicht** stattgefunden. Dieser Punkt sollte im Entscheidungsdokument
-> korrigiert werden.
+Die vollständige Mishkenaz-Ausarbeitung liegt unter `src/pages/mishkenaz/` als
+kanonische Fassung vor (EXT-ECO-MISH-20260714-001, abgeschlossen 2026-08-29);
+die Top-Level-Einstiege delegieren auf diese Seiten und erzeugen keine zweite
+Inhaltsversion. Die Übereinstimmung mit dem v0.9-Kanon sichert der Kanon-Check
+im CI (`npm run check:canon`); der inhaltliche Abgleich ist dokumentiert in
+[`docs/coherence/mishkenaz-v0.9-site-audit-2026-08-30.md`](docs/coherence/mishkenaz-v0.9-site-audit-2026-08-30.md).

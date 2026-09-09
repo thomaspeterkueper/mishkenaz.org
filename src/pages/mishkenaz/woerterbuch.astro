@@ -1,0 +1,127 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MISHKENAZ_CANON_VERSION, nullpoint, vectors } from '../../data/mishkenaz/core';
+import { canonicalLexicon, grammarLexicon } from '../../data/mishkenaz/lexicon';
+
+const title = 'Wörterbuch — Mishkenaz';
+const description = 'Klassifizierte Mishkenaz-v0.9-Referenz: Vektoren, Grammatikformen und kanonische Ausdrücke.';
+const vectorEntries = [nullpoint, ...vectors];
+---
+
+<BaseLayout title={title} description={description}>
+<style>
+  .dict-page { max-width:var(--max-width); margin:0 auto; padding:0 2rem 4rem; }
+  .page-header { padding:3rem 0 2rem; border-bottom:1px solid var(--gold-light); }
+  .breadcrumb { font-family:'Lato',sans-serif; font-size:.65rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; margin-bottom:.75rem; }
+  .breadcrumb a { color:var(--color-petrol); text-decoration:none; }
+  .breadcrumb span { color:var(--text-muted); margin:0 .4rem; }
+  h1 { font-family:'Crimson Text',serif; font-size:clamp(2.2rem,5vw,3.5rem); font-weight:400; margin:0 0 .5rem; color:var(--dark); }
+  .sub { font-family:'Lora',serif; font-size:1.08rem; color:var(--text-muted); font-style:italic; }
+  .notice { background:var(--bg-soft); border-left:3px solid var(--gold); padding:1.1rem 1.5rem; margin:1.5rem 0; font-family:'Lora',serif; line-height:1.7; }
+  .search { margin:1.5rem 0 2rem; }
+  #dict-search { width:100%; max-width:640px; padding:.85rem 1rem; border:1px solid var(--border); border-bottom:2px solid var(--gold); font-family:'Lora',serif; font-size:1rem; }
+  .section { margin:2.5rem 0; }
+  .section h2 { font-family:'Crimson Text',serif; font-size:1.75rem; font-weight:400; border-bottom:1px solid var(--gold-light); padding-bottom:.4rem; }
+  .section-intro { font-family:'Lora',serif; color:var(--text-muted); font-size:.9rem; line-height:1.65; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:.9rem; margin-top:1rem; }
+  .entry { border:1px solid var(--border); padding:1rem 1.1rem; background:white; }
+  .entry.hidden { display:none; }
+  .form { font-family:'Crimson Text',serif; font-size:1.35rem; font-style:italic; color:var(--color-petrol); margin:0 0 .35rem; }
+  .meaning { font-family:'Lora',serif; font-size:.9rem; line-height:1.55; margin:.2rem 0; }
+  .meta { font-family:'Lato',sans-serif; font-size:.61rem; letter-spacing:.09em; text-transform:uppercase; color:var(--gold); margin-top:.55rem; border-top:1px solid var(--border); padding-top:.45rem; }
+  .note { font-family:'Lora',serif; font-size:.8rem; color:var(--text-muted); font-style:italic; margin-top:.35rem; }
+  .none { display:none; font-family:'Lora',serif; color:var(--text-muted); font-style:italic; padding:2rem 0; }
+  .none.visible { display:block; }
+  .nav { display:flex; flex-wrap:wrap; gap:.75rem; margin:2rem 0 0; }
+  .nav a { font-family:'Lato',sans-serif; font-size:.65rem; font-weight:700; text-transform:uppercase; letter-spacing:.18em; color:var(--color-petrol); text-decoration:none; border:1px solid var(--color-petrol); padding:.4rem .9rem; }
+  .nav a:hover { background:var(--color-petrol); color:white; }
+</style>
+
+<div class="dict-page">
+  <header class="page-header">
+    <p class="breadcrumb"><a href="/mishkenaz">Mishkenaz</a><span>›</span>Wörterbuch</p>
+    <h1>Wörterbuch</h1>
+    <p class="sub">Kernreferenz statt Legacy-Sammelliste</p>
+  </header>
+
+  <div class="notice">
+    Diese Seite trennt ab v{MISHKENAZ_CANON_VERSION} bewusst zwischen <strong>Vektoren</strong>, <strong>Grammatikformen</strong> und <strong>kanonischen Ausdrücken</strong>. Freie Interpretationen und experimentelle Rückübersetzungen stehen nicht mehr unmarkiert im Wörterbuch.
+  </div>
+
+  <div class="search"><input id="dict-search" type="search" placeholder="Form oder Bedeutung suchen …" autocomplete="off" /></div>
+
+  <div id="dict-content">
+    <section class="section">
+      <h2>Vektoren und Nullpunkt</h2>
+      <p class="section-intro">V00 Avi ist Nullpunkt außerhalb der 42. V01–V42 bilden sieben Oktaven zu je sechs Vektoren.</p>
+      <div class="grid">
+        {vectorEntries.map((entry) => (
+          <article class="entry" data-search={`${entry.id} ${entry.name} ${entry.core} ${entry.usage}`.toLowerCase()}>
+            <p class="form">{entry.name}</p>
+            <p class="meaning">{entry.core}</p>
+            <p class="note">{entry.usage}</p>
+            <p class="meta">{entry.id}{entry.kind === 'operator' ? ' · Meta-Operator' : entry.kind === 'nullpoint' ? ' · Nullpunkt' : entry.kind === 'bridge' ? ' · Brückenvektor' : ''}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Grammatikformen</h2>
+      <p class="section-intro">Diese Formen sind grammatische Marker oder Partikel und nicht mit semantischen Kernvektoren gleichzusetzen.</p>
+      <div class="grid">
+        {grammarLexicon.map((entry) => (
+          <article class="entry" data-search={`${entry.form} ${entry.german} ${entry.scope} ${entry.note ?? ''}`.toLowerCase()}>
+            <p class="form">{entry.form}</p>
+            <p class="meaning">{entry.german}</p>
+            {entry.note && <p class="note">{entry.note}</p>}
+            <p class="meta">{entry.scope}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Kanonische Ausdrücke</h2>
+      <p class="section-intro">Apostroph-Prägungen sind nicht frei spontan produktiv. Wo ein Ausdruck eine historische oder liturgische Schicht trägt, ist sie angegeben.</p>
+      <div class="grid">
+        {canonicalLexicon.map((entry) => (
+          <article class="entry" data-search={`${entry.form} ${entry.german} ${entry.scope} ${entry.note ?? ''}`.toLowerCase()}>
+            <p class="form">{entry.form}</p>
+            <p class="meaning">{entry.german}</p>
+            {entry.note && <p class="note">{entry.note}</p>}
+            <p class="meta">{entry.scope}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+
+  <p id="dict-none" class="none">Keine passenden Einträge.</p>
+
+  <nav class="nav">
+    <a href="/mishkenaz/grammatik">Grammatik →</a>
+    <a href="/mishkenaz/vektoren">42 Vektoren →</a>
+    <a href="/mishkenaz/rueckuebersetzung">Interpretative Rückübersetzungen →</a>
+    <a href="/mishkenaz">← Übersicht</a>
+  </nav>
+</div>
+
+<script>
+  const input = document.getElementById('dict-search');
+  const entries = Array.from(document.querySelectorAll('.entry'));
+  const none = document.getElementById('dict-none');
+
+  input?.addEventListener('input', (event) => {
+    const value = (event.target instanceof HTMLInputElement ? event.target.value : '').trim().toLowerCase();
+    let visible = 0;
+    entries.forEach((entry) => {
+      const haystack = entry.getAttribute('data-search') ?? '';
+      const match = !value || haystack.includes(value);
+      entry.classList.toggle('hidden', !match);
+      if (match) visible += 1;
+    });
+    none?.classList.toggle('visible', visible === 0);
+  });
+</script>
+</BaseLayout>
