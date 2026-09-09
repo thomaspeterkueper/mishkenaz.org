@@ -1,6 +1,6 @@
 # Mishkenaz — Research-Intake Sprachwandel
 
-**Stand:** 2026-08-31  
+**Stand:** 2026-09-09  
 **Scope:** Website / Sprachwandel / Galut  
 **Status:** Research ausgewertet, keine automatische Kanonisierung
 
@@ -45,6 +45,16 @@ Für öffentliche Texte gilt:
 4. `-om / -ath / -il`, Ta und die konkrete G1–G6-Struktur bleiben Mishkenaz-Kanon, keine aus realen Sprachen abgeleiteten historischen Tatsachen.
 5. Reale morphologische Ähnlichkeiten sind Analogien und keine Etymologien.
 
+## Reale sprachliche Analogien
+
+Der Research Candidate benennt zusätzlich reale Diaspora- und Morphologiebeispiele, die als Vergleichsfenster nützlich sind. Für die öffentliche Darstellung wurde daraus am 9. September 2026 eine streng getrennte Analogie-Ebene eingeführt.
+
+- Romani, Domari und Saurashtra dienen als reale Beispiele für Diaspora, Kontaktstrata, Koineisierung und strukturelle Konvergenz.
+- Dentaler `-t-`-Bereich, Tamil `-il` und vedische `-tha- / -atha-`-Formen dürfen als formale Vergleiche erwähnt werden.
+- Daraus folgt ausdrücklich **keine** Herkunft der Ta-Konstante, des Mishkenaz-Aspekts `-il` oder von `-ath`.
+
+Die vollständige Redaktionsgrenze steht in `docs/coherence/mishkenaz-real-language-analogies-2026-09-09.md`.
+
 ## Modellierungsregel für spätere Galut-Ausarbeitung
 
 Ein realistischer Wandelpfad sollte vorzugsweise aus einer Kombination bestehen aus:
@@ -61,6 +71,7 @@ Diese Faktoren sind als Wahrscheinlichkeits- und Plausibilitätsbedingungen zu b
 ## Aktueller Handlungsbedarf
 
 - Kein Änderungsbedarf am Kernkanon.
-- Website-Texte auf direkte Klima-Kausalbehauptungen prüfen.
+- Direkte Klima-Kausalbehauptungen bleiben ausgeschlossen bzw. als umstritten markiert.
 - Kapitel 5 des Buchs bei der nächsten redaktionellen Runde gegen diese Grenze prüfen.
-- Bei zukünftiger Ausarbeitung einzelner G-Linien die neuen Research-Anker als Plausibilitätsrahmen verwenden.
+- Bei zukünftiger Ausarbeitung einzelner G-Linien die Research-Anker als Plausibilitätsrahmen verwenden.
+- Reale Morphologie nur als Analogie, nie als Herkunftsbeleg verwenden.
