@@ -1,10 +1,257 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="Grammatik">
+
+<Layout
+  title="Grammatik"
+  description="Kernmodell der Mishkenaz-Grammatik: verbinitiale Rollenstruktur, Resonanz-Aspekte, Evidentialität, Pronomen und Ta-Konstante."
+>
   <h1>Grammatik</h1>
-  <p class="lede">Platzhalter — Inhalt folgt nach Sichtung der kanonischen Quellen (read-before-write).</p>
-  <div class="placeholder">
-    Diese Seite ist noch nicht befüllt.
-  </div>
+  <p class="lede">
+    Kanonische Arbeitsfassung der rekonstruierten Dvārakā-Grundform R1. Sie trennt bewusst
+    zwischen dem konstruierten Mishkenaz-System und realen sprachwissenschaftlichen Analogien.
+  </p>
+
+  <section class="status">
+    <strong>Epistemischer Status</strong>
+    <p>
+      Mishkenaz ist eine konstruierte Sprache mit historischer Binnenentwicklung. Verbinitialität,
+      Rollenmarkierung, Koineisierung, Sprachkontakt und Substrat-/Adstrateffekte besitzen reale
+      linguistische Vergleichsfälle. Die konkrete Mishkenaz-Morphologie, insbesondere
+      <code>-om</code>, <code>-ath</code>, <code>-il</code>, die Ta-Konstante und die Galut-Schichten,
+      ist Teil des fiktionalen Sprachkanons und keine Behauptung über eine historisch belegte Sprache.
+    </p>
+  </section>
+
+  <section>
+    <h2>1. Grundstruktur</h2>
+    <p>
+      Mishkenaz ist in R1 überwiegend <strong>verbinitial und rollenkodiert</strong>. Der Satz beginnt
+      mit dem Vorgang oder Zustand. Danach folgen die beteiligten Größen, markiert nach ihrer Rolle
+      im Vorgang, nicht primär nach den Kategorien Subjekt und Objekt.
+    </p>
+
+    <div class="formula">
+      <code>PREDIKAT — bi'QUELLE — la'ZIEL</code>
+    </div>
+
+    <div class="example">
+      <span class="mish">Saha-om bi'sa-i la'ta-i</span>
+      <span>„Ich sehe dich; das Sehen ist stimmig.“</span>
+      <small>Saha-om · von-mir · zu-dir</small>
+    </div>
+
+    <p>
+      <code>bi'</code> markiert die Quelle oder den Ausgangspunkt eines Vorgangs,
+      <code>la'</code> dessen Ziel, Gegenüber oder gerichteten Endpunkt. Damit lässt sich dieselbe
+      Prädikatsstruktur verwenden, auch wenn eine deutsche Übersetzung unterschiedliche syntaktische
+      Konstruktionen benötigt.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. Morphologische Slots</h2>
+    <p>
+      Die R1-Grammatik arbeitet mit kombinierbaren Funktionspositionen. Nicht jeder Slot muss
+      realisiert werden; obligatorisch ist nur der semantische Kern.
+    </p>
+
+    <div class="formula">
+      <code>(TEMPORAL) — (NEG) — (INTENS) — STAMM — (KOLLEKTIV) — (RES) — (EVID)</code>
+    </div>
+
+    <table>
+      <thead><tr><th>Slot</th><th>Funktion</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>STAMM</td><td>lexikalischer oder vektorieller Bedeutungskern</td><td>obligatorisch</td></tr>
+        <tr><td>NEG</td><td>Verneinung bzw. Abwesenheit</td><td>optional</td></tr>
+        <tr><td>INTENS</td><td>Intensität / Skalierung</td><td>noch auszuarbeiten</td></tr>
+        <tr><td>KOLLEKTIV</td><td>distributive oder kollektive Lesart</td><td>teilweise definiert</td></tr>
+        <tr><td>RES</td><td>Resonanzstatus <code>-om/-ath/-il</code></td><td>kanonischer Kern</td></tr>
+        <tr><td>EVID</td><td>Evidentialität / markiertes Fehlen</td><td><code>-tum</code> getrennt vom Aspekt</td></tr>
+      </tbody>
+    </table>
+
+    <p class="note">
+      Die ältere Fassung führte <code>avi-</code> zugleich als Vergangenheitspartikel und als
+      Ausdruck von Leere/Nicht-Sein. Diese Doppelbelegung wird hier ausdrücklich <strong>nicht</strong>
+      kanonisiert. Das Temporalsystem bleibt bis zur historischen Rekonstruktion separat offen.
+    </p>
+  </section>
+
+  <section>
+    <h2>3. Die drei Resonanz-Aspekte</h2>
+    <p>
+      Mishkenaz besitzt neben zeitlicher Einordnung eine eigene grammatische Kategorie für den
+      Zustand einer Handlung oder Aussage. Diese Kategorie beschreibt nicht unmittelbar,
+      <em>wann</em> etwas geschieht, sondern in welchem Verhältnis der Vorgang zu Erwartung,
+      Ziel oder erlebter Stimmigkeit steht.
+    </p>
+
+    <div class="cards">
+      <article>
+        <code>-om</code>
+        <strong>stimmig · angekommen</strong>
+        <p>Der Vorgang wird als erfüllt, passend oder in sich geschlossen gesetzt.</p>
+      </article>
+      <article>
+        <code>-ath</code>
+        <strong>dissonant · nicht stimmig</strong>
+        <p>Der Vorgang besteht, aber sein Verhältnis zu Ziel, Erwartung oder Beziehung ist gestört.</p>
+      </article>
+      <article>
+        <code>-il</code>
+        <strong>suchend · offen · unterwegs</strong>
+        <p>Der Vorgang ist noch nicht abgeschlossen; Offenheit selbst wird grammatisch markiert.</p>
+      </article>
+    </div>
+
+    <div class="example">
+      <span class="mish">Saha-om</span><span>sehen — stimmig / angekommen</span>
+    </div>
+    <div class="example">
+      <span class="mish">Saha-ath</span><span>sehen — vorhanden, aber dissonant</span>
+    </div>
+    <div class="example">
+      <span class="mish">Saha-il</span><span>sehen — suchend / noch offen</span>
+    </div>
+
+    <h3>Operative Auslassung</h3>
+    <p>
+      Der Resonanz-Aspekt kann ausgelassen werden. Das ist nicht gleichbedeutend mit
+      <code>-il</code>. <code>-il</code> setzt die Offenheit ausdrücklich; die Nullmarkierung lässt
+      den Resonanzstatus unausgesprochen. Diese Differenz ist grammatisch relevant.
+    </p>
+  </section>
+
+  <section>
+    <h2>4. Evidentialität und <code>-tum</code></h2>
+    <p>
+      <code>-tum</code> ist <strong>kein vierter Resonanz-Aspekt</strong>. Es gehört in einen eigenen
+      Evidentialitäts-/Missingness-Slot. Die Form markiert, dass etwas für die Aussage konstitutiv
+      fehlt, entzogen ist oder nur über seine Abwesenheit zugänglich bleibt.
+    </p>
+    <p>
+      Damit kann ein Stamm grundsätzlich sowohl einen Resonanzstatus als auch einen evidentiellen
+      Status tragen. Die genaue Kombinatorik wird separat festgelegt; <code>-tum</code> darf nicht
+      wieder als Synonym für Dissonanz oder Offenheit verwendet werden.
+    </p>
+  </section>
+
+  <section>
+    <h2>5. Pronomen und Zahl</h2>
+    <p>
+      Die Personenformen werden aus drei relationalen Kernen gebildet:
+      <code>sa</code> (Selbst/Quelle), <code>ta</code> (Gegenüber/Differenz) und
+      <code>ku</code> (das Dritte / nicht festgelegte Andere). Die bisherigen R1-Zahlmarker werden
+      beibehalten.
+    </p>
+
+    <table>
+      <thead><tr><th></th><th>Singular</th><th>distributiv</th><th>kollektiv</th></tr></thead>
+      <tbody>
+        <tr><td>1. Person</td><td><code>sa-i</code></td><td><code>sa-mira</code></td><td><code>sa-ona</code></td></tr>
+        <tr><td>2. Person</td><td><code>ta-i</code></td><td><code>ta-mira</code></td><td><code>ta-ona</code></td></tr>
+        <tr><td>3. Person</td><td><code>ku-i</code></td><td><code>ku-mira</code></td><td><code>ku-ona</code></td></tr>
+      </tbody>
+    </table>
+
+    <p>
+      <code>-mira</code> behandelt eine Mehrzahl als verteilte Einzelne; <code>-ona</code> setzt sie
+      als Einheit. Diese Unterscheidung ist semantisch und nicht bloß numerisch.
+    </p>
+  </section>
+
+  <section>
+    <h2>6. Negation</h2>
+    <p>
+      <code>wi-</code> ist die reguläre Negation und markiert das Nichtvorliegen eines Vorgangs oder
+      Zustands. Philosophische Begriffe wie <em>Avi</em> (Leere, Nullpunkt, Potential) bleiben davon
+      getrennt und sind lexikalische/vektorielle Bedeutungen, keine zweite grammatische Negation.
+    </p>
+
+    <div class="example">
+      <span class="mish">wi-Saha-om bi'sa-i la'ta-i</span>
+      <span>„Ich sehe dich nicht.“</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>7. Fragen und Offenheit</h2>
+    <p>
+      R1 benötigt für viele Fragen keine eigene Inversionssyntax. Der offene Resonanzstatus
+      <code>-il</code> kann eine Aussage als nicht abgeschlossen und damit als Antwortaufforderung
+      markieren. Das ersetzt jedoch nicht automatisch jedes Fragewort: deiktische und relationale
+      Frageformen werden im Lexikon gesondert beschrieben.
+    </p>
+
+    <div class="example">
+      <span class="mish">Saha-il bi'ta-i la'sa-i</span>
+      <span>„Siehst du mich?“ / „Ist dein Sehen auf mich hin noch offen?“</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>8. Die Ta-Konstante</h2>
+    <p>
+      <code>Ta</code> bezeichnet im Mishkenaz-Kanon Gegenüber, Grenze und Differenz. In bestimmten
+      relationalen Konstruktionen ist diese Differenz nicht Nebensache, sondern Voraussetzung für
+      die Bedeutung: Verbindung bleibt nur dann Beziehung, wenn die beteiligten Größen nicht
+      semantisch ineinander aufgelöst werden.
+    </p>
+
+    <div class="contrast">
+      <div><code>Ma-U</code><strong>Bindung ohne explizite Differenz</strong><span>Verschmelzung / Grenzverlust</span></div>
+      <div><code>Ma'Ta'U</code><strong>Bindung durch anerkannte Differenz</strong><span>Verbindung, die das Andere als Anderes erhält</span></div>
+    </div>
+
+    <p>
+      Der Apostroph bezeichnet in dieser Konstruktion eine artikulatorische bzw. rhythmische Grenze.
+      Die weitergehende ethische Interpretation gehört zum kulturellen Semantiksystem von Mishkenaz;
+      sie ist keine allgemeine sprachwissenschaftliche Gesetzmäßigkeit.
+    </p>
+  </section>
+
+  <section>
+    <h2>9. Was noch nicht kanonisch geschlossen ist</h2>
+    <ul>
+      <li>das vollständige Temporalsystem und seine historische Entwicklung,</li>
+      <li>die genaue Funktion des Intensitäts-Slots,</li>
+      <li>die erlaubten Kombinationen von Resonanz-Aspekt und Evidentialität,</li>
+      <li>die vollständige Morphophonologie an Morphemgrenzen,</li>
+      <li>die Entwicklung dieser Regeln in G1–G6.</li>
+    </ul>
+    <p>
+      Diese Punkte werden nicht mit Platzhalterformen aufgefüllt. Sie werden aus Proto-Mishkenaz,
+      den 42 Vektoren und den späteren Galut-Schichten rekonstruiert.
+    </p>
+  </section>
+
+  <style>
+    section { margin: 3rem 0; }
+    h2 { color: var(--accent); font-weight: 400; margin-bottom: .7rem; }
+    h3 { color: var(--fg); font-weight: 400; margin-top: 2rem; }
+    code { color: var(--accent); font-size: .95em; }
+    .status, .note { border-left: 2px solid var(--accent); padding: 1rem 1.25rem; background: #1b1815; }
+    .status p, .note { color: var(--muted); }
+    .formula { border: 1px solid var(--border); padding: 1rem 1.25rem; margin: 1.25rem 0; overflow-x: auto; }
+    .example { border-bottom: 1px solid var(--border); padding: .8rem 0; display: grid; gap: .15rem; }
+    .example .mish { color: var(--accent); font-size: 1.1rem; }
+    .example small { color: var(--muted); }
+    table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; }
+    th, td { border-bottom: 1px solid var(--border); padding: .65rem .5rem; text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-weight: 400; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; margin: 1.2rem 0; }
+    .cards article { border: 1px solid var(--border); padding: 1rem; }
+    .cards article code, .cards article strong { display: block; margin-bottom: .4rem; }
+    .cards article p { color: var(--muted); margin-bottom: 0; }
+    .contrast { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; margin: 1.25rem 0; }
+    .contrast div { border: 1px solid var(--border); padding: 1rem; display: grid; gap: .35rem; }
+    .contrast span { color: var(--muted); }
+    li { margin-bottom: .4rem; }
+    @media (max-width: 700px) {
+      .cards, .contrast { grid-template-columns: 1fr; }
+      table { font-size: .9rem; }
+    }
+  </style>
 </Layout>
