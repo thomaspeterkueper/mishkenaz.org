@@ -1,10 +1,62 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const groups = [
+  ['I','Physische Basis','V01–V06','Impuls, Welle, Bruch, Ganzheit und gerichtete Veränderung'],
+  ['II','Wahrnehmung','V07–V12','Wahrnehmen, Fragen, Benennen, Öffnen und Übergang'],
+  ['III','Zustände','V13–V18','Präsenz, Abwesenheit, Mangel, Gefahr, Bindung und Grenze'],
+  ['IV','Dynamik','V19–V24','Spannung, Bewegung und Wechselwirkung'],
+  ['V','Transformation','V25–V30','Schwelle, Übertragung, Wandel, Rest und Rekursion'],
+  ['VI','Rückkopplung','V31–V36','Notwendigkeit, Symmetrie, Maß, Kraft, Anziehung und Abstoßung'],
+  ['VII','Meta-Operatoren','V37–V42','Zyklus, Zerfall, Emergenz, Resonanz, Integration und Differentiation'],
+];
 ---
-<Layout title="Vektoren">
-  <h1>Vektoren</h1>
-  <p class="lede">Platzhalter — Inhalt folgt nach Sichtung der kanonischen Quellen (read-before-write).</p>
-  <div class="placeholder">
-    Diese Seite ist noch nicht befüllt.
-  </div>
+<Layout title="Die 42 Vektoren" description="Architektur des Mishkenaz-Vektorsystems: 42 semantische Richtungen in sieben Gruppen plus Avi als V00 außerhalb der Zählung.">
+  <h1>Die 42 Vektoren</h1>
+  <p class="lede">Das Vektorsystem ist das semantische Koordinatensystem von Mishkenaz. Es beschreibt Richtungen und Relationen, nicht 42 Urwörter und nicht 42 naturwissenschaftliche Größen.</p>
+
+  <section class="status">
+    <strong>Kanonische Zählregel</strong>
+    <p><code>Avi = V00</code> ist der Nullpunkt und liegt <strong>außerhalb</strong> der 42 Vektoren. Die gezählten Vektoren müssen daher exakt <code>V01–V42</code> umfassen. Die ältere Darstellung „V00–V42“ innerhalb von sieben Sechsergruppen enthielt einen Off-by-one-Widerspruch und wird nicht übernommen.</p>
+  </section>
+
+  <section>
+    <h2>1. Vier getrennte Ebenen</h2>
+    <div class="formula"><code>URGESTE → LAUTLICHE REALISIERUNG</code><br/><code>VEKTOR → SEMANTISCHE RICHTUNG</code><br/><code>MORPHEM → GRAMMATISCHE FUNKTION</code><br/><code>LEXEM → KONVENTIONALISIERTE WORTBEDEUTUNG</code></div>
+    <p>Ein Name kann auf mehreren Ebenen wiederkehren, etwa <code>Ta</code> als Urgeste, semantische Grenzrichtung und Bestandteil grammatischer Formen. Diese Identität muss jeweils ausdrücklich angegeben werden; Gleichlaut bedeutet nicht automatisch Ebenengleichheit.</p>
+  </section>
+
+  <section>
+    <h2>2. Sieben Gruppen zu je sechs</h2>
+    <p>Die bisher „Oktaven“ genannten Gruppen werden vorläufig neutral als Gruppen geführt. „Oktave“ ist als interne Metapher problematisch, weil jede Einheit sechs und nicht acht Vektoren enthält. Der poetische Begriff kann später als historischer Eigenname einer Mishkenaz-Tradition zurückkehren, sollte aber nicht als mathematische Struktur ausgegeben werden.</p>
+    <div class="groups">
+      {groups.map(([nr,name,range,desc]) => <article><span>{nr}</span><h3>{name}</h3><code>{range}</code><p>{desc}</p></article>)}
+    </div>
+  </section>
+
+  <section>
+    <h2>3. Avi als Nullpunkt</h2>
+    <p><code>V00 Avi</code> bezeichnet im Modell nicht einfach „Nichts“, sondern einen ungesetzten Bezugspunkt: Potenzial vor einer gerichteten semantischen Setzung. Das passt zur bisherigen Rolle von Avi als Nullpunkt. Es darf jedoch nicht gleichzeitig ohne Kennzeichnung als Tempusmarker, Negation, Lautwert und metaphysische Aussage benutzt werden.</p>
+    <p>Die Grammatik hat deshalb die frühere Doppelbelegung von <code>avi-</code> als Vergangenheit und philosophischer Negation bereits aus dem Kernbestand entfernt. Die Vektorseite folgt derselben Trennung.</p>
+  </section>
+
+  <section>
+    <h2>4. Was aus der alten 42er-Liste übernommen wird</h2>
+    <p>Die vorhandenen Namen und Bedeutungsfelder bleiben wertvolles Material, werden aber nicht ungeprüft als endgültige R1-Lexik veröffentlicht. Besonders Formen wie <code>Log</code>, <code>Phi</code>, <code>Abs</code>, <code>Ref</code>, <code>Reso</code> oder <code>Kran</code> wirken aus heutiger Sicht teilweise wie moderne technische Kürzel. Für eine Sprachstufe mit großer historischer Tiefe müssen wir entscheiden, ob sie echte R1-Formen, wissenschaftliche Transliterationen oder spätere Rekonstruktionslabels sind.</p>
+    <p>Dasselbe gilt für Beschreibungen wie „Radar“, „Mixdown“, „EQ-Schnitt“, „LFO“ oder „Goldener Schnitt“. Sie können als heutige Erläuterungen nützlich sein, dürfen aber nicht mit der Binnenbedeutung der alten Sprache verwechselt werden.</p>
+  </section>
+
+  <section>
+    <h2>5. Arbeitsregel für die Revision</h2>
+    <p>Jeder der 42 Einträge erhält künftig mindestens fünf getrennte Felder: stabile ID, abstrakte semantische Richtung, R1-Form oder Rekonstruktionslabel, lautliche Herkunft und belegte/konstruierte Entwicklung durch die Galut-Schichten. Erst wenn diese Felder geklärt sind, gilt ein Eintrag als kanonisch lexikalisiert.</p>
+    <div class="formula"><code>ID · RICHTUNG · FORM · LAUTLICHE HERKUNFT · HISTORISCHE ENTWICKLUNG</code></div>
+  </section>
+
+  <section>
+    <h2>6. Offene Strukturfrage</h2>
+    <p>Die ältere Liste beginnt mit <code>V00 Avi</code> und endet bei <code>V42 Ona-nO</code>. Wenn Avi außerhalb der 42 liegt, enthält dieses Schema 43 nummerierte Positionen. Für die nächste Revision wird deshalb nicht einfach umnummeriert: Zuerst wird geprüft, welche 42 Richtungen tatsächlich unverzichtbar sind und ob <code>Ona-nO</code> ein Vektor, eine zusammengesetzte Form oder der Abschlussoperator des gesamten Zyklus ist.</p>
+  </section>
+
+  <style>
+    section{margin:2.5rem 0}h2{font-weight:400;color:var(--accent)}.status,.formula{border:1px solid var(--border);padding:1.25rem;margin:1.5rem 0}.status strong,code{color:var(--accent)}.groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.groups article{border:1px solid var(--border);padding:1.2rem}.groups article>span{color:var(--muted);font-size:.8rem}.groups h3{margin:.2rem 0;font-weight:400;color:var(--accent)}.groups p{color:var(--muted);margin-bottom:0}@media(max-width:650px){.groups{grid-template-columns:1fr}}
+  </style>
 </Layout>
