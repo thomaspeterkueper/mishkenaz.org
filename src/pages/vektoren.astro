@@ -67,7 +67,18 @@ const octaves = [
   </section>
 
   <section>
-    <h2>7. Historische Formen und moderne Rekonstruktionslabels</h2>
+    <h2>7. Typisierte partielle Algebra</h2>
+    <p>Die funktionale Analyse lässt sich weiter präzisieren: Ein Vektor besitzt nicht nur Bedeutung, sondern erwartet bestimmte <strong>Input-Typen</strong> und erzeugt bestimmte <strong>Output-Typen</strong>. Dadurch ist Komposition nicht überall definiert.</p>
+    <div class="formula"><code>Vektor : INPUT → OUTPUT</code></div>
+    <p>Arbeits-Typen sind unter anderem <code>SYS</code> (Formation/System), <code>REL</code> (Relation), <code>PROC</code> (Prozess), <code>SPACE</code> (Möglichkeits-/Öffnungsraum), <code>TRACE</code> (Spur), <code>OBS</code> (Beobachtung), <code>MODEL</code> (Modell), <code>MSG</code> (Mitteilung) und <code>HIST</code> (historisch angereicherter Zustand).</p>
+    <div class="formula"><code>PROC --Res→ TRACE --Ref→ INFO/MODEL --Log→ MODEL --Tra→ MSG</code></div>
+    <p>Diese Kette ist typkompatibel und erklärt, warum die epistemische Komposition stabil funktioniert. Andere Folgen können dagegen typwidrig oder nur nach zusätzlicher Bedeutungsverschiebung möglich sein.</p>
+    <p>Die Mishkenaz-Algebra ist deshalb vorläufig eine <strong>typisierte partielle semantische Algebra</strong>: Nicht jedes Paar von Vektoren besitzt eine gültige Komposition, und es gibt bislang weder bestätigte Kommutativität noch allgemeine Assoziativität, neutrales Element oder Inversen.</p>
+    <p><code>Ori</code> ist formal besonders interessant: <code>Ori(A,H) → A′</code> kann von der wirksamen Geschichte <code>H</code> abhängen. Zwei gegenwärtig gleich erscheinende Zustände können daher nach unterschiedlichem Verlauf verschieden weiterwirken, ohne dass Mishkenaz dies als notwendiges Naturgesetz behauptet.</p>
+  </section>
+
+  <section>
+    <h2>8. Historische Formen und moderne Rekonstruktionslabels</h2>
     <p>Formen wie <code>Log</code>, <code>Phi</code>, <code>Abs</code>, <code>Ref</code> oder <code>Res</code> gehören zum kanonischen 42er-Inventar. Ihre heutige Schreibweise beweist jedoch nicht, dass genau diese Oberfläche die älteste R1-Lautform war. Für jeden Vektor werden stabile ID, semantische Richtung, historische Form, lautliche Herkunft, Zeichenform und Galut-Entwicklung getrennt dokumentiert.</p>
     <div class="formula"><code>ID · RICHTUNG · FORM · ZEICHEN · LAUTLICHE HERKUNFT · HISTORISCHE ENTWICKLUNG</code></div>
   </section>
