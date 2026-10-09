@@ -14,7 +14,8 @@ export interface ValidationIssue {
     | 'ARITY_CONTEXT'
     | 'AMBIGUOUS_INPUT'
     | 'AMBIGUOUS_OUTPUT'
-    | 'BINDING_SENSITIVE';
+    | 'BINDING_SENSITIVE'
+    | 'HISTORY_REQUIRED';
   message: string;
   token?: string;
   position?: number;
@@ -155,6 +156,7 @@ function dedupeCandidates(candidates: CandidatePath[]): CandidatePath[] {
 export function validateVectorTokens(
   tokens: string[],
   explicitInput?: SemanticType,
+  historyAvailable = false,
 ): Omit<ValidationResult, 'expression' | 'tokens'> {
   const issues: ValidationIssue[] = [];
 
@@ -296,6 +298,19 @@ export function validateVectorTokens(
     candidates = dedupeCandidates(next);
   }
 
+  const historyDependent = tokens.filter(
+    token => vectorSignatures[token]?.requiresHistory,
+  );
+  if (historyDependent.length && !historyAvailable) {
+    issues.push({
+      severity: 'error',
+      code: 'HISTORY_REQUIRED',
+      message:
+        'Historischer Kontext erforderlich für: ' +
+        [...new Set(historyDependent)].join(', ') + '.',
+    });
+  }
+
   const outputTypes = [...new Set(candidates.map(candidate => candidate.output))];
   if (outputTypes.length > 1) {
     issues.push({
@@ -341,6 +356,7 @@ export function validateVectorTokens(
 export function validateVectorExpression(
   expression: string,
   explicitInput?: SemanticType,
+  historyAvailable = false,
 ): ValidationResult {
   const parsed = tokenizeVectorExpression(expression);
 
@@ -354,7 +370,7 @@ export function validateVectorExpression(
     };
   }
 
-  const result = validateVectorTokens(parsed.tokens, explicitInput);
+  const result = validateVectorTokens(parsed.tokens, explicitInput, historyAvailable);
 
   return {
     expression,
