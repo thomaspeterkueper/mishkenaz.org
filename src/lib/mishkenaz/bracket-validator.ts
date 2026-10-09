@@ -76,7 +76,7 @@ const liftedRules: Record<string, LiftedRule> = {
     note: 'Differenzrelation, die als gekoppelte Relation weitergeführt wird.',
   },
   '(Ref-Log)': {
-    inputs: ['TRACE', 'OBS', 'MODEL', 'HIST'],
+    inputs: ['TRACE', 'OBS', 'MODEL'],
     outputs: ['MODEL'],
     note: 'Rückbezug plus Modellbildung als gehobener Rekonstruktionsoperator.',
   },
