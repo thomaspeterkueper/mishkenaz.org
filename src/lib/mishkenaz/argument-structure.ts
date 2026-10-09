@@ -13,6 +13,7 @@ export interface ArgumentSlot {
   role: ArgumentRole;
   types: SemanticType[];
   required: boolean;
+  minCount?: number;
   note?: string;
 }
 
@@ -98,7 +99,7 @@ export const argumentSchemas: Record<string, ArgumentSchema> = {
   '-kora': {
     vector: '-kora',
     slots: [
-      { role: 'members', types: ['SYS', 'REL'], required: true, note: 'Mindestens zwei beteiligte Formationen/Relationen.' },
+      { role: 'members', types: ['SYS', 'REL'], required: true, minCount: 2, note: 'Mindestens zwei beteiligte Formationen/Relationen.' },
     ],
     result: ['CONFIG', 'SYS'],
     note: 'Integration mehrerer Beteiligter zu Formation/Konfiguration.',
@@ -106,7 +107,7 @@ export const argumentSchemas: Record<string, ArgumentSchema> = {
   Ona: {
     vector: 'Ona',
     slots: [
-      { role: 'members', types: ['SYS'], required: true, note: 'Eine oder mehrere als Ganzheit gefasste Formationen.' },
+      { role: 'members', types: ['SYS'], required: true, minCount: 1, note: 'Eine oder mehrere als Ganzheit gefasste Formationen.' },
     ],
     result: ['CONFIG'],
     note: 'Ganzheitsbildung; keine Aussage über Wahrheit oder moralische Einheit.',
@@ -131,8 +132,15 @@ export function validateArguments(
 
   for (const slot of schema.slots) {
     const matches = supplied.filter(arg => arg.role === slot.role);
-    if (slot.required && matches.length === 0) {
-      issues.push({ severity: 'error', message: 'Fehlendes Argument für Rolle ' + slot.role + '.' });
+    const minCount = slot.minCount ?? (slot.required ? 1 : 0);
+
+    if (matches.length < minCount) {
+      issues.push({
+        severity: 'error',
+        message:
+          'Rolle ' + slot.role + ' benötigt mindestens ' + minCount +
+          ' Argument(e); vorhanden ' + matches.length + '.',
+      });
       continue;
     }
 
@@ -153,9 +161,12 @@ export function validateArguments(
   }
 
   const hasError = issues.some(issue => issue.severity === 'error');
-  const complete = schema.slots.filter(slot => slot.required).every(slot =>
-    supplied.some(arg => arg.role === slot.role && slot.types.includes(arg.type)),
-  );
+  const complete = schema.slots.filter(slot => slot.required).every(slot => {
+    const minCount = slot.minCount ?? 1;
+    return supplied.filter(
+      arg => arg.role === slot.role && slot.types.includes(arg.type),
+    ).length >= minCount;
+  });
 
   return { vector, valid: !hasError, complete, issues };
 }
