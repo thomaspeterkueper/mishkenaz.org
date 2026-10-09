@@ -61,8 +61,8 @@ strukturierte Rekonstruktion / Modell / explizite Ordnung.
 ### MSG
 Mitteilungsereignis / Übertragung.
 
-### HIST
-historisch angereicherter Zustand bzw. Zustand mit Pfadbezug.
+### HISTORY (Annotation)
+Geschichte ist kein eigener Basistyp mehr. Sie annotiert einen Zustand oder Prozess mit wirksamem Pfadbezug und kann von Operationen wie `Ori` vorausgesetzt werden.
 
 ### CONFIG
 strukturelle Konfiguration wie Symmetrie, Maß, Ganzheit.
@@ -95,7 +95,7 @@ Diese Typen können sich überlappen; sie dienen zunächst als Verträglichkeits
 | V20 | Kin | SYS -> PATH | Weg/Verlauf |
 | V21 | Syn | (SYS/PROC/MODEL, SYS/PROC/MODEL) -> REL | Übereinstimmung/Gleichlauf |
 | V22 | Abs | INFO/TRACE -> INFO/SYS | Aufnahme/Absorption |
-| V23 | Ref | TRACE/OBS/MODEL/HIST -> INFO/MODEL | Rückbezug/Rückschau |
+| V23 | Ref | TRACE/OBS/MODEL -> INFO/MODEL | Rückbezug/Rückschau; Historie optional als Annotation |
 | V24 | Lim | SPACE/PROC -> BOUND | Schwelle/Grenze als Ort |
 | V25 | Tra | INFO/MODEL/MSG -> MSG | Weitergabe |
 | V26 | Ska | (SYS/PROC/MODEL, SYS/PROC/MODEL) -> REL/MODEL | Skalierung/Vergleich |
@@ -107,8 +107,8 @@ Diese Typen können sich überlappen; sie dienen zunächst als Verträglichkeits
 | V32 | Log | INFO/TRACE/OBS -> MODEL | Strukturierung/Modellbildung |
 | V33 | Sym | (SYS,SYS) -> CONFIG/REL | Symmetrie |
 | V34 | Phi | CONFIG/REL -> CONFIG | Maß/Harmonie |
-| V35 | Ona-nO | CONFIG/HIST -> BOUND | Schwelle möglicher Integration/Wiederannäherung |
-| V36 | Ori/-ori | HIST/SYS/PROC -> HIST/SYS/PROC | Wiederbegegnung unter veränderter Geschichte |
+| V35 | Ona-nO | CONFIG -> BOUND | Schwelle möglicher Integration/Wiederannäherung; Historie kann annotiert sein |
+| V36 | Ori/-ori | SYS/PROC + HISTORY -> SYS/PROC | Wiederbegegnung unter wirksamer Geschichte; HISTORY ist verpflichtende Annotation |
 | V37 | -h/' | SYS/REL/CONFIG -> PROC/CONFIG | Auflösung/Loslassen |
 | V38 | -val | PROC/REL/CONFIG -> SYS/CONFIG | Emergenz/neues Erscheinen |
 | V39 | -reso | (SYS,SYS) / REL -> REL | Kopplung/Wechselwirkung |
@@ -186,7 +186,7 @@ weil `Lim` zunächst nur eine Schwelle liefert.
 
 ```
 SYS/PROC --Rek--> SYS/PROC
-SYS/PROC + Geschichte --Ori--> HIST/SYS/PROC
+SYS/PROC + HISTORY --Ori--> SYS/PROC
 ```
 
 `Rek` kann formal rekursiv sein, ohne Geschichte explizit zu verändern.  
