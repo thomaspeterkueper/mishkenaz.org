@@ -78,7 +78,7 @@ Diese Typen können sich überlappen; sie dienen zunächst als Verträglichkeits
 | V03 | Sa | SYS/REL -> BOUND + SYS/SYS | trennt bzw. erzeugt Bruch |
 | V04 | Ona | SYS* -> CONFIG | fasst zu Ganzheit |
 | V05 | Vya | SYS -> PROC | richtet einen Akteur/Prozess intentional |
-| V06 | Saha | SYS/TRACE/SYS -> OBS | Wahrnehmung eines Gegenstands/Zustands |
+| V06 | Saha | SYS/TRACE -> OBS | Wahrnehmung eines Gegenstands/Zustands |
 | V07 | Nga | SYS -> MSG/PROC | Ruf/Kontaktimpuls |
 | V08 | Pa | MSG/PROC -> TRACE/MSG | Echo/Antwort |
 | V09 | La | SYS/BOUND -> SPACE | öffnet zugänglichen Raum |
