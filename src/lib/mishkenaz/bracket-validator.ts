@@ -42,6 +42,9 @@ export interface ExpressionComparison {
     | 'one-invalid'
     | 'both-invalid';
   notes: string[];
+  leftMeaning?: string;
+  rightMeaning?: string;
+  semanticContrast?: string;
 }
 
 const aliases: Record<string, string> = {
@@ -54,6 +57,78 @@ const aliases: Record<string, string> = {
 };
 
 const compounds = ['Avi-Sol', 'Ona-nO', 'Sa-h'];
+
+const vectorGloss: Record<string, string> = {
+  Ma: 'Bindung herstellen',
+  Ta: 'Differenz oder Gegenüber markieren',
+  Res: 'als Spur oder Residuum fortbestehen',
+  Ref: 'rückbeziehen oder rückschauend einordnen',
+  Log: 'strukturieren oder zu einem Modell ordnen',
+  La: 'einen Raum oder Zugang öffnen',
+  Lim: 'eine Schwelle oder Grenze als Ort markieren',
+  Rek: 'rückkoppeln oder rekursiv erneut anwenden',
+  Ori: 'unter wirksamer Geschichte erneut begegnen',
+  '-reso': 'koppeln oder in Wechselwirkung setzen',
+  '-kora': 'integrieren oder zu einer Formation zusammenführen',
+};
+
+function simpleMeaning(node: ExpressionNode | null): string {
+  if (!node) return 'keine belastbare Lesart';
+  if (node.kind === 'vector') {
+    return vectorGloss[node.vector] ?? vectorSignatures[node.vector]?.note ?? node.vector;
+  }
+
+  const left = simpleMeaning(node.left);
+  const right = simpleMeaning(node.right);
+  return `zuerst ${left}; darauf ${right}`;
+}
+
+function knownInterpretation(source: string): string | undefined {
+  const compact = source.replace(/\s+/g, '');
+
+  const known: Record<string, string> = {
+    '(Ma-Ta)-reso':
+      'Zuerst entsteht eine Bindung, in der Differenz als eigener Zwischenzustand erhalten wird; anschließend wird diese differenzierte Bindung in Wechselwirkung gesetzt.',
+    'Ma-(Ta-reso)':
+      'Beabsichtigte Lesart: Zuerst soll eine Differenz-Wechselwirkungs-Operation gebildet und diese anschließend gebunden werden. Im aktuellen Typsystem ist diese Operatorhebung noch nicht allgemein formalisiert.',
+    '(Res-Ref)-Log':
+      'Eine Spur wird zuerst ausdrücklich rückbezogen bzw. historisch eingeordnet und erst danach zu einem Modell strukturiert.',
+    'Res-(Ref-Log)':
+      'Beabsichtigte Lesart: Auf eine Spur wird eine bereits gebündelte Rekonstruktionsoperation aus Rückbezug und Modellbildung angewandt. Dafür ist Operatorhebung erforderlich.',
+    'Rek-Ori':
+      'Ein rückgekoppelter Zustand oder Prozess begegnet später unter veränderter wirksamer Geschichte erneut.',
+    'Ori-Rek':
+      'Ein historisch veränderter Zustand oder Prozess wird anschließend selbst rückgekoppelt.',
+    '(Rek-Ori)':
+      'Ein rückgekoppelter Zustand oder Prozess begegnet später unter veränderter wirksamer Geschichte erneut.',
+    '(Ori-Rek)':
+      'Ein historisch veränderter Zustand oder Prozess wird anschließend selbst rückgekoppelt.',
+  };
+
+  return known[compact];
+}
+
+function contrastFor(leftSource: string, rightSource: string): string | undefined {
+  const l = leftSource.replace(/\s+/g, '');
+  const r = rightSource.replace(/\s+/g, '');
+
+  const key = `${l}||${r}`;
+  const reverse = `${r}||${l}`;
+
+  const contrasts: Record<string, string> = {
+    '(Ma-Ta)-reso||Ma-(Ta-reso)':
+      'Der Unterschied liegt in der Priorität der Zwischenstruktur: links wird Differenz innerhalb einer Bindung etabliert, rechts wäre eine bereits gekoppelte Differenzrelation der Gegenstand der späteren Bindung.',
+    '(Res-Ref)-Log||Res-(Ref-Log)':
+      'Links ist der Rückbezug ein eigener semantischer Schritt; rechts wird Rückbezug plus Modellbildung als komplexer Operator behandelt. Das kann denselben Endtyp liefern, aber nicht dieselbe Pfadstruktur.',
+    '(Rek-Ori)||(Ori-Rek)':
+      'Links wirkt Geschichte auf etwas bereits Rückgekoppeltes; rechts wird erst die historisch veränderte Gestalt erzeugt und danach rückgekoppelt.',
+  };
+
+  if (contrasts[key]) return contrasts[key];
+  if (contrasts[reverse]) return contrasts[reverse];
+  return undefined;
+}
+
 
 function canonical(raw: string): string | null {
   if (vectorSignatures[raw]) return raw;
@@ -265,20 +340,23 @@ export function compareBracketings(
   const left = validateBracketedExpression(leftSource);
   const right = validateBracketedExpression(rightSource);
   const notes: string[] = [];
+  const leftMeaning = knownInterpretation(leftSource) ?? simpleMeaning(left.ast);
+  const rightMeaning = knownInterpretation(rightSource) ?? simpleMeaning(right.ast);
+  const semanticContrast = contrastFor(leftSource, rightSource);
 
   if (!left.valid && !right.valid) {
-    return { left, right, relation: 'both-invalid', notes: ['Beide Strukturen sind typologisch derzeit ungültig.'] };
+    return { left, right, relation: 'both-invalid', notes: ['Beide Strukturen sind typologisch derzeit ungültig.'], leftMeaning, rightMeaning, semanticContrast };
   }
 
   if (!left.valid || !right.valid) {
-    return { left, right, relation: 'one-invalid', notes: ['Nur eine der beiden Klammerungen ist typologisch zulässig.'] };
+    return { left, right, relation: 'one-invalid', notes: ['Nur eine der beiden Klammerungen ist typologisch zulässig.'], leftMeaning, rightMeaning, semanticContrast };
   }
 
   const leftAst = serialize(left.ast);
   const rightAst = serialize(right.ast);
 
   if (leftAst === rightAst) {
-    return { left, right, relation: 'same-structure', notes: ['Die Klammerungsstruktur ist identisch.'] };
+    return { left, right, relation: 'same-structure', notes: ['Die Klammerungsstruktur ist identisch.'], leftMeaning, rightMeaning, semanticContrast };
   }
 
   const leftOutputs = new Set(left.candidates.map(c => c.output));
@@ -290,11 +368,11 @@ export function compareBracketings(
       `Beide Strukturen können denselben Endtyp erreichen (${shared.join(', ')}), ` +
       'aber der semantische Zwischenpfad ist verschieden.',
     );
-    return { left, right, relation: 'same-output-only', notes };
+    return { left, right, relation: 'same-output-only', notes, leftMeaning, rightMeaning, semanticContrast };
   }
 
   notes.push('Die Klammerungen führen zu unterschiedlichen möglichen Endtypen.');
-  return { left, right, relation: 'different-output', notes };
+  return { left, right, relation: 'different-output', notes, leftMeaning, rightMeaning, semanticContrast };
 }
 
 export function formatBracketedValidation(result: BracketedValidation): string {
@@ -317,6 +395,13 @@ export function formatComparison(result: ExpressionComparison): string {
   return [
     `Vergleich: ${result.relation}`,
     '',
+    'Bedeutungslesart links:',
+    result.leftMeaning ?? '—',
+    '',
+    'Bedeutungslesart rechts:',
+    result.rightMeaning ?? '—',
+    '',
+    ...(result.semanticContrast ? ['Semantischer Unterschied:', result.semanticContrast, ''] : []),
     formatBracketedValidation(result.left),
     '',
     formatBracketedValidation(result.right),
