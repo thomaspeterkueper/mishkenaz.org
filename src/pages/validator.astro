@@ -47,6 +47,10 @@ import Layout from '../layouts/Layout.astro';
       <button type="button" data-left="(Rek-Ori)" data-right="(Ori-Rek)">Rek/Ori</button>
     </div>
     <pre id="comparison" aria-live="polite">Vergleich wird geladen …</pre>
+
+    <h2>Regressionen</h2>
+    <p class="hint">Diese Fälle sichern bereits begründete Kompositionsentscheidungen gegen spätere Änderungen ab.</p>
+    <pre id="regressions" aria-live="polite">Regressionen werden geprüft …</pre>
   </section>
 
   <section>
@@ -75,6 +79,10 @@ import Layout from '../layouts/Layout.astro';
       compareBracketings,
       formatComparison,
     } from '../lib/mishkenaz/bracket-validator';
+    import {
+      formatRegressionReport,
+      runValidatorRegressions,
+    } from '../lib/mishkenaz/validator-regressions';
 
     const input = document.querySelector('#expression');
     const output = document.querySelector('#result');
@@ -83,6 +91,7 @@ import Layout from '../layouts/Layout.astro';
     const rightInput = document.querySelector('#right-expression');
     const compare = document.querySelector('#compare');
     const comparison = document.querySelector('#comparison');
+    const regressions = document.querySelector('#regressions');
 
     function execute() {
       if (!(input instanceof HTMLInputElement) || !(output instanceof HTMLElement)) return;
@@ -135,6 +144,9 @@ import Layout from '../layouts/Layout.astro';
 
     execute();
     executeComparison();
+    if (regressions instanceof HTMLElement) {
+      regressions.textContent = formatRegressionReport(runValidatorRegressions());
+    }
   </script>
 
   <style>
@@ -151,6 +163,7 @@ import Layout from '../layouts/Layout.astro';
     .examples{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
     .examples button{font-size:.85rem;color:var(--muted)}
     .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem}
+    .hint{color:var(--muted);font-size:.95rem}
     pre{white-space:pre-wrap;overflow-wrap:anywhere;border-top:1px solid var(--border);padding-top:1rem;color:var(--fg)}
     @media(max-width:650px){.row{flex-direction:column}.compare-grid{grid-template-columns:1fr}}
   </style>
