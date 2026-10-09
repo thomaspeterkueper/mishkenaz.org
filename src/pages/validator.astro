@@ -29,11 +29,13 @@ import Layout from '../layouts/Layout.astro';
     </div>
     <label for="unified-args">Optionale semantische Argumente</label>
     <input id="unified-args" value="" placeholder="z. B. left:SYS,right:SYS" autocomplete="off" />
+    <label class="check"><input id="unified-history" type="checkbox" /> Historischer Kontext verfügbar</label>
     <div class="examples">
       <button type="button" data-unified="Res-Ref-Log" data-unified-args="">Rekonstruktion</button>
       <button type="button" data-unified="(Ma-Ta)-reso" data-unified-args="left:SYS,right:SYS">Relation</button>
       <button type="button" data-unified="Ma-Ta-reso-kora" data-unified-args="left:SYS,right:SYS,members:SYS,members:SYS">Relation + Integration</button>
       <button type="button" data-unified="Res-Sol" data-unified-args="">Typbruch</button>
+      <button type="button" data-unified="Rek-Ori" data-unified-args="" data-history="true">Historische Rekursion</button>
     </div>
     <pre id="unified-result" aria-live="polite">Gesamtanalyse wird geladen …</pre>
 
@@ -58,6 +60,7 @@ import Layout from '../layouts/Layout.astro';
       <input id="left-expression" value="(Ma-Ta)-reso" autocomplete="off" />
       <input id="right-expression" value="Ma-(Ta-reso)" autocomplete="off" />
     </div>
+    <label class="check"><input id="compare-history" type="checkbox" /> Historischer Kontext verfügbar</label>
     <button id="compare" type="button">Vergleichen</button>
     <div class="examples">
       <button type="button" data-left="(Ma-Ta)-reso" data-right="Ma-(Ta-reso)">Ma/Ta/reso</button>
@@ -142,6 +145,8 @@ import Layout from '../layouts/Layout.astro';
     const unifiedArgs = document.querySelector('#unified-args');
     const unifiedRun = document.querySelector('#unified-run');
     const unifiedResult = document.querySelector('#unified-result');
+    const unifiedHistory = document.querySelector('#unified-history');
+    const compareHistory = document.querySelector('#compare-history');
 
     function executeUnified() {
       if (
@@ -150,7 +155,11 @@ import Layout from '../layouts/Layout.astro';
         !(unifiedResult instanceof HTMLElement)
       ) return;
       unifiedResult.textContent = formatUnifiedAnalysis(
-        analyzeExpression(unifiedExpression.value, unifiedArgs.value),
+        analyzeExpression(
+          unifiedExpression.value,
+          unifiedArgs.value,
+          unifiedHistory instanceof HTMLInputElement ? unifiedHistory.checked : false,
+        ),
       );
     }
 
@@ -170,6 +179,9 @@ import Layout from '../layouts/Layout.astro';
         ) return;
         unifiedExpression.value = button.dataset.unified ?? '';
         unifiedArgs.value = button.dataset.unifiedArgs ?? '';
+        if (unifiedHistory instanceof HTMLInputElement) {
+          unifiedHistory.checked = button.dataset.history === 'true';
+        }
         executeUnified();
       });
     });
@@ -199,7 +211,11 @@ import Layout from '../layouts/Layout.astro';
         !(comparison instanceof HTMLElement)
       ) return;
       comparison.textContent = formatComparison(
-        compareBracketings(leftInput.value, rightInput.value),
+        compareBracketings(
+          leftInput.value,
+          rightInput.value,
+          compareHistory instanceof HTMLInputElement ? compareHistory.checked : false,
+        ),
       );
     }
 
@@ -219,6 +235,11 @@ import Layout from '../layouts/Layout.astro';
         ) return;
         leftInput.value = button.dataset.left ?? '';
         rightInput.value = button.dataset.right ?? '';
+        if (compareHistory instanceof HTMLInputElement) {
+          compareHistory.checked =
+            (button.dataset.left ?? '').includes('Ori') ||
+            (button.dataset.right ?? '').includes('Ori');
+        }
         executeComparison();
       });
     });
@@ -285,6 +306,8 @@ import Layout from '../layouts/Layout.astro';
     .examples button{font-size:.85rem;color:var(--muted)}
     .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem}
     .hint{color:var(--muted);font-size:.95rem}
+    .check{display:flex;gap:.5rem;align-items:center;color:var(--muted);margin:.6rem 0 1rem}
+    .check input{flex:0 0 auto}
     pre{white-space:pre-wrap;overflow-wrap:anywhere;border-top:1px solid var(--border);padding-top:1rem;color:var(--fg)}
     @media(max-width:650px){.row{flex-direction:column}.compare-grid{grid-template-columns:1fr}}
   </style>
