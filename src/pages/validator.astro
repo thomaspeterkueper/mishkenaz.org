@@ -20,6 +20,24 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <section class="validator">
+    <h2>Gesamtanalyse</h2>
+    <p class="hint">Führt Typprüfung, Klammerung, Mehrstellenstruktur und semantische Schutzregeln in einem Ergebnis zusammen.</p>
+    <label for="unified-expression">Ausdruck</label>
+    <div class="row">
+      <input id="unified-expression" value="Res-Ref-Log" autocomplete="off" />
+      <button id="unified-run" type="button">Gesamt prüfen</button>
+    </div>
+    <label for="unified-args">Optionale semantische Argumente</label>
+    <input id="unified-args" value="" placeholder="z. B. left:SYS,right:SYS" autocomplete="off" />
+    <div class="examples">
+      <button type="button" data-unified="Res-Ref-Log" data-unified-args="">Rekonstruktion</button>
+      <button type="button" data-unified="(Ma-Ta)-reso" data-unified-args="left:SYS,right:SYS">Relation</button>
+      <button type="button" data-unified="Ma-Ta-reso-kora" data-unified-args="left:SYS,right:SYS,members:SYS,members:SYS">Relation + Integration</button>
+      <button type="button" data-unified="Res-Sol" data-unified-args="">Typbruch</button>
+    </div>
+    <pre id="unified-result" aria-live="polite">Gesamtanalyse wird geladen …</pre>
+
+    <h2>Einzeltests</h2>
     <label for="expression">Vektorausdruck</label>
     <div class="row">
       <input id="expression" value="Res-Ref-Log" autocomplete="off" />
@@ -103,6 +121,10 @@ import Layout from '../layouts/Layout.astro';
       formatArgumentValidation,
       validateArguments,
     } from '../lib/mishkenaz/argument-structure';
+    import {
+      analyzeExpression,
+      formatUnifiedAnalysis,
+    } from '../lib/mishkenaz/unified-analyzer';
 
     const input = document.querySelector('#expression');
     const output = document.querySelector('#result');
@@ -116,6 +138,41 @@ import Layout from '../layouts/Layout.astro';
     const argSpec = document.querySelector('#arg-spec');
     const argRun = document.querySelector('#arg-run');
     const argResult = document.querySelector('#arg-result');
+    const unifiedExpression = document.querySelector('#unified-expression');
+    const unifiedArgs = document.querySelector('#unified-args');
+    const unifiedRun = document.querySelector('#unified-run');
+    const unifiedResult = document.querySelector('#unified-result');
+
+    function executeUnified() {
+      if (
+        !(unifiedExpression instanceof HTMLInputElement) ||
+        !(unifiedArgs instanceof HTMLInputElement) ||
+        !(unifiedResult instanceof HTMLElement)
+      ) return;
+      unifiedResult.textContent = formatUnifiedAnalysis(
+        analyzeExpression(unifiedExpression.value, unifiedArgs.value),
+      );
+    }
+
+    unifiedRun?.addEventListener('click', executeUnified);
+    [unifiedExpression, unifiedArgs].forEach(field => {
+      field?.addEventListener('keydown', event => {
+        if (event.key === 'Enter') executeUnified();
+      });
+    });
+
+    document.querySelectorAll('[data-unified]').forEach(button => {
+      button.addEventListener('click', () => {
+        if (
+          !(button instanceof HTMLElement) ||
+          !(unifiedExpression instanceof HTMLInputElement) ||
+          !(unifiedArgs instanceof HTMLInputElement)
+        ) return;
+        unifiedExpression.value = button.dataset.unified ?? '';
+        unifiedArgs.value = button.dataset.unifiedArgs ?? '';
+        executeUnified();
+      });
+    });
 
     function execute() {
       if (!(input instanceof HTMLInputElement) || !(output instanceof HTMLElement)) return;
@@ -203,6 +260,7 @@ import Layout from '../layouts/Layout.astro';
       executeArguments();
     });
 
+    executeUnified();
     execute();
     executeComparison();
     executeArguments();
