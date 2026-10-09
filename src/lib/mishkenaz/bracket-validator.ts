@@ -286,6 +286,12 @@ export function parseBracketedExpression(source: string): ParsedExpression {
   return { source, ast, issues };
 }
 
+function collectVectors(node: ExpressionNode | null): string[] {
+  if (!node) return [];
+  if (node.kind === 'vector') return [node.vector];
+  return [...collectVectors(node.left), ...collectVectors(node.right)];
+}
+
 function signatureOutputs(vector: string, input: SemanticType): SemanticType[] {
   const sig = vectorSignatures[vector];
   if (!sig || !sig.inputs.includes(input)) return [];
@@ -356,6 +362,7 @@ function serialize(node: ExpressionNode | null): string {
 export function validateBracketedExpression(
   source: string,
   explicitInput?: SemanticType,
+  historyAvailable = false,
 ): BracketedValidation {
   const parsed = parseBracketedExpression(source);
   if (!parsed.ast || parsed.issues.length) {
@@ -370,6 +377,15 @@ export function validateBracketedExpression(
 
   const candidates = inferNode(parsed.ast, explicitInput ? [explicitInput] : undefined);
   const issues: string[] = [];
+  const historyDependent = collectVectors(parsed.ast).filter(
+    vector => vectorSignatures[vector]?.requiresHistory,
+  );
+  if (historyDependent.length && !historyAvailable) {
+    issues.push(
+      'Historischer Kontext erforderlich für: ' +
+      [...new Set(historyDependent)].join(', ') + '.',
+    );
+  }
 
   if (!candidates.length) {
     issues.push('Die gewählte Klammerung erzeugt keinen typkompatiblen Pfad.');
@@ -377,7 +393,7 @@ export function validateBracketedExpression(
 
   return {
     source,
-    valid: candidates.length > 0,
+    valid: candidates.length > 0 && issues.length === 0,
     ast: parsed.ast,
     candidates,
     issues,
@@ -387,9 +403,10 @@ export function validateBracketedExpression(
 export function compareBracketings(
   leftSource: string,
   rightSource: string,
+  historyAvailable = false,
 ): ExpressionComparison {
-  const left = validateBracketedExpression(leftSource);
-  const right = validateBracketedExpression(rightSource);
+  const left = validateBracketedExpression(leftSource, undefined, historyAvailable);
+  const right = validateBracketedExpression(rightSource, undefined, historyAvailable);
   const notes: string[] = [];
   const leftMeaning = knownInterpretation(leftSource) ?? simpleMeaning(left.ast);
   const rightMeaning = knownInterpretation(rightSource) ?? simpleMeaning(right.ast);
