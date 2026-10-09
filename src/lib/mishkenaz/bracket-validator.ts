@@ -58,6 +58,40 @@ const aliases: Record<string, string> = {
 
 const compounds = ['Avi-Sol', 'Ona-nO', 'Sa-h'];
 
+type LiftedRule = {
+  inputs: SemanticType[];
+  outputs: SemanticType[];
+  note: string;
+};
+
+const liftedRules: Record<string, LiftedRule> = {
+  '(Ma-Ta)': {
+    inputs: ['SYS'],
+    outputs: ['REL'],
+    note: 'Bindung unter erhaltener Differenz; zweites Systemargument kommt aus Syntax/Kontext.',
+  },
+  '(Ta--reso)': {
+    inputs: ['SYS'],
+    outputs: ['REL'],
+    note: 'Differenzrelation, die als gekoppelte Relation weitergeführt wird.',
+  },
+  '(Ref-Log)': {
+    inputs: ['TRACE', 'OBS', 'MODEL', 'HIST'],
+    outputs: ['MODEL'],
+    note: 'Rückbezug plus Modellbildung als gehobener Rekonstruktionsoperator.',
+  },
+  '(La-Lim)': {
+    inputs: ['SYS', 'BOUND'],
+    outputs: ['BOUND'],
+    note: 'Öffnung eines Raums mit anschließender Schwellenbildung.',
+  },
+};
+
+function liftedSignature(node: ExpressionNode): LiftedRule | undefined {
+  return liftedRules[serialize(node)];
+}
+
+
 const vectorGloss: Record<string, string> = {
   Ma: 'Bindung herstellen',
   Ta: 'Differenz oder Gegenüber markieren',
@@ -262,6 +296,23 @@ function inferNode(
   node: ExpressionNode,
   explicitInputs?: SemanticType[],
 ): BracketedCandidate[] {
+  const lifted = node.kind === 'sequence' ? liftedSignature(node) : undefined;
+  if (lifted) {
+    const inputs = explicitInputs ?? lifted.inputs;
+    const candidates: BracketedCandidate[] = [];
+    for (const input of inputs) {
+      if (!lifted.inputs.includes(input)) continue;
+      for (const output of lifted.outputs) {
+        candidates.push({
+          input,
+          output,
+          trace: [`${serialize(node)}:${input}>${output} [operator-lift]`],
+        });
+      }
+    }
+    return candidates;
+  }
+
   if (node.kind === 'vector') {
     const sig = vectorSignatures[node.vector];
     if (!sig) return [];
