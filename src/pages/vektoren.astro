@@ -71,11 +71,11 @@ const octaves = [
     <h2>7. Typisierte partielle Algebra</h2>
     <p>Die funktionale Analyse lässt sich weiter präzisieren: Ein Vektor besitzt nicht nur Bedeutung, sondern erwartet bestimmte <strong>Input-Typen</strong> und erzeugt bestimmte <strong>Output-Typen</strong>. Dadurch ist Komposition nicht überall definiert.</p>
     <div class="formula"><code>Vektor : INPUT → OUTPUT</code></div>
-    <p>Arbeits-Typen sind unter anderem <code>SYS</code> (Formation/System), <code>REL</code> (Relation), <code>PROC</code> (Prozess), <code>SPACE</code> (Möglichkeits-/Öffnungsraum), <code>TRACE</code> (Spur), <code>OBS</code> (Beobachtung), <code>MODEL</code> (Modell), <code>MSG</code> (Mitteilung) und <code>HIST</code> (historisch angereicherter Zustand).</p>
+    <p>Arbeits-Typen sind unter anderem <code>SYS</code> (Formation/System), <code>REL</code> (Relation), <code>PROC</code> (Prozess), <code>SPACE</code> (Möglichkeits-/Öffnungsraum), <code>TRACE</code> (Spur), <code>OBS</code> (Beobachtung), <code>MODEL</code> (Modell) und <code>MSG</code> (Mitteilung). Geschichte wird nicht als eigener Basistyp geführt, sondern als pfadrelevante Annotation auf einem Zustand, Prozess oder Modell.</p>
     <div class="formula"><code>PROC --Res→ TRACE --Ref→ INFO/MODEL --Log→ MODEL --Tra→ MSG</code></div>
     <p>Diese Kette ist typkompatibel und erklärt, warum die epistemische Komposition stabil funktioniert. Andere Folgen können dagegen typwidrig oder nur nach zusätzlicher Bedeutungsverschiebung möglich sein.</p>
     <p>Die Mishkenaz-Algebra ist deshalb vorläufig eine <strong>typisierte partielle semantische Algebra</strong>: Nicht jedes Paar von Vektoren besitzt eine gültige Komposition, und es gibt bislang weder bestätigte Kommutativität noch allgemeine Assoziativität, neutrales Element oder Inversen.</p>
-    <p><code>Ori</code> ist formal besonders interessant: <code>Ori(A,H) → A′</code> kann von der wirksamen Geschichte <code>H</code> abhängen. Zwei gegenwärtig gleich erscheinende Zustände können daher nach unterschiedlichem Verlauf verschieden weiterwirken, ohne dass Mishkenaz dies als notwendiges Naturgesetz behauptet.</p>
+    <p><code>Ori</code> ist formal besonders interessant: <code>Ori(A,H) → A′</code> verlangt eine explizite historische Annotation <code>H</code>. Der Basistyp von <code>A</code> bleibt erhalten, aber zwei gegenwärtig gleich erscheinende Zustände können nach unterschiedlichem Verlauf verschieden weiterwirken, ohne dass Mishkenaz dies als notwendiges Naturgesetz behauptet.</p>
   </section>
 
   <section>
