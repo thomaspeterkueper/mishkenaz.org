@@ -28,10 +28,15 @@ Der aktuelle Stand ist in seiner Grundarchitektur konsistent. Drei konkrete Abwe
 - `Ona` kann eine einzelne Formation als Ganzheit profilieren oder mehrere Formationen kollektiv zusammenfassen.
 - `Ref` wird operativ als epistemische Konversion/Transformation mit relationalem Inhalt geführt.
 
-## Noch offene Modellfragen
+## Weitere geklärte Modellfragen (Vertiefung 2026-10-09)
 
-- Ob `HIST` langfristig eigener Typ oder Typanreicherung/Annotation sein soll.
-- Wie Operatorhebung orthographisch/prosodisch im eigentlichen Mishkenaz markiert wird.
+- Geschichte wird **nicht** als eigener Basistyp `HIST` geführt. Sie ist eine pfadrelevante Annotation; `Ori` verlangt sie explizit.
+- Klammern bleiben reine Analyse-/Validatornotation für Bindungsstruktur und Operatorhebung.
+- Der Apostroph wird nicht als allgemeines Operatorhebungszeichen kanonisiert; dafür fehlt ein belastbarer historischer Beleg und er trägt bereits andere sprachliche Funktionen.
+
+## Noch offene Modellfrage
+
+- Wie Operatorhebung in gesprochener R1-Sprache prosodisch oder durch spätere Lexikalisierung tatsächlich realisiert wird.
 
 ## Entwicklungsregel
 
