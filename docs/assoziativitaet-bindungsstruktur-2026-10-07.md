@@ -260,20 +260,19 @@ Mishkenaz benötigt wahrscheinlich eine Unterscheidung zwischen:
 2. **enger Operatorbindung** — mehrere Vektoren bilden gemeinsam einen komplexen Prädikatskern;
 3. **historischer Prägung / Lexikalisierung** — eine frühere Komposition ist zu einer festen Form geworden.
 
-Der bestehende Unterschied zwischen Bindestrich und Apostroph könnte hierfür relevant sein, darf aber nicht ohne historischen Beleg neu definiert werden.
+Der bestehende Gebrauch von Bindestrich und Apostroph darf hierfür **nicht automatisch umgedeutet** werden. Eine gezielte Reposuche liefert derzeit keinen belastbaren kanonischen Beleg dafür, dass diese Zeichen allgemein „Sequenz“ versus „Operatorhebung“ markieren.
 
-Arbeitsfrage:
+Für die formale Analyse gilt deshalb vorläufig:
 
 ```
-A-B      = transparente Sequenz?
-A'B      = historische/enge Prägung?
+A-B        = vorhandene Oberflächenkomposition; genaue Bindungsart aus Kontext/Grammatik
+(A-B)      = analytische Notation für einen als Einheit behandelten Teilpfad
+A-(B-C)    = analytische Operatorhebung; Klammern sind kein R1-Morphem
 ```
 
-Der aktuelle Kanon sagt bereits:
-- Bindestrich = transparente Sequenz;
-- Apostroph = historische Prägung.
+Der Apostroph bleibt bei seinen bereits belegten sprachlichen Funktionen (etwa Rollenformen und historisch etablierten Formen wie `Ma'Ta'U`). Er wird **nicht** als allgemeines Operatorhebungszeichen kanonisiert.
 
-Damit besitzt Mishkenaz möglicherweise schon die orthographische Grundlage für verschiedene Bindungsstärken.
+Falls ein gehobener Operator später lexikalisiert wird, muss seine tatsächliche R1-Oberfläche phonologisch und historisch rekonstruiert werden; sie folgt nicht automatisch aus der Metanotation.
 
 ## 9. Assoziativitätsklassen
 
