@@ -66,6 +66,7 @@ function parseArgumentSpec(spec?: string): SuppliedArgument[] {
 export function analyzeExpression(
   expression: string,
   argumentSpec?: string,
+  historyAvailable = false,
 ): UnifiedAnalysis {
   const bracketed = /[()]/.test(expression);
   const vectors = extractVectors(expression);
@@ -77,7 +78,7 @@ export function analyzeExpression(
   let outputTypes: SemanticType[] = [];
 
   if (bracketed) {
-    const result = validateBracketedExpression(expression);
+    const result = validateBracketedExpression(expression, undefined, historyAvailable);
     typeValid = result.valid;
     outputTypes = [...new Set(result.candidates.map(candidate => candidate.output))];
     issues.push(...result.issues);
@@ -88,7 +89,7 @@ export function analyzeExpression(
       ));
     }
   } else {
-    const result = validateVectorExpression(expression);
+    const result = validateVectorExpression(expression, undefined, historyAvailable);
     typeValid = result.valid;
     outputTypes = [...new Set(result.candidates.map(candidate => candidate.output))];
     issues.push(...result.issues.map(issue => issue.message));
@@ -137,7 +138,11 @@ export function analyzeExpression(
     summary.push('Wechselwirkung (-reso) und Integration (-kora) bleiben getrennte Schritte.');
   }
   if (vectors.includes('Ori')) {
-    summary.push('Ori ist historienabhängig; gleicher sichtbarer Zustand garantiert keine identische Fortsetzung.');
+    summary.push(
+      historyAvailable
+        ? 'Ori erhält einen expliziten historischen Kontext; gleicher sichtbarer Zustand garantiert keine identische Fortsetzung.'
+        : 'Ori verlangt historischen Kontext; ohne HISTORY-Annotation ist der Ausdruck unvollständig.',
+    );
   }
 
   const valid = typeValid && argumentValid;
