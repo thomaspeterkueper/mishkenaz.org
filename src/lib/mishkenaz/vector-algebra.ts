@@ -11,7 +11,6 @@ export type SemanticType =
   | 'INFO'
   | 'MODEL'
   | 'MSG'
-  | 'HIST'
   | 'CONFIG';
 
 export type StepKind =
@@ -49,7 +48,15 @@ export interface VectorSignature {
   arity?: 1 | 2 | 'many';
   overloads?: VectorOverload[];
   kind: StepKind;
+  requiresHistory?: boolean;
   note?: string;
+}
+
+export interface HistoryAnnotation {
+  present: boolean;
+  source?: string | null;
+  path?: string[] | null;
+  note?: string | null;
 }
 
 export interface PathStep {
@@ -70,7 +77,7 @@ export interface SemanticPath {
   metaOps: PathStep[];
   aspect?: '-om' | '-ath' | '-il' | null;
   provenance?: string | null;
-  history?: string | null;
+  history?: HistoryAnnotation | null;
   output: SemanticType | SemanticType[];
 }
 
@@ -97,7 +104,7 @@ export const vectorSignatures: Record<string, VectorSignature> = {
   Kin: { id: 'V20', form: 'Kin', inputs: ['SYS'], outputs: ['PATH'], kind: 'core', note: 'Weg / Verlauf' },
   Syn: { id: 'V21', form: 'Syn', inputs: ['SYS', 'PROC', 'MODEL'], outputs: ['REL'], arity: 2, kind: 'relation', note: 'Übereinstimmung / Gleichlauf; nicht Wahrheit' },
   Abs: { id: 'V22', form: 'Abs', inputs: ['INFO', 'TRACE'], outputs: ['INFO', 'SYS'], kind: 'conversion', note: 'Aufnahme / Absorption' },
-  Ref: { id: 'V23', form: 'Ref', inputs: ['TRACE', 'OBS', 'MODEL', 'HIST'], outputs: ['INFO', 'MODEL'], kind: 'conversion', note: 'Epistemische Rückbeziehung / Rückschau mit relationalem Inhalt' },
+  Ref: { id: 'V23', form: 'Ref', inputs: ['TRACE', 'OBS', 'MODEL'], outputs: ['INFO', 'MODEL'], kind: 'conversion', note: 'Epistemische Rückbeziehung / Rückschau mit relationalem Inhalt; Historie ist Annotation, kein eigener Inputtyp' },
   Lim: { id: 'V24', form: 'Lim', inputs: ['SPACE', 'PROC'], outputs: ['BOUND'], kind: 'relation', note: 'Schwelle / Grenze als Ort' },
   Tra: { id: 'V25', form: 'Tra', inputs: ['INFO', 'MODEL', 'MSG'], outputs: ['MSG'], kind: 'conversion', note: 'Weitergabe / Transmission' },
   Ska: { id: 'V26', form: 'Ska', inputs: ['SYS', 'PROC', 'MODEL'], outputs: ['REL', 'MODEL'], arity: 2, kind: 'relation', note: 'Skalierung / Vergleich' },
@@ -109,8 +116,8 @@ export const vectorSignatures: Record<string, VectorSignature> = {
   Log: { id: 'V32', form: 'Log', inputs: ['INFO', 'TRACE', 'OBS'], outputs: ['MODEL'], kind: 'model', note: 'Strukturierung / Modellbildung' },
   Sym: { id: 'V33', form: 'Sym', inputs: ['SYS'], outputs: ['CONFIG', 'REL'], arity: 2, kind: 'relation', note: 'Symmetrie' },
   Phi: { id: 'V34', form: 'Phi', inputs: ['CONFIG', 'REL'], outputs: ['CONFIG'], kind: 'relation', note: 'Maß / Harmonie' },
-  'Ona-nO': { id: 'V35', form: 'Ona-nO', inputs: ['CONFIG', 'HIST'], outputs: ['BOUND'], kind: 'relation', note: 'Schwelle möglicher Integration / Wiederannäherung' },
-  Ori: { id: 'V36', form: 'Ori', inputs: ['HIST', 'SYS', 'PROC'], outputs: ['HIST', 'SYS', 'PROC'], kind: 'core', note: 'Historisch abhängige Wiederbegegnung' },
+  'Ona-nO': { id: 'V35', form: 'Ona-nO', inputs: ['CONFIG'], outputs: ['BOUND'], kind: 'relation', note: 'Schwelle möglicher Integration / Wiederannäherung; historische Einbettung kann annotiert sein' },
+  Ori: { id: 'V36', form: 'Ori', inputs: ['SYS', 'PROC'], outputs: ['SYS', 'PROC'], kind: 'core', requiresHistory: true, note: 'Historisch abhängige Wiederbegegnung; Geschichte ist verpflichtende Annotation, kein eigener Basistyp' },
   "-h/'": { id: 'V37', form: "-h/'", inputs: ['SYS', 'REL', 'CONFIG'], outputs: ['PROC', 'CONFIG'], kind: 'meta', note: 'Auflösung / Loslassen' },
   '-val': { id: 'V38', form: '-val', inputs: ['PROC', 'REL', 'CONFIG'], outputs: ['SYS', 'CONFIG'], kind: 'meta', note: 'Emergenz / neues Erscheinen' },
   '-reso': {
