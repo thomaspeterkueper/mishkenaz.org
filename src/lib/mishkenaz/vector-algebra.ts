@@ -34,12 +34,20 @@ export type Compatibility =
   | 'binding-sensitive'
   | 'undefined';
 
+export interface VectorOverload {
+  inputs: SemanticType[];
+  outputs: SemanticType[];
+  arity: 1 | 2 | 'many';
+  note?: string;
+}
+
 export interface VectorSignature {
   id: string;
   form: string;
   inputs: SemanticType[];
   outputs: SemanticType[];
   arity?: 1 | 2 | 'many';
+  overloads?: VectorOverload[];
   kind: StepKind;
   note?: string;
 }
@@ -70,7 +78,7 @@ export const vectorSignatures: Record<string, VectorSignature> = {
   Sol: { id: 'V01', form: 'Sol', inputs: ['POT', 'SYS'], outputs: ['PROC'], kind: 'core', note: 'Impuls / Initiation' },
   Mira: { id: 'V02', form: 'Mira', inputs: ['PROC'], outputs: ['PROC'], kind: 'core', note: 'Fluss / Bewegung' },
   Sa: { id: 'V03', form: 'Sa', inputs: ['SYS', 'REL'], outputs: ['BOUND', 'SYS'], kind: 'relation', note: 'Bruch / Trennung' },
-  Ona: { id: 'V04', form: 'Ona', inputs: ['SYS'], outputs: ['CONFIG'], arity: 'many', kind: 'relation', note: 'Ganzheit / Formation' },
+  Ona: { id: 'V04', form: 'Ona', inputs: ['SYS'], outputs: ['CONFIG'], arity: 'many', kind: 'relation', note: 'Ganzheit / Formation; ein System kann als Ganzheit profiliert oder mehrere können zusammengefasst werden' },
   Vya: { id: 'V05', form: 'Vya', inputs: ['SYS'], outputs: ['PROC'], kind: 'core', note: 'Richtung / Wille / Absicht' },
   Saha: { id: 'V06', form: 'Saha', inputs: ['SYS', 'TRACE'], outputs: ['OBS'], kind: 'conversion', note: 'Wahrnehmung' },
   Nga: { id: 'V07', form: 'Nga', inputs: ['SYS'], outputs: ['MSG', 'PROC'], kind: 'core', note: 'Ruf / Kontaktimpuls' },
@@ -89,7 +97,7 @@ export const vectorSignatures: Record<string, VectorSignature> = {
   Kin: { id: 'V20', form: 'Kin', inputs: ['SYS'], outputs: ['PATH'], kind: 'core', note: 'Weg / Verlauf' },
   Syn: { id: 'V21', form: 'Syn', inputs: ['SYS', 'PROC', 'MODEL'], outputs: ['REL'], arity: 2, kind: 'relation', note: 'Übereinstimmung / Gleichlauf; nicht Wahrheit' },
   Abs: { id: 'V22', form: 'Abs', inputs: ['INFO', 'TRACE'], outputs: ['INFO', 'SYS'], kind: 'conversion', note: 'Aufnahme / Absorption' },
-  Ref: { id: 'V23', form: 'Ref', inputs: ['TRACE', 'OBS', 'MODEL', 'HIST'], outputs: ['INFO', 'MODEL'], kind: 'relation', note: 'Rückbezug / Rückschau' },
+  Ref: { id: 'V23', form: 'Ref', inputs: ['TRACE', 'OBS', 'MODEL', 'HIST'], outputs: ['INFO', 'MODEL'], kind: 'conversion', note: 'Epistemische Rückbeziehung / Rückschau mit relationalem Inhalt' },
   Lim: { id: 'V24', form: 'Lim', inputs: ['SPACE', 'PROC'], outputs: ['BOUND'], kind: 'relation', note: 'Schwelle / Grenze als Ort' },
   Tra: { id: 'V25', form: 'Tra', inputs: ['INFO', 'MODEL', 'MSG'], outputs: ['MSG'], kind: 'conversion', note: 'Weitergabe / Transmission' },
   Ska: { id: 'V26', form: 'Ska', inputs: ['SYS', 'PROC', 'MODEL'], outputs: ['REL', 'MODEL'], arity: 2, kind: 'relation', note: 'Skalierung / Vergleich' },
@@ -105,7 +113,18 @@ export const vectorSignatures: Record<string, VectorSignature> = {
   Ori: { id: 'V36', form: 'Ori', inputs: ['HIST', 'SYS', 'PROC'], outputs: ['HIST', 'SYS', 'PROC'], kind: 'core', note: 'Historisch abhängige Wiederbegegnung' },
   "-h/'": { id: 'V37', form: "-h/'", inputs: ['SYS', 'REL', 'CONFIG'], outputs: ['PROC', 'CONFIG'], kind: 'meta', note: 'Auflösung / Loslassen' },
   '-val': { id: 'V38', form: '-val', inputs: ['PROC', 'REL', 'CONFIG'], outputs: ['SYS', 'CONFIG'], kind: 'meta', note: 'Emergenz / neues Erscheinen' },
-  '-reso': { id: 'V39', form: '-reso', inputs: ['SYS', 'REL'], outputs: ['REL'], arity: 2, kind: 'meta', note: 'Kopplung / Wechselwirkung' },
+  '-reso': {
+    id: 'V39',
+    form: '-reso',
+    inputs: ['SYS', 'REL'],
+    outputs: ['REL'],
+    overloads: [
+      { inputs: ['REL'], outputs: ['REL'], arity: 1, note: 'bestehende Relation als Wechselwirkung/Kopplung fortführen' },
+      { inputs: ['SYS'], outputs: ['REL'], arity: 2, note: 'zwei Systeme in eine Wechselwirkungsrelation setzen' },
+    ],
+    kind: 'meta',
+    note: 'Kopplung / Wechselwirkung; unärer REL-Modus und binärer SYS×SYS-Modus',
+  },
   '-ira': { id: 'V40', form: '-ira', inputs: ['REL', 'SPACE'], outputs: ['REL', 'SPACE'], kind: 'meta', note: 'Attraktion / Verdichtung' },
   '-vya': { id: 'V41', form: '-vya', inputs: ['REL', 'SPACE'], outputs: ['REL', 'SPACE'], kind: 'meta', note: 'Distanzierung / Repulsion' },
   '-kora': { id: 'V42', form: '-kora', inputs: ['SYS', 'REL'], outputs: ['CONFIG', 'SYS'], arity: 'many', kind: 'meta', note: 'Integration / Zusammenführung' },
