@@ -22,13 +22,14 @@ Der aktuelle Stand ist in seiner Grundarchitektur konsistent. Drei konkrete Abwe
 - Resonanzaspekte `-om/-ath/-il` liegen außerhalb der Vektoralgebra.
 - Operatorhebung bleibt explizit und auf dokumentierte Fälle begrenzt.
 
+## Geklärte Modellfragen (2026-10-09)
+
+- `-reso` besitzt zwei typisierte Verwendungen: `REL -> REL` sowie `(SYS,SYS) -> REL`.
+- `Ona` kann eine einzelne Formation als Ganzheit profilieren oder mehrere Formationen kollektiv zusammenfassen.
+- `Ref` wird operativ als epistemische Konversion/Transformation mit relationalem Inhalt geführt.
+
 ## Noch offene Modellfragen
 
-Keine dieser Fragen ist ein aktueller Widerspruch, sie bleiben aber bewusst offen:
-
-- Ob `-reso` formal besser als binäre Operation auf `(SYS,SYS)` und zusätzlich als unärer Operator auf `REL` modelliert werden sollte.
-- Ob `Ona` semantisch eine Mindestanzahl von zwei Mitgliedern verlangt oder auch eine einzelne Formation als Ganzheit profilieren kann.
-- Ob `Ref` als Relationsoperation oder als epistemische Konversion primär klassifiziert werden soll; die Signatur ist konsistent, die Funktionsklasse bleibt interpretativ.
 - Ob `HIST` langfristig eigener Typ oder Typanreicherung/Annotation sein soll.
 - Wie Operatorhebung orthographisch/prosodisch im eigentlichen Mishkenaz markiert wird.
 
