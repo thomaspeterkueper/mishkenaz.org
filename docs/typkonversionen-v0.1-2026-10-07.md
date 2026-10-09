@@ -187,22 +187,34 @@ SPACE --Lim--> eingeschränkter SPACE
 
 Dafür wäre ein zusätzlicher Schritt nötig.
 
-## 11. Geschichte als Typanreicherung
+## 11. Geschichte als Annotation statt Basistyp
 
-`HIST` sollte nicht als völlig neuer Weltzustand verstanden werden, sondern als typisierte Anreicherung:
-
-```
-SYS + wirksame Geschichte -> HIST/SYS
-PROC + wirksame Geschichte -> HIST/PROC
-```
-
-`Ori` kann darauf operieren:
+Geschichte wird nicht mehr als eigener Basistyp `HIST` geführt. Sie ist eine **Pfadannotation** auf einem bestehenden semantischen Träger:
 
 ```
-Ori(A,H) -> A'
+SYS + HISTORY
+PROC + HISTORY
+MODEL + HISTORY
 ```
 
-Damit ist Geschichte selbst konversionsrelevant.
+Der Basistyp bleibt erhalten; zusätzlich wird festgehalten, welcher wirksame Pfad für spätere Operationen relevant ist.
+
+`Ori` verlangt diese Annotation:
+
+```
+Ori(A, H) -> A'
+```
+
+mit `TYPE(A') = TYPE(A)` im Basismodell, aber nicht notwendig gleicher Bedeutung oder gleicher Fortsetzung.
+
+Damit gilt:
+
+```
+GESCHICHTE != TYP
+GESCHICHTE = PFADRELEVANTE ANNOTATION
+```
+
+Diese Trennung vermeidet die frühere Doppelmodellierung von Geschichte als `HIST` und zugleich als `history`-Feld der Pfadsemantik.
 
 ## 12. Explizite vs. implizite Konversion
 
