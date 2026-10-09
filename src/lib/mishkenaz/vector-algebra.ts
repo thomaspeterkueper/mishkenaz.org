@@ -175,7 +175,16 @@ export function sameOutputType(a: SemanticPath, b: SemanticPath): boolean {
 export function pathRelation(a: SemanticPath, b: SemanticPath): PathRelation {
   if (!sameOutputType(a, b)) return 'distinct';
 
-  const sameHistory = (a.history ?? null) === (b.history ?? null);
+  const normalizeHistory = (history: HistoryAnnotation | null | undefined) =>
+    history
+      ? JSON.stringify({
+          present: history.present,
+          source: history.source ?? null,
+          path: history.path ?? null,
+          note: history.note ?? null,
+        })
+      : 'null';
+  const sameHistory = normalizeHistory(a.history) === normalizeHistory(b.history);
   const sameProvenance = (a.provenance ?? null) === (b.provenance ?? null);
   const sameAspect = (a.aspect ?? null) === (b.aspect ?? null);
 
