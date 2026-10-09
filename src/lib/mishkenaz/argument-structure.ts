@@ -94,7 +94,7 @@ export const argumentSchemas: Record<string, ArgumentSchema> = {
       { role: 'right', types: ['SYS', 'REL'], required: true },
     ],
     result: ['REL'],
-    note: 'Wechselwirkung/Kopplung; Integration ist nicht impliziert.',
+    note: 'Binärer Modus: zwei Systeme/Relationen werden gekoppelt. Der unäre REL→REL-Modus benötigt keine zusätzlichen externen Argumente.',
   },
   '-kora': {
     vector: '-kora',
