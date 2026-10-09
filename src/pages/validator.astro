@@ -48,6 +48,22 @@ import Layout from '../layouts/Layout.astro';
     </div>
     <pre id="comparison" aria-live="polite">Vergleich wird geladen …</pre>
 
+    <h2>Argumentstruktur</h2>
+    <p class="hint">Mehrstellige Vektoren brauchen semantisch vollständige Beteiligte. Dieser Test ist unabhängig von der normalen R1-Rollenmarkierung.</p>
+    <div class="compare-grid">
+      <select id="arg-vector">
+        <option value="Ma">Ma</option>
+        <option value="Ta">Ta</option>
+        <option value="Syn">Syn</option>
+        <option value="Ska">Ska</option>
+        <option value="-reso">-reso</option>
+        <option value="-kora">-kora</option>
+      </select>
+      <input id="arg-spec" value="left:SYS,right:SYS" autocomplete="off" />
+    </div>
+    <button id="arg-run" type="button">Argumente prüfen</button>
+    <pre id="arg-result" aria-live="polite">Argumentstruktur wird geladen …</pre>
+
     <h2>Regressionen</h2>
     <p class="hint">Diese Fälle sichern bereits begründete Kompositionsentscheidungen gegen spätere Änderungen ab.</p>
     <pre id="regressions" aria-live="polite">Regressionen werden geprüft …</pre>
@@ -83,6 +99,10 @@ import Layout from '../layouts/Layout.astro';
       formatRegressionReport,
       runValidatorRegressions,
     } from '../lib/mishkenaz/validator-regressions';
+    import {
+      formatArgumentValidation,
+      validateArguments,
+    } from '../lib/mishkenaz/argument-structure';
 
     const input = document.querySelector('#expression');
     const output = document.querySelector('#result');
@@ -92,6 +112,10 @@ import Layout from '../layouts/Layout.astro';
     const compare = document.querySelector('#compare');
     const comparison = document.querySelector('#comparison');
     const regressions = document.querySelector('#regressions');
+    const argVector = document.querySelector('#arg-vector');
+    const argSpec = document.querySelector('#arg-spec');
+    const argRun = document.querySelector('#arg-run');
+    const argResult = document.querySelector('#arg-result');
 
     function execute() {
       if (!(input instanceof HTMLInputElement) || !(output instanceof HTMLElement)) return;
@@ -142,8 +166,46 @@ import Layout from '../layouts/Layout.astro';
       });
     });
 
+    function executeArguments() {
+      if (
+        !(argVector instanceof HTMLSelectElement) ||
+        !(argSpec instanceof HTMLInputElement) ||
+        !(argResult instanceof HTMLElement)
+      ) return;
+
+      const supplied = argSpec.value
+        .split(',')
+        .map(part => part.trim())
+        .filter(Boolean)
+        .map(part => {
+          const [role, type] = part.split(':').map(value => value.trim());
+          return { role, type };
+        })
+        .filter(arg => arg.role && arg.type);
+
+      argResult.textContent = formatArgumentValidation(
+        validateArguments(argVector.value, supplied),
+      );
+    }
+
+    argRun?.addEventListener('click', executeArguments);
+    argVector?.addEventListener('change', () => {
+      if (!(argSpec instanceof HTMLInputElement) || !(argVector instanceof HTMLSelectElement)) return;
+      const defaults = {
+        Ma: 'left:SYS,right:SYS',
+        Ta: 'left:SYS,right:SYS',
+        Syn: 'reference-a:MODEL,reference-b:MODEL',
+        Ska: 'reference-a:MODEL,reference-b:MODEL',
+        '-reso': 'left:SYS,right:SYS',
+        '-kora': 'members:SYS,members:SYS',
+      };
+      argSpec.value = defaults[argVector.value] ?? '';
+      executeArguments();
+    });
+
     execute();
     executeComparison();
+    executeArguments();
     if (regressions instanceof HTMLElement) {
       regressions.textContent = formatRegressionReport(runValidatorRegressions());
     }
@@ -157,7 +219,8 @@ import Layout from '../layouts/Layout.astro';
     .validator{border:1px solid var(--border);padding:1.25rem}
     label{display:block;color:var(--muted);margin-bottom:.5rem}
     .row{display:flex;gap:.6rem}
-    input{flex:1;background:transparent;border:1px solid var(--border);color:var(--fg);padding:.8rem;font:inherit}
+    input,select{flex:1;background:transparent;border:1px solid var(--border);color:var(--fg);padding:.8rem;font:inherit}
+    select option{background:var(--bg);color:var(--fg)}
     button{background:transparent;border:1px solid var(--border);color:var(--accent);padding:.7rem .9rem;cursor:pointer}
     button:hover{border-color:var(--accent)}
     .examples{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
