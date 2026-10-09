@@ -34,6 +34,19 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <pre id="result" aria-live="polite">Validator wird geladen …</pre>
+
+    <h2>Klammerungen vergleichen</h2>
+    <div class="compare-grid">
+      <input id="left-expression" value="(Ma-Ta)-reso" autocomplete="off" />
+      <input id="right-expression" value="Ma-(Ta-reso)" autocomplete="off" />
+    </div>
+    <button id="compare" type="button">Vergleichen</button>
+    <div class="examples">
+      <button type="button" data-left="(Ma-Ta)-reso" data-right="Ma-(Ta-reso)">Ma/Ta/reso</button>
+      <button type="button" data-left="(Res-Ref)-Log" data-right="Res-(Ref-Log)">Res/Ref/Log</button>
+      <button type="button" data-left="(Rek-Ori)" data-right="(Ori-Rek)">Rek/Ori</button>
+    </div>
+    <pre id="comparison" aria-live="polite">Vergleich wird geladen …</pre>
   </section>
 
   <section>
@@ -58,10 +71,18 @@ import Layout from '../layouts/Layout.astro';
       formatValidation,
       validateVectorExpression,
     } from '../lib/mishkenaz/expression-validator';
+    import {
+      compareBracketings,
+      formatComparison,
+    } from '../lib/mishkenaz/bracket-validator';
 
     const input = document.querySelector('#expression');
     const output = document.querySelector('#result');
     const run = document.querySelector('#run');
+    const leftInput = document.querySelector('#left-expression');
+    const rightInput = document.querySelector('#right-expression');
+    const compare = document.querySelector('#compare');
+    const comparison = document.querySelector('#comparison');
 
     function execute() {
       if (!(input instanceof HTMLInputElement) || !(output instanceof HTMLElement)) return;
@@ -81,7 +102,39 @@ import Layout from '../layouts/Layout.astro';
       });
     });
 
+    function executeComparison() {
+      if (
+        !(leftInput instanceof HTMLInputElement) ||
+        !(rightInput instanceof HTMLInputElement) ||
+        !(comparison instanceof HTMLElement)
+      ) return;
+      comparison.textContent = formatComparison(
+        compareBracketings(leftInput.value, rightInput.value),
+      );
+    }
+
+    compare?.addEventListener('click', executeComparison);
+    [leftInput, rightInput].forEach(field => {
+      field?.addEventListener('keydown', event => {
+        if (event.key === 'Enter') executeComparison();
+      });
+    });
+
+    document.querySelectorAll('[data-left][data-right]').forEach(button => {
+      button.addEventListener('click', () => {
+        if (
+          !(button instanceof HTMLElement) ||
+          !(leftInput instanceof HTMLInputElement) ||
+          !(rightInput instanceof HTMLInputElement)
+        ) return;
+        leftInput.value = button.dataset.left ?? '';
+        rightInput.value = button.dataset.right ?? '';
+        executeComparison();
+      });
+    });
+
     execute();
+    executeComparison();
   </script>
 
   <style>
@@ -97,7 +150,8 @@ import Layout from '../layouts/Layout.astro';
     button:hover{border-color:var(--accent)}
     .examples{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
     .examples button{font-size:.85rem;color:var(--muted)}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem}
     pre{white-space:pre-wrap;overflow-wrap:anywhere;border-top:1px solid var(--border);padding-top:1rem;color:var(--fg)}
-    @media(max-width:650px){.row{flex-direction:column}}
+    @media(max-width:650px){.row{flex-direction:column}.compare-grid{grid-template-columns:1fr}}
   </style>
 </Layout>
