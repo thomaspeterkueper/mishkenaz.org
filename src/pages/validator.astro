@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Vektor-Validator" description="Experimenteller Validator für typisierte Mishkenaz-Vektorkompositionen.">
+  <h1>Vektor-Validator</h1>
+  <p class="lede">
+    Experimentelles Werkzeug für die typisierte partielle Vektoralgebra.
+    Es prüft lineare Vektorfolgen auf bekannte Formen, mögliche Typpfade
+    und offensichtliche Typbrüche.
+  </p>
+
+  <section class="status">
+    <strong>Arbeitsstatus</strong>
+    <p>
+      Der Validator prüft den aktuellen Arbeitsstand der Vektorsignaturen.
+      Er entscheidet weder Wahrheit noch kanonische Bedeutung und ersetzt
+      keine historische oder semantische Prüfung.
+    </p>
+  </section>
+
+  <section class="validator">
+    <label for="expression">Vektorausdruck</label>
+    <div class="row">
+      <input id="expression" value="Res-Ref-Log" autocomplete="off" />
+      <button id="run" type="button">Prüfen</button>
+    </div>
+
+    <div class="examples">
+      <button type="button" data-expression="Res-Ref-Log">Res-Ref-Log</button>
+      <button type="button" data-expression="Ma-Ta-reso-kora">Ma-Ta-reso-kora</button>
+      <button type="button" data-expression="La-Lim-Ta">La-Lim-Ta</button>
+      <button type="button" data-expression="Res-Sol">Res-Sol</button>
+    </div>
+
+    <pre id="result" aria-live="polite">Validator wird geladen …</pre>
+  </section>
+
+  <section>
+    <h2>Was geprüft wird</h2>
+    <p>
+      Der Ausdruck wird in bekannte Vektoren und Meta-Operatoren zerlegt.
+      Für den ersten Vektor werden alle plausiblen Eingangstypen betrachtet.
+      Anschließend propagiert der Validator mögliche Output-Typen durch die
+      Folge. Bei einem Typbruch wird die Stelle ausgewiesen.
+    </p>
+    <p>
+      Mehrstellige Operatoren wie <code>Ma</code>, <code>Ta</code>,
+      <code>Syn</code>, <code>-reso</code> oder <code>-kora</code> benötigen
+      zusätzliche Argumente aus Syntax oder Kontext. Der lineare Validator
+      markiert diese Fälle, kann ihre vollständige Argumentstruktur aber noch
+      nicht rekonstruieren.
+    </p>
+  </section>
+
+  <script>
+    import {
+      formatValidation,
+      validateVectorExpression,
+    } from '../lib/mishkenaz/expression-validator';
+
+    const input = document.querySelector('#expression');
+    const output = document.querySelector('#result');
+    const run = document.querySelector('#run');
+
+    function execute() {
+      if (!(input instanceof HTMLInputElement) || !(output instanceof HTMLElement)) return;
+      output.textContent = formatValidation(validateVectorExpression(input.value));
+    }
+
+    run?.addEventListener('click', execute);
+    input?.addEventListener('keydown', event => {
+      if (event.key === 'Enter') execute();
+    });
+
+    document.querySelectorAll('[data-expression]').forEach(button => {
+      button.addEventListener('click', () => {
+        if (!(button instanceof HTMLElement) || !(input instanceof HTMLInputElement)) return;
+        input.value = button.dataset.expression ?? '';
+        execute();
+      });
+    });
+
+    execute();
+  </script>
+
+  <style>
+    section{margin:2.5rem 0}
+    h2{font-weight:400;color:var(--accent)}
+    .status{border-left:2px solid var(--accent);padding:1rem 1.25rem;background:#1b1815}
+    .status p{color:var(--muted)}
+    .validator{border:1px solid var(--border);padding:1.25rem}
+    label{display:block;color:var(--muted);margin-bottom:.5rem}
+    .row{display:flex;gap:.6rem}
+    input{flex:1;background:transparent;border:1px solid var(--border);color:var(--fg);padding:.8rem;font:inherit}
+    button{background:transparent;border:1px solid var(--border);color:var(--accent);padding:.7rem .9rem;cursor:pointer}
+    button:hover{border-color:var(--accent)}
+    .examples{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
+    .examples button{font-size:.85rem;color:var(--muted)}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;border-top:1px solid var(--border);padding-top:1rem;color:var(--fg)}
+    @media(max-width:650px){.row{flex-direction:column}}
+  </style>
+</Layout>
