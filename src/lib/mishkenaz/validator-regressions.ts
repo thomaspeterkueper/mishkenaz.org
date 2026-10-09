@@ -60,7 +60,11 @@ export function runValidatorRegressions(): RegressionReport {
   ] as const;
 
   for (const [id, description, left, right, expectedRelation] of comparisons) {
-    const result = compareBracketings(left, right);
+    const result = compareBracketings(
+      left,
+      right,
+      id === 'compare-rek-ori',
+    );
     cases.push({
       id, description,
       passed: result.relation === expectedRelation,
