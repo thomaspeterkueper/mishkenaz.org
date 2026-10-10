@@ -1,0 +1,137 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Phonologie" description="Arbeitsmodell der gesprochenen R1-Form von Mishkenaz: Lauträume, Silbenbau, Prosodie und Namensanpassung.">
+  <h1>Gesprochene R1-Form</h1>
+  <p class="lede">
+    Die Phonologie wird konservativ rekonstruiert. Moderne Vektorlabels sind nicht automatisch Belege
+    für alte R1-Laute. Deshalb trennt diese Seite gesicherte artikulatorische Kerne, gut gestützte
+    Kandidaten und offene historische Entwicklungen.
+  </p>
+
+  <section class="status">
+    <strong>Rekonstruktionsstatus</strong>
+    <p>
+      Stark verankert sind der Avi-Schwa-Kern <code>ə</code> sowie die artikulatorischen Richtungen
+      von Ma, Pa, Sa, Ku und Ta. Ein vollständiges R1-Phoneminventar ist noch nicht kanonisiert.
+    </p>
+  </section>
+
+  <section>
+    <h2>1. Evidenzstufen</h2>
+    <div class="formula"><code>A = verankert · B = gut gestützter Kandidat · C = offen/später</code></div>
+    <p>
+      Formen wie <code>Log</code>, <code>Phi</code>, <code>Syn</code>, <code>Mö</code>,
+      <code>Ref</code> oder <code>Res</code> gehören zum heutigen Vektorinventar. Ihre Schreibung
+      beweist aber nicht, dass alle darin sichtbaren Laute schon im ältesten R1 phonemisch waren.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. Artikulatorische Kerne</h2>
+    <table>
+      <thead><tr><th>Bereich</th><th>Kern</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>zentraler Vokal</td><td><code>ə</code></td><td>A · Avi</td></tr>
+        <tr><td>offene Vokalität</td><td><code>a</code>-Raum</td><td>A/B</td></tr>
+        <tr><td>gerundete hintere Vokalität</td><td><code>o</code>-Raum</td><td>A/B</td></tr>
+        <tr><td>hohe vordere Vokalität</td><td><code>i</code>-Raum</td><td>A/B</td></tr>
+        <tr><td>hohe hintere Vokalität</td><td><code>u</code>-Raum</td><td>A/B</td></tr>
+        <tr><td>bilabial nasal</td><td><code>m</code></td><td>A · Ma/Om</td></tr>
+        <tr><td>bilabial oral</td><td><code>p</code></td><td>A · Pa</td></tr>
+        <tr><td>koronaler Verschluss</td><td><code>t</code>-Raum</td><td>A · Ta</td></tr>
+        <tr><td>vordere Friktion</td><td><code>s</code>-Raum</td><td>A · Sa</td></tr>
+        <tr><td>velarer Verschluss</td><td><code>k</code>-Raum</td><td>A · Ku</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>3. Minimaler Vokalraum</h2>
+    <p>Als Arbeitsraum ist derzeit mindestens folgende Fünferstruktur plausibel:</p>
+    <div class="formula"><code>/a i u o ə/</code></div>
+    <p>
+      Offen bleiben Vokallänge, <code>e</code>, gerundete Vorderzungenvokale, Diphthonge
+      und regionale Galut-Erweiterungen.
+    </p>
+  </section>
+
+  <section>
+    <h2>4. Silbenbau</h2>
+    <p>
+      Die Urgesten bevorzugen einfache Formen wie <code>V</code>, <code>CV</code>,
+      <code>VC</code> und <code>CVC</code>. Daraus wird vorläufig nur ein konservatives
+      Kernschema abgeleitet:
+    </p>
+    <div class="formula"><code>R1-Kernsilbe = (C)V(C)</code></div>
+    <p>
+      Das ist kein Verbot komplexerer späterer Formen. Besonders an Morphemgrenzen können
+      komplexere Oberflächen entstehen.
+    </p>
+  </section>
+
+  <section>
+    <h2>5. Prosodische Gruppen</h2>
+    <div class="formula"><code>[PRÄDIKAT] · [bi' REFERENT] · [la' REFERENT]</code></div>
+    <p>
+      Jede Gruppe besitzt einen Hauptakzent. Rollenmarker sind schwächer als der lexikalische
+      Kern des folgenden Referenten. Eine feste Regel wie „immer erste Silbe“ oder
+      „immer vorletzte Silbe“ wird noch nicht erfunden.
+    </p>
+  </section>
+
+  <section>
+    <h2>6. Enge Operatorbindung</h2>
+    <p>
+      Klammern im Validator sind Metanotation. Für gesprochene R1-Sprache werden derzeit drei
+      Hypothesen getestet: gemeinsame Akzentdomäne, schwächere innere Grenze und spätere
+      phonologische Fusion häufiger Operatoren.
+    </p>
+    <div class="formula"><code>SEMANTISCHE BINDUNG ≠ AUTOMATISCHES SCHRIFTZEICHEN</code></div>
+  </section>
+
+  <section>
+    <h2>7. Eigennamen</h2>
+    <p>
+      Namen werden so wenig wie möglich und so stark wie nötig an die jeweilige Sprachstufe
+      angepasst. Ihre Referenzierbarkeit hat Vorrang vor symbolischer Umdeutung.
+    </p>
+    <div class="formula"><code>ETYMOLOGIE ≠ AKTUELLE REFERENZ</code></div>
+    <p>
+      Vorläufige Reparaturhierarchie für Fremdnamen:
+      Segment erhalten → nächstes vorhandenes Segment → Cluster syllabifizieren →
+      nötigenfalls Epenthese → Tilgung zuletzt.
+      <code>ə</code> ist wegen Avi ein starker Epenthese-Kandidat, aber noch keine Universalregel.
+    </p>
+  </section>
+
+  <section>
+    <h2>8. Testkorpus</h2>
+    <p>
+      Die nächste Rekonstruktionsrunde prüft Silbengrenzen, Akzent, Grenzstärke und Sandhi an:
+    </p>
+    <div class="formula">
+      <code>Saha-om · wi-Saha-om · Res-Ref-Log-il · bi'sa-i · la'ta-i · bi'Daria · la'Dvārakā · Ma'Ta'U-reso</code>
+    </div>
+  </section>
+
+  <section>
+    <h2>9. Noch offen</h2>
+    <p>
+      Vollständiges Konsonanteninventar, Wortakzent, Allophone, Sandhi, feste Epenthese,
+      Operatorbindungsprosodie und die Lautwandelregeln von R1 zu den Galut-Schichten.
+    </p>
+  </section>
+
+  <style>
+    section{margin:2.5rem 0}
+    h2{font-weight:400;color:var(--accent)}
+    .status,.formula{border:1px solid var(--border);padding:1.25rem;margin:1.5rem 0}
+    .status strong,code{color:var(--accent)}
+    table{width:100%;border-collapse:collapse;font-size:.92rem}
+    th,td{text-align:left;vertical-align:top;padding:.7rem;border-bottom:1px solid var(--border)}
+    th{color:var(--accent);font-weight:400}
+    @media(max-width:700px){table{font-size:.82rem}th,td{padding:.45rem}}
+  </style>
+</Layout>

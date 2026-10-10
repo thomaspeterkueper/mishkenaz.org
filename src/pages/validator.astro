@@ -1,0 +1,314 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Vektor-Validator" description="Experimenteller Validator für typisierte Mishkenaz-Vektorkompositionen.">
+  <h1>Vektor-Validator</h1>
+  <p class="lede">
+    Experimentelles Werkzeug für die typisierte partielle Vektoralgebra.
+    Es prüft lineare Vektorfolgen auf bekannte Formen, mögliche Typpfade
+    und offensichtliche Typbrüche.
+  </p>
+
+  <section class="status">
+    <strong>Arbeitsstatus</strong>
+    <p>
+      Der Validator prüft den aktuellen Arbeitsstand der Vektorsignaturen.
+      Er entscheidet weder Wahrheit noch kanonische Bedeutung und ersetzt
+      keine historische oder semantische Prüfung.
+    </p>
+  </section>
+
+  <section class="validator">
+    <h2>Gesamtanalyse</h2>
+    <p class="hint">Führt Typprüfung, Klammerung, Mehrstellenstruktur und semantische Schutzregeln in einem Ergebnis zusammen.</p>
+    <label for="unified-expression">Ausdruck</label>
+    <div class="row">
+      <input id="unified-expression" value="Res-Ref-Log" autocomplete="off" />
+      <button id="unified-run" type="button">Gesamt prüfen</button>
+    </div>
+    <label for="unified-args">Optionale semantische Argumente</label>
+    <input id="unified-args" value="" placeholder="z. B. left:SYS,right:SYS" autocomplete="off" />
+    <label class="check"><input id="unified-history" type="checkbox" /> Historischer Kontext verfügbar</label>
+    <div class="examples">
+      <button type="button" data-unified="Res-Ref-Log" data-unified-args="">Rekonstruktion</button>
+      <button type="button" data-unified="(Ma-Ta)-reso" data-unified-args="left:SYS,right:SYS">Relation</button>
+      <button type="button" data-unified="Ma-Ta-reso-kora" data-unified-args="left:SYS,right:SYS,members:SYS,members:SYS">Relation + Integration</button>
+      <button type="button" data-unified="Res-Sol" data-unified-args="">Typbruch</button>
+      <button type="button" data-unified="Rek-Ori" data-unified-args="" data-history="true">Historische Rekursion</button>
+    </div>
+    <pre id="unified-result" aria-live="polite">Gesamtanalyse wird geladen …</pre>
+
+    <h2>Einzeltests</h2>
+    <label for="expression">Vektorausdruck</label>
+    <div class="row">
+      <input id="expression" value="Res-Ref-Log" autocomplete="off" />
+      <button id="run" type="button">Prüfen</button>
+    </div>
+
+    <div class="examples">
+      <button type="button" data-expression="Res-Ref-Log">Res-Ref-Log</button>
+      <button type="button" data-expression="Ma-Ta-reso-kora">Ma-Ta-reso-kora</button>
+      <button type="button" data-expression="La-Lim-Ta">La-Lim-Ta</button>
+      <button type="button" data-expression="Res-Sol">Res-Sol</button>
+    </div>
+
+    <pre id="result" aria-live="polite">Validator wird geladen …</pre>
+
+    <h2>Klammerungen vergleichen</h2>
+    <div class="compare-grid">
+      <input id="left-expression" value="(Ma-Ta)-reso" autocomplete="off" />
+      <input id="right-expression" value="Ma-(Ta-reso)" autocomplete="off" />
+    </div>
+    <label class="check"><input id="compare-history" type="checkbox" /> Historischer Kontext verfügbar</label>
+    <button id="compare" type="button">Vergleichen</button>
+    <div class="examples">
+      <button type="button" data-left="(Ma-Ta)-reso" data-right="Ma-(Ta-reso)">Ma/Ta/reso</button>
+      <button type="button" data-left="(Res-Ref)-Log" data-right="Res-(Ref-Log)">Res/Ref/Log</button>
+      <button type="button" data-left="(Rek-Ori)" data-right="(Ori-Rek)">Rek/Ori</button>
+    </div>
+    <pre id="comparison" aria-live="polite">Vergleich wird geladen …</pre>
+
+    <h2>Argumentstruktur</h2>
+    <p class="hint">Mehrstellige Vektoren brauchen semantisch vollständige Beteiligte. Dieser Test ist unabhängig von der normalen R1-Rollenmarkierung.</p>
+    <div class="compare-grid">
+      <select id="arg-vector">
+        <option value="Ma">Ma</option>
+        <option value="Ta">Ta</option>
+        <option value="Syn">Syn</option>
+        <option value="Ska">Ska</option>
+        <option value="-reso">-reso</option>
+        <option value="-kora">-kora</option>
+      </select>
+      <input id="arg-spec" value="left:SYS,right:SYS" autocomplete="off" />
+    </div>
+    <button id="arg-run" type="button">Argumente prüfen</button>
+    <pre id="arg-result" aria-live="polite">Argumentstruktur wird geladen …</pre>
+
+    <h2>Regressionen</h2>
+    <p class="hint">Diese Fälle sichern bereits begründete Kompositionsentscheidungen gegen spätere Änderungen ab.</p>
+    <pre id="regressions" aria-live="polite">Regressionen werden geprüft …</pre>
+  </section>
+
+  <section>
+    <h2>Was geprüft wird</h2>
+    <p>
+      Der Ausdruck wird in bekannte Vektoren und Meta-Operatoren zerlegt.
+      Für den ersten Vektor werden alle plausiblen Eingangstypen betrachtet.
+      Anschließend propagiert der Validator mögliche Output-Typen durch die
+      Folge. Bei einem Typbruch wird die Stelle ausgewiesen.
+    </p>
+    <p>
+      Mehrstellige Operatoren wie <code>Ma</code>, <code>Ta</code>,
+      <code>Syn</code>, <code>-reso</code> oder <code>-kora</code> benötigen
+      zusätzliche Argumente aus Syntax oder Kontext. Der lineare Validator
+      markiert diese Fälle, kann ihre vollständige Argumentstruktur aber noch
+      nicht rekonstruieren.
+    </p>
+  </section>
+
+  <script>
+    import {
+      formatValidation,
+      validateVectorExpression,
+    } from '../lib/mishkenaz/expression-validator';
+    import {
+      compareBracketings,
+      formatComparison,
+    } from '../lib/mishkenaz/bracket-validator';
+    import {
+      formatRegressionReport,
+      runValidatorRegressions,
+    } from '../lib/mishkenaz/validator-regressions';
+    import {
+      formatArgumentValidation,
+      validateArguments,
+    } from '../lib/mishkenaz/argument-structure';
+    import {
+      analyzeExpression,
+      formatUnifiedAnalysis,
+    } from '../lib/mishkenaz/unified-analyzer';
+
+    const input = document.querySelector('#expression');
+    const output = document.querySelector('#result');
+    const run = document.querySelector('#run');
+    const leftInput = document.querySelector('#left-expression');
+    const rightInput = document.querySelector('#right-expression');
+    const compare = document.querySelector('#compare');
+    const comparison = document.querySelector('#comparison');
+    const regressions = document.querySelector('#regressions');
+    const argVector = document.querySelector('#arg-vector');
+    const argSpec = document.querySelector('#arg-spec');
+    const argRun = document.querySelector('#arg-run');
+    const argResult = document.querySelector('#arg-result');
+    const unifiedExpression = document.querySelector('#unified-expression');
+    const unifiedArgs = document.querySelector('#unified-args');
+    const unifiedRun = document.querySelector('#unified-run');
+    const unifiedResult = document.querySelector('#unified-result');
+    const unifiedHistory = document.querySelector('#unified-history');
+    const compareHistory = document.querySelector('#compare-history');
+
+    function executeUnified() {
+      if (
+        !(unifiedExpression instanceof HTMLInputElement) ||
+        !(unifiedArgs instanceof HTMLInputElement) ||
+        !(unifiedResult instanceof HTMLElement)
+      ) return;
+      unifiedResult.textContent = formatUnifiedAnalysis(
+        analyzeExpression(
+          unifiedExpression.value,
+          unifiedArgs.value,
+          unifiedHistory instanceof HTMLInputElement ? unifiedHistory.checked : false,
+        ),
+      );
+    }
+
+    unifiedRun?.addEventListener('click', executeUnified);
+    [unifiedExpression, unifiedArgs].forEach(field => {
+      field?.addEventListener('keydown', event => {
+        if (event.key === 'Enter') executeUnified();
+      });
+    });
+
+    document.querySelectorAll('[data-unified]').forEach(button => {
+      button.addEventListener('click', () => {
+        if (
+          !(button instanceof HTMLElement) ||
+          !(unifiedExpression instanceof HTMLInputElement) ||
+          !(unifiedArgs instanceof HTMLInputElement)
+        ) return;
+        unifiedExpression.value = button.dataset.unified ?? '';
+        unifiedArgs.value = button.dataset.unifiedArgs ?? '';
+        if (unifiedHistory instanceof HTMLInputElement) {
+          unifiedHistory.checked = button.dataset.history === 'true';
+        }
+        executeUnified();
+      });
+    });
+
+    function execute() {
+      if (!(input instanceof HTMLInputElement) || !(output instanceof HTMLElement)) return;
+      output.textContent = formatValidation(validateVectorExpression(input.value));
+    }
+
+    run?.addEventListener('click', execute);
+    input?.addEventListener('keydown', event => {
+      if (event.key === 'Enter') execute();
+    });
+
+    document.querySelectorAll('[data-expression]').forEach(button => {
+      button.addEventListener('click', () => {
+        if (!(button instanceof HTMLElement) || !(input instanceof HTMLInputElement)) return;
+        input.value = button.dataset.expression ?? '';
+        execute();
+      });
+    });
+
+    function executeComparison() {
+      if (
+        !(leftInput instanceof HTMLInputElement) ||
+        !(rightInput instanceof HTMLInputElement) ||
+        !(comparison instanceof HTMLElement)
+      ) return;
+      comparison.textContent = formatComparison(
+        compareBracketings(
+          leftInput.value,
+          rightInput.value,
+          compareHistory instanceof HTMLInputElement ? compareHistory.checked : false,
+        ),
+      );
+    }
+
+    compare?.addEventListener('click', executeComparison);
+    [leftInput, rightInput].forEach(field => {
+      field?.addEventListener('keydown', event => {
+        if (event.key === 'Enter') executeComparison();
+      });
+    });
+
+    document.querySelectorAll('[data-left][data-right]').forEach(button => {
+      button.addEventListener('click', () => {
+        if (
+          !(button instanceof HTMLElement) ||
+          !(leftInput instanceof HTMLInputElement) ||
+          !(rightInput instanceof HTMLInputElement)
+        ) return;
+        leftInput.value = button.dataset.left ?? '';
+        rightInput.value = button.dataset.right ?? '';
+        if (compareHistory instanceof HTMLInputElement) {
+          compareHistory.checked =
+            (button.dataset.left ?? '').includes('Ori') ||
+            (button.dataset.right ?? '').includes('Ori');
+        }
+        executeComparison();
+      });
+    });
+
+    function executeArguments() {
+      if (
+        !(argVector instanceof HTMLSelectElement) ||
+        !(argSpec instanceof HTMLInputElement) ||
+        !(argResult instanceof HTMLElement)
+      ) return;
+
+      const supplied = argSpec.value
+        .split(',')
+        .map(part => part.trim())
+        .filter(Boolean)
+        .map(part => {
+          const [role, type] = part.split(':').map(value => value.trim());
+          return { role, type };
+        })
+        .filter(arg => arg.role && arg.type);
+
+      argResult.textContent = formatArgumentValidation(
+        validateArguments(argVector.value, supplied),
+      );
+    }
+
+    argRun?.addEventListener('click', executeArguments);
+    argVector?.addEventListener('change', () => {
+      if (!(argSpec instanceof HTMLInputElement) || !(argVector instanceof HTMLSelectElement)) return;
+      const defaults = {
+        Ma: 'left:SYS,right:SYS',
+        Ta: 'left:SYS,right:SYS',
+        Syn: 'reference-a:MODEL,reference-b:MODEL',
+        Ska: 'reference-a:MODEL,reference-b:MODEL',
+        '-reso': 'left:SYS,right:SYS',
+        '-kora': 'members:SYS,members:SYS',
+      };
+      argSpec.value = defaults[argVector.value] ?? '';
+      executeArguments();
+    });
+
+    executeUnified();
+    execute();
+    executeComparison();
+    executeArguments();
+    if (regressions instanceof HTMLElement) {
+      regressions.textContent = formatRegressionReport(runValidatorRegressions());
+    }
+  </script>
+
+  <style>
+    section{margin:2.5rem 0}
+    h2{font-weight:400;color:var(--accent)}
+    .status{border-left:2px solid var(--accent);padding:1rem 1.25rem;background:#1b1815}
+    .status p{color:var(--muted)}
+    .validator{border:1px solid var(--border);padding:1.25rem}
+    label{display:block;color:var(--muted);margin-bottom:.5rem}
+    .row{display:flex;gap:.6rem}
+    input,select{flex:1;background:transparent;border:1px solid var(--border);color:var(--fg);padding:.8rem;font:inherit}
+    select option{background:var(--bg);color:var(--fg)}
+    button{background:transparent;border:1px solid var(--border);color:var(--accent);padding:.7rem .9rem;cursor:pointer}
+    button:hover{border-color:var(--accent)}
+    .examples{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem 0}
+    .examples button{font-size:.85rem;color:var(--muted)}
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem}
+    .hint{color:var(--muted);font-size:.95rem}
+    .check{display:flex;gap:.5rem;align-items:center;color:var(--muted);margin:.6rem 0 1rem}
+    .check input{flex:0 0 auto}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;border-top:1px solid var(--border);padding-top:1rem;color:var(--fg)}
+    @media(max-width:650px){.row{flex-direction:column}.compare-grid{grid-template-columns:1fr}}
+  </style>
+</Layout>
