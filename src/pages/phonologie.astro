@@ -1,5 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import {
+  boundaryGloss,
+  pronunciationClassLabel,
+  pronunciationCorpus,
+  spokenR1Rules,
+} from '../lib/mishkenaz/spoken-phonology';
 ---
 
 <Layout title="Phonologie" description="Arbeitsmodell der gesprochenen R1-Form von Mishkenaz: Lauträume, Silbenbau, Prosodie und Namensanpassung.">
@@ -107,17 +113,48 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <section>
-    <h2>8. Testkorpus</h2>
+    <h2>8. Aussprache-Testkorpus</h2>
     <p>
-      Die nächste Rekonstruktionsrunde prüft Silbengrenzen, Akzent, Grenzstärke und Sandhi an:
+      Das Testkorpus trennt produktive R1-Morphologie, historisch gebundene Formen,
+      Namen und moderne Inventarlabels. Nicht jede sichtbare Form erlaubt daher
+      denselben Grad an Aussagenschärfe.
     </p>
-    <div class="formula">
-      <code>Saha-om · wi-Saha-om · Res-Ref-Log-il · bi'sa-i · la'ta-i · bi'Daria · la'Dvārakā · Ma'Ta'U-reso</code>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Ausdruck</th><th>Klasse</th><th>Prosodie</th><th>Silbenkandidat</th><th>Grenze</th><th>Befund</th></tr>
+        </thead>
+        <tbody>
+          {pronunciationCorpus.map(test => (
+            <tr>
+              <td><code>{test.expression}</code></td>
+              <td>{pronunciationClassLabel(test.pronunciationClass)} · {test.evidence}</td>
+              <td><code>{test.prosodicGrouping}</code></td>
+              <td>{test.syllableCandidate ? <code>{test.syllableCandidate}</code> : 'offen'}</td>
+              <td><code>{test.boundary}</code><br/><small>{boundaryGloss[test.boundary]}</small></td>
+              <td>{test.decision}{test.cautions.length > 0 && <small class="caution">{test.cautions.join(' · ')}</small>}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </section>
 
   <section>
-    <h2>9. Noch offen</h2>
+    <h2>9. Vorläufige Prosodieregeln</h2>
+    <ol>
+      {spokenR1Rules.map(rule => <li>{rule}</li>)}
+    </ol>
+    <p>
+      Besonders wichtig ist die neue Trennung: <strong>Namen bilden eigene phonologische
+      Domänen</strong>, während Rollenmarker wie <code>bi'</code> und <code>la'</code>
+      eng an sie anbinden. Moderne Vektorlabels werden dagegen nicht rückwärts als
+      R1-Aussprache gelesen.
+    </p>
+  </section>
+
+  <section>
+    <h2>10. Noch offen</h2>
     <p>
       Vollständiges Konsonanteninventar, Wortakzent, Allophone, Sandhi, feste Epenthese,
       Operatorbindungsprosodie und die Lautwandelregeln von R1 zu den Galut-Schichten.
@@ -129,9 +166,14 @@ import Layout from '../layouts/Layout.astro';
     h2{font-weight:400;color:var(--accent)}
     .status,.formula{border:1px solid var(--border);padding:1.25rem;margin:1.5rem 0}
     .status strong,code{color:var(--accent)}
+    .table-wrap{overflow-x:auto}
     table{width:100%;border-collapse:collapse;font-size:.92rem}
     th,td{text-align:left;vertical-align:top;padding:.7rem;border-bottom:1px solid var(--border)}
     th{color:var(--accent);font-weight:400}
-    @media(max-width:700px){table{font-size:.82rem}th,td{padding:.45rem}}
+    td small{color:var(--muted)}
+    .caution{display:block;margin-top:.35rem}
+    ol{padding-left:1.3rem}
+    li{margin:.45rem 0}
+    @media(max-width:700px){table{font-size:.82rem;min-width:760px}th,td{padding:.45rem}}
   </style>
 </Layout>
