@@ -9,6 +9,7 @@ const nav = [
   { href: '/', label: 'Start' },
   { href: '/grammatik', label: 'Grammatik' },
   { href: '/proto-mishkenaz', label: 'Proto-Mishkenaz' },
+  { href: '/phonologie', label: 'Phonologie' },
   { href: '/rueckuebersetzung', label: 'Rückübersetzung' },
   { href: '/vektoren', label: 'Vektoren' },
   { href: '/woerterbuch', label: 'Wörterbuch' },
@@ -57,15 +58,41 @@ const nav = [
       display: flex;
       gap: 1.5rem;
       flex-wrap: wrap;
+      align-items: center;
     }
-    nav a {
+    nav a, nav summary {
       color: var(--muted);
       text-decoration: none;
       font-size: 0.95rem;
       letter-spacing: 0.02em;
+      cursor: pointer;
     }
-    nav a:hover, nav a.active {
+    nav a:hover, nav a.active, nav summary:hover, .tools.active > summary {
       color: var(--accent);
+    }
+    .tools {
+      position: relative;
+    }
+    .tools > summary {
+      list-style: none;
+    }
+    .tools > summary::-webkit-details-marker {
+      display: none;
+    }
+    .tools-menu {
+      position: absolute;
+      right: 0;
+      top: calc(100% + .55rem);
+      min-width: 11rem;
+      padding: .45rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      z-index: 20;
+    }
+    .tools-menu a {
+      display: block;
+      padding: .45rem .6rem;
+      white-space: nowrap;
     }
     main {
       max-width: 760px;
@@ -105,6 +132,12 @@ const nav = [
       {nav.map((item) => (
         <a href={item.href} class={Astro.url.pathname === item.href ? 'active' : ''}>{item.label}</a>
       ))}
+      <details class:list={['tools', { active: Astro.url.pathname.startsWith('/validator') }]}>
+        <summary>Tools</summary>
+        <div class="tools-menu">
+          <a href="/validator" class={Astro.url.pathname === '/validator' ? 'active' : ''}>Vektor-Validator</a>
+        </div>
+      </details>
     </nav>
   </header>
   <main>
