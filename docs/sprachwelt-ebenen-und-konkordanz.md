@@ -84,6 +84,20 @@ Die Migrationsquelle auf thomas-kueper.de bleibt bis zur Migration unverändert.
 
 - **Vektoren:** V34 *Ira* → *Vya-Ma* (Attraktor, Anziehung; Schatten Obsession). V40 *Kora*: Bezeichnung „Integration“, die Schattenzeile „Der Verlust der Grenze“ trägt die Fusionswarnung. V42 *Ona-nO*: Kanonbedeutung „das Ganze, vollständig, aber nicht fertig“; die bisherige Beschreibung als Galut-Schicht kennzeichnen.
 - **Rückübersetzungen:** *Ma'Ta'U-kora* ist im Kanon Liebe, die Gegensätze integriert und die Grenze wahrt; Verschmelzung ist bereits *Ma-U*.
-- **Noch zu entscheiden:**
-  1. Suffixform zu *Vya-Ma* und Umgang mit bestehenden *-ira*-Formen (Wörterbuch *-ira*, Rückübersetzung *Schadenfreude = Sa-Ta-Ira*): neue Form im Kanon oder *-ira* als Galut-Form?
-  2. Komposita für *Lume*, *Kesh* und *Palya*.
+- **Suffix *-vama*** (Beschluss 25.10.2026): Meta-Operator-Suffix zu *Vya-Ma*, entstanden durch Zusammenziehung *vya-ma* → *vama*. Kanonform z. B. *Schadenfreude = Sa-Ta-vama* (Bruch-Grenze-Anziehung). Die bisherigen *-ira*-Formen (*Sa-Ta-Ira*, Wörterbuch *-ira* „Attraktor, Obsession“) werden als Galut-Formen geführt. Ob *-ira* im Kanon künftig als Suffix der Selbstreflexion dient, ist offen.
+
+## Neue Wörter der Kanonsprache (25.10.2026)
+
+Gebildet aus vorhandenen Vektoren und Urgesten, ohne neue Vektoren.
+
+| Wort | Zerlegung | Bedeutung | Omnizedenz-Zeichen |
+|---|---|---|---|
+| ***Vya-Ma*** (V34) | Vya (gerichtete Bewegung) + Ma (Bindung) | Attraktor, Anziehung; Schatten: Obsession. Gegenstück zu V35 *Vya-Re* | – |
+| ***-vama*** | Suffixform zu *Vya-Ma* | anziehend, hingezogen | – |
+| ***Om-Kin*** | Om (verkörpertes Wesen) + Kin (gerichtete Kraft, Bewegung) | Verstehen durch Tun; der Geist, der im Körper handelt | ∫ Lume |
+| ***Pa'Ta*** | Pa (Echo, Antwort) + Ta (Gegenüber), mit Ta-Stille | Verantwortung als Antwortfähigkeit: einem Anderen antworten, der widersprechen kann | 🌋 Kesh |
+| ***Om'Ta*** | Om (Urgeste 3: Stimmigkeit, Ankommen) + Ta (das Andere), mit Ta-Stille | Stimmigkeit, die das Andere einschließt: stimmig erst, wenn auch das Gegenüber zustimmen kann; Prüfanlass, kein Urteil | ✓ Palya |
+
+**Begründung der Ta-Stille:** *Pa'Ta* und *Om'Ta* tragen den Apostroph wie *Ma'Ta'U*. Damit ist die Ta-Konstante in beiden Ethikbegriffen grammatisch sichtbar: Verantwortung und Stimmigkeit gibt es nur mit einem Gegenüber, das Gegenüber bleibt.
+
+**Hinweis zu *Om*:** Die Urgeste *Om* bedeutet Stimmigkeit und Ankommen; in *Om-Bi-La* (Heimat) und *Om-Kin* steht *Om* für das verkörperte Wesen. Beides ist verwandt (das angekommene, verkörperte Selbst), sollte bei der Migration aber als Bedeutungsspektrum von *Om* beschrieben werden. Vom Aspekt *-om* unterscheidet sich das Wort durch Großschreibung und Stellung.
