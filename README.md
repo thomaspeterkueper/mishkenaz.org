@@ -61,6 +61,7 @@ external-tasks/
 
 ## Forschungsnotizen
 
+- [Sprachwelt: Ebenen und Konkordanz](docs/sprachwelt-ebenen-und-konkordanz.md) – Kanonsprache, historische Schichten, Figurenrede (25.10.2026)
 - [Abgleich Mishkenaz – relationale Prozessontologie – Trilogie der Antwortfähigkeit](docs/abgleich/2026-10-25-mishkenaz-prozessontologie-trilogie.md) (25.10.2026)
 
 ## Status
