@@ -84,7 +84,7 @@ Die Migrationsquelle auf thomas-kueper.de bleibt bis zur Migration unverändert.
 
 - **Vektoren:** V34 *Ira* → *Vya-Ma* (Attraktor, Anziehung; Schatten Obsession). V40 *Kora*: Bezeichnung „Integration“, die Schattenzeile „Der Verlust der Grenze“ trägt die Fusionswarnung. V42 *Ona-nO*: Kanonbedeutung „das Ganze, vollständig, aber nicht fertig“; die bisherige Beschreibung als Galut-Schicht kennzeichnen.
 - **Rückübersetzungen:** *Ma'Ta'U-kora* ist im Kanon Liebe, die Gegensätze integriert und die Grenze wahrt; Verschmelzung ist bereits *Ma-U*.
-- **Suffix *-vama*** (Beschluss 25.10.2026): Meta-Operator-Suffix zu *Vya-Ma*, entstanden durch Zusammenziehung *vya-ma* → *vama*. Kanonform z. B. *Schadenfreude = Sa-Ta-vama* (Bruch-Grenze-Anziehung). Die bisherigen *-ira*-Formen (*Sa-Ta-Ira*, Wörterbuch *-ira* „Attraktor, Obsession“) werden als Galut-Formen geführt. Ob *-ira* im Kanon künftig als Suffix der Selbstreflexion dient, ist offen.
+- **Suffix *-vama*** (Beschluss 25.10.2026): Meta-Operator-Suffix zu *Vya-Ma*, entstanden durch Zusammenziehung *vya-ma* → *vama*. Kanonform z. B. *Schadenfreude = Sa-Ta-vama* (Bruch-Grenze-Anziehung). Die bisherigen *-ira*-Formen (*Sa-Ta-Ira*, Wörterbuch *-ira* „Attraktor, Obsession“) werden als Galut-Formen geführt. Im Kanon wird *-ira* zum Suffix der Selbstreflexion (siehe unten).
 
 ## Neue Wörter der Kanonsprache (25.10.2026)
 
@@ -101,3 +101,24 @@ Gebildet aus vorhandenen Vektoren und Urgesten, ohne neue Vektoren.
 **Begründung der Ta-Stille:** *Pa'Ta* und *Om'Ta* tragen den Apostroph wie *Ma'Ta'U*. Damit ist die Ta-Konstante in beiden Ethikbegriffen grammatisch sichtbar: Verantwortung und Stimmigkeit gibt es nur mit einem Gegenüber, das Gegenüber bleibt.
 
 **Hinweis zu *Om*:** Die Urgeste *Om* bedeutet Stimmigkeit und Ankommen; in *Om-Bi-La* (Heimat) und *Om-Kin* steht *Om* für das verkörperte Wesen. Beides ist verwandt (das angekommene, verkörperte Selbst), sollte bei der Migration aber als Bedeutungsspektrum von *Om* beschrieben werden. Vom Aspekt *-om* unterscheidet sich das Wort durch Großschreibung und Stellung.
+
+## *-ira*: Suffix der Selbstreflexion (Beschluss 25.10.2026)
+
+Mit der Kanonbedeutung von *Ira* (⟴ reflexive Rückkopplung) wird *-ira* zum Meta-Operator der Selbstreflexion: Der Sprecher bemerkt sein eigenes Verhältnis zu dem, was er tut, und dieses Bemerken kann sein weiteres Handeln verändern.
+
+**Stellung:** wie die übrigen Meta-Operatoren nach dem Stamm und vor dem Aspekt: STAMM – *-ira* – ASP.
+
+| Form | Glosse | Bedeutung |
+|---|---|---|
+| *Saha-ira-om bi'sa-i la'ta-i* | Sehen-selbstbemerkend-stimmig · von-mir · zu-dir | Ich sehe dich und bemerke dabei mein Sehen. Es stimmt. |
+| *Saha-ira-ath bi'sa-i la'ta-i* | Sehen-selbstbemerkend-dissonant · von-mir · zu-dir | Ich bemerke, dass mein Sehen nicht stimmt – die Selbstkorrektur des Blicks. |
+| *Saha-ira-il bi'sa-i la'ta-i* | Sehen-selbstbemerkend-suchend · von-mir · zu-dir | Ich prüfe, wie ich dich sehe. |
+| *Pa'Ta-ira* | Antwort-Gegenüber-selbstbemerkend | Verantwortung, die ihre eigene Antwort prüft |
+| *Ma'Ta'U-ira* | Bindung-Grenze-Schutz-selbstbemerkend | Liebe, die sich selbst bemerkt |
+
+**Abgrenzung:** V22 *Ref* (Reflexion, Spiegelung; Schatten: Konfrontation mit sich selbst) bezeichnet das Gespiegeltwerden, V29 *Rek* (Rekursion; Schatten: Endlosschleife) das Kreisen um sich selbst. *-ira* bezeichnet das Bemerken, das in Handeln zurückwirkt. Sein Schatten ist die Selbstbespiegelung, die nicht mehr zum Anderen zurückkehrt.
+
+**Schichten:** In den Galut-Schichten bleibt *-ira* der Attraktor (Anziehung, Obsession), etwa in *Sa-Ta-Ira*. Dass dieselbe Form in zwei Schichten Verschiedenes bedeutet, ist ein Fall von Bedeutungswandel und wird bei Belegen mit der Schicht angegeben.
+
+**Bezug:** *Saha-ira-ath* ist die grammatische Form der *Prüfung des eigenen Blicks* (*Der erhellte Blick*): „Ein Blick wird heller, wenn wir erkennen können, wo er noch korrigiert werden muss.“
+
