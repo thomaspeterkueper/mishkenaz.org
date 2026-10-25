@@ -59,14 +59,31 @@ Abkürzungen: **M** = Mishkenaz (Vektoren, Grammatik); **O** = Symbolsprache auf
   Nach den Regeln oben wären das entweder K-Texte, die nachgezogen werden, oder H-Schichten, die als solche markiert werden.
 - **Mehrfachfunktion in M:** *sol-, val-, ori-, avi-* sind zugleich Vektoren und Zeitpartikel, *-mira* und *-ona* zugleich Vektoren und Pluralsuffixe. Das ist sprachlich plausibel (Grammatikalisierung) und sollte als solche beschrieben werden, damit es nicht wie eine Doppelbelegung wirkt.
 
-## Offene Entscheidungen
+## Beschlüsse vom 25.10.2026
 
-1. **Kora:** Bleibt in K die Integration (O/RE/FH), und wird die Fusionswarnung in M als Schatten von Kora geführt? Oder wird Fusion ein eigener Name?
-2. **Ira:** Reflexion (O) oder Anziehung (M)? Der jeweils andere Sinn braucht einen eigenen Namen oder wird Schicht.
-3. **Mira:** Schwingung (M, RE, FH) oder Staunen (O)?
-4. **Saha:** Ist die revidierte O-Bedeutung (trainierbare Wahrnehmung) die K-Bedeutung? M „Sicht“ passt, FH „Präsenz“ wäre Schicht.
-5. **Zeichen ∇:** Val (O) oder Vya (RE/FH)?
-6. **Ona-nO:** neu bestimmen (K) oder als Glaube der Galut-Sprecher führen (H)?
-7. **Vektoren und Symbole:** Ist jeder Kanonbegriff zugleich ein Mishkenaz-Wort? Soll Mishkenaz Begriffe wie Lume, Kesh und Palya als Wörter aufnehmen?
+| Punkt | Kanonsprache (K) | Als Schicht (H) geführt |
+|---|---|---|
+| **Kora** ⊕ | Integration, dritte Option; Fusion ist ihr Schatten | M V40 „Integration · Fusion“ |
+| **Ira** ⟴ | reflexive Rückkopplung, Selbstreflexion | M V34 „Ira“ als Attraktor |
+| **V34** | neuer Name ***Vya-Ma*** – gerichtete Bewegung (Vya) zur Bindung (Ma), Gegenstück zu V35 *Vya-Re*; Schatten: Obsession | – |
+| **Mira** ∼ | Schwingung, Rhythmus | O bis 25.10.2026: Staunen, Offenheit, Neugier |
+| **Saha** 𓂀 | trainierbare Wahrnehmung (passt zu M V06 „Sicht“) | RE: Feldwahrnehmung; FH: Präsenz, Da-Sein |
+| **Zeichen ∇** | *Val*; *Vya* behält → | RE/FH: ∇ Vya |
+| **Eko** ≈ | Entsprechung; Stimmigkeit liegt allein bei *Palya* ✓ | FH: Eko = Stimmigkeit |
+| **Kesh, Zua** | 🌋, ☯ | FH: ※, ◐ |
+| **Zählung** | 42 Vektoren (plus V00) | 28 Vektoren der Resonanzethik |
+| **Ona-nO** (V42) | „das Ganze, vollständig, aber nicht fertig“ | Rückkehr in die Ur-Einheit, „vollständige Auflösung“ als Glaube der Galut-Sprecher |
+| **Lume, Kesh, Palya** | werden Mishkenaz-Wörter als Komposita aus vorhandenen Vektoren und Urgesten, ohne neue Vektoren | – |
+| **Feldsprache in O** (Kesh, Nunc, Laya, Eko) | auf Kanonstand gebracht | frühere Formulierung als datierter Hinweis auf der jeweiligen Symbolseite |
 
-Die Bedeutungsfragen 1–5 betreffen omnizedenz.org und sind dort als External Task `EXT-MISH-OMNI-20261025-001` hinterlegt. Die Fragen 6 und 7 entscheidet Mishkenaz selbst.
+Umgesetzt in omnizedenz.org (Symbolseiten Mira, Kesh, Nunc, Laya, Eko, Kora); der External Task `EXT-MISH-OMNI-20261025-001` ist erledigt.
+
+## Folgen für die Mishkenaz-Seiten (bei der Migration umzusetzen)
+
+Die Migrationsquelle auf thomas-kueper.de bleibt bis zur Migration unverändert.
+
+- **Vektoren:** V34 *Ira* → *Vya-Ma* (Attraktor, Anziehung; Schatten Obsession). V40 *Kora*: Bezeichnung „Integration“, die Schattenzeile „Der Verlust der Grenze“ trägt die Fusionswarnung. V42 *Ona-nO*: Kanonbedeutung „das Ganze, vollständig, aber nicht fertig“; die bisherige Beschreibung als Galut-Schicht kennzeichnen.
+- **Rückübersetzungen:** *Ma'Ta'U-kora* ist im Kanon Liebe, die Gegensätze integriert und die Grenze wahrt; Verschmelzung ist bereits *Ma-U*.
+- **Noch zu entscheiden:**
+  1. Suffixform zu *Vya-Ma* und Umgang mit bestehenden *-ira*-Formen (Wörterbuch *-ira*, Rückübersetzung *Schadenfreude = Sa-Ta-Ira*): neue Form im Kanon oder *-ira* als Galut-Form?
+  2. Komposita für *Lume*, *Kesh* und *Palya*.
