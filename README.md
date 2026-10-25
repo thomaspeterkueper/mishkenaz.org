@@ -59,6 +59,10 @@ external-tasks/
   rejected/                 Abgelehnte Anforderungen
 ```
 
+## Forschungsnotizen
+
+- [Abgleich Mishkenaz – relationale Prozessontologie – Trilogie der Antwortfähigkeit](docs/abgleich/2026-10-25-mishkenaz-prozessontologie-trilogie.md) (25.10.2026)
+
 ## Status
 
 **Stand 2026-07-14: Grundgerüst angelegt, alle sechs Seiten sind Platzhalter.**
