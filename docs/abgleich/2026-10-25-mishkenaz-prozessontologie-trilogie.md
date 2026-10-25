@@ -2,6 +2,18 @@
 
 **25. Oktober 2026 – Forschungsnotiz, kein neuer Kanon.** Keine Seite wurde verändert.
 
+> **Korrektur (25.10.2026, abends):** Diese Notiz und die erste Konkordanz stützten sich auf die ältere Vektorliste von thomas-kueper.de. Auf mishkenaz.org gilt seit September 2026 eine kanonische Zählung (`src/pages/vektoren.astro`), in der die Grammatik, die Urgesten und Ona-nO bereits prozessual gefasst sind. Zuordnung der betroffenen Stellen:
+>
+> | ältere Liste (thomas-kueper.de) | kanonische Zählung (mishkenaz.org) |
+> |---|---|
+> | V34 *Ira* (Attraktor) | kein Vektor; V34 ist *Phi*. Anziehung ist im Kanon das Kompositum *Vya-Ma* / *-vama* |
+> | V40 *Kora* (Integration · Fusion) | V42 *-kora* |
+> | V41 *Kran* (Differenzierung) | nicht im 42er-System; V41 ist *-vya* |
+> | V42 *Ona-nO* (Ur-Einheit, Auflösung) | V35 *Ona-nO*, bereits als „Schwelle, an der Integration möglich wird – keine Selbstauflösung“ bestimmt |
+> | *-ira* (Attraktor) | V40 *-ira*, Kanonbedeutung Selbstreflexion |
+>
+> Die inhaltlichen Beschlüsse gelten unverändert; nur die Nummern sind entsprechend zu lesen. Auch die Frage, ob die Aspekte eine Stellungnahme des Sprechers sind, war auf mishkenaz.org bereits entschieden: Die Grammatik nennt sie „relational-epistemisch“.
+
 ## Gegenstand und gelesener Umfang
 
 | Text | Fundstelle | Gelesen |

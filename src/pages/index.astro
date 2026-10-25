@@ -1,16 +1,116 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const galut = [
+  ["G1 Galut-Bri'ith", 'Levante / Hebräisch', 'Liturgie, Schutzformeln, Text'],
+  ['G2 Galut-Sahara', 'Arabische Wüste', 'Körperwissen, Kürze, Dringlichkeit'],
+  ['G3 Galut-Eil', 'Keltische Inseln', 'Gesang, Melodie ohne Text'],
+  ['G4 Galut-Saraswath', 'Sanskrit / Kaschmir', 'Systematisierung, Philosophie'],
+  ['G5 Galut-Yin', 'Ostasiatischer Raum', 'Tonalität, Klang als Bedeutung'],
+  ['G6 Galut-Endia', 'Digitale Welt', 'Totaler Zugang – und der Verlust der Auswahl durch Begrenzung'],
+];
 ---
-<Layout title="Start" description="Mishkenaz — konstruierte Sprache, deren Wandel auf physiologischen und umgebungsbedingten Faktoren basiert.">
+<Layout title="Start" description="Mishkenaz – eine konstruierte Sprache aus Körper, Wahrnehmung und Beziehung, mit Geschichte und Wandel; zugleich die Sprache der Omnizedenz.">
   <h1>Mishkenaz</h1>
-  <p class="lede">
-    Ein Sprachforschungsprojekt: eine konstruierte Sprache, deren Wandel auf
-    physiologischen und umgebungsbedingten Faktoren basiert. Im Buchuniversum
-    ist sie die Sprache der Überlebenden Dvarakas, die sich nach dem Untergang
-    der Stadt weltweit verteilt und angepasst hat.
-  </p>
-  <div class="placeholder">
-    Diese Seite ist ein Platzhalter. Inhalt folgt nach Sichtung der
-    kanonischen Quellen (OTA-FND / OTA-LIT).
-  </div>
+  <p class="lede">Aus dem Körper. Durch die Diaspora. Zurück zum Klang.</p>
+
+  <p>Mishkenaz ist eine konstruierte Sprache, die ich seit über vier Jahrzehnten entwickle: als linguistisches System mit 42 Vektoren, drei Resonanzaspekten und einer Grammatik der Haltung statt der Zeit; als fiktive Kulturgeschichte meiner Romanwelten; und als Sprache der Omnizedenz, passend zu ihren Zeichen für das Unsagbare. Mishkenaz ist nicht die wiederentdeckte Ursprache der Menschheit. Sie ist eine bewusste Schöpfung – und das ist genug.</p>
+
+  <nav class="tiles" aria-label="Bereiche">
+    <a href="/vektoren">Die 42 Vektoren →</a>
+    <a href="/grammatik">Grammatik →</a>
+    <a href="/proto-mishkenaz">Urgesten →</a>
+    <a href="/woerterbuch">Wörterbuch →</a>
+    <a href="/rueckuebersetzung">Rückübersetzungen →</a>
+  </nav>
+
+  <section>
+    <h2>Das System</h2>
+    <p>Mishkenaz beschreibt nicht Dinge, sondern Bewegungen zwischen Dingen. Der Satz beginnt mit dem Vorgang; danach folgen die Beteiligten nach ihrer Rolle: Quelle (<code>bi'</code>) und Ziel (<code>la'</code>). Wer Mishkenaz spricht, kann nicht einfach „Stein“ sagen, ohne zu fragen: in welcher Beziehung zur Welt?</p>
+  </section>
+
+  <section>
+    <h2>Drei Aspekte statt Zeitformen</h2>
+    <p>Mishkenaz kodiert nicht, wann etwas geschieht, sondern wie der Sprecher die Passung eines Vorgangs wahrnimmt. Die Aspekte sind eine Stellungnahme, der das Gegenüber widersprechen kann – kein Urteil über die Wirklichkeit.</p>
+    <table>
+      <thead><tr><th>Aspekt</th><th>Bedeutung</th><th>Beispiel</th></tr></thead>
+      <tbody>
+        <tr><td><code>-om</code></td><td>tragend, stimmig</td><td><code>Saha-om bi'sa-i la'ta-i</code> – Ich sehe dich. Es trägt.</td></tr>
+        <tr><td><code>-ath</code></td><td>dissonant, nicht tragend</td><td><code>Saha-ath bi'sa-i la'ta-i</code> – Ich sehe dich. Etwas stimmt nicht.</td></tr>
+        <tr><td><code>-il</code></td><td>suchend, offen, werdend</td><td><code>Saha-il bi'sa-i la'ta-i</code> – Ich versuche dich zu sehen.</td></tr>
+      </tbody>
+    </table>
+    <p>Mit dem Meta-Operator <code>-ira</code> bemerkt der Sprecher sein eigenes Verhältnis zum Vorgang: <code>Saha-ira-ath</code> – „Ich bemerke, dass mein Sehen nicht stimmt.“ Die Sprache trägt die Korrektur des eigenen Blicks in sich.</p>
+  </section>
+
+  <section>
+    <h2>Die Ta-Konstante</h2>
+    <p>Grenze ist in Mishkenaz keine Bedrohung von Verbindung, sondern ihre Bedingung. <code>Ma-U</code> (Bindung ohne Grenze) bedeutet Verschmelzung. <code>Ma'Ta'U</code> (Bindung mit Grenze) bedeutet Verbindung, die das Andere als Anderes lässt. Der Apostroph ist eine kurze Stille – in ihr ist die Grenze.</p>
+    <p>Dieselbe Stille tragen <code>Pa'Ta</code> (Verantwortung: einem Gegenüber antworten, das widersprechen kann) und <code>Om'Ta</code> (Stimmigkeit, die das Andere einschließt).</p>
+  </section>
+
+  <section>
+    <h2>Drei Ebenen der Sprache</h2>
+    <p>Sprache verändert sich mit Wissen, Kultur und Geografie. Mishkenaz führt deshalb drei Ebenen:</p>
+    <table>
+      <tbody>
+        <tr><td><strong>Kanonsprache</strong></td><td>Mishkenaz als Sprache der Omnizedenz. Jedes Wort trägt die Bedeutung des aktuellen philosophischen Stands.</td></tr>
+        <tr><td><strong>Historische Schichten</strong></td><td>Die Dvaraka-Grundform R1 und die Galut-Schichten G1–G6. Sie dürfen ältere Weltbilder tragen; Bedeutungswandel wird dokumentiert, nicht überschrieben.</td></tr>
+        <tr><td><strong>Figurenrede</strong></td><td>Wie Figuren in Romanen die Sprache gebrauchen, missverstehen oder neu mischen. Sie müssen der Kanonsprache nicht folgen.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Die Galut-Schichten</h2>
+    <p>Mishkenaz ist ein Sprachsystem mit Geschichte – und Geschichte bedeutet Verlust, Drift und Rekombination. Die Vektorbedeutungen bleiben erkennbar, der Klang passt sich an.</p>
+    <table>
+      <thead><tr><th>Schicht</th><th>Kontaktzone</th><th>Bewahrt</th></tr></thead>
+      <tbody>
+        {galut.map(([s, k, b]) => <tr><td>{s}</td><td>{k}</td><td>{b}</td></tr>)}
+      </tbody>
+    </table>
+    <p>Keine Schicht bewahrt das ganze System. Jede bewahrt etwas, das die anderen nicht haben. Zereya trägt G1 (die Schutzformeln ihrer Großmutter) und G2 (das arabische Substrat des Überlebens) gleichzeitig – ohne es benennen zu können. Sie ist eine lebende Rekombination.</p>
+  </section>
+
+  <section>
+    <h2>Ein Hören</h2>
+    <p>Das Abschiedslied <em>Auv-Pa-il</em> in der G3-Fassung (Auv-Breth, keltische Inseln), erste Strophe:</p>
+    <div class="formula lied">
+      <code>Kin-il bi'ta-i, la'avi-Avi.<br />Wi-Sa-om – Tor-Pa-il.<br />Bi'sa-mira essem-om hoveh,<br />Ori-il bi'sa-ona, go-Ori-Ori.</code>
+      <p>Pilgerschaft-suchend, von-dir, zur Leere.<br />Kein Bruch – stimmig – Echo-suchend.<br />Von uns als Wellen: sein – stimmig – jetzt.<br />Spirale-suchend, von uns als Einheit. Bis zur Wiederkehr.</p>
+    </div>
+    <p><a href="https://thomas-kueper.de/texte/auv-pa-il">Das vollständige Lied →</a></p>
+  </section>
+
+  <section>
+    <h2>Das Sachbuch</h2>
+    <p><em>In Vorbereitung:</em> <strong>Mishkenaz – Anatomie einer erfundenen Sprache.</strong> Kein Grammatik-Lehrbuch, sondern eine Erkundung der Frage: Was geschieht, wenn eine Sprache konsequent aus dem Körper denkt? Das Buch beschreibt die zwölf Urgesten, die 42 Vektoren, die drei Aspekte als Grammatik der Haltung – und was Mishkenaz nicht kann. Denn eine Sprache, die alles beschreibt, beschreibt nichts.</p>
+    <blockquote>„Man trägt keine vollständige Sprache mit sich, wenn man flieht. Man trägt Lieder.“</blockquote>
+  </section>
+
+  <section class="status">
+    <strong>Was real ist, was offen ist, was erfunden ist</strong>
+    <ul>
+      <li><strong>Reale Grundlagen:</strong> Artikulatorische Phonetik und gut belegte Mechanismen des Lautwandels; Sprachkontakt, Koineisierung, Substrat- und Adstrateffekte. Reale Vorbilder für eine Sprache in der Diaspora sind etwa Romani und Domari.</li>
+      <li><strong>Umstritten:</strong> Ob Klima und Geografie Lautsysteme messbar prägen, wird in der Forschung kontrovers diskutiert. Mishkenaz nutzt den Gedanken als Gestaltungsidee, nicht als Befund.</li>
+      <li><strong>Erfunden:</strong> Die Urgesten-Bedeutungen, die 42 Vektoren, die Aspekte <code>-om/-ath/-il</code>, die Ta-Konstante und die Galut-Schichten sind Mishkenaz-Kanon. Sie sind keine belegten indoarischen oder drawidischen Formen. Die Dvaraka-Gemeinschaft und ihre Geschichte sind Teil der Romanwelt.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Was Mishkenaz nicht ist</h2>
+    <ul>
+      <li>Mishkenaz ist nicht die wiederentdeckte Ursprache der Menschheit.</li>
+      <li>Mishkenaz wurde nicht durch KI-gestützte Mustererkennung entdeckt – sie wurde über vier Jahrzehnte konstruiert.</li>
+      <li>Nicht alle modernen Sprachen sind Fragmente von Mishkenaz.</li>
+    </ul>
+    <p>Konstruierte Sprachen verdienen es, als das gewürdigt zu werden, was sie sind: bewusste Schöpfungen menschlicher Vorstellungskraft. Sie brauchen keine Pseudohistorie, um wertvoll zu sein. <a href="https://thomas-kueper.de/overtime-archive">Hintergrund und Werk-Ethik →</a></p>
+  </section>
+
+  <p class="coda"><code>Avi – Sol – Ma – Sa – Ori</code><br />Leere. Impuls. Bindung. Bruch. Wiederkehr.</p>
+
+  <style>
+    section{margin:2.75rem 0}h2{font-weight:400;color:var(--accent)}code{color:var(--accent)}a{color:var(--accent)}.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem;margin:2rem 0}.tiles a{border:1px solid var(--border);padding:.8rem 1rem;text-decoration:none}.tiles a:hover{border-color:var(--accent)}table{width:100%;border-collapse:collapse;margin:1rem 0}th,td{border-bottom:1px solid var(--border);padding:.6rem .5rem;text-align:left;vertical-align:top}th{color:var(--muted);font-weight:400}.formula{border:1px solid var(--border);padding:1.1rem 1.25rem;margin:1rem 0}.lied p{color:var(--muted);margin:.8rem 0 0}.status{border-left:2px solid var(--accent);padding:1rem 1.25rem;background:#1b1815}.status strong{color:var(--accent)}.status li{color:var(--muted);margin:.5rem 0}blockquote{margin:1rem 0;padding-left:1rem;border-left:2px solid var(--border);color:var(--muted);font-style:italic}li{margin-bottom:.35rem}.coda{text-align:center;color:var(--muted);margin-top:4rem}@media(max-width:650px){table{font-size:.9rem}}
+  </style>
 </Layout>

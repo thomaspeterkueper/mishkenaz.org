@@ -1,10 +1,97 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+const weitere = [
+  { wort: '정 Jeong', sprache: 'Koreanisch', mish: 'Ma-Ta-Reso', text: 'Tiefe Verbundenheit durch gemeinsame Geschichte – Bindung, Grenze, Resonanz' },
+  { wort: 'Hygge', sprache: 'Dänisch', mish: 'Ma-Bi-om', text: 'Gemütliche Geborgenheit – Bindung und Wärme, die tragen' },
+  { wort: 'Fernweh', sprache: 'Deutsch', mish: 'Ku-Saha-Sa', text: 'Sehnsucht nach der Ferne – Hunger nach dem Sehen, über eine Schwelle hinweg' },
+  { wort: 'Schadenfreude', sprache: 'Deutsch', mish: 'Sa-Ta-vama', text: 'Freude am Schmerz des Anderen – Bruch, Grenze, Anziehung. Galut-Form: Sa-Ta-Ira.' },
+  { wort: 'Weltschmerz', sprache: 'Deutsch', mish: 'Ona-Sa-Saha', text: 'Leiden an der Welt als Ganzer – Ganzheit, Bruch, Sicht' },
+  { wort: 'Tessân', sprache: 'Mishkenaz R4', mish: 'Val-Ta-om', text: 'Tägliches Ausrichten gegen das Gefälle – Emergenz, Grenze, tragend. Kein deutsches Äquivalent.' },
+  { wort: 'Vûrath', sprache: 'Mishkenaz', mish: 'Ra-Wi-om', text: 'Institutionelles Weitermachen ohne Handeln – Fluss, Kälte, scheinbar tragend' },
+  { wort: 'Sôveth', sprache: 'Mishkenaz', mish: 'Sa-h-Vya', text: 'Das Gefälle – im Weltbild der Sprecher die bevorzugte Richtung des Geschehens' },
+];
 ---
-<Layout title="Rückübersetzung">
-  <h1>Rückübersetzung</h1>
-  <p class="lede">Platzhalter — Inhalt folgt nach Sichtung der kanonischen Quellen (read-before-write).</p>
-  <div class="placeholder">
-    Diese Seite ist noch nicht befüllt.
-  </div>
+<Layout title="Rückübersetzungen" description="Verdichtete Bedeutungsfelder wie Sehnsucht, Heimat, Saudade oder Han – in Mishkenaz-Vektoren aufgeschlüsselt.">
+  <h1>Rückübersetzungen</h1>
+  <p class="lede">Manche Wörter unserer Sprachen tragen Bedeutungsfelder, die mehr enthalten, als ein einzelnes Wort fassen kann – Sehnsucht, Saudade, Heimat, Han. Mishkenaz schlüsselt sie in ihre Vektor-Komponenten auf.</p>
+
+  <section class="status">
+    <strong>Epistemischer Status</strong>
+    <p>Das ist keine Behauptung über sprachliche Abstammung, sondern ein Werkzeug, um die innere Architektur dieser Wörter sichtbar zu machen. Alle Zerlegungen sind Mishkenaz-Interpretationen der Bedeutungsfelder, keine etymologischen Aussagen.</p>
+  </section>
+
+  <section>
+    <h2>Sehnsucht</h2>
+    <div class="formula"><code>Ku-Saha + Pa-Sa</code><br /><small>wörtlich: Hunger-Sehen + Echo-Bruch</small></div>
+    <p><code>Ku-Saha</code> – man hungert nach dem Sehen, man dürstet nach dem Blick auf etwas. <code>Pa-Sa</code> – das Echo, die gesuchte Form, ist gebrochen, nicht erreichbar.</p>
+    <p>Sehnsucht ist das Leiden an der Sichtbarkeit des Unerreichbaren. Man würde nicht leiden, wenn man es nicht sähe – aber man sieht es, und genau das schmerzt.</p>
+    <h3>Verwandte Bedeutungsfelder</h3>
+    <ul>
+      <li><strong>Saudade</strong> (Portugiesisch) = <code>Ku-Saha-h</code> – Hunger nach dem Sehen, der im Zerfall liegt: das Verlorene, das vergeht</li>
+      <li><strong>한 Han</strong> (Koreanisch) = <code>Sa-h-Ori</code> – Bruch, Zerfall, Wiederkehr: ein kollektiver Schmerz, der in veränderter Gestalt wiederkehrt</li>
+      <li><strong>Hiraeth</strong> (Walisisch) = <code>Ku-Ona-h</code> – Hunger nach einer verlorenen Ganzheit</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Heimat</h2>
+    <div class="formula"><code>Om-Bi-La</code><br /><small>wörtlich: Person-Ort-Erlaubnis</small></div>
+    <p><code>Om</code> – ich als verkörpertes, angekommenes Wesen. <code>Bi</code> – ein Ort mit Wärme. <code>La</code> – Erlaubnis: Ich darf hier sein und muss es nicht rechtfertigen.</p>
+    <p>Heimat ist nicht nur ein Ort. Es ist der Ort, an dem mein Sein erlaubt ist – wo ich nicht erkläre, rechtfertige oder beweise.</p>
+    <h3>Warum Heimat schwer zu übersetzen ist</h3>
+    <ul>
+      <li>Englisch <em>home</em> ≈ <code>Bi-La</code> (Ort-Erlaubnis) – es fehlt die Person (<code>Om</code>)</li>
+      <li>Französisch <em>chez moi</em> = „bei mir“ – Ort ohne die Dimension der Erlaubnis</li>
+      <li>Mishkenaz <code>Om-Bi-La</code> – alle drei Dimensionen als Einheit</li>
+    </ul>
+    <p class="note">Offene Frage: Erlaubnis ist noch kein Zugang. Ein eigenes Wort für die offene Tür, durch die man nicht gehen kann, steht noch aus.</p>
+  </section>
+
+  <section>
+    <h2>Liebe</h2>
+    <div class="formula"><code>Ma'Ta'U</code><br /><small>wörtlich: Bindung-Grenze-Schutz</small></div>
+    <p><code>Ma</code> – Bindung, das Nährende. <code>Ta</code> – Grenze, das Andere, du als du. <code>U</code> – Schutz, Geborgenheit, die Hülle.</p>
+    <p>Liebe ohne <code>Ta</code> ist <code>Ma-U</code> – Verschmelzung, Besessenheit, Übergriff. Erst die Anerkennung der Grenze macht aus Bindung eine Beziehung, die den anderen als anderen lässt.</p>
+    <h3>Zustände der Liebe</h3>
+    <ul>
+      <li><code>Ma'Ta'U-reso</code> – Resonanz-Liebe: gegenseitig antwortend</li>
+      <li><code>Ma'Ta'U-ori</code> – wiederkehrende Liebe: Sehnsucht in der Schleife</li>
+      <li><code>Ma'Ta'U-h</code> – vergehende Liebe: im Abschied</li>
+      <li><code>Ma'Ta'U-val</code> – werdende Liebe: etwas Neues entsteht</li>
+      <li><code>Ma'Ta'U-kora</code> – integrierende Liebe: Gegensätze verbunden, die Grenze gewahrt</li>
+      <li><code>Ma'Ta'U-ira</code> – Liebe, die sich selbst bemerkt</li>
+      <li><code>Ma-U</code> (ohne Ta) – Verschmelzung, Besessenheit, Übergriff</li>
+    </ul>
+    <p class="note">In älterer Lesart stand <code>Ma'Ta'U-kora</code> für Verschmelzungsliebe mit dem Warnhinweis „Ta fehlt“. In der Kanonsprache ist Kora Integration; die Verschmelzung bleibt <code>Ma-U</code>.</p>
+  </section>
+
+  <section>
+    <h2>Andacht</h2>
+    <div class="formula"><code>Avi-Saha</code><br /><small>wörtlich: Leere-Schauen</small></div>
+    <p><code>Avi</code> – die offene Möglichkeit vor aller Form. <code>Saha</code> – das Sehen-Wollen, der Durst nach Sicht.</p>
+    <p>Andacht ist das Schauen in die Leere: nicht nach „etwas“, sondern in die Offenheit, aus der Form hervortreten kann.</p>
+    <ul>
+      <li><code>Avi-Saha-om</code> – Meditation: Andacht, die trägt</li>
+      <li><code>Avi-Saha-il</code> – Gebet: Andacht, die noch sucht</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Weitere Rückübersetzungen</h2>
+    <div class="grid">
+      {weitere.map((w) => (
+        <article>
+          <h3>{w.wort}</h3>
+          <small>{w.sprache}</small>
+          <code>{w.mish}</code>
+          <p>{w.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    section{margin:2.5rem 0}h2{font-weight:400;color:var(--accent)}h3{font-weight:400;color:var(--fg);margin:1.5rem 0 .4rem}code{color:var(--accent)}.status{border-left:2px solid var(--accent);padding:1rem 1.25rem;background:#1b1815}.status strong{color:var(--accent)}.status p,.note{color:var(--muted)}.formula{border:1px solid var(--border);padding:1rem 1.25rem;margin:1rem 0}.formula code{font-size:1.2rem}.formula small{color:var(--muted)}li{margin-bottom:.4rem}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}.grid article{border:1px solid var(--border);padding:1rem}.grid h3{margin:0}.grid small{color:var(--muted);display:block;margin-bottom:.4rem}.grid p{color:var(--muted);margin:.4rem 0 0}@media(max-width:650px){.grid{grid-template-columns:1fr}}
+  </style>
 </Layout>

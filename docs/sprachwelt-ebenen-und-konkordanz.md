@@ -2,6 +2,18 @@
 
 **Stand 25. Oktober 2026 – Arbeitsentwurf.** Grundlage: Entscheidung des Autors vom selben Tag; Abgleichnotiz `docs/abgleich/2026-10-25-mishkenaz-prozessontologie-trilogie.md`.
 
+> **Korrektur (25.10.2026, abends):** Diese Notiz und die erste Konkordanz stützten sich auf die ältere Vektorliste von thomas-kueper.de. Auf mishkenaz.org gilt seit September 2026 eine kanonische Zählung (`src/pages/vektoren.astro`), in der die Grammatik, die Urgesten und Ona-nO bereits prozessual gefasst sind. Zuordnung der betroffenen Stellen:
+>
+> | ältere Liste (thomas-kueper.de) | kanonische Zählung (mishkenaz.org) |
+> |---|---|
+> | V34 *Ira* (Attraktor) | kein Vektor; V34 ist *Phi*. Anziehung ist im Kanon das Kompositum *Vya-Ma* / *-vama* |
+> | V40 *Kora* (Integration · Fusion) | V42 *-kora* |
+> | V41 *Kran* (Differenzierung) | nicht im 42er-System; V41 ist *-vya* |
+> | V42 *Ona-nO* (Ur-Einheit, Auflösung) | V35 *Ona-nO*, bereits als „Schwelle, an der Integration möglich wird – keine Selbstauflösung“ bestimmt |
+> | *-ira* (Attraktor) | V40 *-ira*, Kanonbedeutung Selbstreflexion |
+>
+> Die inhaltlichen Beschlüsse gelten unverändert; nur die Nummern sind entsprechend zu lesen. Auch die Frage, ob die Aspekte eine Stellungnahme des Sprechers sind, war auf mishkenaz.org bereits entschieden: Die Grammatik nennt sie „relational-epistemisch“.
+
 ## Entscheidung des Autors
 
 > Mishkenaz behält verschiedene Ebenen, denn Sprache verändert sich mit Wissen, Kultur und Geografie. Zugleich soll Mishkenaz die Sprache der Omnizedenz sein, passend zu den Zeichen für das Unsagbare. Dafür braucht es eine konsistente Sprachwelt über alle Gedankenwerke. Einzelne Figuren in Romanen und Geschichten müssen dieser Sprachwelt nicht zwingend folgen.
@@ -78,7 +90,7 @@ Abkürzungen: **M** = Mishkenaz (Vektoren, Grammatik); **O** = Symbolsprache auf
 
 Umgesetzt in omnizedenz.org (Symbolseiten Mira, Kesh, Nunc, Laya, Eko, Kora); der External Task `EXT-MISH-OMNI-20261025-001` ist erledigt.
 
-## Folgen für die Mishkenaz-Seiten (bei der Migration umzusetzen)
+## Folgen für die Mishkenaz-Seiten (umgesetzt am 25.10.2026, Nummern siehe Korrektur oben)
 
 Die Migrationsquelle auf thomas-kueper.de bleibt bis zur Migration unverändert.
 
@@ -92,7 +104,7 @@ Gebildet aus vorhandenen Vektoren und Urgesten, ohne neue Vektoren.
 
 | Wort | Zerlegung | Bedeutung | Omnizedenz-Zeichen |
 |---|---|---|---|
-| ***Vya-Ma*** (V34) | Vya (gerichtete Bewegung) + Ma (Bindung) | Attraktor, Anziehung; Schatten: Obsession. Gegenstück zu V35 *Vya-Re* | – |
+| ***Vya-Ma*** | Vya (gerichtete Bewegung) + Ma (Bindung) | Attraktor, Anziehung; Schatten: Obsession. Gegenstück zu *Vya-Re* (ältere Liste) | – |
 | ***-vama*** | Suffixform zu *Vya-Ma* | anziehend, hingezogen | – |
 | ***Om-Kin*** | Om (verkörpertes Wesen) + Kin (gerichtete Kraft, Bewegung) | Verstehen durch Tun; der Geist, der im Körper handelt | ∫ Lume |
 | ***Pa'Ta*** | Pa (Echo, Antwort) + Ta (Gegenüber), mit Ta-Stille | Verantwortung als Antwortfähigkeit: einem Anderen antworten, der widersprechen kann | 🌋 Kesh |

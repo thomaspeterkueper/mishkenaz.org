@@ -1,10 +1,153 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Ebene: K = Kanonsprache (Sprache der Omnizedenz), H = historische Schicht / Weltbild der Sprecher
+type Eintrag = { w: string; de: string; en?: string; note?: string; ebene?: 'K' | 'H' };
+
+const sektionen: { titel: string; text?: string; eintraege: Eintrag[] }[] = [
+  {
+    titel: 'Kern-Vektoren',
+    eintraege: [
+      { w: 'Avi', de: 'Leere, Nullpunkt, offene Möglichkeit', en: 'Void, zero point, potential', note: 'V00 · Urgeste Avi (Schwa ə)' },
+      { w: 'Sol', de: 'Impuls, Beginn, erster Stoß', en: 'Impulse, beginning', note: 'V01' },
+      { w: 'Mira', de: 'Welle, Schwingung, Rhythmus', en: 'Wave, oscillation, rhythm', note: 'V02 · Omnizedenz ∼ Mira' },
+      { w: 'Sa', de: 'Bruch, Schwelle, Übergang', en: 'Break, threshold', note: 'V03 · Urgeste Sa' },
+      { w: 'Ona', de: 'Ganzheit – vollständig, aber nicht fertig', en: 'Wholeness', note: 'V04 · Omnizedenz ◯ Ona' },
+      { w: 'Vya', de: 'Richtung, gerichtete Entfaltung', en: 'Direction', note: 'V05 · Omnizedenz → Vya' },
+      { w: 'Saha', de: 'Sicht, Wahrnehmung', en: 'Sight, perception', note: 'V06 · Omnizedenz 𓂀 Saha' },
+      { w: 'Pa', de: 'Echo, Antwort, Identität, Name', en: 'Echo, answer, identity', note: 'V08 · Urgeste Pa' },
+      { w: 'La', de: 'Tor, Öffnung, Erlaubnis', en: 'Gate, opening, permission', note: 'V09' },
+      { w: 'Ra', de: 'Fluss, Zeit, Wachstum', en: 'Flow, time, growth', note: 'V10' },
+      { w: 'Bi', de: 'Ansatzpunkt, Quelle; Wärme, Ort, Präsenz', en: 'Source; warmth, place', note: 'V12 · Urgeste Bi' },
+      { w: 'Wi', de: 'Kälte, Abwesenheit, Nicht', en: 'Cold, absence, not', note: 'V13' },
+      { w: 'Ku', de: 'Hohlraum, Mangel, Suche, Frage', en: 'Hollow, lack, search', note: 'V14 · Urgeste Ku' },
+      { w: 'Ma', de: 'Bindung, Nähren, Sicherheit', en: 'Bond, nourishment', note: 'V16 · Urgeste Ma' },
+      { w: 'Ta', de: 'Gegenüber, Grenze, das Andere', en: 'Boundary, the other', note: 'V17 · Urgeste Ta · Ta-Konstante' },
+      { w: 'Kin', de: 'gerichtete Kraft, Bewegung', en: 'Directed force, motion', note: 'V20' },
+    ],
+  },
+  {
+    titel: 'Pronomen',
+    eintraege: [
+      { w: 'sa-i', de: 'ich', en: 'I', note: 'sa (Selbst/Quelle) + -i' },
+      { w: 'ta-i', de: 'du', en: 'you', note: 'ta (Gegenüber) + -i' },
+      { w: 'ku-i', de: 'er, sie, es – das Dritte', en: 'he, she, it', note: 'ku (das nicht festgelegte Andere) + -i' },
+      { w: 'sa-mira', de: 'wir – jede und jeder einzeln', en: 'we (distributive)', note: 'sa + -mira (distributiv)' },
+      { w: 'sa-ona', de: 'wir – als Einheit', en: 'we (collective)', note: 'sa + -ona (kollektiv)' },
+    ],
+  },
+  {
+    titel: 'Komposita',
+    text: 'Zusammensetzungen aus Vektoren und Urgesten. Der Apostroph markiert die Ta-Stille: eine kurze Pause, in der die Grenze hörbar wird.',
+    eintraege: [
+      { w: "Ma'Ta'U", de: 'Liebe – Bindung mit Grenze und Schutz', en: 'Love', note: 'Ma + Ta + U · Ta-Konstante' },
+      { w: 'Ma-U', de: 'Bindung ohne Grenze – Verschmelzung (Schatten der Liebe)', en: 'Fusion, enmeshment', note: 'Ma + U' },
+      { w: "Pa'Ta", de: 'Verantwortung – Antwort an ein Gegenüber, das widersprechen kann', en: 'Responsibility', note: 'Pa + Ta · Omnizedenz 🌋 Kesh · neu 25.10.2026' },
+      { w: "Om'Ta", de: 'Stimmigkeit, die das Andere einschließt', en: 'Coherence that includes the other', note: 'Om + Ta · Omnizedenz ✓ Palya · neu 25.10.2026' },
+      { w: 'Om-Kin', de: 'Verstehen durch Tun – der Geist, der im Körper handelt', en: 'Embodied understanding', note: 'Om + Kin · Omnizedenz ∫ Lume · neu 25.10.2026' },
+      { w: 'Vya-Ma', de: 'Anziehung, Attraktor (Schatten: Obsession)', en: 'Attraction', note: 'Vya + Ma · Suffixform -vama · neu 25.10.2026' },
+      { w: 'Om-Bi-La', de: 'Heimat – Person, Ort, Erlaubnis', en: 'Home', note: 'Om (verkörpertes Selbst) + Bi + La' },
+      { w: 'Avi-Saha', de: 'Andacht – das Schauen in die Leere', en: 'Devotion, meditation', note: 'Avi + Saha' },
+      { w: 'Ku-Saha', de: 'Sehnsucht – Hunger nach dem Sehen', en: 'Longing', note: 'Ku + Saha' },
+      { w: 'Ori-Kol', de: 'spiralförmige Wiederkehr des Klangs', en: 'Spiral return of sound', note: 'Ori + Kol' },
+      { w: 'Saha-om bi\'sa-i la\'ta-i', de: 'Ich sehe dich. Es trägt.', en: 'I see you. It holds.', note: 'Vollsatz · Aspekt -om' },
+      { w: 'Saha-ira-ath bi\'sa-i la\'ta-i', de: 'Ich bemerke, dass mein Sehen nicht stimmt.', en: 'I notice my seeing is off.', note: 'Vollsatz · -ira + -ath' },
+    ],
+  },
+  {
+    titel: 'Grammatische Formen',
+    text: 'Ausführlich in der Grammatik.',
+    eintraege: [
+      { w: '-om', de: 'tragend, stimmig – Stellungnahme des Sprechers', en: 'Holding (resonance aspect)' },
+      { w: '-ath', de: 'dissonant, nicht tragend', en: 'Dissonant (resonance aspect)' },
+      { w: '-il', de: 'suchend, offen, werdend', en: 'Seeking, open (resonance aspect)' },
+      { w: '-tum', de: 'Deprivation – schmerzhaftes, unwiederbringliches Fehlen', en: 'Deprivation marker' },
+      { w: 'wi-', de: 'Verneinung', en: 'Negation' },
+      { w: "bi'", de: 'Rollenpartikel: von (Quelle)', en: 'From (source)' },
+      { w: "la'", de: 'Rollenpartikel: zu (Ziel, Gegenüber)', en: 'To (goal)' },
+      { w: '-i', de: 'Singular', en: 'Singular' },
+      { w: '-mira', de: 'distributive Mehrzahl', en: 'Distributive plural' },
+      { w: '-ona', de: 'kollektive Einheit', en: 'Collective' },
+      { w: '-vama', de: 'anziehend, hingezogen (Suffixform zu Vya-Ma)', en: 'Attracted', note: 'neu 25.10.2026' },
+    ],
+  },
+  {
+    titel: 'Meta-Operatoren (V37–V42)',
+    eintraege: [
+      { w: "-h / '", de: 'Entropie, Zerfall, Loslassen; auch Genitiv', en: 'Entropy; genitive', note: 'V37' },
+      { w: '-val', de: 'Emergenz, Entfaltung, Neues', en: 'Emergence', note: 'V38 · Omnizedenz ∇ Val' },
+      { w: '-reso', de: 'Resonanz, Gegenseitigkeit', en: 'Resonance, mutuality', note: 'V39 · Omnizedenz ⇌ Reso' },
+      { w: '-ira', de: 'Selbstreflexion – das Bemerken, das ins Handeln zurückwirkt', en: 'Self-reflection', note: 'V40 · Omnizedenz ⟴ Ira · Kanonbedeutung seit 25.10.2026' },
+      { w: '-vya', de: 'Richtung (zu V05 Vya)', en: 'Direction', note: 'V41 · Funktion als Meta-Operator noch auszuarbeiten' },
+      { w: '-kora', de: 'Integration – die dritte Option; Schatten: Verschmelzung', en: 'Integration', note: 'V42 · Omnizedenz ⊕ Kora' },
+      { w: '-ori', de: 'Wiederkehr unter verändertem Zustand, Spirale', en: 'Recursion, spiral return', note: 'V36 · Omnizedenz ⟳ Ori' },
+    ],
+  },
+  {
+    titel: 'Historische Formen und Weltbild der Sprecher',
+    text: 'Diese Formen sind belegt, gehören aber einer älteren Schicht oder dem Weltbild der Sprecher an. Sie gelten nicht als Kanonsprache.',
+    eintraege: [
+      { w: '-ira', de: 'Anziehung, Attraktor, Obsession', note: 'Galut-Bedeutung; im Kanon: -vama', ebene: 'H' },
+      { w: 'Sa-Ta-Ira', de: 'Schadenfreude', note: 'Galut-Form; Kanon: Sa-Ta-vama', ebene: 'H' },
+      { w: '-kran', de: 'Differenzierung, Klarheit, Abstand', note: 'ältere Zählung V41; im kanonischen 42er-System nicht enthalten', ebene: 'H' },
+      { w: 'Qadesh-La-om', de: 'heilige Öffnung – stimmig (Schutzformel)', note: "G1 Galut-Bri'ith", ebene: 'H' },
+      { w: 'Sôveth', de: 'das Gefälle – im Weltbild der Sprecher die bevorzugte Richtung des Geschehens', note: 'Sa-h-Vya · Entropie-Metapher', ebene: 'H' },
+    ],
+  },
+];
 ---
-<Layout title="Wörterbuch">
+<Layout title="Wörterbuch" description="Mishkenaz – Deutsch: Kern-Vektoren, Pronomen, Komposita, grammatische Formen und Meta-Operatoren, mit Suche.">
   <h1>Wörterbuch</h1>
-  <p class="lede">Platzhalter — Inhalt folgt nach Sichtung der kanonischen Quellen (read-before-write).</p>
-  <div class="placeholder">
-    Diese Seite ist noch nicht befüllt.
-  </div>
+  <p class="lede">Mishkenaz – Deutsch. Die Einträge folgen der Kanonsprache; ältere Formen und Wörter aus dem Weltbild der Sprecher stehen gesondert und sind gekennzeichnet.</p>
+
+  <section class="status">
+    <strong>Epistemischer Status</strong>
+    <p>Alle Wörter sind Teil einer konstruierten Sprache. Bedeutungen und Zerlegungen sind Mishkenaz-Setzungen, keine etymologischen Aussagen über reale Sprachen.</p>
+  </section>
+
+  <input id="suche" type="search" placeholder="Suchen: Mishkenaz oder Deutsch …" aria-label="Wörterbuch durchsuchen" />
+
+  {sektionen.map((s) => (
+    <section class="dict" data-sektion>
+      <h2>{s.titel}</h2>
+      {s.text && <p class="note">{s.text}</p>}
+      <div class="grid">
+        {s.eintraege.map((e) => (
+          <article data-s={`${e.w} ${e.de} ${e.en ?? ''} ${e.note ?? ''}`.toLowerCase()} class={e.ebene === 'H' ? 'h' : ''}>
+            <code>{e.w}</code>
+            <p>{e.de}</p>
+            {e.en && <p class="en">{e.en}</p>}
+            {e.note && <small>{e.note}</small>}
+            {e.ebene === 'H' && <span class="tag">historisch</span>}
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+
+  <p id="leer" class="note" hidden>Keine Einträge gefunden.</p>
+
+  <script>
+    const feld = document.getElementById('suche') as HTMLInputElement | null;
+    const leer = document.getElementById('leer');
+    feld?.addEventListener('input', () => {
+      const q = feld.value.trim().toLowerCase();
+      let treffer = 0;
+      document.querySelectorAll<HTMLElement>('[data-sektion]').forEach((sek) => {
+        let inSek = 0;
+        sek.querySelectorAll<HTMLElement>('article').forEach((a) => {
+          const ok = !q || (a.dataset.s ?? '').includes(q);
+          a.hidden = !ok;
+          if (ok) inSek++;
+        });
+        sek.hidden = inSek === 0;
+        treffer += inSek;
+      });
+      if (leer) leer.hidden = treffer > 0;
+    });
+  </script>
+
+  <style>
+    section{margin:2.5rem 0}h2{font-weight:400;color:var(--accent)}code{color:var(--accent);font-size:1.05rem}.status{border-left:2px solid var(--accent);padding:1rem 1.25rem;background:#1b1815}.status strong{color:var(--accent)}.status p,.note{color:var(--muted)}#suche{width:100%;padding:.8rem 1rem;margin:1rem 0 0;background:#1b1815;border:1px solid var(--border);color:var(--fg);font:inherit}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}.grid article{border:1px solid var(--border);padding:1rem;position:relative}.grid article p{margin:.35rem 0 0}.grid .en{color:var(--muted);font-style:italic;font-size:.9rem}.grid small{display:block;margin-top:.5rem;color:var(--muted);font-size:.8rem}.grid article.h{border-style:dashed}.tag{position:absolute;top:.6rem;right:.75rem;font-size:.7rem;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}@media(max-width:650px){.grid{grid-template-columns:1fr}}
+  </style>
 </Layout>
