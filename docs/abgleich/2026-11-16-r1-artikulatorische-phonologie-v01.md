@@ -1,5 +1,8 @@
 # R1-Phonologie: körperbasierter Prüfstand v0.1
 
+> **Quellenkorrektur (16.11.2026, nach Wiederauffinden des Buchmanuskripts):** Die ältere Formulierung unten („noch kein vollständiges R1-Phoneminventar“) berücksichtigt die bereits vorhandene Buchfassung v0.9 nicht. In `thomaspeterkueper/buecherwelten/works/mishkenaz/manuscript/v0.9/07b_anhang_a_c.md` und `07c_anhang_a_c.md` gibt es eine ausdrücklich **freigegebene R1-Ableitungstabelle** mit ungefähr 17 Konsonanten und acht vokalischen Positionen (zusammen etwa 25). Dieser bestehende Konstruktionskanon ist Ausgangspunkt. Offen bleiben unabhängige Phonemkontrastprüfung, Silbenstrukturen, Betonung und die genauere Realisierung mancher Transkriptionszeichen. Die Kandidatentabelle in diesem Papier ist ein ergänzender phonetischer Prüfstand, **kein Ersatz für die Buchliste**. Insbesondere legt das Buch B primär bei Pa (nicht Ma) ab und behandelt Bi als positionalen Ansatz. Siehe außerdem Buchanhang D (G1–G5-Aussprachevarianten).
+
+
 **Datum:** 16. November 2026  
 **Status:** Arbeitshypothesen, kein Beschluss eines vollständigen R1-Phoneminventars.  
 **Öffentliche Darstellung:** `src/pages/proto-mishkenaz.astro`.  
