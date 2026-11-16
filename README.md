@@ -49,6 +49,7 @@ src/
   pages/
     index.astro             Start
     grammatik.astro         Grammatik
+    sprachgeschichte.astro  R1 und Galut-Schichten: belegter Stand und Wandelhypothesen
     proto-mishkenaz.astro   Proto-Mishkenaz
     rueckuebersetzung.astro Rückübersetzung
     vektoren.astro          Vektoren
