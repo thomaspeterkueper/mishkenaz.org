@@ -2,10 +2,10 @@
 import Layout from '../layouts/Layout.astro';
 
 const schichten = [
-  { id: 'R1', name: 'Dvārakā-Grundform', region: 'Fiktionale Ausgangsgemeinschaft', funktion: 'Vergleichsbasis für Rollenstruktur und Resonanzaspekte', beleg: 'Grammatischer Arbeitskanon; vollständige Phonologie noch offen', offen: 'Phoneminventar, Silbenbau, Betonung und datierte Textbelege' },
+  { id: 'R1', name: 'Dvārakā-Grundform', region: 'Fiktionale Ausgangsgemeinschaft', funktion: 'Vergleichsbasis für Rollenstruktur und Resonanzaspekte', beleg: 'Buch v0.9, Anhang A.10: ungefähr 17 Konsonanten und acht vokalische Positionen', offen: 'Minimalpaare, Silbenbau, Betonung und datierte Textbelege' },
   { id: 'G1', name: "Galut-Bri'ith", region: 'Levante / hebräischer Kontakt', funktion: 'Liturgische und textuelle Überlieferung', beleg: 'Literarische Traditionsschicht; G1/G2-Mischung bei Zereya beschrieben', offen: 'Lautwandel und Überlieferungsketten an konkreten Wortpaaren' },
   { id: 'G2', name: 'Galut-Sahara', region: 'Arabische Wüstenräume', funktion: 'Alltagsrede, Kürze und Körperwissen', beleg: 'Literarische Traditionsschicht; bei Zereya mit G1 kombiniert', offen: 'Belegte Kürzungsregeln, Register und tatsächliche Kontaktformen' },
-  { id: 'G3', name: 'Galut-Eil', region: 'Keltische Inseln', funktion: 'Gesang, Melodie und Abschiedsüberlieferung', beleg: 'Auv-Pa-il als G3-Lied; Entwicklung Avi → Auv ausdrücklich beschrieben', offen: 'Genauer Lautweg, Konditionierung und Abgrenzung von dichterischer Variante' },
+  { id: 'G3', name: 'Galut-Eil', region: 'Keltische Inseln', funktion: 'Gesang, Melodie und Abschiedsüberlieferung', beleg: 'Buch v0.9, Anhang D: Avi/Auv-Merger, Mira → Mhira; -om/-il/-ath variieren', offen: 'Genaue Regelumgebung, Datierung und Gegenbelege' },
   { id: 'G4', name: 'Galut-Saraswath', region: 'Kaschmir / Sanskrit-Kontakt', funktion: 'Philosophische Systematisierung', beleg: 'Traditionsprofil, noch keine gesicherte Lautregel', offen: 'Morphologische Neuinterpretationen anhand von Paralleltexten' },
   { id: 'G5', name: 'Galut-Yin', region: 'Ostasiatische Kontakträume', funktion: 'Tonalität und Klang als Bedeutung', beleg: 'Traditionsprofil, kein bereits dokumentiertes Tonsystem', offen: 'Unterscheidung von Ton, Intonation und literarischer Klangästhetik' },
   { id: 'G6', name: 'Galut-Endia', region: 'Digitale Welt', funktion: 'Digitaler Austausch und veränderte Zugangsformen', beleg: 'Erzählwelt und Sprachwandel-Hypothese', offen: 'Konkrete Medienregister, Normierung und Kontaktmechanismen' },
@@ -63,12 +63,28 @@ const schichten = [
     <h2>Wie wir neue Wandelregeln prüfen</h2>
     <ol>
       <li>Ein Ausgangslexem mit Vektor-ID, morphologischer Analyse und Quellschicht angeben.</li>
-      <li>Den vorgeschlagenen Laut- oder Bedeutungswandel präzise formulieren – einschließlich Kontext und Ausnahmen.</li>
+      <li>Vorhandene Buchregeln zuerst übernehmen und auf Kontext, Reichweite und mögliche Ausnahmen prüfen.</li>
+      <li>Neue Laut- oder Bedeutungswandel ausschließlich mit Kontext und Ausnahmen vorschlagen.</li>
       <li>Mindestens ein zweites Wort oder einen kontrastierenden Fall prüfen.</li>
       <li>Zwischen belegtem Kanon, literarischem Textbeleg und neuer Modellhypothese unterscheiden.</li>
       <li>Historische Formen erhalten; erst nach Prüfung eine neue Schichtregel freigeben.</li>
     </ol>
-    <p>Für R1 fehlen derzeit insbesondere vollständiges Phoneminventar, Silbenstruktur und Betonungsregeln. Diese Grundlagen stehen vor einer umfassenden Simulation der Galut-Lautgeschichte.</p>
+    <p>Für R1 ist bereits ein Buchinventar dokumentiert (Anhang A.10, v0.9). Eine vollständige Prüfung seiner phonemischen Kontraste, Silbenstruktur und Betonungsregeln steht jedoch noch aus. Vor einer umfassenden Galut-Simulation müssen zunächst die bereits formulierten Buchregeln übernommen und geprüft werden.</p>
+  </section>
+
+  <section class="status">
+    <strong>Buchabgleich: vorhandene Galut-Aussprachemodelle</strong>
+    <p>
+      Das wiedergefundene Buchmanuskript v0.9 enthält in Anhang D bereits
+      schichtspezifische Beschreibungen und exemplarische Aussprachen.
+      So nennt G2 die Variante <code>-om → -ôn</code>; G3 nennt
+      <code>-om → [ɔn]</code>, <code>-il → [eːl]</code>,
+      <code>-ath → [aχ]</code> und <code>Mira → Mhira</code>.
+      Diese Buchangaben sind Ausgangspunkte für die Prüfung, nicht
+      neu erfundene Regeln. Einige Beschreibungen benötigen noch
+      präzisere IPA-Zuordnung und Gegenbeispiele.
+    </p>
+    <p><a href="https://github.com/thomaspeterkueper/buecherwelten/blob/main/works/mishkenaz/manuscript/v0.9/08a_anhang_d_f.md">Buchanhang D ansehen</a></p>
   </section>
 
   <section>
