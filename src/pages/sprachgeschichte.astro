@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const schichten = [
+  { id: 'R1', name: 'Dvārakā-Grundform', region: 'Fiktionale Ausgangsgemeinschaft', funktion: 'Vergleichsbasis für Rollenstruktur und Resonanzaspekte', beleg: 'Grammatischer Arbeitskanon; vollständige Phonologie noch offen', offen: 'Phoneminventar, Silbenbau, Betonung und datierte Textbelege' },
+  { id: 'G1', name: "Galut-Bri'ith", region: 'Levante / hebräischer Kontakt', funktion: 'Liturgische und textuelle Überlieferung', beleg: 'Literarische Traditionsschicht; G1/G2-Mischung bei Zereya beschrieben', offen: 'Lautwandel und Überlieferungsketten an konkreten Wortpaaren' },
+  { id: 'G2', name: 'Galut-Sahara', region: 'Arabische Wüstenräume', funktion: 'Alltagsrede, Kürze und Körperwissen', beleg: 'Literarische Traditionsschicht; bei Zereya mit G1 kombiniert', offen: 'Belegte Kürzungsregeln, Register und tatsächliche Kontaktformen' },
+  { id: 'G3', name: 'Galut-Eil', region: 'Keltische Inseln', funktion: 'Gesang, Melodie und Abschiedsüberlieferung', beleg: 'Auv-Pa-il als G3-Lied; Entwicklung Avi → Auv ausdrücklich beschrieben', offen: 'Genauer Lautweg, Konditionierung und Abgrenzung von dichterischer Variante' },
+  { id: 'G4', name: 'Galut-Saraswath', region: 'Kaschmir / Sanskrit-Kontakt', funktion: 'Philosophische Systematisierung', beleg: 'Traditionsprofil, noch keine gesicherte Lautregel', offen: 'Morphologische Neuinterpretationen anhand von Paralleltexten' },
+  { id: 'G5', name: 'Galut-Yin', region: 'Ostasiatische Kontakträume', funktion: 'Tonalität und Klang als Bedeutung', beleg: 'Traditionsprofil, kein bereits dokumentiertes Tonsystem', offen: 'Unterscheidung von Ton, Intonation und literarischer Klangästhetik' },
+  { id: 'G6', name: 'Galut-Endia', region: 'Digitale Welt', funktion: 'Digitaler Austausch und veränderte Zugangsformen', beleg: 'Erzählwelt und Sprachwandel-Hypothese', offen: 'Konkrete Medienregister, Normierung und Kontaktmechanismen' },
+];
+---
+<Layout title="Sprachgeschichte" description="Die historischen und fiktiven Sprachschichten von Mishkenaz – mit belegten Formen, Arbeitshypothesen und offenen Lautwandelregeln.">
+  <h1>Eine Sprache mit Geschichte</h1>
+  <p class="lede">Von Dvārakā zu den Galut-Schichten: Was überliefert ist, was die Romanwelt erzählt und was wir sprachwissenschaftlich erst noch konstruieren müssen.</p>
+
+  <section class="status">
+    <strong>Wichtig: Rekonstruktion innerhalb einer erfundenen Sprachwelt</strong>
+    <p>Die Gemeinschaft von Dvārakā und ihre Galut-Geschichte gehören zur Fiktion. R1 bezeichnet eine <em>kanonische Arbeitsrekonstruktion</em>, keine tatsächlich archäologisch belegte Ursprache. Reale Mechanismen wie Lautwandel und Sprachkontakt dienen als Methodenvergleich; einzelne Lautentwicklungen müssen für Mishkenaz eigens formuliert und geprüft werden.</p>
+  </section>
+
+  <section>
+    <h2>Kein Stammbaum als Einbahnstraße</h2>
+    <p>Die sechs Galut-Schichten sind keine festgelegte zeitliche Folge G1 → G2 → G3 → G4 → G5 → G6. Sie können sich aus einer Ausgangstradition verzweigen, miteinander in Kontakt treten und sich erneut vermischen. Zereyas G1/G2-Repertoire ist ein bereits erzählter Fall solcher Rekombination.</p>
+    <p>Wir trennen deshalb stets <strong>Form</strong> (wie etwas ausgesprochen oder geschrieben wird), <strong>Funktion</strong> (was eine Konstruktion im Satz leistet), <strong>Bedeutung</strong> (was Sprecher damit ausdrücken) und <strong>Überlieferung</strong> (wer die Form in welchem Kontext verwendet).</p>
+    <div class="diagram"><span>R1 · Arbeitsrekonstruktion</span><span aria-hidden="true">↓ mögliche Verzweigungen, Kontakte und Rekombination</span><span>G1 · G2 · G3 · G4 · G5 · G6</span></div>
+  </section>
+
+  <section>
+    <h2>Die sieben Referenzschichten</h2>
+    {schichten.map((schicht) => (
+      <article class="layer" id={schicht.id.toLowerCase()}>
+        <h3>{schicht.id} · {schicht.name}</h3>
+        <p><strong>Kontakt und Region:</strong> {schicht.region}</p>
+        <p><strong>Erzählerische Funktion:</strong> {schicht.funktion}</p>
+        <p><strong>Bereits dokumentiert:</strong> {schicht.beleg}</p>
+        <p><strong>Noch zu prüfen:</strong> {schicht.offen}</p>
+      </article>
+    ))}
+  </section>
+
+  <section>
+    <h2>Erste nachvollziehbare Vergleichsfälle</h2>
+    <div class="layer">
+      <h3>01 · Avi und Auv</h3>
+      <p><code>Avi</code> bezeichnet als V00 einen offenen Bezugspunkt. In der Urgesten-Rekonstruktion ist der Schwa-Raum <code>ə</code> sein lautlicher Kern. Für G3 ist die Entwicklung <code>Avi → Auv</code> ausdrücklich beschrieben und das Abschiedslied <em>Auv-Pa-il</em> überliefert.</p>
+      <p><strong>Was belegt ist:</strong> eine kanonisch beschriebene Verwandtschaft zweier Formen und ein G3-Lied. <strong>Was noch fehlt:</strong> eine regelhafte Herleitung mit Ausgangsphonemen, Zwischenschritten und definierter Lautumgebung. Der Pfeil ist bislang eine Traditionszuordnung, kein bewiesenes Lautgesetz.</p>
+    </div>
+    <div class="layer">
+      <h3>02 · -ira und -vama</h3>
+      <p>Ältere Galut-Verwendungen kennen <code>-ira</code> als Anziehung oder Attraktor; die aktuelle Kanonsprache nutzt <code>-ira</code> für Selbstreflexion. Anziehung wird nun über <code>Vya-Ma</code> und das Suffix <code>-vama</code> ausgedrückt.</p>
+      <p>Die historische Form <code>Sa-Ta-Ira</code> steht neben der kanonischen <code>Sa-Ta-vama</code>-Analyse von „Schadenfreude“. Das ist zunächst ein dokumentierter <strong>semantischer und normativer Wechsel zwischen Sprachschichten</strong>, noch kein Nachweis eines regelmäßigen Lautwandels von <code>ira</code> zu <code>vama</code>.</p>
+    </div>
+    <div class="layer">
+      <h3>03 · Ta bleibt hörbar und deutbar</h3>
+      <p><code>Ma'Ta'U</code>, <code>Pa'Ta</code> und <code>Om'Ta</code> machen eine Grenze beziehungsweise ein Gegenüber ausdrücklich sichtbar; die Ta-Stille trägt eine grammatische und literarische Funktion. Wir wissen noch nicht, wie sie in jeder Galut-Schicht phonetisch realisiert oder möglicherweise abgeschwächt wird.</p>
+      <p><strong>Prüffrage:</strong> Welche Aussprache- oder Schriftänderung darf auftreten, ohne die Unterscheidung zwischen Bindung mit Grenze und Bindung ohne explizite Differenz zu verwischen?</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Wie wir neue Wandelregeln prüfen</h2>
+    <ol>
+      <li>Ein Ausgangslexem mit Vektor-ID, morphologischer Analyse und Quellschicht angeben.</li>
+      <li>Den vorgeschlagenen Laut- oder Bedeutungswandel präzise formulieren – einschließlich Kontext und Ausnahmen.</li>
+      <li>Mindestens ein zweites Wort oder einen kontrastierenden Fall prüfen.</li>
+      <li>Zwischen belegtem Kanon, literarischem Textbeleg und neuer Modellhypothese unterscheiden.</li>
+      <li>Historische Formen erhalten; erst nach Prüfung eine neue Schichtregel freigeben.</li>
+    </ol>
+    <p>Für R1 fehlen derzeit insbesondere vollständiges Phoneminventar, Silbenstruktur und Betonungsregeln. Diese Grundlagen stehen vor einer umfassenden Simulation der Galut-Lautgeschichte.</p>
+  </section>
+
+  <section>
+    <h2>Hören, Sprache, Erinnerung</h2>
+    <p>Das bekannte G3-Abschiedslied <em>Auv-Pa-il</em> ist ein guter Anfang, um Schriftform, Bedeutung, mögliche Aussprache und kulturelle Verwendung miteinander zu verbinden. Eine konkrete Audiofassung oder IPA-Transkription sollte erst folgen, wenn die Lautwerte hinreichend definiert sind.</p>
+    <p>Weiterführend: <a href="/grammatik">Grammatik der Grundform</a>, <a href="/proto-mishkenaz">Urgesten</a>, <a href="/vektoren">42 Vektoren</a> und <a href="/woerterbuch">Wörterbuch</a>.</p>
+  </section>
+
+  <style>
+    section{margin:2.75rem 0} h2{font-weight:400;color:var(--accent)} h3{color:var(--accent);font-weight:400;margin-top:0}
+    p,li{line-height:1.7} code{color:var(--accent)} a{color:var(--accent)}
+    .status,.layer{border:1px solid var(--border);padding:1rem 1.25rem;margin:1rem 0}
+    .status{border-left:3px solid var(--accent)} .layer p{margin:.5rem 0}
+    .diagram{display:grid;gap:.5rem;padding:1rem;border:1px dashed var(--border);text-align:center;color:var(--accent);margin:1.5rem 0}
+    .diagram span:nth-child(2){color:var(--muted);font-size:.9rem}
+  </style>
+</Layout>
