@@ -60,6 +60,8 @@ Im neuen Stand ist Stimmigkeit kein Wahrheitsmaßstab: „Ein Augenblick der Kla
 
 Vorschlag für die Systemebene: *-om/-ath/-il* als **Stellungnahme des Sprechers** fassen (evidential-ähnlich: „für mich angekommen / für mich dissonant / für mich offen“), nicht als Aussage über die Wirklichkeit. Dann wird die Ta-Konstante auch auf die Aspekte anwendbar: Das *-om* des Sprechers kann durch das *-ath* des Gegenübers widersprochen werden, und die Sprache kodiert Korrigierbarkeit statt Gewissheit. Dass die Sprache mit *Vûrath* bereits eine scheinbare Stimmigkeit kennt, stützt diese Lesart.
 
+> **Vermerk 26.11.2026:** „evidential-ähnlich“ meint eine Abgrenzung, keine Identität. Evidentialität kodiert die Informationsquelle; die Resonanzaspekte kodieren die wahrgenommene Passung einer Relation, gemeinsam ist nur die Sprecherperspektive. Siehe `2026-11-26-resonanzaspekte-typologischer-horizont.md` (Abschnitt 5).
+
 ### 2. Der Satz über das Lügen
 „Man kann darin auch lügen – aber nicht ohne körperliches Verbiegen.“ Die Übersicht relativiert das bereits („kein mystischer Wahrheitsdetektor“, eine „Konsequenz des Sprachentwurfs“). Das sollte so bleiben und auf der Weltebene verortet werden. Auf der Systemebene gilt der Einwand aus der Resonanzethik-Abgleichnotiz: Gerade wer manipuliert, kann *-om* sagen, ohne sich zu verbiegen (toxische Resonanz).
 
