@@ -1,5 +1,7 @@
 import { validateVectorExpression } from './expression-validator';
 import { compareBracketings, validateBracketedExpression } from './bracket-validator';
+import { analyzeExpression } from './unified-analyzer';
+import { createReferent, typeReferentForRole } from './reference-semantics';
 
 export interface RegressionCase {
   id: string;
@@ -74,6 +76,39 @@ export function runValidatorRegressions(): RegressionReport {
       passed: result.relation === expectedRelation,
       expected: expectedRelation,
       actual: result.relation,
+    });
+  }
+
+  const referents = [
+    ['referent-id-from-surface', 'Ein Referent erhält eine normalisierte ID aus seiner Oberfläche.', createReferent('Daria', 'proper-name').id, 'daria'],
+    ['referent-id-fallback', 'Ohne verwertbare Oberfläche fällt die Referent-ID auf „referent“ zurück.', createReferent('—', 'abstract').id, 'referent'],
+    ['referent-name-not-space', 'Ein Eigenname wird nicht automatisch als Raum typisiert.', typeReferentForRole(createReferent('Daria', 'proper-name'), { role: 'left', allowedTypes: ['SPACE'] }).semanticTypes.join(', ') || 'keine', 'keine'],
+    ['referent-place-context', 'Ein Ortsname kann im Rollenkontext als Raum typisiert werden.', typeReferentForRole(createReferent('Dvārakā', 'place-name'), { role: 'left', allowedTypes: ['SPACE'] }).semanticTypes.join(', '), 'SPACE'],
+  ] as const;
+
+  for (const [id, description, actual, expected] of referents) {
+    cases.push({
+      id, description,
+      passed: actual === expected,
+      expected,
+      actual,
+    });
+  }
+
+  const unified = [
+    ['unified-cross-operator-args', 'Mitgelieferte Argumente gelten je Operator nur für dessen Rollen.', '(Ma-Ta)-reso-kora', 'left:SYS,right:SYS,members:SYS,members:SYS'],
+  ] as const;
+
+  for (const [id, description, expression, argumentSpec] of unified) {
+    const result = analyzeExpression(expression, argumentSpec);
+    cases.push({
+      id, description,
+      passed: result.valid && result.argumentComplete && result.issues.length === 0,
+      expected: 'valid, vollständig, ohne Hinweise',
+      actual:
+        (result.valid ? 'valid' : 'invalid') + ', ' +
+        (result.argumentComplete ? 'vollständig' : 'unvollständig') + ', ' +
+        result.issues.length + ' Hinweis(e)',
     });
   }
 

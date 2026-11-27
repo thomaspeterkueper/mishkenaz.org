@@ -113,8 +113,28 @@ export function analyzeExpression(
     argumentComplete = false;
     summary.push('Mehrstellenoperator vorhanden: ' + multi.join(', ') + '. Argumente wurden nicht mitgeliefert.');
   } else {
+    // Supplied arguments belong to the whole expression, not to every
+    // operator in it. Each operator is therefore checked only against the
+    // roles its own schema declares; roles declared by no participating
+    // operator are reported once.
+    const declaredRoles = new Set<ArgumentRole>();
     for (const vector of multi) {
-      const validation = validateArguments(vector, supplied);
+      for (const slot of argumentSchemas[vector].slots) declaredRoles.add(slot.role);
+    }
+
+    const unknownRoles = [...new Set(supplied.map(arg => arg.role))]
+      .filter(role => !declaredRoles.has(role));
+    for (const role of unknownRoles) {
+      issues.push(
+        'Unbekannte Rolle ' + role + ' für die beteiligten Operatoren (' +
+        multi.join(', ') + ').'
+      );
+    }
+
+    for (const vector of multi) {
+      const roles = new Set(argumentSchemas[vector].slots.map(slot => slot.role));
+      const relevant = supplied.filter(arg => roles.has(arg.role));
+      const validation = validateArguments(vector, relevant);
       argumentValid = argumentValid && validation.valid;
       argumentComplete = argumentComplete && validation.complete;
       for (const issue of validation.issues) {

@@ -44,7 +44,7 @@ export function createReferent(
     .toLowerCase();
 
   return {
-    id: id ?? normalized || 'referent',
+    id: (id ?? normalized) || 'referent',
     surface,
     kind,
   };
