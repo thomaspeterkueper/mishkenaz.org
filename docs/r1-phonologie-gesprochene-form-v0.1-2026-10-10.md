@@ -1,7 +1,9 @@
 # Mishkenaz — R1-Phonologie und gesprochene Form v0.1
 
-**Stand:** 2026-10-10  
-**Status:** konservatives Rekonstruktionsmodell; kein vollständig kanonisiertes Phoneminventar
+**Stand:** 2026-10-10 (Quellenkorrektur ergänzt 2026-11-27)  
+**Status:** konservativer artikulatorischer Prüfstand auf Grundlage des freigegebenen Buchinventars A.10; kein Ersatzinventar
+
+> **Quellenkorrektur (nach Wiederauffinden des Buchmanuskripts):** Die ältere Formulierung „kein vollständig kanonisiertes Phoneminventar“ berücksichtigt die Buchfassung v0.9 nicht. In `buecherwelten/works/mishkenaz/manuscript/v0.9/07b_anhang_a_c.md` und `07c_anhang_a_c.md` (Kap. 2.7 / Anhang A.10) liegt eine freigegebene R1-Ableitungstabelle mit ungefähr 17 Konsonanten und acht vokalischen Positionen vor. Dieser Konstruktionskanon ist Ausgangspunkt; dieses Dokument ist ein ergänzender artikulatorischer und prosodischer Prüfstand, kein konkurrierendes Inventar. Bei Widersprüchen gilt die Quellenprüfung, keine stillschweigende Neufestlegung. Die Aussagen unten zur noch nicht gesicherten Herkunft einzelner Segmente betreffen die älteste gesprochene Realisierung, nicht die Zugehörigkeit zum Buchinventar.
 
 ## 1. Methodische Grenze
 
@@ -18,8 +20,8 @@ nicht ohne unabhängigen Beleg als direkte Evidenz für Proto-/R1-Phoneme verwen
 Daher werden drei Evidenzstufen getrennt:
 
 ```
-A = artikulatorisch/kanonisch verankert
-B = aus stabilen R1-Formen gut gestützter Kandidat
+A = im Buchinventar A.10 verankert und artikulatorisch gestützt
+B = aus stabilen R1-Formen gut gestützter Kandidat für die gesprochene Realisierung
 C = offene oder spätere historische Realisierung
 ```
 
@@ -33,45 +35,47 @@ Aus der Proto-Mishkenaz-Schicht sind mindestens folgende Kontraste belastbar:
 | offene Vokalität | `a`-Raum | Ah / Ma / Pa / Sa / Ta |
 | gerundete hintere Vokalität | `o`-Raum | Oh / Om |
 | hohe vordere Vokalität | `i`-Raum | Il / Bi |
-| hohe/hintere Vokalität | `u`-Raum | Ku / Auv-Komponente |
+| hohe/hintere Vokalität | `u`-Raum | Ku / Auv-Komponente; eigenständiges `U` in A.10 nicht angelegt, zu prüfen |
 | bilabial nasal | `m` | Ma / Om |
 | bilabial oral | `p` | Pa |
-| bilabialer Ansatz | `b`-Kandidat | Bi; historisch noch zu prüfen |
+| bilabialer Ansatz | `b`-Kandidat | Buchinventar leitet B aus Pa ab; Bi ist positional, historisch zu prüfen |
 | koronaler Verschluss | `t`-Raum | Ta |
 | vordere Friktion | `s`-Raum | Sa |
 | velarer Verschluss | `k`-Raum | Ku |
 
-Diese Tabelle beschreibt zunächst **Lauträume**, nicht zwingend bereits ein vollständiges Phonemsystem.
+Diese Tabelle beschreibt zunächst **Lauträume** als artikulatorische Lesart der im Buchinventar A.10 angelegten Kontraste. Sie ist kein Ersatz für die Buchliste.
 
-## 3. Noch nicht gesicherte Konsonanten
+## 3. Offene gesprochene Realisierung einzelner Konsonanten
 
-Formen mit `l`, `r`, `v`, `h`, `n`, `g`, `f`, `y/j` oder weiteren Segmenten kommen im heutigen Bestand vor.
+`L`, `R`, `V/W`, `H`, `N`, `G` und `J/Y` sind im Buchinventar A.10 angelegt; `F` bleibt dort eine Lücke. Formen mit diesen Segmenten kommen im heutigen Bestand vor.
 
-Sie können:
+Offen ist nicht ihre Zugehörigkeit zum Buchinventar, sondern ihre konkrete älteste gesprochene Realisierung. Sie kann:
 
-- echte R1-Phoneme sein;
-- Allophone oder historische Ableitungen sein;
-- spätere Galut-Entwicklungen sein;
-- moderne Rekonstruktionsschreibungen sein.
+- unmittelbar dem Buchinventar entsprechen;
+- allophonisch oder positionsbedingt variieren;
+- eine spätere Galut-Entwicklung sein;
+- eine moderne Rekonstruktionsschreibung sein.
 
-Bis eine Herkunftsregel vorliegt, werden sie nicht pauschal in ein kanonisches Proto-Inventar aufgenommen.
+Bis eine Herkunftsregel vorliegt, werden sie nicht als direkte Lautbelege der ältesten R1-Schicht verwendet. Die Inventarzugehörigkeit nach A.10 bleibt davon unberührt.
 
-## 4. Vokalsystem als minimaler Kandidatenraum
+## 4. Vokalsystem: Buchinventar und konservativer Prüfraum
 
-Für R1 ist als Arbeitsraum mindestens plausibel:
+Das Buchinventar A.10 führt acht vokalische Positionen: `A`, `Ā`, `O`, `Ō`, `I`, `E`, `AU`, `ə`.
+
+Als konservativer artikulatorischer Kern der gesprochenen Form wird daraus vorläufig nur folgender Fünferraum geprüft:
 
 ```
 /a i u o ə/
 ```
 
-`ə` besitzt dabei eine besondere historische Stellung durch Avi, aber keine grammatische Sondermacht.
+`ə` besitzt dabei eine besondere historische Stellung durch Avi, aber keine grammatische Sondermacht. Der Fünferraum ist eine Prüfhypothese für die älteste gesprochene Schicht, keine Verkleinerung des Buchinventars.
 
-Offen bleiben:
+Zu prüfen bleiben:
 
-- phonemische Länge;
-- `e` als eigenständiges Phonem;
+- Realisierung und Distribution der Vokallänge (`Ā`, `Ō`);
+- `E` als eigene Position;
+- `AU` als Diphthong oder Sequenz;
 - `ö/ø` oder andere gerundete Vorderzungenvokale;
-- Diphthonge versus Vokal+Gleitlaut;
 - regionale Galut-Erweiterungen.
 
 ## 5. Silbenbau: konservative Rekonstruktion
@@ -217,7 +221,7 @@ Nur problematische Segmente oder Cluster werden repariert.
 
 ## 11. Reparaturhierarchie für Fremdnamen
 
-Solange das volle Inventar noch offen ist, wird nur die **Hierarchie** festgelegt, nicht jede konkrete Lautersetzung:
+Solange die konkrete gesprochene Realisierung der Laute nicht geklärt ist, wird nur die **Hierarchie** festgelegt, nicht jede konkrete Lautersetzung:
 
 ```
 1. vorhandenes Segment erhalten
@@ -301,23 +305,24 @@ Für jeden Ausdruck sind zu bestimmen:
 
 ## 17. Kanonstatus
 
-Bereits stark verankert:
+Bereits kanonisch (Buchinventar A.10):
 
+- ungefähr 17 Konsonanten und acht vokalische Positionen (zusammen ≈ 25);
 - Avi-Schwa `ə` als Rekonstruktionskern;
 - artikulatorische Kerne Ma/Pa/Sa/Ku/Ta;
 - prosodische Schwäche von Rollenmarkern gegenüber Referenten;
 - Trennung von Urgeste, Vektor, Morphem und Wort.
 
-Arbeitsmodell:
+Arbeitsmodell dieser Seite (ergänzender Prüfstand, kein Ersatzinventar):
 
-- Minimalvokalraum `/a i u o ə/`;
+- konservativer Fünfer-Vokalraum `/a i u o ə/` als artikulatorischer Kern;
 - Kernsilbe `(C)V(C)`;
 - prosodische Gruppen;
 - Reparaturhierarchie für Fremdnamen.
 
 Noch offen:
 
-- vollständiges Konsonanteninventar;
+- Phonemkontrastprüfung (Minimalpaare) innerhalb des Buchinventars;
 - exakte Allophone;
 - Wortakzent;
 - Sandhi;

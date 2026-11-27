@@ -1,7 +1,9 @@
 # Mishkenaz — Referenz, Namen, Dinge und gesprochene Struktur
 
-**Stand:** 2026-10-09  
+**Stand:** 2026-10-09 (Quellenkorrektur ergänzt 2026-11-27)  
 **Status:** Arbeitsmodell / Grundlage für R1-Nominal- und Prosodiesystem
+
+> **Quellenkorrektur:** Das wiederaufgefundene Buchmanuskript v0.9 legt in Kap. 2.7 / Anhang A.10 ein freigegebenes R1-Inventar (ungefähr 17 Konsonanten, acht vokalische Positionen) fest. Aussagen unten zum „noch nicht vollständigen Phoneminventar“ sind daher als offene Detail- und Realisierungsprüfung zu lesen, nicht als Fehlen eines Inventars.
 
 ## 1. Warum diese Schicht fehlt
 
@@ -201,7 +203,7 @@ Das erlaubt, komplexe Vektorkerne und komplexe Namen hörbar zu unterscheiden.
 
 ## 9. Betonung
 
-Solange das historische Phoneminventar noch nicht vollständig rekonstruiert ist, wird keine starre Silbenbetonungsregel erfunden.
+Solange die gesprochene Realisierung des im Buchinventar A.10 angelegten Phoneminventars noch nicht vollständig geklärt ist, wird keine starre Silbenbetonungsregel erfunden.
 
 Stattdessen gilt als sichere prosodische Arbeitsregel:
 
@@ -248,7 +250,7 @@ Für sie braucht R1 langfristig Regeln für:
 - mögliche Epenthese;
 - Flexions-/Rollenanschluss.
 
-Bis das Phoneminventar vollständig ist, dürfen keine konkreten Lautanpassungsregeln erfunden werden.
+Bis die gesprochene Realisierung und Distribution der Laute geklärt ist, dürfen keine konkreten Lautanpassungsregeln erfunden werden.
 
 ## 11. Namen sind semantisch opak
 
@@ -352,7 +354,7 @@ Damit kann später ein vollständiger Satz statt nur ein Vektorkern validiert we
 
 ## 16. Offene Fragen
 
-- Phoneminventar und Silbenstruktur von R1;
+- Phonemkontrastprüfung und Silbenstruktur von R1;
 - genaue Wortakzentregeln;
 - prosodische Markierung enger Operatorbindung;
 - Definitheit ohne obligatorischen Artikel;

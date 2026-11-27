@@ -3,6 +3,8 @@
 **Stand:** 2026-10-23  
 **Status:** phonologische Arbeitsanalyse; keine vollständige phonetische Rekonstruktion
 
+> **Quellenkorrektur (2026-11-27):** Seit Wiederauffinden des Buchmanuskripts v0.9 gilt die freigegebene R1-Ableitungstabelle in Kap. 2.7 / Anhang A.10 (ungefähr 17 Konsonanten, acht vokalische Positionen) als Inventarkanon. Die folgenden Fragen betreffen die gesprochene Realisierung und Distribution, nicht die Zugehörigkeit zum Inventar.
+
 ## 1. Notation der Analyse
 
 Die folgenden Zeichen gehören zur **Metaanalyse**, nicht zur Mishkenaz-Orthographie:
@@ -163,7 +165,7 @@ la.ta.i
 
 Auch hier bleibt `a+i` zunächst erhalten.
 
-Der Status von `l` in der ältesten Schicht ist noch offen; die Struktur des Rollenmarkers ist kanonisch, seine tiefste Lautgeschichte nicht vollständig geklärt.
+`L` ist im Buchinventar A.10 angelegt; seine älteste gesprochene Realisierung im Rollenmarker ist noch nicht im Detail geklärt. Die Struktur des Rollenmarkers ist kanonisch.
 
 ## 8. `bi'Daria`
 
@@ -201,7 +203,7 @@ Es werden drei historische Register unterschieden:
 2. **integrierte Lehnform:** phonotaktisch angepasst;
 3. **erblich gewordene Form:** Ergebnis späteren Lautwandels.
 
-Welche konkrete integrierte R1-Form entsteht, bleibt offen, solange das vollständige Inventar fehlt.
+Welche konkrete integrierte R1-Form entsteht, bleibt offen, solange die Kontakt- und Lehnform nicht belegt ist.
 
 **Arbeitsentscheidung:** keine voreilige Epenthese oder Tilgung.
 
@@ -287,7 +289,7 @@ Aus dem Testkorpus können jetzt erstmals konkrete, aber begrenzte Regeln formul
 - phonetische Realisierung des Apostrophs;
 - Existenz eines phonemischen Glottisverschlusses;
 - konkrete Allophone von `s`, `t`, `k`, `p`, `m`;
-- Status von `b`, `l`, `r`, `w/v`, `h`, `n`, `g`, `f`, `j/y`;
+- gesprochene Realisierung und Distribution von `b`, `l`, `r`, `w/v`, `h`, `n`, `g`, `j/y` (im Buchinventar A.10 angelegt) sowie Einordnung von `f` (Lücke in A.10);
 - Vokalreduktion in unbetonten Silben;
 - Sandhi über G1/G2-Grenzen;
 - konkrete Adaptation von `Dvārakā` und anderen Fremdnamen.

@@ -32,7 +32,7 @@ export const pronunciationCorpus: PronunciationTestCase[] = [
     syllableCandidate: 'Sa.ha.om',
     boundary: 'G2',
     decision: 'Keine obligatorische Pause oder Vokalverschmelzung; -om bleibt an den Stamm gebunden.',
-    cautions: ['Status von h im ältesten R1 bleibt offen.'],
+    cautions: ['H ist im Buchinventar A.10 angelegt; seine älteste Realisierung bleibt zu prüfen.'],
   },
   {
     expression: 'wi-Saha-om',
@@ -43,7 +43,7 @@ export const pronunciationCorpus: PronunciationTestCase[] = [
     syllableCandidate: 'wi.Sa.ha.om',
     boundary: 'G2',
     decision: 'Negation und Aspekt bilden mit dem Stamm eine Prädikatsgruppe.',
-    cautions: ['Status von w im ältesten R1 bleibt offen.'],
+    cautions: ['V/W ist im Buchinventar A.10 angelegt; die älteste Realisierung von w bleibt zu prüfen.'],
   },
   {
     expression: 'Res-Ref-Log-il',
@@ -76,7 +76,7 @@ export const pronunciationCorpus: PronunciationTestCase[] = [
     syllableCandidate: 'la.ta.i',
     boundary: 'G1',
     decision: 'Rollenmarker bindet eng an den Referenten; a+i bleibt vorläufig Hiatus.',
-    cautions: ['Status von l in der ältesten Schicht bleibt offen.'],
+    cautions: ['L ist im Buchinventar A.10 angelegt; seine älteste Realisierung bleibt zu prüfen.'],
   },
   {
     expression: "bi'Daria",
