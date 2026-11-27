@@ -49,6 +49,7 @@ src/
   pages/
     index.astro             Start
     grammatik.astro         Grammatik
+    sprachgeschichte.astro  R1 und Galut-Schichten: belegter Stand und Wandelhypothesen
     proto-mishkenaz.astro   Proto-Mishkenaz
     rueckuebersetzung.astro Rückübersetzung
     vektoren.astro          Vektoren
@@ -59,13 +60,11 @@ external-tasks/
   rejected/                 Abgelehnte Anforderungen
 ```
 
+## Forschungsnotizen
+
+- [Sprachwelt: Ebenen und Konkordanz](docs/sprachwelt-ebenen-und-konkordanz.md) – Kanonsprache, historische Schichten, Figurenrede (25.10.2026)
+- [Abgleich Mishkenaz – relationale Prozessontologie – Trilogie der Antwortfähigkeit](docs/abgleich/2026-10-25-mishkenaz-prozessontologie-trilogie.md) (25.10.2026)
+
 ## Status
 
-**Stand 2026-07-14: Grundgerüst angelegt, alle sechs Seiten sind Platzhalter.**
-Content-Migration/-Aufbau aus den kanonischen OTA-Dokumenten (OTA-FND, OTA-LIT)
-steht noch aus und erfolgt nach der etablierten read-before-write-Methodik.
-
-> Hinweis zu ECO-ARC-0009: Die dort unter „Folgeaufgaben" als *erledigt*
-> markierte Content-Migration aus `thomas-kueper.de` hat zum Zeitpunkt dieses
-> Commits **nicht** stattgefunden. Dieser Punkt sollte im Entscheidungsdokument
-> korrigiert werden.
+**Stand 2026-10-25:** Alle sechs Inhaltsseiten sind gefüllt. Grammatik, Vektoren und Urgesten wurden im September 2026 kanonisch neu gefasst; Start, Wörterbuch und Rückübersetzungen sind am 25.10.2026 aus `thomas-kueper.de` übernommen und an die Kanonsprache angepasst (Ebenenmodell, Konkordanz, Beschlüsse in `docs/`). Ein Abgleich mit den OTA-Dokumenten (OTA-FND, OTA-LIT) steht noch aus.
