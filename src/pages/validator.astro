@@ -33,7 +33,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="examples">
       <button type="button" data-unified="Res-Ref-Log" data-unified-args="">Rekonstruktion</button>
       <button type="button" data-unified="(Ma-Ta)-reso" data-unified-args="left:SYS,right:SYS">Relation</button>
-      <button type="button" data-unified="Ma-Ta-reso-kora" data-unified-args="left:SYS,right:SYS,members:SYS,members:SYS">Relation + Integration</button>
+      <button type="button" data-unified="(Ma-Ta)-reso-kora" data-unified-args="left:SYS,right:SYS,members:SYS,members:SYS">Relation + Integration</button>
       <button type="button" data-unified="Res-Sol" data-unified-args="">Typbruch</button>
       <button type="button" data-unified="Rek-Ori" data-unified-args="" data-history="true">Historische Rekursion</button>
     </div>
@@ -48,7 +48,7 @@ import Layout from '../layouts/Layout.astro';
 
     <div class="examples">
       <button type="button" data-expression="Res-Ref-Log">Res-Ref-Log</button>
-      <button type="button" data-expression="Ma-Ta-reso-kora">Ma-Ta-reso-kora</button>
+      <button type="button" data-expression="Ma-Ta-reso-kora">Ma-Ta-reso-kora (linear: Typbruch)</button>
       <button type="button" data-expression="La-Lim-Ta">La-Lim-Ta</button>
       <button type="button" data-expression="Res-Sol">Res-Sol</button>
     </div>
@@ -104,6 +104,14 @@ import Layout from '../layouts/Layout.astro';
       zusätzliche Argumente aus Syntax oder Kontext. Der lineare Validator
       markiert diese Fälle, kann ihre vollständige Argumentstruktur aber noch
       nicht rekonstruieren.
+    </p>
+    <p>
+      Bindungssensible Familien wie <code>Ma-Ta-reso</code> sind in linearer
+      Schreibweise typbrüchig: <code>Ma</code> liefert <code>REL</code>,
+      <code>Ta</code> erwartet <code>SYS</code>. Erst eine explizite
+      Klammerung wie <code>(Ma-Ta)-reso</code> bildet im Klammerungsvergleich
+      und in der Gesamtanalyse eine gehobene Einheit. Ohne Klammern nimmt der
+      Validator keine Operatorhebung an.
     </p>
   </section>
 

@@ -5,7 +5,8 @@ import {
 
 export type ExpressionNode =
   | { kind: 'vector'; vector: string }
-  | { kind: 'sequence'; left: ExpressionNode; right: ExpressionNode };
+  | { kind: 'sequence'; left: ExpressionNode; right: ExpressionNode }
+  | { kind: 'group'; inner: ExpressionNode };
 
 export interface ParseIssue {
   message: string;
@@ -88,6 +89,9 @@ const liftedRules: Record<string, LiftedRule> = {
 };
 
 function liftedSignature(node: ExpressionNode): LiftedRule | undefined {
+  // Operator lifting is only available for units the author explicitly
+  // bracketed. Unparenthesized sequences keep purely sequential typing.
+  if (node.kind !== 'group') return undefined;
   return liftedRules[serialize(node)];
 }
 
@@ -111,6 +115,8 @@ function simpleMeaning(node: ExpressionNode | null): string {
   if (node.kind === 'vector') {
     return vectorGloss[node.vector] ?? vectorSignatures[node.vector]?.note ?? node.vector;
   }
+
+  if (node.kind === 'group') return simpleMeaning(node.inner);
 
   const left = simpleMeaning(node.left);
   const right = simpleMeaning(node.right);
@@ -249,7 +255,9 @@ export function parseBracketedExpression(source: string): ParsedExpression {
         return inner;
       }
       index += 1;
-      return inner;
+      if (!inner) return null;
+      // Nested redundant parentheses add no structure; keep one group node.
+      return inner.kind === 'group' ? inner : { kind: 'group', inner };
     }
 
     if (token === ')' || token === '-') return null;
@@ -289,6 +297,7 @@ export function parseBracketedExpression(source: string): ParsedExpression {
 function collectVectors(node: ExpressionNode | null): string[] {
   if (!node) return [];
   if (node.kind === 'vector') return [node.vector];
+  if (node.kind === 'group') return collectVectors(node.inner);
   return [...collectVectors(node.left), ...collectVectors(node.right)];
 }
 
@@ -302,8 +311,10 @@ function inferNode(
   node: ExpressionNode,
   explicitInputs?: SemanticType[],
 ): BracketedCandidate[] {
-  const lifted = node.kind === 'sequence' ? liftedSignature(node) : undefined;
-  if (lifted) {
+  if (node.kind === 'group') {
+    const lifted = liftedSignature(node);
+    if (!lifted) return inferNode(node.inner, explicitInputs);
+
     const inputs = explicitInputs ?? lifted.inputs;
     const candidates: BracketedCandidate[] = [];
     for (const input of inputs) {
@@ -356,7 +367,10 @@ function inferNode(
 function serialize(node: ExpressionNode | null): string {
   if (!node) return '(invalid)';
   if (node.kind === 'vector') return node.vector;
-  return `(${serialize(node.left)}-${serialize(node.right)})`;
+  // Explicit groups keep their parentheses; sequences stay flat so redundant
+  // outer brackets do not alter the reported structure.
+  if (node.kind === 'group') return `(${serialize(node.inner)})`;
+  return `${serialize(node.left)}-${serialize(node.right)}`;
 }
 
 export function validateBracketedExpression(

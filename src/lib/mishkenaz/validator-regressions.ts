@@ -41,6 +41,9 @@ export function runValidatorRegressions(): RegressionReport {
     ['bracket-res-ref-log', 'Expliziter Rückbezug vor Modellbildung bleibt gültig.', '(Res-Ref)-Log', true],
     ['bracket-ref-log-lift', 'Ref-Log kann als gehobener Rekonstruktionsoperator auf Res folgen.', 'Res-(Ref-Log)', true],
     ['bracket-la-lim-ta', 'La-Lim plus Ta ist ohne weitere Operatorhebung noch nicht direkt typisiert.', '(La-Lim)-Ta', false],
+    ['bracket-no-implicit-lift', 'Operatorhebung verlangt explizite Klammerung; Ma-Ta-reso bleibt als lineare Folge typbrüchig.', 'Ma-Ta-reso', false],
+    ['bracket-single-vector-group', 'Die Klammerung eines einzelnen Vektors hebt keine Folge.', '(Ma)-Ta', false],
+    ['bracket-ma-ta-reso-kora', 'Explizit gehobene Ma-Ta-Einheit trägt -reso und -kora.', '(Ma-Ta)-reso-kora', true],
   ] as const;
 
   for (const [id, description, expression, expectedValid] of bracketed) {
@@ -57,6 +60,7 @@ export function runValidatorRegressions(): RegressionReport {
     ['compare-res-ref-log', 'Res/Ref/Log erreicht denselben Endtyp über verschiedene Pfade.', '(Res-Ref)-Log', 'Res-(Ref-Log)', 'same-output-only'],
     ['compare-ma-ta-reso', 'Ma/Ta/reso bleibt klammerungssensitiv.', '(Ma-Ta)-reso', 'Ma-(Ta-reso)', 'one-invalid'],
     ['compare-rek-ori', 'Rek-Ori und Ori-Rek bleiben getrennte Strukturen.', '(Rek-Ori)', '(Ori-Rek)', 'same-output-only'],
+    ['compare-implicit-vs-explicit', 'Ungeklammerte Folge und explizit gehobene Einheit sind nicht strukturgleich.', 'Ma-Ta-reso', '(Ma-Ta)-reso', 'one-invalid'],
   ] as const;
 
   for (const [id, description, left, right, expectedRelation] of comparisons) {
